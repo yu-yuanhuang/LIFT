@@ -16,6 +16,8 @@
 }
 .placeholder {
 }
+.button {
+}
 .primary_button {
   color:#FFFFFF;
 }
@@ -69,5 +71,7 @@
   color:#999999;
 }
 .form_disabled {
+}
+._流程形状 {
 }
 textarea, select, input, button { outline: none; }
