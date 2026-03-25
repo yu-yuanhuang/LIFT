@@ -362,7 +362,7 @@ html,body{
     var groups = getMembersAndInstitutions();
     var members = groups.members;
     var insts = groups.insts;
-    var radius = 360;
+    var radius = 468; // 原半徑360的1.3倍，拉開環狀上下節點間距
     var i;
 
     function halfCircle(list, startAngle, endAngle) {
@@ -596,9 +596,14 @@ html,body{
             ly = pt.y - 8;
           }
         } else {
-          // arc: both left of node
-          lx = pt.x - tw - gap;
-          ly = pt.y - 8;
+          // arc: 人員標籤在左側，機構標籤在右側
+          if (node.type === "member") {
+            lx = pt.x - tw - gap;
+            ly = pt.y - 8;
+          } else {
+            lx = pt.x + gap;
+            ly = pt.y - 8;
+          }
         }
 
         ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(node.id) ? 0.25 : 1;
