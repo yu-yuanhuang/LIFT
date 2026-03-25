@@ -383,8 +383,11 @@ html,body{
       return arr;
     }
 
-    var leftPos = halfCircle(members, Math.PI / 2, Math.PI * 3 / 2);
-    var rightPos = halfCircle(insts, -Math.PI / 2, Math.PI / 2);
+    // 留出上緣與下緣空白，避免左右半圓的端點節點與標籤在頂部/底部重疊
+    // 左半圓：120° 到 240°
+    // 右半圓：-60° 到 60°
+    var leftPos = halfCircle(members, Math.PI * 2 / 3, Math.PI * 4 / 3);
+    var rightPos = halfCircle(insts, -Math.PI / 3, Math.PI / 3);
 
     for (i = 0; i < members.length; i++) {
       members[i].arcX = leftPos[i].x;
