@@ -114,6 +114,22 @@ html,body{
   }
 }
 
+
+#hint .hint-title{
+  font-size:24px;
+  line-height:1.2;
+  font-weight:700;
+  margin-bottom:4px;
+}
+#hint .hint-desc{
+  font-size:12px;
+  line-height:1.35;
+}
+@media (max-width: 768px){
+  #hint .hint-title{font-size:20px;}
+  #hint .hint-desc{font-size:12px;}
+}
+
 </style>
 </head>
 <body>
@@ -123,7 +139,7 @@ html,body{
   <button id="menuToggle" aria-label="開關設定選單">選單</button>
   <div id="panelBackdrop"></div>
 
-  <div id="hint">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div>
+  <div id="hint"><div class="hint-title">修德國小_校際合作網絡</div><div class="hint-desc">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div></div>
 
   <div id="panel">
     <h3>網絡設定</h3>
@@ -683,7 +699,7 @@ html,body{
     // labels
     if (toggleLabels.checked) {
       ctx.save();
-      ctx.font = "12px Arial, Noto Sans TC";
+      ctx.font = (isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC");
       ctx.fillStyle = "#222";
       for (i = 0; i < graph.nodes.length; i++) {
         var node = graph.nodes[i];
