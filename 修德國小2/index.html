@@ -114,6 +114,7 @@ html,body{
     </div>
     <div>
       <button id="exportPNG">匯出PNG</button>
+      <button id="rerunForce">重新布局</button>
     </div>
   </div>
 
@@ -143,6 +144,7 @@ html,body{
   var toggleArrows = document.getElementById("toggleArrows");
   var toggleHoverFocus = document.getElementById("toggleHoverFocus");
   var exportPNG = document.getElementById("exportPNG");
+  var rerunForce = document.getElementById("rerunForce");
   var menuToggle = document.getElementById("menuToggle");
   var panel = document.getElementById("panel");
   var panelBackdrop = document.getElementById("panelBackdrop");
@@ -449,12 +451,13 @@ html,body{
     var n = graph.nodes.length;
     if (!n) return;
 
-    // initial positions on a broad circle
+    // initial positions on a broad circle with random phase and small jitter
     var radius = 320;
+    var phase = Math.random() * Math.PI * 2;
     for (i = 0; i < n; i++) {
-      var ang = (Math.PI * 2 * i) / n;
-      graph.nodes[i].forceX = Math.cos(ang) * radius;
-      graph.nodes[i].forceY = Math.sin(ang) * radius;
+      var ang = phase + (Math.PI * 2 * i) / n;
+      graph.nodes[i].forceX = Math.cos(ang) * radius + (Math.random() - 0.5) * 40;
+      graph.nodes[i].forceY = Math.sin(ang) * radius + (Math.random() - 0.5) * 40;
     }
 
     var adj = {};
@@ -543,6 +546,37 @@ html,body{
     for (i = 0; i < n; i++) {
       graph.nodes[i].forceX = +((graph.nodes[i].forceX - centerX) * normScale).toFixed(2);
       graph.nodes[i].forceY = +((graph.nodes[i].forceY - centerY) * normScale).toFixed(2);
+    }
+
+    // collision relaxation: avoid node overlap after force layout
+    for (var relax = 0; relax < 120; relax++) {
+      var moved = false;
+      for (i = 0; i < n; i++) {
+        var a = graph.nodes[i];
+        for (j = i + 1; j < n; j++) {
+          var b = graph.nodes[j];
+          var cdx = b.forceX - a.forceX;
+          var cdy = b.forceY - a.forceY;
+          var cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          if (cdist < 0.01) {
+            cdx = (Math.random() - 0.5) * 0.1;
+            cdy = (Math.random() - 0.5) * 0.1;
+            cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          }
+          var minDist = (Math.max(4, a.size) + Math.max(4, b.size) + 18);
+          if (cdist < minDist) {
+            var push = (minDist - cdist) / 2;
+            var pux = cdx / cdist * push;
+            var puy = cdy / cdist * push;
+            a.forceX -= pux;
+            a.forceY -= puy;
+            b.forceX += pux;
+            b.forceY += puy;
+            moved = true;
+          }
+        }
+      }
+      if (!moved) break;
     }
   }
 
@@ -639,6 +673,91 @@ html,body{
     return { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
   }
 
+
+  function boxesOverlap(a, b) {
+    return !(a.x + a.w < b.x || b.x + b.w < a.x || a.y + a.h < b.y || b.y + b.h < a.y);
+  }
+
+  function computeForceLabelPlacements() {
+    var placements = [];
+    var placed = [];
+    var nodeBoxes = [];
+    var i;
+
+    ctx.save();
+    ctx.font = isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC";
+
+    for (i = 0; i < graph.nodes.length; i++) {
+      var np = worldToScreen(graph.nodes[i].x, graph.nodes[i].y);
+      var nr = Math.max(4, graph.nodes[i].size);
+      nodeBoxes.push({
+        id: graph.nodes[i].id,
+        x: np.x - nr,
+        y: np.y - nr,
+        w: nr * 2,
+        h: nr * 2
+      });
+    }
+
+    var nodesSorted = graph.nodes.slice(0);
+    nodesSorted.sort(function(a, b) { return Math.max(4, b.size) - Math.max(4, a.size); });
+
+    for (i = 0; i < nodesSorted.length; i++) {
+      var node = nodesSorted[i];
+      var pt = worldToScreen(node.x, node.y);
+      var gap = Math.max(4, node.size) + 8;
+      var text = node.label;
+      var tw = ctx.measureText(text).width;
+      var boxW = tw + 6;
+      var boxH = 16;
+
+      var candidates = [
+        { x: pt.x + gap, y: pt.y - boxH / 2 },
+        { x: pt.x - boxW - gap, y: pt.y - boxH / 2 },
+        { x: pt.x + gap, y: pt.y - gap - boxH },
+        { x: pt.x + gap, y: pt.y + gap },
+        { x: pt.x - boxW - gap, y: pt.y - gap - boxH },
+        { x: pt.x - boxW - gap, y: pt.y + gap },
+        { x: pt.x - boxW / 2, y: pt.y - gap - boxH },
+        { x: pt.x - boxW / 2, y: pt.y + gap }
+      ];
+
+      var best = null;
+      var bestScore = Infinity;
+      var c, box, score, j, cx, cy;
+
+      for (c = 0; c < candidates.length; c++) {
+        box = { x: candidates[c].x, y: candidates[c].y, w: boxW, h: boxH };
+        score = 0;
+
+        for (j = 0; j < placed.length; j++) {
+          if (boxesOverlap(box, placed[j])) score += 1200;
+        }
+        for (j = 0; j < nodeBoxes.length; j++) {
+          if (nodeBoxes[j].id !== node.id && boxesOverlap(box, nodeBoxes[j])) score += 350;
+        }
+        if (box.x < 4 || box.y < 4 || box.x + box.w > width - 4 || box.y + box.h > height - 4) score += 180;
+
+        cx = box.x + box.w / 2;
+        cy = box.y + box.h / 2;
+        score += Math.sqrt((cx - pt.x) * (cx - pt.x) + (cy - pt.y) * (cy - pt.y)) * 0.15;
+
+        if (score < bestScore) {
+          bestScore = score;
+          best = box;
+        }
+      }
+
+      if (best) {
+        placements.push({ id: node.id, x: best.x, y: best.y, text: text });
+        placed.push(best);
+      }
+    }
+
+    ctx.restore();
+    return placements;
+  }
+
   function showTooltipForNode(n, mx, my) {
     var items = [];
     var i;
@@ -714,28 +833,35 @@ html,body{
       ctx.font = isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC";
       ctx.fillStyle = "#222";
 
-      for (i = 0; i < graph.nodes.length; i++) {
-        var node = graph.nodes[i];
-        var pt = worldToScreen(node.x, node.y);
-        var gap = Math.max(4, node.size) + 6;
-        var text = node.label;
-        var tw = ctx.measureText(text).width;
-        var lx, ly;
-
-        if (layoutMode.value === "parallel") {
-          if (node.type === "member") { lx = pt.x - tw - gap; ly = pt.y - 8; }
-          else { lx = pt.x + gap; ly = pt.y - 8; }
-        } else if (layoutMode.value === "arc") {
-          if (node.type === "member") { lx = pt.x - tw - gap; ly = pt.y - 8; }
-          else { lx = pt.x + gap; ly = pt.y - 8; }
-        } else {
-          // force layout: smart side by x position
-          if (pt.x < width / 2) { lx = pt.x - tw - gap; ly = pt.y - 8; }
-          else { lx = pt.x + gap; ly = pt.y - 8; }
+      if (layoutMode.value === "force") {
+        var forcePlacements = computeForceLabelPlacements();
+        for (i = 0; i < forcePlacements.length; i++) {
+          ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(forcePlacements[i].id) ? 0.25 : 1;
+          ctx.fillText(forcePlacements[i].text, forcePlacements[i].x, forcePlacements[i].y);
         }
+      } else {
+        for (i = 0; i < graph.nodes.length; i++) {
+          var node = graph.nodes[i];
+          var pt = worldToScreen(node.x, node.y);
+          var gap = Math.max(4, node.size) + 6;
+          var text = node.label;
+          var tw = ctx.measureText(text).width;
+          var lx, ly;
 
-        ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(node.id) ? 0.25 : 1;
-        ctx.fillText(text, lx, ly);
+          if (layoutMode.value === "parallel") {
+            if (node.type === "member") { lx = pt.x - tw - gap; ly = pt.y - 8; }
+            else { lx = pt.x + gap; ly = pt.y - 8; }
+          } else if (layoutMode.value === "arc") {
+            if (node.type === "member") { lx = pt.x - tw - gap; ly = pt.y - 8; }
+            else { lx = pt.x + gap; ly = pt.y - 8; }
+          } else {
+            if (pt.x < width / 2) { lx = pt.x - tw - gap; ly = pt.y - 8; }
+            else { lx = pt.x + gap; ly = pt.y - 8; }
+          }
+
+          ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(node.id) ? 0.25 : 1;
+          ctx.fillText(text, lx, ly);
+        }
       }
       ctx.restore();
     }
@@ -909,6 +1035,16 @@ html,body{
 
   menuToggle.addEventListener("click", toggleMobilePanel);
   panelBackdrop.addEventListener("click", closeMobilePanel);
+
+  rerunForce.addEventListener("click", function() {
+    computeForceLayout();
+    if (layoutMode.value === "force") {
+      applyForceLayout();
+      fitCamera();
+      draw();
+    }
+    closeMobilePanel();
+  });
 
   window.addEventListener("resize", function() {
     syncResponsiveUI();
