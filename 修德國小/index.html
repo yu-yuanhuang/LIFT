@@ -1,1484 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>校際合作網絡展示</title>
-  <style>
-    :root {
-      --bg: #f5f7fb;
-      --panel: #ffffff;
-      --line: #dbe3ef;
-      --text: #18212f;
-      --muted: #5d6b82;
-      --accent: #2f6feb;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-    }
-    .app {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      min-height: 100vh;
-    }
-    .panel {
-      background: var(--panel);
-      border-right: 1px solid var(--line);
-      padding: 18px 16px;
-      overflow: auto;
-    }
-    .panel h1 { font-size: 20px; margin: 0 0 8px; }
-    .panel p { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
-    .group {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 12px;
-      background: #fff;
-    }
-    .group h2 { font-size: 14px; margin: 0 0 10px; }
-    .field { margin-bottom: 10px; }
-    .field label { display: block; font-size: 13px; margin-bottom: 6px; color: var(--muted); }
-    .field input[type="text"],
-    .field input[type="search"],
-    .field select {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 14px;
-      background: #fff;
-    }
-    .inline { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 14px; }
-    .inline input[type="range"] { flex: 1; }
-    .inline input[type="color"] { width: 44px; height: 32px; border: none; background: transparent; padding: 0; }
-    .checks { display: grid; gap: 6px; font-size: 14px; }
-    .checks label { display: flex; align-items: center; gap: 8px; }
-    button {
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--text);
-      border-radius: 10px;
-      padding: 8px 10px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .legend-item { display:flex; align-items:center; gap:8px; font-size:14px; margin:6px 0; }
-    .dot, .sq { width: 14px; height: 14px; display:inline-block; }
-    .dot { border-radius: 999px; background: #d64f4f; }
-    .sq { background: #4477cc; }
-    .workspace { position: relative; min-height: 100vh; }
-    #graph-container { position:absolute; inset:0; }
-    .topbar {
-      position: absolute;
-      top: 12px; right: 12px;
-      z-index: 10;
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 8px 10px;
-      font-size: 13px;
-      color: var(--muted);
-      backdrop-filter: blur(6px);
-      max-width: 360px;
-    }
-    .status { margin-top: 8px; font-size: 12px; color: var(--muted); }
-    .details { font-size: 13px; line-height: 1.5; color: var(--text); }
-    .details strong { display:block; margin-bottom:4px; }
-    .small { font-size: 12px; color: var(--muted); }
-    code { background: #eef3ff; padding: 1px 5px; border-radius: 6px; }
-    @media (max-width: 920px) {
-      .app { grid-template-columns: 1fr; }
-      .panel { border-right: 0; border-bottom: 1px solid var(--line); }
-      .workspace { min-height: 72vh; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>校際合作網絡圖 — 高相容版</title>
+<style>
+html,body{margin:0;padding:0;height:100%;width:100%;font-family:Arial,"Noto Sans TC",sans-serif;background:#fff}
+#container{position:relative;width:100%;height:100%}
+#canvas{position:absolute;left:0;top:0;right:0;bottom:0;width:100%;height:100%;background:#fff;cursor:grab}
+#controls{position:absolute;right:12px;top:12px;background:rgba(255,255,255,0.98);border:1px solid #ccc;padding:10px;border-radius:8px;z-index:20}
+#tooltip{position:absolute;display:none;z-index:30;background:#fff;border:1px solid #999;padding:8px;border-radius:6px;max-width:300px;font-size:13px}
+.legend{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,0.98);border:1px solid #ccc;padding:8px;border-radius:8px;z-index:20}
+button{padding:6px 8px;margin:4px 2px;font-size:13px}
+</style>
 </head>
 <body>
-  <div class="app">
-    <aside class="panel">
-      <h1>校際合作網絡展示模板</h1>
-      <p>這是以Sigma.js製作的互動網絡頁。支援拖曳節點、切換箭頭、基本樣式調整、搜尋與節點資訊。</p>
-
-      <div class="group">
-        <h2>資料與說明</h2>
-        <div class="small">目前內嵌檔案：<code>修德國小_校際合作網絡.gexf</code></div>
-        <div class="small" style="margin-top:6px;">互動提示：滑鼠拖動畫布可平移，滾輪縮放，直接拖曳節點可重排位置。</div>
-      </div>
-
-      <div class="group">
-        <h2>搜尋與篩選</h2>
-        <div class="field">
-          <label for="search">搜尋節點標籤</label>
-          <input id="search" type="search" placeholder="輸入成員ID或機構名稱" />
-        </div>
-        <div class="checks">
-          <label><input id="show-members" type="checkbox" checked /> 顯示學校成員</label>
-          <label><input id="show-orgs" type="checkbox" checked /> 顯示機構</label>
-          <label><input id="show-labels" type="checkbox" checked /> 顯示標籤</label>
-          <label><input id="show-arrows" type="checkbox" checked /> 顯示有向箭頭</label>
-        </div>
-      </div>
-
-      <div class="group">
-        <h2>樣式設定</h2>
-        <div class="inline">
-          <span style="width:88px;">成員顏色</span>
-          <input id="member-color" type="color" value="#d64f4f" />
-        </div>
-        <div class="inline">
-          <span style="width:88px;">機構顏色</span>
-          <input id="org-color" type="color" value="#4477cc" />
-        </div>
-        <div class="inline">
-          <span style="width:88px;">邊線顏色</span>
-          <input id="edge-color" type="color" value="#9aa7bd" />
-        </div>
-        <div class="inline">
-          <span style="width:88px;">節點倍率</span>
-          <input id="node-scale" type="range" min="0.6" max="2.5" step="0.1" value="1" />
-          <span id="node-scale-val">1.0</span>
-        </div>
-        <div class="inline">
-          <span style="width:88px;">邊線倍率</span>
-          <input id="edge-scale" type="range" min="0.5" max="4" step="0.1" value="1" />
-          <span id="edge-scale-val">1.0</span>
-        </div>
-      </div>
-
-      <div class="group">
-        <h2>操作</h2>
-        <div class="btns">
-          <button id="reset-view" class="primary">重設視角</button>
-          <button id="clear-focus">清除選取</button>
-          <button id="random-layout">重新佈局</button>
-          <button id="save-png">匯出PNG</button>
-        </div>
-      </div>
-
-      <div class="group">
-        <h2>圖例</h2>
-        <div class="legend-item"><span class="dot"></span>學校成員（圓形）</div>
-        <div class="legend-item"><span class="sq"></span>機構（方形）</div>
-        <div class="small">邊為有向連結：成員 → 機構</div>
-      </div>
-
-      <div class="group">
-        <h2>節點資訊</h2>
-        <div id="details" class="details">點選節點後，這裡會顯示節點屬性、入度與出度。</div>
-      </div>
-    </aside>
-
-    <main class="workspace">
-      <div id="graph-container"></div>
-      <div class="topbar">
-        <div><strong>操作提示</strong></div>
-        <div>拖曳節點可調整位置；按住空白區拖動畫布；滑鼠滾輪縮放。</div>
-        <div class="status" id="status">載入中…</div>
-      </div>
-    </main>
+<div id="container">
+  <canvas id="canvas"></canvas>
+  <div id="controls">
+    <div><strong>網絡設定</strong></div>
+    <div style="margin-top:6px">
+      <select id="mode">
+        <option value="parallel">左右並列（人員左、機構右）</option>
+        <option value="arc">環狀左右半圓（同一圓）</option>
+      </select>
+    </div>
+    <div style="margin-top:6px">
+      <label><input type="checkbox" id="showLabels" checked> 顯示標籤</label><br>
+      <label><input type="checkbox" id="showArrows" checked> 顯示箭頭</label><br>
+      <label><input type="checkbox" id="hoverFocus" checked> Hover 突顯</label>
+    </div>
+    <div style="margin-top:8px">
+      <button id="export">匯出PNG</button>
+    </div>
   </div>
+  <div class="legend"><div><strong>圖例</strong></div><div style="margin-top:6px"><span style="display:inline-block;width:12px;height:12px;background:#baceb1;border-radius:50%;margin-right:6px;vertical-align:middle"></span>學校成員</div><div style="margin-top:6px"><span style="display:inline-block;width:12px;height:12px;background:#c3b4d1;margin-right:6px;vertical-align:middle"></span>機構</div></div>
+  <div id="tooltip"></div>
+</div>
+<script>
+var GRAPH_DATA = {"nodes": [{"id": "1001", "label": "1001", "type": "member", "size": 6.83, "parallelX": [-660, -1056.0], "parallelY": [-660, -1056.0], "arcX": [0.0, 350.0], "arcY": [0.0, 350.0], "color": "#baceb1", "shape": "circle"}, {"id": "1002", "label": "1002", "type": "member", "size": 6.0, "parallelX": [-660, -992.0], "parallelY": [-660, -992.0], "arcX": [-33.27, 348.42], "arcY": [-33.27, 348.42], "color": "#baceb1", "shape": "circle"}, {"id": "1003", "label": "1003", "type": "member", "size": 6.83, "parallelX": [-660, -928.0], "parallelY": [-660, -928.0], "arcX": [-66.24, 343.68], "arcY": [-66.24, 343.68], "color": "#baceb1", "shape": "circle"}, {"id": "1004", "label": "1004", "type": "member", "size": 7.67, "parallelX": [-660, -864.0], "parallelY": [-660, -864.0], "arcX": [-98.61, 335.82], "arcY": [-98.61, 335.82], "color": "#baceb1", "shape": "circle"}, {"id": "1005", "label": "1005", "type": "member", "size": 8.5, "parallelX": [-660, -800.0], "parallelY": [-660, -800.0], "arcX": [-130.08, 324.93], "arcY": [-130.08, 324.93], "color": "#baceb1", "shape": "circle"}, {"id": "1006", "label": "1006", "type": "member", "size": 6.83, "parallelX": [-660, -736.0], "parallelY": [-660, -736.0], "arcX": [-160.38, 311.09], "arcY": [-160.38, 311.09], "color": "#baceb1", "shape": "circle"}, {"id": "1007", "label": "1007", "type": "member", "size": 7.67, "parallelX": [-660, -672.0], "parallelY": [-660, -672.0], "arcX": [-189.22, 294.44], "arcY": [-189.22, 294.44], "color": "#baceb1", "shape": "circle"}, {"id": "1008", "label": "1008", "type": "member", "size": 6.0, "parallelX": [-660, -608.0], "parallelY": [-660, -608.0], "arcX": [-216.36, 275.12], "arcY": [-216.36, 275.12], "color": "#baceb1", "shape": "circle"}, {"id": "1009", "label": "1009", "type": "member", "size": 6.83, "parallelX": [-660, -544.0], "parallelY": [-660, -544.0], "arcX": [-241.53, 253.31], "arcY": [-241.53, 253.31], "color": "#baceb1", "shape": "circle"}, {"id": "1010", "label": "1010", "type": "member", "size": 6.83, "parallelX": [-660, -480.0], "parallelY": [-660, -480.0], "arcX": [-264.51, 229.2], "arcY": [-264.51, 229.2], "color": "#baceb1", "shape": "circle"}, {"id": "1011", "label": "1011", "type": "member", "size": 6.83, "parallelX": [-660, -416.0], "parallelY": [-660, -416.0], "arcX": [-285.1, 203.02], "arcY": [-285.1, 203.02], "color": "#baceb1", "shape": "circle"}, {"id": "1012", "label": "1012", "type": "member", "size": 9.33, "parallelX": [-660, -352.0], "parallelY": [-660, -352.0], "arcX": [-303.11, 175.0], "arcY": [-303.11, 175.0], "color": "#baceb1", "shape": "circle"}, {"id": "1013", "label": "1013", "type": "member", "size": 7.67, "parallelX": [-660, -288.0], "parallelY": [-660, -288.0], "arcX": [-318.37, 145.4], "arcY": [-318.37, 145.4], "color": "#baceb1", "shape": "circle"}, {"id": "1014", "label": "1014", "type": "member", "size": 6.83, "parallelX": [-660, -224.0], "parallelY": [-660, -224.0], "arcX": [-330.75, 114.47], "arcY": [-330.75, 114.47], "color": "#baceb1", "shape": "circle"}, {"id": "1015", "label": "1015", "type": "member", "size": 7.67, "parallelX": [-660, -160.0], "parallelY": [-660, -160.0], "arcX": [-340.13, 82.52], "arcY": [-340.13, 82.52], "color": "#baceb1", "shape": "circle"}, {"id": "1016", "label": "1016", "type": "member", "size": 6.83, "parallelX": [-660, -96.0], "parallelY": [-660, -96.0], "arcX": [-346.44, 49.81], "arcY": [-346.44, 49.81], "color": "#baceb1", "shape": "circle"}, {"id": "1017", "label": "1017", "type": "member", "size": 6.83, "parallelX": [-660, -32.0], "parallelY": [-660, -32.0], "arcX": [-349.6, 16.65], "arcY": [-349.6, 16.65], "color": "#baceb1", "shape": "circle"}, {"id": "1018", "label": "1018", "type": "member", "size": 6.83, "parallelX": [-660, 32.0], "parallelY": [-660, 32.0], "arcX": [-349.6, -16.65], "arcY": [-349.6, -16.65], "color": "#baceb1", "shape": "circle"}, {"id": "1019", "label": "1019", "type": "member", "size": 8.5, "parallelX": [-660, 96.0], "parallelY": [-660, 96.0], "arcX": [-346.44, -49.81], "arcY": [-346.44, -49.81], "color": "#baceb1", "shape": "circle"}, {"id": "1020", "label": "1020", "type": "member", "size": 6.83, "parallelX": [-660, 160.0], "parallelY": [-660, 160.0], "arcX": [-340.13, -82.52], "arcY": [-340.13, -82.52], "color": "#baceb1", "shape": "circle"}, {"id": "1021", "label": "1021", "type": "member", "size": 7.67, "parallelX": [-660, 224.0], "parallelY": [-660, 224.0], "arcX": [-330.75, -114.47], "arcY": [-330.75, -114.47], "color": "#baceb1", "shape": "circle"}, {"id": "1022", "label": "1022", "type": "member", "size": 7.67, "parallelX": [-660, 288.0], "parallelY": [-660, 288.0], "arcX": [-318.37, -145.4], "arcY": [-318.37, -145.4], "color": "#baceb1", "shape": "circle"}, {"id": "1023", "label": "1023", "type": "member", "size": 6.83, "parallelX": [-660, 352.0], "parallelY": [-660, 352.0], "arcX": [-303.11, -175.0], "arcY": [-303.11, -175.0], "color": "#baceb1", "shape": "circle"}, {"id": "1024", "label": "1024", "type": "member", "size": 16.0, "parallelX": [-660, 416.0], "parallelY": [-660, 416.0], "arcX": [-285.1, -203.02], "arcY": [-285.1, -203.02], "color": "#baceb1", "shape": "circle"}, {"id": "1025", "label": "1025", "type": "member", "size": 10.17, "parallelX": [-660, 480.0], "parallelY": [-660, 480.0], "arcX": [-264.51, -229.2], "arcY": [-264.51, -229.2], "color": "#baceb1", "shape": "circle"}, {"id": "1026", "label": "1026", "type": "member", "size": 11.0, "parallelX": [-660, 544.0], "parallelY": [-660, 544.0], "arcX": [-241.53, -253.31], "arcY": [-241.53, -253.31], "color": "#baceb1", "shape": "circle"}, {"id": "1027", "label": "1027", "type": "member", "size": 6.83, "parallelX": [-660, 608.0], "parallelY": [-660, 608.0], "arcX": [-216.36, -275.12], "arcY": [-216.36, -275.12], "color": "#baceb1", "shape": "circle"}, {"id": "1028", "label": "1028", "type": "member", "size": 6.83, "parallelX": [-660, 672.0], "parallelY": [-660, 672.0], "arcX": [-189.22, -294.44], "arcY": [-189.22, -294.44], "color": "#baceb1", "shape": "circle"}, {"id": "1029", "label": "1029", "type": "member", "size": 6.83, "parallelX": [-660, 736.0], "parallelY": [-660, 736.0], "arcX": [-160.38, -311.09], "arcY": [-160.38, -311.09], "color": "#baceb1", "shape": "circle"}, {"id": "1030", "label": "1030", "type": "member", "size": 6.0, "parallelX": [-660, 800.0], "parallelY": [-660, 800.0], "arcX": [-130.08, -324.93], "arcY": [-130.08, -324.93], "color": "#baceb1", "shape": "circle"}, {"id": "1031", "label": "1031", "type": "member", "size": 10.17, "parallelX": [-660, 864.0], "parallelY": [-660, 864.0], "arcX": [-98.61, -335.82], "arcY": [-98.61, -335.82], "color": "#baceb1", "shape": "circle"}, {"id": "1032", "label": "1032", "type": "member", "size": 8.5, "parallelX": [-660, 928.0], "parallelY": [-660, 928.0], "arcX": [-66.24, -343.68], "arcY": [-66.24, -343.68], "color": "#baceb1", "shape": "circle"}, {"id": "1033", "label": "1033", "type": "member", "size": 7.67, "parallelX": [-660, 992.0], "parallelY": [-660, 992.0], "arcX": [-33.27, -348.42], "arcY": [-33.27, -348.42], "color": "#baceb1", "shape": "circle"}, {"id": "1034", "label": "1034", "type": "member", "size": 6.83, "parallelX": [-660, 1056.0], "parallelY": [-660, 1056.0], "arcX": [-0.0, -350.0], "arcY": [-0.0, -350.0], "color": "#baceb1", "shape": "circle"}, {"id": "新北市三重區正義國民小學", "label": "新北市三重區正義國民小學", "type": "institution", "size": 11.83, "parallelX": 660, "parallelY": -1344.0, "arcX": 0.0, "arcY": -350.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區厚德國民小學", "label": "新北市三重區厚德國民小學", "type": "institution", "size": 8.5, "parallelX": 660, "parallelY": -1280.0, "arcX": 26.16, "arcY": -349.02, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區光興國民小學", "label": "新北市三重區光興國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -1216.0, "arcX": 52.16, "arcY": -346.09, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區蘆洲國民小學", "label": "新北市蘆洲區蘆洲國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -1152.0, "arcX": 77.88, "arcY": -341.22, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區興穀國民小學", "label": "新北市三重區興穀國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -1088.0, "arcX": 103.16, "arcY": -334.45, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區五華國民小學", "label": "新北市三重區五華國民小學", "type": "institution", "size": 11.0, "parallelX": 660, "parallelY": -1024.0, "arcX": 127.87, "arcY": -325.81, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區鷺江國民小學", "label": "新北市蘆洲區鷺江國民小學", "type": "institution", "size": 9.33, "parallelX": 660, "parallelY": -960.0, "arcX": 151.86, "arcY": -315.34, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市鶯歌區鶯歌國民小學", "label": "新北市鶯歌區鶯歌國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -896.0, "arcX": 175.0, "arcY": -303.11, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區成功國民小學", "label": "新北市蘆洲區成功國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -832.0, "arcX": 197.16, "arcY": -289.18, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市淡水區興仁國民小學", "label": "新北市淡水區興仁國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -768.0, "arcX": 218.22, "arcY": -273.64, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市淡水區新興國民小學", "label": "新北市淡水區新興國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -704.0, "arcX": 238.06, "arcY": -256.57, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市板橋區板橋國民小學", "label": "新北市板橋區板橋國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -640.0, "arcX": 256.57, "arcY": -238.06, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市石碇區和平國民小學", "label": "新北市石碇區和平國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -576.0, "arcX": 273.64, "arcY": -218.22, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市永和區網溪國民小學", "label": "新北市永和區網溪國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -512.0, "arcX": 289.18, "arcY": -197.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新店區中正國民小學", "label": "新北市新店區中正國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -448.0, "arcX": 303.11, "arcY": -175.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區修德國民小學", "label": "新北市三重區修德國民小學", "type": "institution", "size": 9.33, "parallelX": 660, "parallelY": -384.0, "arcX": 315.34, "arcY": -151.86, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新莊區昌平國民小學", "label": "新北市新莊區昌平國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -320.0, "arcX": 325.81, "arcY": -127.87, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區光榮國民小學", "label": "新北市三重區光榮國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -256.0, "arcX": 334.45, "arcY": -103.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新莊區光華國民小學", "label": "新北市新莊區光華國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -192.0, "arcX": 341.22, "arcY": -77.88, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市市立明志國民中學", "label": "新北市市立明志國民中學", "type": "institution", "size": 8.5, "parallelX": 660, "parallelY": -128.0, "arcX": 346.09, "arcY": -52.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區碧華國民小學", "label": "新北市三重區碧華國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -64.0, "arcX": 349.02, "arcY": -26.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區永福國民小學", "label": "新北市三重區永福國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 0.0, "arcX": 350.0, "arcY": 0.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市板橋區後埔國民小學", "label": "新北市板橋區後埔國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 64.0, "arcX": 349.02, "arcY": 26.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新莊區榮富國民小學", "label": "新北市新莊區榮富國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 128.0, "arcX": 346.09, "arcY": 52.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市汐止區北峰國民小學", "label": "新北市汐止區北峰國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 192.0, "arcX": 341.22, "arcY": 77.88, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市汐止區汐止國民小學", "label": "新北市汐止區汐止國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 256.0, "arcX": 334.45, "arcY": 103.16, "color": "#c3b4d1", "shape": "square"}, {"id": "雲林縣麥寮鄉麥寮國民小學", "label": "雲林縣麥寮鄉麥寮國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 320.0, "arcX": 325.81, "arcY": 127.87, "color": "#c3b4d1", "shape": "square"}, {"id": "臺南市善化區蓮潭國民小學", "label": "臺南市善化區蓮潭國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 384.0, "arcX": 315.34, "arcY": 151.86, "color": "#c3b4d1", "shape": "square"}, {"id": "臺中市大里區內新國民小學", "label": "臺中市大里區內新國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 448.0, "arcX": 303.11, "arcY": 175.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區重陽國民小學", "label": "新北市三重區重陽國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 512.0, "arcX": 289.18, "arcY": 197.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區二重國民小學", "label": "新北市三重區二重國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 576.0, "arcX": 273.64, "arcY": 218.22, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市市立碧華國民中學", "label": "新北市市立碧華國民中學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 640.0, "arcX": 256.57, "arcY": 238.06, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區集美國民小學", "label": "新北市三重區集美國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 704.0, "arcX": 238.06, "arcY": 256.57, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市立三重高級中學", "label": "新北市立三重高級中學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 768.0, "arcX": 218.22, "arcY": 273.64, "color": "#c3b4d1", "shape": "square"}, {"id": "國立臺北教育大學", "label": "國立臺北教育大學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 832.0, "arcX": 197.16, "arcY": 289.18, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市立三民高級中學", "label": "新北市立三民高級中學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 896.0, "arcX": 175.0, "arcY": 303.11, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區仁愛國民小學", "label": "新北市蘆洲區仁愛國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 960.0, "arcX": 151.86, "arcY": 315.34, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市私立光仁國民小學", "label": "臺北市私立光仁國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1024.0, "arcX": 127.87, "arcY": 325.81, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市萬華區新和國民小學", "label": "臺北市萬華區新和國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1088.0, "arcX": 103.16, "arcY": 334.45, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市萬華區萬大國民小學", "label": "臺北市萬華區萬大國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1152.0, "arcX": 77.88, "arcY": 341.22, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市萬華區東園國民小學", "label": "臺北市萬華區東園國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1216.0, "arcX": 52.16, "arcY": 346.09, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市大同區日新國民小學", "label": "臺北市大同區日新國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1280.0, "arcX": 26.16, "arcY": 349.02, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市板橋區國光國民小學", "label": "新北市板橋區國光國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1344.0, "arcX": 0.0, "arcY": 350.0, "color": "#c3b4d1", "shape": "square"}], "edges": [{"id": "e1", "source": "1001", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e2", "source": "1003", "target": "新北市三重區厚德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e3", "source": "1004", "target": "新北市三重區光興國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e4", "source": "1004", "target": "新北市蘆洲區蘆洲國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e5", "source": "1005", "target": "新北市三重區興穀國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e6", "source": "1005", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e7", "source": "1005", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e8", "source": "1006", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e9", "source": "1007", "target": "新北市蘆洲區蘆洲國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e10", "source": "1007", "target": "新北市鶯歌區鶯歌國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e11", "source": "1009", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e12", "source": "1010", "target": "新北市蘆洲區成功國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e13", "source": "1011", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e14", "source": "1012", "target": "新北市三重區厚德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e15", "source": "1012", "target": "新北市淡水區興仁國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e16", "source": "1012", "target": "新北市淡水區新興國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e17", "source": "1012", "target": "新北市板橋區板橋國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e18", "source": "1013", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e19", "source": "1013", "target": "新北市石碇區和平國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e20", "source": "1014", "target": "新北市永和區網溪國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e21", "source": "1015", "target": "新北市鶯歌區鶯歌國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e22", "source": "1015", "target": "新北市新店區中正國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e23", "source": "1016", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e24", "source": "1017", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e25", "source": "1018", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e26", "source": "1019", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e27", "source": "1019", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e28", "source": "1019", "target": "新北市新莊區昌平國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e29", "source": "1020", "target": "新北市三重區光榮國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e30", "source": "1021", "target": "新北市新莊區光華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e31", "source": "1021", "target": "新北市市立明志國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e32", "source": "1022", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e33", "source": "1022", "target": "新北市三重區碧華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e34", "source": "1023", "target": "新北市市立明志國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e35", "source": "1024", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e36", "source": "1024", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e37", "source": "1024", "target": "新北市三重區永福國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e38", "source": "1024", "target": "新北市板橋區板橋國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e39", "source": "1024", "target": "新北市板橋區後埔國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e40", "source": "1024", "target": "新北市新莊區昌平國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e41", "source": "1024", "target": "新北市新莊區榮富國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e42", "source": "1024", "target": "新北市汐止區北峰國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e43", "source": "1024", "target": "新北市汐止區汐止國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e44", "source": "1024", "target": "雲林縣麥寮鄉麥寮國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e45", "source": "1024", "target": "臺南市善化區蓮潭國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e46", "source": "1024", "target": "臺中市大里區內新國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e47", "source": "1025", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e48", "source": "1025", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e49", "source": "1025", "target": "新北市三重區重陽國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e50", "source": "1025", "target": "新北市三重區二重國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e51", "source": "1025", "target": "新北市市立碧華國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e52", "source": "1026", "target": "新北市三重區厚德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e53", "source": "1026", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e54", "source": "1026", "target": "新北市三重區集美國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e55", "source": "1026", "target": "新北市市立明志國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e56", "source": "1026", "target": "新北市立三重高級中學", "color": "#cccccc", "size": 1.4}, {"id": "e57", "source": "1026", "target": "國立臺北教育大學", "color": "#cccccc", "size": 1.4}, {"id": "e58", "source": "1027", "target": "新北市立三民高級中學", "color": "#cccccc", "size": 1.4}, {"id": "e59", "source": "1028", "target": "新北市蘆洲區仁愛國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e60", "source": "1029", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e61", "source": "1031", "target": "臺北市私立光仁國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e62", "source": "1031", "target": "臺北市萬華區新和國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e63", "source": "1031", "target": "臺北市萬華區萬大國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e64", "source": "1031", "target": "臺北市萬華區東園國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e65", "source": "1031", "target": "臺北市大同區日新國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e66", "source": "1032", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e67", "source": "1032", "target": "新北市三重區興穀國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e68", "source": "1032", "target": "新北市三重區光榮國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e69", "source": "1033", "target": "新北市三重區碧華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e70", "source": "1033", "target": "新北市板橋區國光國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e71", "source": "1034", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}]};
 
-  <script type="module">
-    import Sigma from "https://esm.sh/sigma@3?bundle";
-    import Graph from "https://esm.sh/graphology@0.26.0?bundle";
-    import {NodeCircleProgram, EdgeArrowProgram, EdgeRectangleProgram} from "https://esm.sh/sigma@3/rendering?bundle";
-    import NodeSquareProgram from "https://esm.sh/@sigma/node-square@3?bundle";
+// High-compatibility script (avoid modern syntax)
+// basic variables and DOM refs
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var modeSelect = document.getElementById('mode');
+var showLabels = document.getElementById('showLabels');
+var showArrows = document.getElementById('showArrows');
+var hoverFocus = document.getElementById('hoverFocus');
+var exportBtn = document.getElementById('export');
+var tooltip = document.getElementById('tooltip');
 
-    const embeddedGexf = `<?xml version='1.0' encoding='utf-8'?>
-<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
-  <meta lastmodifieddate="2026-03-25">
-    <creator>NetworkX 3.6.1</creator>
-  </meta>
-  <graph defaultedgetype="directed" mode="static" name="">
-    <attributes mode="static" class="edge">
-      <attribute id="3" title="direction" type="string" />
-    </attributes>
-    <attributes mode="static" class="node">
-      <attribute id="0" title="node_type" type="string" />
-      <attribute id="1" title="shape" type="string" />
-      <attribute id="2" title="color" type="string" />
-    </attributes>
-    <nodes>
-      <node id="1001" label="1001">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1002" label="1002">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1003" label="1003">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1004" label="1004">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1005" label="1005">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1006" label="1006">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1007" label="1007">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1008" label="1008">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1009" label="1009">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1010" label="1010">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1011" label="1011">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1012" label="1012">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1013" label="1013">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1014" label="1014">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1015" label="1015">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1016" label="1016">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1017" label="1017">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1018" label="1018">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1019" label="1019">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1020" label="1020">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1021" label="1021">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1022" label="1022">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1023" label="1023">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1024" label="1024">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1025" label="1025">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1026" label="1026">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1027" label="1027">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1028" label="1028">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1029" label="1029">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1030" label="1030">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1031" label="1031">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1032" label="1032">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1033" label="1033">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="1034" label="1034">
-        <attvalues>
-          <attvalue for="0" value="學校成員" />
-          <attvalue for="1" value="circle" />
-          <attvalue for="2" value="red" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區正義國民小學" label="新北市三重區正義國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區厚德國民小學" label="新北市三重區厚德國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區光興國民小學" label="新北市三重區光興國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市蘆洲區蘆洲國民小學" label="新北市蘆洲區蘆洲國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區興穀國民小學" label="新北市三重區興穀國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區五華國民小學" label="新北市三重區五華國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市蘆洲區鷺江國民小學" label="新北市蘆洲區鷺江國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市鶯歌區鶯歌國民小學" label="新北市鶯歌區鶯歌國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市蘆洲區成功國民小學" label="新北市蘆洲區成功國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市淡水區興仁國民小學" label="新北市淡水區興仁國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市淡水區新興國民小學" label="新北市淡水區新興國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市板橋區板橋國民小學" label="新北市板橋區板橋國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市石碇區和平國民小學" label="新北市石碇區和平國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市永和區網溪國民小學" label="新北市永和區網溪國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市新店區中正國民小學" label="新北市新店區中正國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區修德國民小學" label="新北市三重區修德國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市新莊區昌平國民小學" label="新北市新莊區昌平國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區光榮國民小學" label="新北市三重區光榮國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市新莊區光華國民小學" label="新北市新莊區光華國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市市立明志國民中學" label="新北市市立明志國民中學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區碧華國民小學" label="新北市三重區碧華國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區永福國民小學" label="新北市三重區永福國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市板橋區後埔國民小學" label="新北市板橋區後埔國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市新莊區榮富國民小學" label="新北市新莊區榮富國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市汐止區北峰國民小學" label="新北市汐止區北峰國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市汐止區汐止國民小學" label="新北市汐止區汐止國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="雲林縣麥寮鄉麥寮國民小學" label="雲林縣麥寮鄉麥寮國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺南市善化區蓮潭國民小學" label="臺南市善化區蓮潭國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺中市大里區內新國民小學" label="臺中市大里區內新國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區重陽國民小學" label="新北市三重區重陽國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區二重國民小學" label="新北市三重區二重國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市市立碧華國民中學" label="新北市市立碧華國民中學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市三重區集美國民小學" label="新北市三重區集美國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市立三重高級中學" label="新北市立三重高級中學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="國立臺北教育大學" label="國立臺北教育大學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市立三民高級中學" label="新北市立三民高級中學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市蘆洲區仁愛國民小學" label="新北市蘆洲區仁愛國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺北市私立光仁國民小學" label="臺北市私立光仁國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺北市萬華區新和國民小學" label="臺北市萬華區新和國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺北市萬華區萬大國民小學" label="臺北市萬華區萬大國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺北市萬華區東園國民小學" label="臺北市萬華區東園國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="臺北市大同區日新國民小學" label="臺北市大同區日新國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-      <node id="新北市板橋區國光國民小學" label="新北市板橋區國光國民小學">
-        <attvalues>
-          <attvalue for="0" value="機構" />
-          <attvalue for="1" value="square" />
-          <attvalue for="2" value="blue" />
-        </attvalues>
-      </node>
-    </nodes>
-    <edges>
-      <edge source="1001" target="新北市三重區正義國民小學" id="0" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1003" target="新北市三重區厚德國民小學" id="1" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1004" target="新北市三重區光興國民小學" id="2" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1004" target="新北市蘆洲區蘆洲國民小學" id="3" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1005" target="新北市三重區興穀國民小學" id="4" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1005" target="新北市三重區五華國民小學" id="5" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1005" target="新北市蘆洲區鷺江國民小學" id="6" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1006" target="新北市三重區五華國民小學" id="7" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1007" target="新北市蘆洲區蘆洲國民小學" id="8" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1007" target="新北市鶯歌區鶯歌國民小學" id="9" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1009" target="新北市三重區正義國民小學" id="10" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1010" target="新北市蘆洲區成功國民小學" id="11" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1011" target="新北市蘆洲區鷺江國民小學" id="12" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1012" target="新北市三重區厚德國民小學" id="13" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1012" target="新北市淡水區興仁國民小學" id="14" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1012" target="新北市淡水區新興國民小學" id="15" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1012" target="新北市板橋區板橋國民小學" id="16" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1013" target="新北市蘆洲區鷺江國民小學" id="17" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1013" target="新北市石碇區和平國民小學" id="18" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1014" target="新北市永和區網溪國民小學" id="19" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1015" target="新北市鶯歌區鶯歌國民小學" id="20" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1015" target="新北市新店區中正國民小學" id="21" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1016" target="新北市三重區正義國民小學" id="22" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1017" target="新北市蘆洲區鷺江國民小學" id="23" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1018" target="新北市三重區修德國民小學" id="24" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1019" target="新北市三重區正義國民小學" id="25" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1019" target="新北市三重區五華國民小學" id="26" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1019" target="新北市新莊區昌平國民小學" id="27" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1020" target="新北市三重區光榮國民小學" id="28" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1021" target="新北市新莊區光華國民小學" id="29" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1021" target="新北市市立明志國民中學" id="30" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1022" target="新北市三重區五華國民小學" id="31" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1022" target="新北市三重區碧華國民小學" id="32" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1023" target="新北市市立明志國民中學" id="33" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市三重區正義國民小學" id="34" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市三重區修德國民小學" id="35" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市三重區永福國民小學" id="36" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市板橋區板橋國民小學" id="37" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市板橋區後埔國民小學" id="38" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市新莊區昌平國民小學" id="39" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市新莊區榮富國民小學" id="40" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市汐止區北峰國民小學" id="41" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="新北市汐止區汐止國民小學" id="42" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="雲林縣麥寮鄉麥寮國民小學" id="43" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="臺南市善化區蓮潭國民小學" id="44" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1024" target="臺中市大里區內新國民小學" id="45" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1025" target="新北市三重區正義國民小學" id="46" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1025" target="新北市三重區五華國民小學" id="47" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1025" target="新北市三重區重陽國民小學" id="48" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1025" target="新北市三重區二重國民小學" id="49" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1025" target="新北市市立碧華國民中學" id="50" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1026" target="新北市三重區厚德國民小學" id="51" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1026" target="新北市三重區五華國民小學" id="52" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1026" target="新北市三重區集美國民小學" id="53" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1026" target="新北市市立明志國民中學" id="54" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1026" target="新北市立三重高級中學" id="55" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1026" target="國立臺北教育大學" id="56" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1027" target="新北市立三民高級中學" id="57" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1028" target="新北市蘆洲區仁愛國民小學" id="58" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1029" target="新北市三重區修德國民小學" id="59" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1031" target="臺北市私立光仁國民小學" id="60" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1031" target="臺北市萬華區新和國民小學" id="61" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1031" target="臺北市萬華區萬大國民小學" id="62" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1031" target="臺北市萬華區東園國民小學" id="63" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1031" target="臺北市大同區日新國民小學" id="64" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1032" target="新北市三重區正義國民小學" id="65" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1032" target="新北市三重區興穀國民小學" id="66" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1032" target="新北市三重區光榮國民小學" id="67" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1033" target="新北市三重區碧華國民小學" id="68" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1033" target="新北市板橋區國光國民小學" id="69" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-      <edge source="1034" target="新北市三重區修德國民小學" id="70" weight="1">
-        <attvalues>
-          <attvalue for="3" value="member_to_institution" />
-        </attvalues>
-      </edge>
-    </edges>
-  </graph>
-</gexf>
-`;
+var nodes = GRAPH_DATA.nodes.slice(0);
+var edges = GRAPH_DATA.edges.slice(0);
+var nodeById = {};
+for (var i=0;i<nodes.length;i++){ nodeById[nodes[i].id]=nodes[i]; }
 
-    const state = {
-      search: "",
-      hoveredNode: null,
-      selectedNode: null,
-      dragging: false,
-      draggedNode: null,
-      memberColor: "#d64f4f",
-      orgColor: "#4477cc",
-      edgeColor: "#9aa7bd",
-      nodeScale: 1,
-      edgeScale: 1,
-      showMembers: true,
-      showOrgs: true,
-      showLabels: true,
-      showArrows: true,
-    };
+// initial positions: use parallel coords
+for (var i=0;i<nodes.length;i++){
+  nodes[i].x = nodes[i].parallelX;
+  nodes[i].y = nodes[i].parallelY;
+}
 
-    const els = {
-      search: document.getElementById("search"),
-      showMembers: document.getElementById("show-members"),
-      showOrgs: document.getElementById("show-orgs"),
-      showLabels: document.getElementById("show-labels"),
-      showArrows: document.getElementById("show-arrows"),
-      memberColor: document.getElementById("member-color"),
-      orgColor: document.getElementById("org-color"),
-      edgeColor: document.getElementById("edge-color"),
-      nodeScale: document.getElementById("node-scale"),
-      edgeScale: document.getElementById("edge-scale"),
-      nodeScaleVal: document.getElementById("node-scale-val"),
-      edgeScaleVal: document.getElementById("edge-scale-val"),
-      details: document.getElementById("details"),
-      status: document.getElementById("status"),
-      resetView: document.getElementById("reset-view"),
-      clearFocus: document.getElementById("clear-focus"),
-      randomLayout: document.getElementById("random-layout"),
-      savePng: document.getElementById("save-png"),
-    };
+// camera and interaction
+var width=window.innerWidth, height=window.innerHeight, dpr = window.devicePixelRatio || 1;
+var camera = {x:0,y:0,scale:1};
+var isPanning=false, isDragging=false, dragNode=null;
+var lastMouse = {x:0,y:0};
+var hovered = null;
 
-    function parseGexf(xmlString) {
-      const xml = new DOMParser().parseFromString(xmlString, "application/xml");
-      const graphType = xml.querySelector("graph")?.getAttribute("defaultedgetype") || "directed";
-      const GraphClass = graphType === "directed" ? Graph.DirectedGraph || Graph : Graph.UndirectedGraph || Graph;
-      const graph = new GraphClass();
+function resize(){ width = canvas.clientWidth; height = canvas.clientHeight; canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0); fit(); }
+function worldToScreen(x,y){ return {x: width/2 + (x+camera.x)*camera.scale, y: height/2 + (y+camera.y)*camera.scale}; }
+function screenToWorld(x,y){ return {x: (x-width/2)/camera.scale - camera.x, y: (y-height/2)/camera.scale - camera.y}; }
 
-      const attrMaps = { node: new Map(), edge: new Map() };
-      xml.querySelectorAll("attributes[class='node'] > attribute").forEach((el) => {
-        attrMaps.node.set(el.getAttribute("id"), el.getAttribute("title"));
-      });
-      xml.querySelectorAll("attributes[class='edge'] > attribute").forEach((el) => {
-        attrMaps.edge.set(el.getAttribute("id"), el.getAttribute("title"));
-      });
+function drawArrow(sx,sy,tx,ty,color,widthLine,drawHead){
+  ctx.save();
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.globalAlpha = 1; ctx.lineWidth = widthLine;
+  ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(tx,ty); ctx.stroke();
+  if(drawHead){
+    var angle = Math.atan2(ty-sy, tx-sx);
+    var head = Math.max(8, 6 + widthLine*2);
+    ctx.beginPath();
+    ctx.moveTo(tx,ty);
+    ctx.lineTo(tx - head*Math.cos(angle - Math.PI/7), ty - head*Math.sin(angle - Math.PI/7));
+    ctx.lineTo(tx - head*Math.cos(angle + Math.PI/7), ty - head*Math.sin(angle + Math.PI/7));
+    ctx.closePath();
+    ctx.fill();
+  }
+  ctx.restore();
+}
 
-      xml.querySelectorAll("nodes > node").forEach((nodeEl) => {
-        const id = nodeEl.getAttribute("id");
-        const label = nodeEl.getAttribute("label") || id;
-        const attrs = { label };
-        nodeEl.querySelectorAll("attvalue").forEach((att) => {
-          const key = attrMaps.node.get(att.getAttribute("for"));
-          if (key) attrs[key] = att.getAttribute("value");
-        });
-        graph.addNode(id, attrs);
-      });
+function nodeScreenPos(n){
+  return worldToScreen(n.x, n.y);
+}
 
-      let edgeIndex = 0;
-      xml.querySelectorAll("edges > edge").forEach((edgeEl) => {
-        const source = edgeEl.getAttribute("source");
-        const target = edgeEl.getAttribute("target");
-        const id = edgeEl.getAttribute("id") || `e${edgeIndex++}`;
-        const attrs = {
-          weight: Number(edgeEl.getAttribute("weight") || 1),
-        };
-        edgeEl.querySelectorAll("attvalue").forEach((att) => {
-          const key = attrMaps.edge.get(att.getAttribute("for"));
-          if (key) attrs[key] = att.getAttribute("value");
-        });
-        graph.addEdgeWithKey(id, source, target, attrs);
-      });
-
-      return graph;
-    }
-
-    function assignInitialLayout(graph) {
-      const memberIds = [];
-      const orgIds = [];
-      graph.forEachNode((node, attrs) => {
-        if ((attrs.node_type || "") === "學校成員") memberIds.push(node);
-        else orgIds.push(node);
-      });
-
-      const placeRing = (ids, radius, offset = 0) => {
-        const total = Math.max(ids.length, 1);
-        ids.forEach((id, i) => {
-          const angle = (Math.PI * 2 * i) / total + offset;
-          graph.mergeNodeAttributes(id, { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius });
-        });
-      };
-
-      placeRing(orgIds, 8, -Math.PI / 2);
-      placeRing(memberIds, 20, -Math.PI / 2 + Math.PI / Math.max(memberIds.length, 2));
-
-      graph.forEachNode((node, attrs) => {
-        const degree = (graph.inDegree ? graph.inDegree(node) : 0) + (graph.outDegree ? graph.outDegree(node) : 0);
-        const isMember = (attrs.node_type || "") === "學校成員";
-        graph.mergeNodeAttributes(node, {
-          size: isMember ? Math.max(4, 3 + degree * 0.35) : Math.max(7, 6 + degree * 0.45),
-          color: isMember ? state.memberColor : state.orgColor,
-          type: isMember ? "circle" : "square",
-          forceLabel: !isMember || degree >= 3,
-          label: attrs.label || node,
-          originalType: isMember ? "circle" : "square",
-        });
-      });
-
-      graph.forEachEdge((edge, attrs, source, target) => {
-        graph.mergeEdgeAttributes(edge, {
-          size: 1.1 * (attrs.weight || 1),
-          color: state.edgeColor,
-          type: state.showArrows ? "arrow" : "line",
-          label: `${source} → ${target}`,
-        });
-      });
-    }
-
-    const graph = parseGexf(embeddedGexf);
-    assignInitialLayout(graph);
-
-    const renderer = new Sigma(graph, document.getElementById("graph-container"), {
-      minCameraRatio: 0.15,
-      maxCameraRatio: 5,
-      renderLabels: true,
-      renderEdgeLabels: false,
-      labelDensity: 0.09,
-      labelGridCellSize: 80,
-      labelRenderedSizeThreshold: 8,
-      zIndex: true,
-      defaultEdgeType: "arrow",
-      nodeProgramClasses: {
-        circle: NodeCircleProgram,
-        square: NodeSquareProgram,
-      },
-      edgeProgramClasses: {
-        arrow: EdgeArrowProgram,
-        line: EdgeRectangleProgram,
-      },
-      nodeReducer: (node, data) => nodeReducer(node, data),
-      edgeReducer: (edge, data) => edgeReducer(edge, data),
-    });
-
-    function isNodeVisible(attrs) {
-      const nodeType = attrs.node_type || "";
-      if (nodeType === "學校成員" && !state.showMembers) return false;
-      if (nodeType !== "學校成員" && !state.showOrgs) return false;
-      if (state.search) {
-        const q = state.search.toLowerCase();
-        const label = String(attrs.label || "").toLowerCase();
-        if (!label.includes(q)) return false;
+function draw(){
+  ctx.clearRect(0,0,width,height);
+  // draw edges
+  for(var i=0;i<edges.length;i++){
+    var e = edges[i];
+    var s = nodeById[e.source];
+    var t = nodeById[e.target];
+    if(!s || !t) continue;
+    var sp = nodeScreenPos(s);
+    var tp = nodeScreenPos(t);
+    // shift start/end by node radius
+    var dx = tp.x - sp.x, dy = tp.y - sp.y;
+    var dist = Math.sqrt(dx*dx+dy*dy) || 1;
+    var ux = dx/dist, uy = dy/dist;
+    var sr = Math.max(4, s.size) * camera.scale;
+    var tr = Math.max(4, t.size) * camera.scale;
+    var sx = sp.x + ux*(sr+2), sy = sp.y + uy*(sr+2);
+    var ex = tp.x - ux*(tr+10), ey = tp.y - uy*(tr+10);
+    var col = e.color || '#cccccc';
+    var lw = e.size || 1.2;
+    drawArrow(sx,sy,ex,ey,col,lw, showArrows.checked);
+  }
+  // draw nodes
+  for(var i=0;i<nodes.length;i++){
+    var n = nodes[i];
+    var p = nodeScreenPos(n);
+    var s = Math.max(4, n.size);
+    ctx.save();
+    // dim if hoverFocus active and not neighbor
+    var alpha = 1.0;
+    if(hovered && hoverFocus.checked){
+      var isNeighbor = (hovered.id === n.id);
+      for(var j=0;j<edges.length && !isNeighbor;j++){
+        if(edges[j].source===hovered.id && edges[j].target===n.id) { isNeighbor=true; break; }
+        if(edges[j].target===hovered.id && edges[j].source===n.id) { isNeighbor=true; break; }
       }
-      return true;
+      if(!isNeighbor) alpha = 0.25;
     }
-
-    function neighborSet(nodeId) {
-      const set = new Set([nodeId]);
-      if (!nodeId) return set;
-      graph.forEachNeighbor(nodeId, (n) => set.add(n));
-      return set;
-    }
-
-    function nodeReducer(node, data) {
-      const attrs = graph.getNodeAttributes(node);
-      const visible = isNodeVisible(attrs);
-      if (!visible) return { ...data, hidden: true };
-
-      const selectedNeighborhood = state.selectedNode ? neighborSet(state.selectedNode) : null;
-      const hoveredNeighborhood = state.hoveredNode ? neighborSet(state.hoveredNode) : null;
-      const highlighted = (selectedNeighborhood && selectedNeighborhood.has(node)) || (hoveredNeighborhood && hoveredNeighborhood.has(node));
-      const matched = state.search && String(attrs.label || "").toLowerCase().includes(state.search.toLowerCase());
-      const baseColor = (attrs.node_type || "") === "學校成員" ? state.memberColor : state.orgColor;
-
-      return {
-        ...data,
-        color: highlighted ? baseColor : baseColor,
-        size: (attrs.size || 5) * state.nodeScale * (matched ? 1.25 : 1),
-        hidden: false,
-        forceLabel: state.showLabels ? (!!attrs.forceLabel || matched || highlighted || !!state.selectedNode) : false,
-        label: state.showLabels ? attrs.label : "",
-        zIndex: highlighted ? 1 : 0,
-      };
-    }
-
-    function edgeReducer(edge, data) {
-      const attrs = graph.getEdgeAttributes(edge);
-      const source = graph.source(edge);
-      const target = graph.target(edge);
-      const sourceVisible = isNodeVisible(graph.getNodeAttributes(source));
-      const targetVisible = isNodeVisible(graph.getNodeAttributes(target));
-      if (!sourceVisible || !targetVisible) return { ...data, hidden: true };
-
-      const highlight = state.selectedNode && (source === state.selectedNode || target === state.selectedNode || graph.areNeighbors(source, state.selectedNode) || graph.areNeighbors(target, state.selectedNode));
-      const hoverHighlight = state.hoveredNode && (source === state.hoveredNode || target === state.hoveredNode);
-      const active = highlight || hoverHighlight;
-
-      return {
-        ...data,
-        type: state.showArrows ? "arrow" : "line",
-        color: active ? "#4a5568" : state.edgeColor,
-        size: (attrs.size || 1) * state.edgeScale * (active ? 1.6 : 1),
-        hidden: false,
-        zIndex: active ? 1 : 0,
-      };
-    }
-
-    function refresh() {
-      els.nodeScaleVal.textContent = Number(state.nodeScale).toFixed(1);
-      els.edgeScaleVal.textContent = Number(state.edgeScale).toFixed(1);
-      renderer.setSetting("renderLabels", state.showLabels);
-      renderer.refresh();
-      updateStatus();
-    }
-
-    function updateStatus() {
-      let visibleNodes = 0;
-      graph.forEachNode((node, attrs) => { if (isNodeVisible(attrs)) visibleNodes += 1; });
-      let visibleEdges = 0;
-      graph.forEachEdge((edge, attrs, source, target) => {
-        if (isNodeVisible(graph.getNodeAttributes(source)) && isNodeVisible(graph.getNodeAttributes(target))) visibleEdges += 1;
-      });
-      els.status.textContent = `顯示中：${visibleNodes} 節點，${visibleEdges} 邊`;
-    }
-
-    function updateDetails(nodeId = null) {
-      if (!nodeId) {
-        els.details.innerHTML = "點選節點後，這裡會顯示節點屬性、入度與出度。";
-        return;
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = n.color || (n.type==='member' ? '#baceb1' : '#c3b4d1');
+    ctx.strokeStyle = '#666'; ctx.lineWidth=1;
+    if(n.shape==='circle'){ ctx.beginPath(); ctx.arc(p.x,p.y,s,0,Math.PI*2); ctx.fill(); ctx.stroke(); }
+    else { ctx.beginPath(); ctx.rect(p.x-s,p.y-s,s*2,s*2); ctx.fill(); ctx.stroke(); }
+    ctx.restore();
+  }
+  // labels
+  if(showLabels.checked){
+    ctx.save(); ctx.font = '12px Arial, Noto Sans TC'; ctx.fillStyle='#222';
+    for(var i=0;i<nodes.length;i++){
+      var n = nodes[i]; var p = nodeScreenPos(n); var s = Math.max(4, n.size); var gap = s + 6;
+      var text = n.label;
+      var metrics = ctx.measureText(text); var tw = metrics.width; var x,y;
+      if(modeSelect.value === 'parallel'){
+        if(n.type === 'member'){ x = p.x - (tw + gap); y = p.y - 8; }
+        else { x = p.x + gap; y = p.y - 8; }
+      } else {
+        // arc mode: both labels left of node per your request
+        x = p.x - (tw + gap); y = p.y - 8;
       }
-      const attrs = graph.getNodeAttributes(nodeId);
-      const inDegree = graph.inDegree ? graph.inDegree(nodeId) : graph.degree(nodeId);
-      const outDegree = graph.outDegree ? graph.outDegree(nodeId) : graph.degree(nodeId);
-      const neighbors = [];
-      graph.forEachNeighbor(nodeId, (n) => neighbors.push(graph.getNodeAttribute(n, "label") || n));
-      els.details.innerHTML = `
-        <strong>${attrs.label || nodeId}</strong>
-        類型：${attrs.node_type || "未分類"}<br>
-        ID：${nodeId}<br>
-        入度：${inDegree} ／ 出度：${outDegree}<br>
-        鄰近節點數：${neighbors.length}<br>
-        <span class="small">鄰近節點：${neighbors.slice(0, 12).join("、") || "無"}${neighbors.length > 12 ? "…" : ""}</span>
-      `;
-    }
-
-    renderer.on("enterNode", ({ node }) => {
-      state.hoveredNode = node;
-      refresh();
-    });
-    renderer.on("leaveNode", () => {
-      state.hoveredNode = null;
-      refresh();
-    });
-    renderer.on("clickNode", ({ node }) => {
-      state.selectedNode = state.selectedNode === node ? null : node;
-      updateDetails(state.selectedNode);
-      refresh();
-    });
-    renderer.on("clickStage", () => {
-      state.selectedNode = null;
-      updateDetails(null);
-      refresh();
-    });
-
-    renderer.on("downNode", (e) => {
-      state.dragging = true;
-      state.draggedNode = e.node;
-      renderer.getCamera().disable();
-      graph.setNodeAttribute(state.draggedNode, "highlighted", true);
-    });
-
-    renderer.getMouseCaptor().on("mousemovebody", (e) => {
-      if (!state.dragging || !state.draggedNode) return;
-      const pos = renderer.viewportToGraph({ x: e.x, y: e.y });
-      graph.setNodeAttribute(state.draggedNode, "x", pos.x);
-      graph.setNodeAttribute(state.draggedNode, "y", pos.y);
-      e.preventSigmaDefault();
-      if (e.original) {
-        e.original.preventDefault();
-        e.original.stopPropagation();
+      if(hovered && hoverFocus.checked){
+        var isNeighbor = (hovered.id === n.id);
+        for(var j=0;j<edges.length && !isNeighbor;j++){
+          if(edges[j].source===hovered.id && edges[j].target===n.id) { isNeighbor=true; break; }
+          if(edges[j].target===hovered.id && edges[j].source===n.id) { isNeighbor=true; break; }
+        }
+        if(!isNeighbor) ctx.globalAlpha = 0.25;
       }
-      renderer.refresh();
-    });
+      ctx.fillText(text, x+3, y+1);
+      ctx.globalAlpha = 1.0;
+    }
+    ctx.restore();
+  }
+}
 
-    const stopDragging = () => {
-      if (!state.dragging) return;
-      state.dragging = false;
-      state.draggedNode = null;
-      renderer.getCamera().enable();
-      renderer.refresh();
-    };
-    renderer.getMouseCaptor().on("mouseup", stopDragging);
-    renderer.getMouseCaptor().on("mousedown", () => {});
-    window.addEventListener("mouseup", stopDragging);
+// basic fit layout: center and scale
+function fit(){
+  var xs = [], ys = [];
+  for(var i=0;i<nodes.length;i++){ xs.push(nodes[i].x); ys.push(nodes[i].y); }
+  if(xs.length===0){ camera = {x:0,y:0,scale:1}; draw(); return; }
+  var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+  var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+  var pad = 200;
+  var graphW = Math.max(1, maxX-minX+pad), graphH = Math.max(1, maxY-minY+pad);
+  var scaleX = width / graphW, scaleY = height / graphH;
+  camera.scale = Math.min(scaleX, scaleY) * 0.95;
+  camera.x = -((minX+maxX)/2);
+  camera.y = -((minY+maxY)/2);
+  draw();
+}
 
-    els.search.addEventListener("input", (e) => {
-      state.search = e.target.value.trim();
-      refresh();
-    });
-    els.showMembers.addEventListener("change", (e) => { state.showMembers = e.target.checked; refresh(); });
-    els.showOrgs.addEventListener("change", (e) => { state.showOrgs = e.target.checked; refresh(); });
-    els.showLabels.addEventListener("change", (e) => { state.showLabels = e.target.checked; refresh(); });
-    els.showArrows.addEventListener("change", (e) => { state.showArrows = e.target.checked; refresh(); });
-    els.memberColor.addEventListener("input", (e) => { state.memberColor = e.target.value; refresh(); });
-    els.orgColor.addEventListener("input", (e) => { state.orgColor = e.target.value; refresh(); });
-    els.edgeColor.addEventListener("input", (e) => { state.edgeColor = e.target.value; refresh(); });
-    els.nodeScale.addEventListener("input", (e) => { state.nodeScale = Number(e.target.value); refresh(); });
-    els.edgeScale.addEventListener("input", (e) => { state.edgeScale = Number(e.target.value); refresh(); });
+// apply layouts
+function applyLayout(mode){
+  if(mode === 'parallel'){
+    for(var i=0;i<nodes.length;i++){
+      nodes[i].x = nodes[i].parallelX;
+      nodes[i].y = nodes[i].parallelY;
+    }
+  } else {
+    for(var i=0;i<nodes.length;i++){
+      nodes[i].x = nodes[i].arcX;
+      nodes[i].y = nodes[i].arcY;
+    }
+  }
+  fit();
+}
 
-    els.resetView.addEventListener("click", () => {
-      if (renderer.getCamera().animatedReset) renderer.getCamera().animatedReset();
-      else renderer.getCamera().setState({ x: 0.5, y: 0.5, ratio: 1, angle: 0 });
-    });
-    els.clearFocus.addEventListener("click", () => {
-      state.selectedNode = null;
-      state.hoveredNode = null;
-      state.search = "";
-      els.search.value = "";
-      updateDetails(null);
-      refresh();
-    });
-    els.randomLayout.addEventListener("click", () => {
-      assignInitialLayout(graph);
-      renderer.refresh();
-      if (renderer.getCamera().animatedReset) renderer.getCamera().animatedReset();
-      updateStatus();
-    });
+// simple hit test
+function findNodeAt(mx,my){
+  for(var i=nodes.length-1;i>=0;i--){
+    var n = nodes[i];
+    var p = nodeScreenPos(n);
+    var r = Math.max(4, n.size) * camera.scale;
+    if(n.shape === 'circle'){
+      var dx = mx - p.x, dy = my - p.y;
+      if(dx*dx + dy*dy <= r*r) return n;
+    } else {
+      if(mx >= p.x - r && mx <= p.x + r && my >= p.y - r && my <= p.y + r) return n;
+    }
+  }
+  return null;
+}
 
-    els.savePng.addEventListener("click", () => {
-      const { width, height } = renderer.getDimensions();
-      const pixelRatio = window.devicePixelRatio || 1;
-      const tmpRoot = document.createElement("div");
-      tmpRoot.style.width = `${width}px`;
-      tmpRoot.style.height = `${height}px`;
-      tmpRoot.style.position = "absolute";
-      tmpRoot.style.left = "-99999px";
-      document.body.appendChild(tmpRoot);
+// events
+canvas.addEventListener('mousedown', function(e){
+  var rect = canvas.getBoundingClientRect(); var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  var n = findNodeAt(mx,my);
+  lastMouse.x = e.clientX; lastMouse.y = e.clientY;
+  if(n){ isDragging=true; dragNode = n; canvas.style.cursor='grabbing'; }
+  else { isPanning = true; canvas.style.cursor='grabbing'; }
+});
+window.addEventListener('mousemove', function(e){
+  var rect = canvas.getBoundingClientRect(); var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  if(isDragging && dragNode){
+    var w = screenToWorld(mx,my); dragNode.x = w.x; dragNode.y = w.y; draw(); updateTooltipPosition(mx,my); return;
+  }
+  if(isPanning){
+    var dx = e.clientX - lastMouse.x, dy = e.clientY - lastMouse.y;
+    camera.x += dx / camera.scale; camera.y += dy / camera.scale;
+    lastMouse.x = e.clientX; lastMouse.y = e.clientY;
+    draw(); return;
+  }
+  var n = findNodeAt(mx,my);
+  if(n){
+    if(hovered === null || hovered.id !== n.id) hovered = n;
+    showTooltipForNode(n, mx, my);
+    draw();
+  } else {
+    hovered = null; tooltip.style.display='none'; draw();
+  }
+});
+window.addEventListener('mouseup', function(){ isPanning=false; isDragging=false; dragNode=null; canvas.style.cursor='grab'; });
+canvas.addEventListener('wheel', function(e){ e.preventDefault(); var rect = canvas.getBoundingClientRect(); var mx = e.clientX - rect.left, my = e.clientY - rect.top; var before = screenToWorld(mx,my); var factor = e.deltaY < 0 ? 1.1 : 0.9; camera.scale = Math.max(0.12, Math.min(6, camera.scale * factor)); var after = screenToWorld(mx,my); camera.x += after.x - before.x; camera.y += after.y - before.y; draw(); }, {passive:false});
 
-      const tmpRenderer = new Sigma(graph, tmpRoot, renderer.getSettings());
-      tmpRenderer.getCamera().setState(renderer.getCamera().getState());
-      tmpRenderer.refresh();
+function showTooltipForNode(n, mx, my){
+  var items = [];
+  if(n.type === 'member'){
+    for(var i=0;i<edges.length;i++){ if(edges[i].source === n.id){ items.push(nodeById[edges[i].target].label); } }
+  } else {
+    for(var i=0;i<edges.length;i++){ if(edges[i].target === n.id){ items.push(nodeById[edges[i].source].label); } }
+  }
+  var html = '<div style="font-weight:700;margin-bottom:6px">' + escapeHtml(n.label) + '</div>';
+  html += '<div style="color:#555;margin-bottom:6px">' + (n.type==='member' ? '學校成員' : '機構') + '</div>';
+  html += '<div><strong>連結數：' + items.length + '</strong></div>';
+  if(items.length > 0){ html += '<ul style="margin:6px 0 0 18px;padding:0;">'; for(var j=0;j<items.length;j++){ html += '<li>' + escapeHtml(items[j]) + '</li>'; } html += '</ul>'; }
+  tooltip.innerHTML = html;
+  tooltip.style.display = 'block';
+  updateTooltipPosition(mx,my);
+}
+function updateTooltipPosition(mx,my){
+  tooltip.style.left = Math.min(mx+12, width-320) + 'px';
+  tooltip.style.top = Math.min(my+12, height-200) + 'px';
+}
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-      const canvas = document.createElement("canvas");
-      canvas.width = width * pixelRatio;
-      canvas.height = height * pixelRatio;
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+modeSelect.addEventListener('change', function(){ applyLayout(modeSelect.value); });
+showLabels.addEventListener('change', draw);
+showArrows.addEventListener('change', draw);
+hoverFocus.addEventListener('change', draw);
+exportBtn.addEventListener('click', function(){ var link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'network.png'; link.click(); });
 
-      const canvases = tmpRenderer.getCanvases();
-      Object.keys(canvases).forEach((key) => {
-        ctx.drawImage(canvases[key], 0, 0, canvas.width, canvas.height);
-      });
+window.addEventListener('resize', resize);
 
-      canvas.toBlob((blob) => {
-        if (!blob) return;
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "校際合作網絡圖.png";
-        a.click();
-        URL.revokeObjectURL(a.href);
-        tmpRenderer.kill();
-        tmpRoot.remove();
-      }, "image/png");
-    });
+// initial
+resize();
+applyLayout('parallel');
 
-    updateDetails(null);
-    refresh();
-  </script>
+</script>
 </body>
 </html>
