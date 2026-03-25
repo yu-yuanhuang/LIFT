@@ -3,283 +3,721 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>校際合作網絡圖 — 高相容版</title>
+<title>校際合作網絡圖</title>
 <style>
-html,body{margin:0;padding:0;height:100%;width:100%;font-family:Arial,"Noto Sans TC",sans-serif;background:#fff}
-#container{position:relative;width:100%;height:100%}
-#canvas{position:absolute;left:0;top:0;right:0;bottom:0;width:100%;height:100%;background:#fff;cursor:grab}
-#controls{position:absolute;right:12px;top:12px;background:rgba(255,255,255,0.98);border:1px solid #ccc;padding:10px;border-radius:8px;z-index:20}
-#tooltip{position:absolute;display:none;z-index:30;background:#fff;border:1px solid #999;padding:8px;border-radius:6px;max-width:300px;font-size:13px}
-.legend{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,0.98);border:1px solid #ccc;padding:8px;border-radius:8px;z-index:20}
-button{padding:6px 8px;margin:4px 2px;font-size:13px}
+html,body{
+  margin:0;padding:0;width:100%;height:100%;
+  background:#ffffff;font-family:Arial,"Noto Sans TC",sans-serif;overflow:hidden;
+}
+#app{position:relative;width:100%;height:100%;}
+#canvas{position:absolute;inset:0;width:100%;height:100%;background:#ffffff;cursor:grab;}
+#canvas.dragging{cursor:grabbing;}
+#panel{
+  position:absolute;right:12px;top:12px;z-index:20;
+  width:310px;background:rgba(255,255,255,0.98);
+  border:1px solid #b8b8b8;border-radius:10px;padding:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);font-size:13px;
+}
+#panel h3{margin:0 0 10px 0;font-size:15px;}
+#panel select,#panel button{font-size:13px;}
+#panel select{
+  width:100%;box-sizing:border-box;padding:8px;border:1px solid #bbb;border-radius:6px;background:#fff;
+}
+#panel label{display:block;margin:6px 0;}
+#panel button{
+  margin-top:8px;padding:6px 10px;border:1px solid #999;border-radius:6px;background:#fff;cursor:pointer;
+}
+#legend{
+  position:absolute;left:12px;bottom:12px;z-index:20;
+  background:rgba(255,255,255,0.96);border:1px solid #b8b8b8;border-radius:10px;padding:10px 12px;font-size:13px;
+}
+.legend-row{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.legend-circle{width:12px;height:12px;border-radius:50%;background:#baceb1;border:1px solid #888;}
+.legend-square{width:12px;height:12px;background:#c3b4d1;border:1px solid #888;}
+.legend-line{position:relative;width:18px;height:0;border-top:2px solid #cccccc;}
+.legend-line:after{
+  content:"";position:absolute;right:-1px;top:-4px;width:0;height:0;
+  border-left:6px solid #cccccc;border-top:4px solid transparent;border-bottom:4px solid transparent;
+}
+#hint{
+  position:absolute;left:12px;top:12px;z-index:20;
+  background:rgba(255,255,255,0.96);border:1px solid #b8b8b8;border-radius:10px;padding:8px 10px;font-size:12px;
+}
+#tooltip{
+  position:absolute;z-index:30;display:none;max-width:320px;
+  background:rgba(255,255,255,0.99);border:1px solid #a8a8a8;border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);padding:10px 12px;font-size:12px;line-height:1.5;pointer-events:none;
+}
+#tooltip .title{font-weight:700;margin-bottom:6px;}
+#tooltip .meta{color:#555;margin-bottom:6px;}
+#tooltip .list{max-height:180px;overflow:auto;}
+#status{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:#fff;border:1px solid #ccc;border-radius:10px;padding:14px 16px;z-index:40;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);font-size:14px;
+}
+#status.error{color:#7a1e1e;border-color:#d9a5a5;background:#fff7f7;}
 </style>
 </head>
 <body>
-<div id="container">
+<div id="app">
   <canvas id="canvas"></canvas>
-  <div id="controls">
-    <div><strong>網絡設定</strong></div>
-    <div style="margin-top:6px">
-      <select id="mode">
-        <option value="parallel">左右並列（人員左、機構右）</option>
-        <option value="arc">環狀左右半圓（同一圓）</option>
+
+  <div id="hint">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div>
+
+  <div id="panel">
+    <h3>網絡設定</h3>
+    <div>
+      <select id="layoutMode">
+        <option value="parallel">左右並列</option>
+        <option value="arc">環狀並列</option>
       </select>
     </div>
-    <div style="margin-top:6px">
-      <label><input type="checkbox" id="showLabels" checked> 顯示標籤</label><br>
-      <label><input type="checkbox" id="showArrows" checked> 顯示箭頭</label><br>
-      <label><input type="checkbox" id="hoverFocus" checked> Hover 突顯</label>
+    <div style="margin-top:8px;">
+      <label><input id="toggleLabels" type="checkbox" checked> 顯示標籤</label>
+      <label><input id="toggleArrows" type="checkbox" checked> 顯示箭頭</label>
+      <label><input id="toggleHoverFocus" type="checkbox" checked> Hover聚焦突顯</label>
     </div>
-    <div style="margin-top:8px">
-      <button id="export">匯出PNG</button>
+    <div>
+      <button id="exportPNG">匯出PNG</button>
     </div>
   </div>
-  <div class="legend"><div><strong>圖例</strong></div><div style="margin-top:6px"><span style="display:inline-block;width:12px;height:12px;background:#baceb1;border-radius:50%;margin-right:6px;vertical-align:middle"></span>學校成員</div><div style="margin-top:6px"><span style="display:inline-block;width:12px;height:12px;background:#c3b4d1;margin-right:6px;vertical-align:middle"></span>機構</div></div>
+
+  <div id="legend">
+    <div><strong>圖例</strong></div>
+    <div class="legend-row"><span class="legend-circle"></span><span>學校成員</span></div>
+    <div class="legend-row"><span class="legend-square"></span><span>機構</span></div>
+    <div class="legend-row"><span class="legend-line"></span><span>有向連結</span></div>
+  </div>
+
   <div id="tooltip"></div>
+  <div id="status">正在載入network.gexf…</div>
 </div>
+
 <script>
-var GRAPH_DATA = {"nodes": [{"id": "1001", "label": "1001", "type": "member", "size": 6.83, "parallelX": [-660, -1056.0], "parallelY": [-660, -1056.0], "arcX": [0.0, 350.0], "arcY": [0.0, 350.0], "color": "#baceb1", "shape": "circle"}, {"id": "1002", "label": "1002", "type": "member", "size": 6.0, "parallelX": [-660, -992.0], "parallelY": [-660, -992.0], "arcX": [-33.27, 348.42], "arcY": [-33.27, 348.42], "color": "#baceb1", "shape": "circle"}, {"id": "1003", "label": "1003", "type": "member", "size": 6.83, "parallelX": [-660, -928.0], "parallelY": [-660, -928.0], "arcX": [-66.24, 343.68], "arcY": [-66.24, 343.68], "color": "#baceb1", "shape": "circle"}, {"id": "1004", "label": "1004", "type": "member", "size": 7.67, "parallelX": [-660, -864.0], "parallelY": [-660, -864.0], "arcX": [-98.61, 335.82], "arcY": [-98.61, 335.82], "color": "#baceb1", "shape": "circle"}, {"id": "1005", "label": "1005", "type": "member", "size": 8.5, "parallelX": [-660, -800.0], "parallelY": [-660, -800.0], "arcX": [-130.08, 324.93], "arcY": [-130.08, 324.93], "color": "#baceb1", "shape": "circle"}, {"id": "1006", "label": "1006", "type": "member", "size": 6.83, "parallelX": [-660, -736.0], "parallelY": [-660, -736.0], "arcX": [-160.38, 311.09], "arcY": [-160.38, 311.09], "color": "#baceb1", "shape": "circle"}, {"id": "1007", "label": "1007", "type": "member", "size": 7.67, "parallelX": [-660, -672.0], "parallelY": [-660, -672.0], "arcX": [-189.22, 294.44], "arcY": [-189.22, 294.44], "color": "#baceb1", "shape": "circle"}, {"id": "1008", "label": "1008", "type": "member", "size": 6.0, "parallelX": [-660, -608.0], "parallelY": [-660, -608.0], "arcX": [-216.36, 275.12], "arcY": [-216.36, 275.12], "color": "#baceb1", "shape": "circle"}, {"id": "1009", "label": "1009", "type": "member", "size": 6.83, "parallelX": [-660, -544.0], "parallelY": [-660, -544.0], "arcX": [-241.53, 253.31], "arcY": [-241.53, 253.31], "color": "#baceb1", "shape": "circle"}, {"id": "1010", "label": "1010", "type": "member", "size": 6.83, "parallelX": [-660, -480.0], "parallelY": [-660, -480.0], "arcX": [-264.51, 229.2], "arcY": [-264.51, 229.2], "color": "#baceb1", "shape": "circle"}, {"id": "1011", "label": "1011", "type": "member", "size": 6.83, "parallelX": [-660, -416.0], "parallelY": [-660, -416.0], "arcX": [-285.1, 203.02], "arcY": [-285.1, 203.02], "color": "#baceb1", "shape": "circle"}, {"id": "1012", "label": "1012", "type": "member", "size": 9.33, "parallelX": [-660, -352.0], "parallelY": [-660, -352.0], "arcX": [-303.11, 175.0], "arcY": [-303.11, 175.0], "color": "#baceb1", "shape": "circle"}, {"id": "1013", "label": "1013", "type": "member", "size": 7.67, "parallelX": [-660, -288.0], "parallelY": [-660, -288.0], "arcX": [-318.37, 145.4], "arcY": [-318.37, 145.4], "color": "#baceb1", "shape": "circle"}, {"id": "1014", "label": "1014", "type": "member", "size": 6.83, "parallelX": [-660, -224.0], "parallelY": [-660, -224.0], "arcX": [-330.75, 114.47], "arcY": [-330.75, 114.47], "color": "#baceb1", "shape": "circle"}, {"id": "1015", "label": "1015", "type": "member", "size": 7.67, "parallelX": [-660, -160.0], "parallelY": [-660, -160.0], "arcX": [-340.13, 82.52], "arcY": [-340.13, 82.52], "color": "#baceb1", "shape": "circle"}, {"id": "1016", "label": "1016", "type": "member", "size": 6.83, "parallelX": [-660, -96.0], "parallelY": [-660, -96.0], "arcX": [-346.44, 49.81], "arcY": [-346.44, 49.81], "color": "#baceb1", "shape": "circle"}, {"id": "1017", "label": "1017", "type": "member", "size": 6.83, "parallelX": [-660, -32.0], "parallelY": [-660, -32.0], "arcX": [-349.6, 16.65], "arcY": [-349.6, 16.65], "color": "#baceb1", "shape": "circle"}, {"id": "1018", "label": "1018", "type": "member", "size": 6.83, "parallelX": [-660, 32.0], "parallelY": [-660, 32.0], "arcX": [-349.6, -16.65], "arcY": [-349.6, -16.65], "color": "#baceb1", "shape": "circle"}, {"id": "1019", "label": "1019", "type": "member", "size": 8.5, "parallelX": [-660, 96.0], "parallelY": [-660, 96.0], "arcX": [-346.44, -49.81], "arcY": [-346.44, -49.81], "color": "#baceb1", "shape": "circle"}, {"id": "1020", "label": "1020", "type": "member", "size": 6.83, "parallelX": [-660, 160.0], "parallelY": [-660, 160.0], "arcX": [-340.13, -82.52], "arcY": [-340.13, -82.52], "color": "#baceb1", "shape": "circle"}, {"id": "1021", "label": "1021", "type": "member", "size": 7.67, "parallelX": [-660, 224.0], "parallelY": [-660, 224.0], "arcX": [-330.75, -114.47], "arcY": [-330.75, -114.47], "color": "#baceb1", "shape": "circle"}, {"id": "1022", "label": "1022", "type": "member", "size": 7.67, "parallelX": [-660, 288.0], "parallelY": [-660, 288.0], "arcX": [-318.37, -145.4], "arcY": [-318.37, -145.4], "color": "#baceb1", "shape": "circle"}, {"id": "1023", "label": "1023", "type": "member", "size": 6.83, "parallelX": [-660, 352.0], "parallelY": [-660, 352.0], "arcX": [-303.11, -175.0], "arcY": [-303.11, -175.0], "color": "#baceb1", "shape": "circle"}, {"id": "1024", "label": "1024", "type": "member", "size": 16.0, "parallelX": [-660, 416.0], "parallelY": [-660, 416.0], "arcX": [-285.1, -203.02], "arcY": [-285.1, -203.02], "color": "#baceb1", "shape": "circle"}, {"id": "1025", "label": "1025", "type": "member", "size": 10.17, "parallelX": [-660, 480.0], "parallelY": [-660, 480.0], "arcX": [-264.51, -229.2], "arcY": [-264.51, -229.2], "color": "#baceb1", "shape": "circle"}, {"id": "1026", "label": "1026", "type": "member", "size": 11.0, "parallelX": [-660, 544.0], "parallelY": [-660, 544.0], "arcX": [-241.53, -253.31], "arcY": [-241.53, -253.31], "color": "#baceb1", "shape": "circle"}, {"id": "1027", "label": "1027", "type": "member", "size": 6.83, "parallelX": [-660, 608.0], "parallelY": [-660, 608.0], "arcX": [-216.36, -275.12], "arcY": [-216.36, -275.12], "color": "#baceb1", "shape": "circle"}, {"id": "1028", "label": "1028", "type": "member", "size": 6.83, "parallelX": [-660, 672.0], "parallelY": [-660, 672.0], "arcX": [-189.22, -294.44], "arcY": [-189.22, -294.44], "color": "#baceb1", "shape": "circle"}, {"id": "1029", "label": "1029", "type": "member", "size": 6.83, "parallelX": [-660, 736.0], "parallelY": [-660, 736.0], "arcX": [-160.38, -311.09], "arcY": [-160.38, -311.09], "color": "#baceb1", "shape": "circle"}, {"id": "1030", "label": "1030", "type": "member", "size": 6.0, "parallelX": [-660, 800.0], "parallelY": [-660, 800.0], "arcX": [-130.08, -324.93], "arcY": [-130.08, -324.93], "color": "#baceb1", "shape": "circle"}, {"id": "1031", "label": "1031", "type": "member", "size": 10.17, "parallelX": [-660, 864.0], "parallelY": [-660, 864.0], "arcX": [-98.61, -335.82], "arcY": [-98.61, -335.82], "color": "#baceb1", "shape": "circle"}, {"id": "1032", "label": "1032", "type": "member", "size": 8.5, "parallelX": [-660, 928.0], "parallelY": [-660, 928.0], "arcX": [-66.24, -343.68], "arcY": [-66.24, -343.68], "color": "#baceb1", "shape": "circle"}, {"id": "1033", "label": "1033", "type": "member", "size": 7.67, "parallelX": [-660, 992.0], "parallelY": [-660, 992.0], "arcX": [-33.27, -348.42], "arcY": [-33.27, -348.42], "color": "#baceb1", "shape": "circle"}, {"id": "1034", "label": "1034", "type": "member", "size": 6.83, "parallelX": [-660, 1056.0], "parallelY": [-660, 1056.0], "arcX": [-0.0, -350.0], "arcY": [-0.0, -350.0], "color": "#baceb1", "shape": "circle"}, {"id": "新北市三重區正義國民小學", "label": "新北市三重區正義國民小學", "type": "institution", "size": 11.83, "parallelX": 660, "parallelY": -1344.0, "arcX": 0.0, "arcY": -350.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區厚德國民小學", "label": "新北市三重區厚德國民小學", "type": "institution", "size": 8.5, "parallelX": 660, "parallelY": -1280.0, "arcX": 26.16, "arcY": -349.02, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區光興國民小學", "label": "新北市三重區光興國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -1216.0, "arcX": 52.16, "arcY": -346.09, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區蘆洲國民小學", "label": "新北市蘆洲區蘆洲國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -1152.0, "arcX": 77.88, "arcY": -341.22, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區興穀國民小學", "label": "新北市三重區興穀國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -1088.0, "arcX": 103.16, "arcY": -334.45, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區五華國民小學", "label": "新北市三重區五華國民小學", "type": "institution", "size": 11.0, "parallelX": 660, "parallelY": -1024.0, "arcX": 127.87, "arcY": -325.81, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區鷺江國民小學", "label": "新北市蘆洲區鷺江國民小學", "type": "institution", "size": 9.33, "parallelX": 660, "parallelY": -960.0, "arcX": 151.86, "arcY": -315.34, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市鶯歌區鶯歌國民小學", "label": "新北市鶯歌區鶯歌國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -896.0, "arcX": 175.0, "arcY": -303.11, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區成功國民小學", "label": "新北市蘆洲區成功國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -832.0, "arcX": 197.16, "arcY": -289.18, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市淡水區興仁國民小學", "label": "新北市淡水區興仁國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -768.0, "arcX": 218.22, "arcY": -273.64, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市淡水區新興國民小學", "label": "新北市淡水區新興國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -704.0, "arcX": 238.06, "arcY": -256.57, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市板橋區板橋國民小學", "label": "新北市板橋區板橋國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -640.0, "arcX": 256.57, "arcY": -238.06, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市石碇區和平國民小學", "label": "新北市石碇區和平國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -576.0, "arcX": 273.64, "arcY": -218.22, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市永和區網溪國民小學", "label": "新北市永和區網溪國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -512.0, "arcX": 289.18, "arcY": -197.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新店區中正國民小學", "label": "新北市新店區中正國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -448.0, "arcX": 303.11, "arcY": -175.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區修德國民小學", "label": "新北市三重區修德國民小學", "type": "institution", "size": 9.33, "parallelX": 660, "parallelY": -384.0, "arcX": 315.34, "arcY": -151.86, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新莊區昌平國民小學", "label": "新北市新莊區昌平國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -320.0, "arcX": 325.81, "arcY": -127.87, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區光榮國民小學", "label": "新北市三重區光榮國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -256.0, "arcX": 334.45, "arcY": -103.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新莊區光華國民小學", "label": "新北市新莊區光華國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": -192.0, "arcX": 341.22, "arcY": -77.88, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市市立明志國民中學", "label": "新北市市立明志國民中學", "type": "institution", "size": 8.5, "parallelX": 660, "parallelY": -128.0, "arcX": 346.09, "arcY": -52.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區碧華國民小學", "label": "新北市三重區碧華國民小學", "type": "institution", "size": 7.67, "parallelX": 660, "parallelY": -64.0, "arcX": 349.02, "arcY": -26.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區永福國民小學", "label": "新北市三重區永福國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 0.0, "arcX": 350.0, "arcY": 0.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市板橋區後埔國民小學", "label": "新北市板橋區後埔國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 64.0, "arcX": 349.02, "arcY": 26.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市新莊區榮富國民小學", "label": "新北市新莊區榮富國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 128.0, "arcX": 346.09, "arcY": 52.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市汐止區北峰國民小學", "label": "新北市汐止區北峰國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 192.0, "arcX": 341.22, "arcY": 77.88, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市汐止區汐止國民小學", "label": "新北市汐止區汐止國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 256.0, "arcX": 334.45, "arcY": 103.16, "color": "#c3b4d1", "shape": "square"}, {"id": "雲林縣麥寮鄉麥寮國民小學", "label": "雲林縣麥寮鄉麥寮國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 320.0, "arcX": 325.81, "arcY": 127.87, "color": "#c3b4d1", "shape": "square"}, {"id": "臺南市善化區蓮潭國民小學", "label": "臺南市善化區蓮潭國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 384.0, "arcX": 315.34, "arcY": 151.86, "color": "#c3b4d1", "shape": "square"}, {"id": "臺中市大里區內新國民小學", "label": "臺中市大里區內新國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 448.0, "arcX": 303.11, "arcY": 175.0, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區重陽國民小學", "label": "新北市三重區重陽國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 512.0, "arcX": 289.18, "arcY": 197.16, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區二重國民小學", "label": "新北市三重區二重國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 576.0, "arcX": 273.64, "arcY": 218.22, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市市立碧華國民中學", "label": "新北市市立碧華國民中學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 640.0, "arcX": 256.57, "arcY": 238.06, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市三重區集美國民小學", "label": "新北市三重區集美國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 704.0, "arcX": 238.06, "arcY": 256.57, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市立三重高級中學", "label": "新北市立三重高級中學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 768.0, "arcX": 218.22, "arcY": 273.64, "color": "#c3b4d1", "shape": "square"}, {"id": "國立臺北教育大學", "label": "國立臺北教育大學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 832.0, "arcX": 197.16, "arcY": 289.18, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市立三民高級中學", "label": "新北市立三民高級中學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 896.0, "arcX": 175.0, "arcY": 303.11, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市蘆洲區仁愛國民小學", "label": "新北市蘆洲區仁愛國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 960.0, "arcX": 151.86, "arcY": 315.34, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市私立光仁國民小學", "label": "臺北市私立光仁國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1024.0, "arcX": 127.87, "arcY": 325.81, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市萬華區新和國民小學", "label": "臺北市萬華區新和國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1088.0, "arcX": 103.16, "arcY": 334.45, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市萬華區萬大國民小學", "label": "臺北市萬華區萬大國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1152.0, "arcX": 77.88, "arcY": 341.22, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市萬華區東園國民小學", "label": "臺北市萬華區東園國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1216.0, "arcX": 52.16, "arcY": 346.09, "color": "#c3b4d1", "shape": "square"}, {"id": "臺北市大同區日新國民小學", "label": "臺北市大同區日新國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1280.0, "arcX": 26.16, "arcY": 349.02, "color": "#c3b4d1", "shape": "square"}, {"id": "新北市板橋區國光國民小學", "label": "新北市板橋區國光國民小學", "type": "institution", "size": 6.83, "parallelX": 660, "parallelY": 1344.0, "arcX": 0.0, "arcY": 350.0, "color": "#c3b4d1", "shape": "square"}], "edges": [{"id": "e1", "source": "1001", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e2", "source": "1003", "target": "新北市三重區厚德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e3", "source": "1004", "target": "新北市三重區光興國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e4", "source": "1004", "target": "新北市蘆洲區蘆洲國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e5", "source": "1005", "target": "新北市三重區興穀國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e6", "source": "1005", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e7", "source": "1005", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e8", "source": "1006", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e9", "source": "1007", "target": "新北市蘆洲區蘆洲國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e10", "source": "1007", "target": "新北市鶯歌區鶯歌國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e11", "source": "1009", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e12", "source": "1010", "target": "新北市蘆洲區成功國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e13", "source": "1011", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e14", "source": "1012", "target": "新北市三重區厚德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e15", "source": "1012", "target": "新北市淡水區興仁國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e16", "source": "1012", "target": "新北市淡水區新興國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e17", "source": "1012", "target": "新北市板橋區板橋國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e18", "source": "1013", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e19", "source": "1013", "target": "新北市石碇區和平國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e20", "source": "1014", "target": "新北市永和區網溪國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e21", "source": "1015", "target": "新北市鶯歌區鶯歌國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e22", "source": "1015", "target": "新北市新店區中正國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e23", "source": "1016", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e24", "source": "1017", "target": "新北市蘆洲區鷺江國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e25", "source": "1018", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e26", "source": "1019", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e27", "source": "1019", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e28", "source": "1019", "target": "新北市新莊區昌平國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e29", "source": "1020", "target": "新北市三重區光榮國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e30", "source": "1021", "target": "新北市新莊區光華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e31", "source": "1021", "target": "新北市市立明志國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e32", "source": "1022", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e33", "source": "1022", "target": "新北市三重區碧華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e34", "source": "1023", "target": "新北市市立明志國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e35", "source": "1024", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e36", "source": "1024", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e37", "source": "1024", "target": "新北市三重區永福國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e38", "source": "1024", "target": "新北市板橋區板橋國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e39", "source": "1024", "target": "新北市板橋區後埔國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e40", "source": "1024", "target": "新北市新莊區昌平國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e41", "source": "1024", "target": "新北市新莊區榮富國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e42", "source": "1024", "target": "新北市汐止區北峰國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e43", "source": "1024", "target": "新北市汐止區汐止國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e44", "source": "1024", "target": "雲林縣麥寮鄉麥寮國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e45", "source": "1024", "target": "臺南市善化區蓮潭國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e46", "source": "1024", "target": "臺中市大里區內新國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e47", "source": "1025", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e48", "source": "1025", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e49", "source": "1025", "target": "新北市三重區重陽國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e50", "source": "1025", "target": "新北市三重區二重國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e51", "source": "1025", "target": "新北市市立碧華國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e52", "source": "1026", "target": "新北市三重區厚德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e53", "source": "1026", "target": "新北市三重區五華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e54", "source": "1026", "target": "新北市三重區集美國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e55", "source": "1026", "target": "新北市市立明志國民中學", "color": "#cccccc", "size": 1.4}, {"id": "e56", "source": "1026", "target": "新北市立三重高級中學", "color": "#cccccc", "size": 1.4}, {"id": "e57", "source": "1026", "target": "國立臺北教育大學", "color": "#cccccc", "size": 1.4}, {"id": "e58", "source": "1027", "target": "新北市立三民高級中學", "color": "#cccccc", "size": 1.4}, {"id": "e59", "source": "1028", "target": "新北市蘆洲區仁愛國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e60", "source": "1029", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e61", "source": "1031", "target": "臺北市私立光仁國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e62", "source": "1031", "target": "臺北市萬華區新和國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e63", "source": "1031", "target": "臺北市萬華區萬大國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e64", "source": "1031", "target": "臺北市萬華區東園國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e65", "source": "1031", "target": "臺北市大同區日新國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e66", "source": "1032", "target": "新北市三重區正義國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e67", "source": "1032", "target": "新北市三重區興穀國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e68", "source": "1032", "target": "新北市三重區光榮國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e69", "source": "1033", "target": "新北市三重區碧華國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e70", "source": "1033", "target": "新北市板橋區國光國民小學", "color": "#cccccc", "size": 1.4}, {"id": "e71", "source": "1034", "target": "新北市三重區修德國民小學", "color": "#cccccc", "size": 1.4}]};
+(function () {
+  var MEMBER_COLOR = "#baceb1";
+  var INST_COLOR = "#c3b4d1";
+  var EDGE_COLOR = "#cccccc";
 
-// High-compatibility script (avoid modern syntax)
-// basic variables and DOM refs
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-var modeSelect = document.getElementById('mode');
-var showLabels = document.getElementById('showLabels');
-var showArrows = document.getElementById('showArrows');
-var hoverFocus = document.getElementById('hoverFocus');
-var exportBtn = document.getElementById('export');
-var tooltip = document.getElementById('tooltip');
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  var tooltip = document.getElementById("tooltip");
+  var statusBox = document.getElementById("status");
+  var layoutMode = document.getElementById("layoutMode");
+  var toggleLabels = document.getElementById("toggleLabels");
+  var toggleArrows = document.getElementById("toggleArrows");
+  var toggleHoverFocus = document.getElementById("toggleHoverFocus");
+  var exportPNG = document.getElementById("exportPNG");
 
-var nodes = GRAPH_DATA.nodes.slice(0);
-var edges = GRAPH_DATA.edges.slice(0);
-var nodeById = {};
-for (var i=0;i<nodes.length;i++){ nodeById[nodes[i].id]=nodes[i]; }
+  var width = 0;
+  var height = 0;
+  var dpr = window.devicePixelRatio || 1;
 
-// initial positions: use parallel coords
-for (var i=0;i<nodes.length;i++){
-  nodes[i].x = nodes[i].parallelX;
-  nodes[i].y = nodes[i].parallelY;
-}
+  var graph = { nodes: [], edges: [] };
+  var nodeMap = {};
+  var inMap = {};
+  var outMap = {};
 
-// camera and interaction
-var width=window.innerWidth, height=window.innerHeight, dpr = window.devicePixelRatio || 1;
-var camera = {x:0,y:0,scale:1};
-var isPanning=false, isDragging=false, dragNode=null;
-var lastMouse = {x:0,y:0};
-var hovered = null;
+  var camera = { x: 0, y: 0, scale: 1 };
+  var isPanning = false;
+  var isDragging = false;
+  var dragNode = null;
+  var hovered = null;
+  var lastMouse = { x: 0, y: 0 };
 
-function resize(){ width = canvas.clientWidth; height = canvas.clientHeight; canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0); fit(); }
-function worldToScreen(x,y){ return {x: width/2 + (x+camera.x)*camera.scale, y: height/2 + (y+camera.y)*camera.scale}; }
-function screenToWorld(x,y){ return {x: (x-width/2)/camera.scale - camera.x, y: (y-height/2)/camera.scale - camera.y}; }
-
-function drawArrow(sx,sy,tx,ty,color,widthLine,drawHead){
-  ctx.save();
-  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.globalAlpha = 1; ctx.lineWidth = widthLine;
-  ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(tx,ty); ctx.stroke();
-  if(drawHead){
-    var angle = Math.atan2(ty-sy, tx-sx);
-    var head = Math.max(8, 6 + widthLine*2);
-    ctx.beginPath();
-    ctx.moveTo(tx,ty);
-    ctx.lineTo(tx - head*Math.cos(angle - Math.PI/7), ty - head*Math.sin(angle - Math.PI/7));
-    ctx.lineTo(tx - head*Math.cos(angle + Math.PI/7), ty - head*Math.sin(angle + Math.PI/7));
-    ctx.closePath();
-    ctx.fill();
+  function setStatus(text, isError) {
+    statusBox.innerHTML = text;
+    statusBox.className = isError ? "error" : "";
+    statusBox.style.display = "block";
   }
-  ctx.restore();
-}
 
-function nodeScreenPos(n){
-  return worldToScreen(n.x, n.y);
-}
-
-function draw(){
-  ctx.clearRect(0,0,width,height);
-  // draw edges
-  for(var i=0;i<edges.length;i++){
-    var e = edges[i];
-    var s = nodeById[e.source];
-    var t = nodeById[e.target];
-    if(!s || !t) continue;
-    var sp = nodeScreenPos(s);
-    var tp = nodeScreenPos(t);
-    // shift start/end by node radius
-    var dx = tp.x - sp.x, dy = tp.y - sp.y;
-    var dist = Math.sqrt(dx*dx+dy*dy) || 1;
-    var ux = dx/dist, uy = dy/dist;
-    var sr = Math.max(4, s.size) * camera.scale;
-    var tr = Math.max(4, t.size) * camera.scale;
-    var sx = sp.x + ux*(sr+2), sy = sp.y + uy*(sr+2);
-    var ex = tp.x - ux*(tr+10), ey = tp.y - uy*(tr+10);
-    var col = e.color || '#cccccc';
-    var lw = e.size || 1.2;
-    drawArrow(sx,sy,ex,ey,col,lw, showArrows.checked);
+  function hideStatus() {
+    statusBox.style.display = "none";
   }
-  // draw nodes
-  for(var i=0;i<nodes.length;i++){
-    var n = nodes[i];
-    var p = nodeScreenPos(n);
-    var s = Math.max(4, n.size);
-    ctx.save();
-    // dim if hoverFocus active and not neighbor
-    var alpha = 1.0;
-    if(hovered && hoverFocus.checked){
-      var isNeighbor = (hovered.id === n.id);
-      for(var j=0;j<edges.length && !isNeighbor;j++){
-        if(edges[j].source===hovered.id && edges[j].target===n.id) { isNeighbor=true; break; }
-        if(edges[j].target===hovered.id && edges[j].source===n.id) { isNeighbor=true; break; }
-      }
-      if(!isNeighbor) alpha = 0.25;
+
+  function resizeCanvas() {
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    fitCamera();
+  }
+
+  function worldToScreen(x, y) {
+    return {
+      x: width / 2 + (x + camera.x) * camera.scale,
+      y: height / 2 + (y + camera.y) * camera.scale
+    };
+  }
+
+  function screenToWorld(x, y) {
+    return {
+      x: (x - width / 2) / camera.scale - camera.x,
+      y: (y - height / 2) / camera.scale - camera.y
+    };
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function getChildrenByTag(node, tagName) {
+    var arr = [];
+    var children = node.getElementsByTagName(tagName);
+    for (var i = 0; i < children.length; i++) arr.push(children[i]);
+    return arr;
+  }
+
+  function parseGexf(text) {
+    var parser = new DOMParser();
+    var xml = parser.parseFromString(text, "application/xml");
+    var parseError = xml.getElementsByTagName("parsererror");
+    if (parseError && parseError.length) {
+      throw new Error("GEXF XML解析失敗");
     }
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle = n.color || (n.type==='member' ? '#baceb1' : '#c3b4d1');
-    ctx.strokeStyle = '#666'; ctx.lineWidth=1;
-    if(n.shape==='circle'){ ctx.beginPath(); ctx.arc(p.x,p.y,s,0,Math.PI*2); ctx.fill(); ctx.stroke(); }
-    else { ctx.beginPath(); ctx.rect(p.x-s,p.y-s,s*2,s*2); ctx.fill(); ctx.stroke(); }
-    ctx.restore();
-  }
-  // labels
-  if(showLabels.checked){
-    ctx.save(); ctx.font = '12px Arial, Noto Sans TC'; ctx.fillStyle='#222';
-    for(var i=0;i<nodes.length;i++){
-      var n = nodes[i]; var p = nodeScreenPos(n); var s = Math.max(4, n.size); var gap = s + 6;
-      var text = n.label;
-      var metrics = ctx.measureText(text); var tw = metrics.width; var x,y;
-      if(modeSelect.value === 'parallel'){
-        if(n.type === 'member'){ x = p.x - (tw + gap); y = p.y - 8; }
-        else { x = p.x + gap; y = p.y - 8; }
-      } else {
-        // arc mode: both labels left of node per your request
-        x = p.x - (tw + gap); y = p.y - 8;
-      }
-      if(hovered && hoverFocus.checked){
-        var isNeighbor = (hovered.id === n.id);
-        for(var j=0;j<edges.length && !isNeighbor;j++){
-          if(edges[j].source===hovered.id && edges[j].target===n.id) { isNeighbor=true; break; }
-          if(edges[j].target===hovered.id && edges[j].source===n.id) { isNeighbor=true; break; }
+
+    var g = { nodes: [], edges: [] };
+    var rawNodes = xml.getElementsByTagName("node");
+    var rawEdges = xml.getElementsByTagName("edge");
+
+    var i, j;
+    for (i = 0; i < rawNodes.length; i++) {
+      var n = rawNodes[i];
+      var id = n.getAttribute("id");
+      var label = n.getAttribute("label") || id;
+      var nodeType = null;
+
+      var attvalues = n.getElementsByTagName("attvalue");
+      for (j = 0; j < attvalues.length; j++) {
+        var av = attvalues[j];
+        var forAttr = av.getAttribute("for");
+        var valAttr = av.getAttribute("value");
+        if (forAttr === "node_type" || forAttr === "0" || forAttr === "type") {
+          if (valAttr === "member" || valAttr === "institution") {
+            nodeType = valAttr;
+          }
         }
-        if(!isNeighbor) ctx.globalAlpha = 0.25;
       }
-      ctx.fillText(text, x+3, y+1);
-      ctx.globalAlpha = 1.0;
+
+      g.nodes.push({
+        id: id,
+        label: label,
+        type: nodeType,
+        size: 8,
+        color: null,
+        shape: null,
+        parallelX: 0,
+        parallelY: 0,
+        arcX: 0,
+        arcY: 0,
+        x: 0,
+        y: 0
+      });
+    }
+
+    for (i = 0; i < rawEdges.length; i++) {
+      var e = rawEdges[i];
+      g.edges.push({
+        id: e.getAttribute("id") || ("e" + (i + 1)),
+        source: e.getAttribute("source"),
+        target: e.getAttribute("target"),
+        color: EDGE_COLOR,
+        size: 1.4
+      });
+    }
+
+    return g;
+  }
+
+  function inferNodeTypesIfNeeded() {
+    var i;
+    var indeg = {};
+    var outdeg = {};
+    for (i = 0; i < graph.nodes.length; i++) {
+      indeg[graph.nodes[i].id] = 0;
+      outdeg[graph.nodes[i].id] = 0;
+    }
+    for (i = 0; i < graph.edges.length; i++) {
+      var e = graph.edges[i];
+      if (outdeg.hasOwnProperty(e.source)) outdeg[e.source] += 1;
+      if (indeg.hasOwnProperty(e.target)) indeg[e.target] += 1;
+    }
+    for (i = 0; i < graph.nodes.length; i++) {
+      var n = graph.nodes[i];
+      if (!n.type) {
+        if (outdeg[n.id] > 0 && indeg[n.id] === 0) n.type = "member";
+        else if (indeg[n.id] > 0 && outdeg[n.id] === 0) n.type = "institution";
+        else n.type = "member";
+      }
+      n.color = n.type === "member" ? MEMBER_COLOR : INST_COLOR;
+      n.shape = n.type === "member" ? "circle" : "square";
+    }
+  }
+
+  function computeSizes() {
+    var degree = {};
+    var i;
+    var maxDegree = 1;
+    for (i = 0; i < graph.nodes.length; i++) degree[graph.nodes[i].id] = 0;
+    for (i = 0; i < graph.edges.length; i++) {
+      degree[graph.edges[i].source] += 1;
+      degree[graph.edges[i].target] += 1;
+    }
+    for (var k in degree) {
+      if (degree[k] > maxDegree) maxDegree = degree[k];
+    }
+    for (i = 0; i < graph.nodes.length; i++) {
+      var d = degree[graph.nodes[i].id] || 1;
+      graph.nodes[i].size = +(6 + (d / maxDegree) * 10).toFixed(2);
+    }
+  }
+
+  function prepareMaps() {
+    var i;
+    nodeMap = {};
+    inMap = {};
+    outMap = {};
+    for (i = 0; i < graph.nodes.length; i++) {
+      var n = graph.nodes[i];
+      nodeMap[n.id] = n;
+      inMap[n.id] = [];
+      outMap[n.id] = [];
+    }
+    for (i = 0; i < graph.edges.length; i++) {
+      var e = graph.edges[i];
+      if (outMap[e.source]) outMap[e.source].push(e.target);
+      if (inMap[e.target]) inMap[e.target].push(e.source);
+    }
+  }
+
+  function getMembersAndInstitutions() {
+    var members = [];
+    var insts = [];
+    for (var i = 0; i < graph.nodes.length; i++) {
+      if (graph.nodes[i].type === "member") members.push(graph.nodes[i]);
+      else insts.push(graph.nodes[i]);
+    }
+    // stable ordering by label
+    members.sort(function(a, b) { return String(a.label).localeCompare(String(b.label), "zh-Hant"); });
+    insts.sort(function(a, b) { return String(a.label).localeCompare(String(b.label), "zh-Hant"); });
+    return { members: members, insts: insts };
+  }
+
+  function applyParallelLayout() {
+    var groups = getMembersAndInstitutions();
+    var members = groups.members;
+    var insts = groups.insts;
+
+    var maxSize = 8;
+    var i;
+    for (i = 0; i < graph.nodes.length; i++) {
+      if (graph.nodes[i].size > maxSize) maxSize = graph.nodes[i].size;
+    }
+
+    var minSpacing = maxSize * 4;
+    var span = 900;
+    var sideX = 760; // widened gap
+
+    function positionsFor(list, xValue) {
+      var out = [];
+      var n = list.length;
+      if (n === 1) {
+        out.push({ x: xValue, y: 0 });
+        return out;
+      }
+      var idealSpacing = n > 1 ? span / (n - 1) : span;
+      var spacing = Math.max(minSpacing, idealSpacing);
+      var totalHeight = spacing * (n - 1);
+      var start = -totalHeight / 2;
+      for (var j = 0; j < n; j++) {
+        out.push({ x: xValue, y: +(start + j * spacing).toFixed(2) });
+      }
+      return out;
+    }
+
+    var mPos = positionsFor(members, -sideX);
+    var iPos = positionsFor(insts, sideX);
+
+    for (i = 0; i < members.length; i++) {
+      members[i].parallelX = mPos[i].x;
+      members[i].parallelY = mPos[i].y;
+      members[i].x = mPos[i].x;
+      members[i].y = mPos[i].y;
+    }
+    for (i = 0; i < insts.length; i++) {
+      insts[i].parallelX = iPos[i].x;
+      insts[i].parallelY = iPos[i].y;
+      insts[i].x = iPos[i].x;
+      insts[i].y = iPos[i].y;
+    }
+  }
+
+  function applyArcLayout() {
+    var groups = getMembersAndInstitutions();
+    var members = groups.members;
+    var insts = groups.insts;
+    var radius = 360;
+    var i;
+
+    function halfCircle(list, startAngle, endAngle) {
+      var arr = [];
+      var n = list.length;
+      if (n === 1) {
+        arr.push({ x: +(radius * Math.cos((startAngle + endAngle) / 2)).toFixed(2),
+                   y: +(radius * Math.sin((startAngle + endAngle) / 2)).toFixed(2) });
+        return arr;
+      }
+      for (var j = 0; j < n; j++) {
+        var ang = startAngle + j * (endAngle - startAngle) / (n - 1);
+        arr.push({
+          x: +(radius * Math.cos(ang)).toFixed(2),
+          y: +(radius * Math.sin(ang)).toFixed(2)
+        });
+      }
+      return arr;
+    }
+
+    var leftPos = halfCircle(members, Math.PI / 2, Math.PI * 3 / 2);
+    var rightPos = halfCircle(insts, -Math.PI / 2, Math.PI / 2);
+
+    for (i = 0; i < members.length; i++) {
+      members[i].arcX = leftPos[i].x;
+      members[i].arcY = leftPos[i].y;
+      members[i].x = leftPos[i].x;
+      members[i].y = leftPos[i].y;
+    }
+    for (i = 0; i < insts.length; i++) {
+      insts[i].arcX = rightPos[i].x;
+      insts[i].arcY = rightPos[i].y;
+      insts[i].x = rightPos[i].x;
+      insts[i].y = rightPos[i].y;
+    }
+  }
+
+  function applyLayout(mode) {
+    if (mode === "arc") applyArcLayout();
+    else applyParallelLayout();
+    fitCamera();
+    draw();
+  }
+
+  function fitCamera() {
+    if (!graph.nodes.length) return;
+    var xs = [];
+    var ys = [];
+    for (var i = 0; i < graph.nodes.length; i++) {
+      xs.push(graph.nodes[i].x);
+      ys.push(graph.nodes[i].y);
+    }
+    var minX = Math.min.apply(null, xs);
+    var maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys);
+    var maxY = Math.max.apply(null, ys);
+
+    var pad = 240;
+    var graphW = Math.max(1, maxX - minX + pad);
+    var graphH = Math.max(1, maxY - minY + pad);
+
+    var scaleX = width / graphW;
+    var scaleY = height / graphH;
+
+    camera.scale = Math.min(scaleX, scaleY) * 0.92;
+    camera.x = -((minX + maxX) / 2);
+    camera.y = -((minY + maxY) / 2);
+  }
+
+  function findNodeAt(mx, my) {
+    for (var i = graph.nodes.length - 1; i >= 0; i--) {
+      var n = graph.nodes[i];
+      var p = worldToScreen(n.x, n.y);
+      var r = Math.max(4, n.size) * camera.scale;
+      if (n.shape === "circle") {
+        var dx = mx - p.x;
+        var dy = my - p.y;
+        if (dx * dx + dy * dy <= r * r) return n;
+      } else {
+        if (mx >= p.x - r && mx <= p.x + r && my >= p.y - r && my <= p.y + r) return n;
+      }
+    }
+    return null;
+  }
+
+  function isNeighborOfHovered(nodeId) {
+    if (!hovered) return true;
+    if (hovered.id === nodeId) return true;
+    for (var i = 0; i < graph.edges.length; i++) {
+      var e = graph.edges[i];
+      if (e.source === hovered.id && e.target === nodeId) return true;
+      if (e.target === hovered.id && e.source === nodeId) return true;
+    }
+    return false;
+  }
+
+  function drawArrow(sx, sy, tx, ty, color, widthLine, drawHead) {
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = widthLine;
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(tx, ty);
+    ctx.stroke();
+
+    if (drawHead) {
+      var angle = Math.atan2(ty - sy, tx - sx);
+      var head = Math.max(8, 6 + widthLine * 2);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - head * Math.cos(angle - Math.PI / 7), ty - head * Math.sin(angle - Math.PI / 7));
+      ctx.lineTo(tx - head * Math.cos(angle + Math.PI / 7), ty - head * Math.sin(angle + Math.PI / 7));
+      ctx.closePath();
+      ctx.fill();
     }
     ctx.restore();
   }
-}
 
-// basic fit layout: center and scale
-function fit(){
-  var xs = [], ys = [];
-  for(var i=0;i<nodes.length;i++){ xs.push(nodes[i].x); ys.push(nodes[i].y); }
-  if(xs.length===0){ camera = {x:0,y:0,scale:1}; draw(); return; }
-  var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
-  var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
-  var pad = 200;
-  var graphW = Math.max(1, maxX-minX+pad), graphH = Math.max(1, maxY-minY+pad);
-  var scaleX = width / graphW, scaleY = height / graphH;
-  camera.scale = Math.min(scaleX, scaleY) * 0.95;
-  camera.x = -((minX+maxX)/2);
-  camera.y = -((minY+maxY)/2);
-  draw();
-}
-
-// apply layouts
-function applyLayout(mode){
-  if(mode === 'parallel'){
-    for(var i=0;i<nodes.length;i++){
-      nodes[i].x = nodes[i].parallelX;
-      nodes[i].y = nodes[i].parallelY;
-    }
-  } else {
-    for(var i=0;i<nodes.length;i++){
-      nodes[i].x = nodes[i].arcX;
-      nodes[i].y = nodes[i].arcY;
-    }
-  }
-  fit();
-}
-
-// simple hit test
-function findNodeAt(mx,my){
-  for(var i=nodes.length-1;i>=0;i--){
-    var n = nodes[i];
-    var p = nodeScreenPos(n);
-    var r = Math.max(4, n.size) * camera.scale;
-    if(n.shape === 'circle'){
-      var dx = mx - p.x, dy = my - p.y;
-      if(dx*dx + dy*dy <= r*r) return n;
+  function showTooltipForNode(n, mx, my) {
+    var items = [];
+    var i;
+    if (n.type === "member") {
+      for (i = 0; i < graph.edges.length; i++) {
+        if (graph.edges[i].source === n.id && nodeMap[graph.edges[i].target]) {
+          items.push(nodeMap[graph.edges[i].target].label);
+        }
+      }
     } else {
-      if(mx >= p.x - r && mx <= p.x + r && my >= p.y - r && my <= p.y + r) return n;
+      for (i = 0; i < graph.edges.length; i++) {
+        if (graph.edges[i].target === n.id && nodeMap[graph.edges[i].source]) {
+          items.push(nodeMap[graph.edges[i].source].label);
+        }
+      }
+    }
+
+    var html = '<div class="title">' + escapeHtml(n.label) + '</div>';
+    html += '<div class="meta">' + (n.type === "member" ? "學校成員" : "機構") + '</div>';
+    html += '<div><strong>連結數：' + items.length + '</strong></div>';
+    if (items.length) {
+      html += '<div class="list"><ul style="margin:6px 0 0 18px;padding:0;">';
+      for (var j = 0; j < items.length; j++) html += '<li>' + escapeHtml(items[j]) + '</li>';
+      html += '</ul></div>';
+    }
+    tooltip.innerHTML = html;
+    tooltip.style.display = "block";
+    tooltip.style.left = Math.min(mx + 12, width - 320) + "px";
+    tooltip.style.top = Math.min(my + 12, height - 220) + "px";
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // edges
+    for (var i = 0; i < graph.edges.length; i++) {
+      var e = graph.edges[i];
+      var s = nodeMap[e.source];
+      var t = nodeMap[e.target];
+      if (!s || !t) continue;
+
+      var sp = worldToScreen(s.x, s.y);
+      var tp = worldToScreen(t.x, t.y);
+
+      var dx = tp.x - sp.x;
+      var dy = tp.y - sp.y;
+      var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      var ux = dx / dist;
+      var uy = dy / dist;
+
+      var sr = Math.max(4, s.size) * camera.scale;
+      var tr = Math.max(4, t.size) * camera.scale;
+
+      var sx = sp.x + ux * (sr + 2);
+      var sy = sp.y + uy * (sr + 2);
+      var ex = tp.x - ux * (tr + 10);
+      var ey = tp.y - uy * (tr + 10);
+
+      ctx.globalAlpha = hovered && toggleHoverFocus.checked && !(e.source === hovered.id || e.target === hovered.id) ? 0.14 : 1;
+      drawArrow(sx, sy, ex, ey, e.color, e.size, toggleArrows.checked);
+      ctx.globalAlpha = 1;
+    }
+
+    // nodes
+    for (i = 0; i < graph.nodes.length; i++) {
+      var n = graph.nodes[i];
+      var p = worldToScreen(n.x, n.y);
+      var r = Math.max(4, n.size);
+
+      ctx.save();
+      ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(n.id) ? 0.25 : 1;
+      ctx.fillStyle = n.color;
+      ctx.strokeStyle = "#666";
+      ctx.lineWidth = 1;
+
+      if (n.shape === "circle") {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.rect(p.x - r, p.y - r, r * 2, r * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    // labels
+    if (toggleLabels.checked) {
+      ctx.save();
+      ctx.font = "12px Arial, Noto Sans TC";
+      ctx.fillStyle = "#222";
+      for (i = 0; i < graph.nodes.length; i++) {
+        var node = graph.nodes[i];
+        var pt = worldToScreen(node.x, node.y);
+        var gap = Math.max(4, node.size) + 6;
+        var text = node.label;
+        var tw = ctx.measureText(text).width;
+        var lx, ly;
+
+        if (layoutMode.value === "parallel") {
+          if (node.type === "member") {
+            lx = pt.x - tw - gap;
+            ly = pt.y - 8;
+          } else {
+            lx = pt.x + gap;
+            ly = pt.y - 8;
+          }
+        } else {
+          // arc: both left of node
+          lx = pt.x - tw - gap;
+          ly = pt.y - 8;
+        }
+
+        ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(node.id) ? 0.25 : 1;
+        ctx.fillText(text, lx, ly);
+      }
+      ctx.restore();
     }
   }
-  return null;
-}
 
-// events
-canvas.addEventListener('mousedown', function(e){
-  var rect = canvas.getBoundingClientRect(); var mx = e.clientX - rect.left, my = e.clientY - rect.top;
-  var n = findNodeAt(mx,my);
-  lastMouse.x = e.clientX; lastMouse.y = e.clientY;
-  if(n){ isDragging=true; dragNode = n; canvas.style.cursor='grabbing'; }
-  else { isPanning = true; canvas.style.cursor='grabbing'; }
-});
-window.addEventListener('mousemove', function(e){
-  var rect = canvas.getBoundingClientRect(); var mx = e.clientX - rect.left, my = e.clientY - rect.top;
-  if(isDragging && dragNode){
-    var w = screenToWorld(mx,my); dragNode.x = w.x; dragNode.y = w.y; draw(); updateTooltipPosition(mx,my); return;
+  function loadGexf() {
+    var url = "./network.gexf?_=" + String(new Date().getTime());
+    fetch(url).then(function(resp) {
+      if (!resp.ok) throw new Error("無法讀取network.gexf：" + resp.status);
+      return resp.text();
+    }).then(function(text) {
+      graph = parseGexf(text);
+      inferNodeTypesIfNeeded();
+      computeSizes();
+      prepareMaps();
+      applyLayout("parallel");
+      hideStatus();
+    }).catch(function(err) {
+      setStatus("讀取network.gexf失敗。請確認index.html與network.gexf在同一資料夾，且用HTTP伺服器開啟。<br><br>" + escapeHtml(String(err)), true);
+      console.error(err);
+    });
   }
-  if(isPanning){
-    var dx = e.clientX - lastMouse.x, dy = e.clientY - lastMouse.y;
-    camera.x += dx / camera.scale; camera.y += dy / camera.scale;
-    lastMouse.x = e.clientX; lastMouse.y = e.clientY;
-    draw(); return;
-  }
-  var n = findNodeAt(mx,my);
-  if(n){
-    if(hovered === null || hovered.id !== n.id) hovered = n;
-    showTooltipForNode(n, mx, my);
+
+  // events
+  canvas.addEventListener("mousedown", function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+    var n = findNodeAt(mx, my);
+    lastMouse.x = e.clientX;
+    lastMouse.y = e.clientY;
+    if (n) {
+      isDragging = true;
+      dragNode = n;
+      canvas.className = "dragging";
+    } else {
+      isPanning = true;
+      canvas.className = "dragging";
+    }
+  });
+
+  window.addEventListener("mousemove", function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+
+    if (isDragging && dragNode) {
+      var w = screenToWorld(mx, my);
+      dragNode.x = w.x;
+      dragNode.y = w.y;
+      draw();
+      if (hovered && hovered.id === dragNode.id) showTooltipForNode(dragNode, mx, my);
+      return;
+    }
+
+    if (isPanning) {
+      var dx = e.clientX - lastMouse.x;
+      var dy = e.clientY - lastMouse.y;
+      camera.x += dx / camera.scale;
+      camera.y += dy / camera.scale;
+      lastMouse.x = e.clientX;
+      lastMouse.y = e.clientY;
+      draw();
+      return;
+    }
+
+    var n = findNodeAt(mx, my);
+    if (n) {
+      if (!hovered || hovered.id !== n.id) hovered = n;
+      showTooltipForNode(n, mx, my);
+      draw();
+    } else {
+      hovered = null;
+      tooltip.style.display = "none";
+      draw();
+    }
+  });
+
+  window.addEventListener("mouseup", function() {
+    isPanning = false;
+    isDragging = false;
+    dragNode = null;
+    canvas.className = "";
+  });
+
+  canvas.addEventListener("wheel", function(e) {
+    e.preventDefault();
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+    var before = screenToWorld(mx, my);
+    var factor = e.deltaY < 0 ? 1.1 : 0.9;
+    camera.scale = Math.max(0.12, Math.min(6, camera.scale * factor));
+    var after = screenToWorld(mx, my);
+    camera.x += after.x - before.x;
+    camera.y += after.y - before.y;
     draw();
-  } else {
-    hovered = null; tooltip.style.display='none'; draw();
-  }
-});
-window.addEventListener('mouseup', function(){ isPanning=false; isDragging=false; dragNode=null; canvas.style.cursor='grab'; });
-canvas.addEventListener('wheel', function(e){ e.preventDefault(); var rect = canvas.getBoundingClientRect(); var mx = e.clientX - rect.left, my = e.clientY - rect.top; var before = screenToWorld(mx,my); var factor = e.deltaY < 0 ? 1.1 : 0.9; camera.scale = Math.max(0.12, Math.min(6, camera.scale * factor)); var after = screenToWorld(mx,my); camera.x += after.x - before.x; camera.y += after.y - before.y; draw(); }, {passive:false});
+  }, { passive: false });
 
-function showTooltipForNode(n, mx, my){
-  var items = [];
-  if(n.type === 'member'){
-    for(var i=0;i<edges.length;i++){ if(edges[i].source === n.id){ items.push(nodeById[edges[i].target].label); } }
-  } else {
-    for(var i=0;i<edges.length;i++){ if(edges[i].target === n.id){ items.push(nodeById[edges[i].source].label); } }
-  }
-  var html = '<div style="font-weight:700;margin-bottom:6px">' + escapeHtml(n.label) + '</div>';
-  html += '<div style="color:#555;margin-bottom:6px">' + (n.type==='member' ? '學校成員' : '機構') + '</div>';
-  html += '<div><strong>連結數：' + items.length + '</strong></div>';
-  if(items.length > 0){ html += '<ul style="margin:6px 0 0 18px;padding:0;">'; for(var j=0;j<items.length;j++){ html += '<li>' + escapeHtml(items[j]) + '</li>'; } html += '</ul>'; }
-  tooltip.innerHTML = html;
-  tooltip.style.display = 'block';
-  updateTooltipPosition(mx,my);
-}
-function updateTooltipPosition(mx,my){
-  tooltip.style.left = Math.min(mx+12, width-320) + 'px';
-  tooltip.style.top = Math.min(my+12, height-200) + 'px';
-}
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  layoutMode.addEventListener("change", function() {
+    applyLayout(layoutMode.value);
+  });
+  toggleLabels.addEventListener("change", draw);
+  toggleArrows.addEventListener("change", draw);
+  toggleHoverFocus.addEventListener("change", draw);
 
-modeSelect.addEventListener('change', function(){ applyLayout(modeSelect.value); });
-showLabels.addEventListener('change', draw);
-showArrows.addEventListener('change', draw);
-hoverFocus.addEventListener('change', draw);
-exportBtn.addEventListener('click', function(){ var link = document.createElement('a'); link.href = canvas.toDataURL('image/png'); link.download = 'network.png'; link.click(); });
+  exportPNG.addEventListener("click", function() {
+    var link = document.createElement("a");
+    link.download = "校際合作網絡圖.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
 
-window.addEventListener('resize', resize);
+  window.addEventListener("resize", resizeCanvas);
 
-// initial
-resize();
-applyLayout('parallel');
-
+  resizeCanvas();
+  loadGexf();
+})();
 </script>
 </body>
 </html>
