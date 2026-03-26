@@ -247,12 +247,20 @@ html,body{
   gap:4px;
   margin-top:6px;
 }
+
 .force-density-ticks span{
   flex:1;
   text-align:center;
   font-size:10px;
   color:var(--muted);
+  transition:color .18s ease,font-weight .18s ease,transform .18s ease;
 }
+.force-density-ticks span.active{
+  color:var(--text);
+  font-weight:700;
+  transform:translateY(-1px);
+}
+
 @media (max-width: 768px){
   #forceDensityWrap{padding:10px 10px 9px;}
   .force-density-current{font-size:10px;}
@@ -298,11 +306,11 @@ html,body{
           <span>大</span>
         </div>
         <div class="force-density-ruler">
-          <span></span><span></span><span></span><span></span><span></span><span class="mid"></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span class="mid"></span><span></span><span></span><span></span><span></span>
         </div>
-        <input id="forceDensitySlider" type="range" min="0" max="10" step="1" value="5">
-        <div class="force-density-ticks">
-          <span>0.4</span><span>0.6</span><span>0.7</span><span>0.8</span><span>0.9</span><span>1.0</span><span>1.1</span><span>1.2</span><span>1.3</span><span>1.4</span><span>1.6</span>
+        <input id="forceDensitySlider" type="range" min="0" max="8" step="1" value="4">
+        <div id="forceDensityTicks" class="force-density-ticks">
+          <span>÷1.8</span><span>÷1.6</span><span>÷1.4</span><span>÷1.2</span><span>1.0</span><span>×1.2</span><span>×1.4</span><span>×1.6</span><span>×1.8</span>
         </div>
       </div>
     </div>
@@ -342,6 +350,7 @@ html,body{
   var forceDensityWrap = document.getElementById("forceDensityWrap");
   var forceDensitySlider = document.getElementById("forceDensitySlider");
   var forceDensityCurrent = document.getElementById("forceDensityCurrent");
+  var forceDensityTicks = document.getElementById("forceDensityTicks");
   var menuToggle = document.getElementById("menuToggle");
   var panel = document.getElementById("panel");
   var panelBackdrop = document.getElementById("panelBackdrop");
@@ -367,18 +376,31 @@ html,body{
   var pinchStartScale = 1;
   var pinchWorldCenter = null;
 
-  var FORCE_DISTANCE_VALUES = [0.4, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.6];
+  var FORCE_DISTANCE_VALUES = [1/1.8, 1/1.6, 1/1.4, 1/1.2, 1.0, 1.2, 1.4, 1.6, 1.8];
 
   function getForceDistanceFactor() {
     var idx = parseInt(forceDensitySlider.value, 10);
-    if (isNaN(idx) || idx < 0 || idx >= FORCE_DISTANCE_VALUES.length) idx = 5;
+    if (isNaN(idx) || idx < 0 || idx >= FORCE_DISTANCE_VALUES.length) idx = 4;
     return FORCE_DISTANCE_VALUES[idx];
   }
 
   function updateForceDensityUI() {
+    var idx = parseInt(forceDensitySlider.value, 10);
+    if (isNaN(idx) || idx < 0 || idx >= FORCE_DISTANCE_VALUES.length) idx = 4;
     var factor = getForceDistanceFactor();
-    var text = factor === 1 ? "預設密度 ×1.0" : ("距離 ×" + factor.toFixed(1));
+    var text;
+    if (idx === 4) text = "預設密度 ×1.0";
+    else if (idx < 4) text = "距離 ÷" + (1 / factor).toFixed(1);
+    else text = "距離 ×" + factor.toFixed(1);
     forceDensityCurrent.innerHTML = text;
+
+    if (forceDensityTicks) {
+      var spans = forceDensityTicks.getElementsByTagName("span");
+      for (var i = 0; i < spans.length; i++) {
+        if (i === idx) spans[i].className = "active";
+        else spans[i].className = "";
+      }
+    }
   }
 
   function updateForceDensityVisibility() {
