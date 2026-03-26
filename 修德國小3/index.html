@@ -492,6 +492,7 @@ html,body{
         parallelX: 0, parallelY: 0,
         arcX: 0, arcY: 0,
         forceX: 0, forceY: 0,
+        forceBaseX: 0, forceBaseY: 0,
         x: 0, y: 0
       });
     }
@@ -795,12 +796,21 @@ html,body{
       }
       if (!moved) break;
     }
+
+    // persist as the current base force layout
+    for (i = 0; i < n; i++) {
+      graph.nodes[i].forceBaseX = graph.nodes[i].forceX;
+      graph.nodes[i].forceBaseY = graph.nodes[i].forceY;
+    }
   }
 
   function applyForceLayout() {
+    var factor = getForceDistanceFactor();
     for (var i = 0; i < graph.nodes.length; i++) {
-      graph.nodes[i].x = graph.nodes[i].forceX;
-      graph.nodes[i].y = graph.nodes[i].forceY;
+      var bx = typeof graph.nodes[i].forceBaseX === "number" ? graph.nodes[i].forceBaseX : graph.nodes[i].forceX;
+      var by = typeof graph.nodes[i].forceBaseY === "number" ? graph.nodes[i].forceBaseY : graph.nodes[i].forceY;
+      graph.nodes[i].x = bx * factor;
+      graph.nodes[i].y = by * factor;
     }
   }
 
@@ -1247,7 +1257,6 @@ html,body{
   forceDensitySlider.addEventListener("input", function() {
     updateForceDensityUI();
     if (layoutMode.value === "force") {
-      computeForceLayout();
       applyForceLayout();
       fitCamera();
       draw();
