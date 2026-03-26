@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>校際合作網絡圖</title>
+<title>修德國小_校際合作網絡</title>
 <style>
 :root{
   --bg:#f4efe8;
@@ -162,7 +162,10 @@ html,body{
   <button id="menuToggle" aria-label="開關設定選單">選單</button>
   <div id="panelBackdrop"></div>
 
-  <div id="hint">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div>
+  <div id="hint">
+    <div class="hint-title">修德國小_校際合作網絡</div>
+    <div class="hint-desc">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div>
+  </div>
 
   <div id="panel">
     <h3>網絡設定</h3>
@@ -170,6 +173,7 @@ html,body{
       <select id="layoutMode">
         <option value="parallel">左右並列</option>
         <option value="arc">環狀並列</option>
+        <option value="force">力導向布局</option>
       </select>
     </div>
     <div style="margin-top:8px;">
@@ -179,6 +183,7 @@ html,body{
     </div>
     <div>
       <button id="exportPNG">匯出PNG</button>
+      <button id="rerunForce">重新布局</button>
     </div>
   </div>
 
@@ -208,6 +213,7 @@ html,body{
   var toggleArrows = document.getElementById("toggleArrows");
   var toggleHoverFocus = document.getElementById("toggleHoverFocus");
   var exportPNG = document.getElementById("exportPNG");
+  var rerunForce = document.getElementById("rerunForce");
   var menuToggle = document.getElementById("menuToggle");
   var panel = document.getElementById("panel");
   var panelBackdrop = document.getElementById("panelBackdrop");
@@ -227,21 +233,11 @@ html,body{
   var dragNode = null;
   var hovered = null;
   var lastMouse = { x: 0, y: 0 };
+
   var touchMode = null;
   var pinchStartDist = 0;
   var pinchStartScale = 1;
   var pinchWorldCenter = null;
-
-  function setStatus(text, isError) {
-    statusBox.innerHTML = text;
-    statusBox.className = isError ? "error" : "";
-    statusBox.style.display = "block";
-  }
-
-  function hideStatus() {
-    statusBox.style.display = "none";
-  }
-
 
   function isMobileView() {
     return window.innerWidth <= 768;
@@ -266,13 +262,18 @@ html,body{
   }
 
   function syncResponsiveUI() {
-    if (isMobileView()) {
-      panel.classList.remove("open");
-      panelBackdrop.classList.remove("open");
-    } else {
-      panel.classList.remove("open");
-      panelBackdrop.classList.remove("open");
-    }
+    panel.classList.remove("open");
+    panelBackdrop.classList.remove("open");
+  }
+
+  function setStatus(text, isError) {
+    statusBox.innerHTML = text;
+    statusBox.className = isError ? "error" : "";
+    statusBox.style.display = "block";
+  }
+
+  function hideStatus() {
+    statusBox.style.display = "none";
   }
 
   function resizeCanvas() {
@@ -306,26 +307,17 @@ html,body{
       .replace(/"/g, "&quot;");
   }
 
-  function getChildrenByTag(node, tagName) {
-    var arr = [];
-    var children = node.getElementsByTagName(tagName);
-    for (var i = 0; i < children.length; i++) arr.push(children[i]);
-    return arr;
-  }
-
   function parseGexf(text) {
     var parser = new DOMParser();
     var xml = parser.parseFromString(text, "application/xml");
     var parseError = xml.getElementsByTagName("parsererror");
-    if (parseError && parseError.length) {
-      throw new Error("GEXF XML解析失敗");
-    }
+    if (parseError && parseError.length) throw new Error("GEXF XML解析失敗");
 
     var g = { nodes: [], edges: [] };
     var rawNodes = xml.getElementsByTagName("node");
     var rawEdges = xml.getElementsByTagName("edge");
-
     var i, j;
+
     for (i = 0; i < rawNodes.length; i++) {
       var n = rawNodes[i];
       var id = n.getAttribute("id");
@@ -337,10 +329,9 @@ html,body{
         var av = attvalues[j];
         var forAttr = av.getAttribute("for");
         var valAttr = av.getAttribute("value");
-        if (forAttr === "node_type" || forAttr === "0" || forAttr === "type") {
-          if (valAttr === "member" || valAttr === "institution") {
-            nodeType = valAttr;
-          }
+        if ((forAttr === "node_type" || forAttr === "0" || forAttr === "type") &&
+            (valAttr === "member" || valAttr === "institution")) {
+          nodeType = valAttr;
         }
       }
 
@@ -351,12 +342,10 @@ html,body{
         size: 8,
         color: null,
         shape: null,
-        parallelX: 0,
-        parallelY: 0,
-        arcX: 0,
-        arcY: 0,
-        x: 0,
-        y: 0
+        parallelX: 0, parallelY: 0,
+        arcX: 0, arcY: 0,
+        forceX: 0, forceY: 0,
+        x: 0, y: 0
       });
     }
 
@@ -370,7 +359,6 @@ html,body{
         size: 1.4
       });
     }
-
     return g;
   }
 
@@ -408,9 +396,7 @@ html,body{
       degree[graph.edges[i].source] += 1;
       degree[graph.edges[i].target] += 1;
     }
-    for (var k in degree) {
-      if (degree[k] > maxDegree) maxDegree = degree[k];
-    }
+    for (var k in degree) if (degree[k] > maxDegree) maxDegree = degree[k];
     for (i = 0; i < graph.nodes.length; i++) {
       var d = degree[graph.nodes[i].id] || 1;
       graph.nodes[i].size = +(6 + (d / maxDegree) * 10).toFixed(2);
@@ -435,33 +421,31 @@ html,body{
     }
   }
 
-  function getMembersAndInstitutions() {
+  function getGroups() {
     var members = [];
     var insts = [];
-    for (var i = 0; i < graph.nodes.length; i++) {
+    var i;
+    for (i = 0; i < graph.nodes.length; i++) {
       if (graph.nodes[i].type === "member") members.push(graph.nodes[i]);
       else insts.push(graph.nodes[i]);
     }
-    // stable ordering by label
     members.sort(function(a, b) { return String(a.label).localeCompare(String(b.label), "zh-Hant"); });
     insts.sort(function(a, b) { return String(a.label).localeCompare(String(b.label), "zh-Hant"); });
     return { members: members, insts: insts };
   }
 
   function applyParallelLayout() {
-    var groups = getMembersAndInstitutions();
+    var groups = getGroups();
     var members = groups.members;
     var insts = groups.insts;
 
     var maxSize = 8;
     var i;
-    for (i = 0; i < graph.nodes.length; i++) {
-      if (graph.nodes[i].size > maxSize) maxSize = graph.nodes[i].size;
-    }
+    for (i = 0; i < graph.nodes.length; i++) if (graph.nodes[i].size > maxSize) maxSize = graph.nodes[i].size;
 
     var minSpacing = maxSize * 4;
     var span = 900;
-    var sideX = 760; // widened gap
+    var sideX = 760;
 
     function positionsFor(list, xValue) {
       var out = [];
@@ -474,9 +458,7 @@ html,body{
       var spacing = Math.max(minSpacing, idealSpacing);
       var totalHeight = spacing * (n - 1);
       var start = -totalHeight / 2;
-      for (var j = 0; j < n; j++) {
-        out.push({ x: xValue, y: +(start + j * spacing).toFixed(2) });
-      }
+      for (var j = 0; j < n; j++) out.push({ x: xValue, y: +(start + j * spacing).toFixed(2) });
       return out;
     }
 
@@ -484,32 +466,30 @@ html,body{
     var iPos = positionsFor(insts, sideX);
 
     for (i = 0; i < members.length; i++) {
-      members[i].parallelX = mPos[i].x;
-      members[i].parallelY = mPos[i].y;
-      members[i].x = mPos[i].x;
-      members[i].y = mPos[i].y;
+      members[i].parallelX = mPos[i].x; members[i].parallelY = mPos[i].y;
+      members[i].x = mPos[i].x; members[i].y = mPos[i].y;
     }
     for (i = 0; i < insts.length; i++) {
-      insts[i].parallelX = iPos[i].x;
-      insts[i].parallelY = iPos[i].y;
-      insts[i].x = iPos[i].x;
-      insts[i].y = iPos[i].y;
+      insts[i].parallelX = iPos[i].x; insts[i].parallelY = iPos[i].y;
+      insts[i].x = iPos[i].x; insts[i].y = iPos[i].y;
     }
   }
 
   function applyArcLayout() {
-    var groups = getMembersAndInstitutions();
+    var groups = getGroups();
     var members = groups.members;
     var insts = groups.insts;
-    var radius = 468; // 原半徑360的1.3倍，拉開環狀上下節點間距
+    var radius = 468; // 1.3x
     var i;
 
     function halfCircle(list, startAngle, endAngle) {
       var arr = [];
       var n = list.length;
       if (n === 1) {
-        arr.push({ x: +(radius * Math.cos((startAngle + endAngle) / 2)).toFixed(2),
-                   y: +(radius * Math.sin((startAngle + endAngle) / 2)).toFixed(2) });
+        arr.push({
+          x: +(radius * Math.cos((startAngle + endAngle) / 2)).toFixed(2),
+          y: +(radius * Math.sin((startAngle + endAngle) / 2)).toFixed(2)
+        });
         return arr;
       }
       for (var j = 0; j < n; j++) {
@@ -522,58 +502,182 @@ html,body{
       return arr;
     }
 
-    // 留出上緣與下緣空白，避免左右半圓的端點節點與標籤在頂部/底部重疊
-    // 左半圓：120° 到 240°
-    // 右半圓：-60° 到 60°
     var leftPos = halfCircle(members, Math.PI * 2 / 3, Math.PI * 4 / 3);
     var rightPos = halfCircle(insts, -Math.PI / 3, Math.PI / 3);
 
     for (i = 0; i < members.length; i++) {
-      members[i].arcX = leftPos[i].x;
-      members[i].arcY = leftPos[i].y;
-      members[i].x = leftPos[i].x;
-      members[i].y = leftPos[i].y;
+      members[i].arcX = leftPos[i].x; members[i].arcY = leftPos[i].y;
+      members[i].x = leftPos[i].x; members[i].y = leftPos[i].y;
     }
     for (i = 0; i < insts.length; i++) {
-      insts[i].arcX = rightPos[i].x;
-      insts[i].arcY = rightPos[i].y;
-      insts[i].x = rightPos[i].x;
-      insts[i].y = rightPos[i].y;
+      insts[i].arcX = rightPos[i].x; insts[i].arcY = rightPos[i].y;
+      insts[i].x = rightPos[i].x; insts[i].y = rightPos[i].y;
+    }
+  }
+
+  function computeForceLayout() {
+    var i, j;
+    var n = graph.nodes.length;
+    if (!n) return;
+
+    // initial positions on a broad circle with random phase and small jitter
+    var radius = 320;
+    var phase = Math.random() * Math.PI * 2;
+    for (i = 0; i < n; i++) {
+      var ang = phase + (Math.PI * 2 * i) / n;
+      graph.nodes[i].forceX = Math.cos(ang) * radius + (Math.random() - 0.5) * 40;
+      graph.nodes[i].forceY = Math.sin(ang) * radius + (Math.random() - 0.5) * 40;
+    }
+
+    var adj = {};
+    for (i = 0; i < n; i++) adj[graph.nodes[i].id] = {};
+    for (i = 0; i < graph.edges.length; i++) {
+      var e = graph.edges[i];
+      adj[e.source][e.target] = true;
+      adj[e.target][e.source] = true;
+    }
+
+    var area = 1200 * 900;
+    var k = Math.sqrt(area / Math.max(1, n));
+    var temperature = 120;
+
+    for (var iter = 0; iter < 220; iter++) {
+      var disp = {};
+      for (i = 0; i < n; i++) disp[graph.nodes[i].id] = { x: 0, y: 0 };
+
+      // repulsion
+      for (i = 0; i < n; i++) {
+        var v = graph.nodes[i];
+        for (j = i + 1; j < n; j++) {
+          var u = graph.nodes[j];
+          var dx = v.forceX - u.forceX;
+          var dy = v.forceY - u.forceY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 0.01) {
+            dx = (Math.random() - 0.5) * 0.1;
+            dy = (Math.random() - 0.5) * 0.1;
+            dist = Math.sqrt(dx * dx + dy * dy);
+          }
+          var rep = (k * k) / dist;
+          var rx = dx / dist * rep;
+          var ry = dy / dist * rep;
+          disp[v.id].x += rx; disp[v.id].y += ry;
+          disp[u.id].x -= rx; disp[u.id].y -= ry;
+        }
+      }
+
+      // attraction along edges
+      for (i = 0; i < graph.edges.length; i++) {
+        var ed = graph.edges[i];
+        var s = nodeMap[ed.source];
+        var t = nodeMap[ed.target];
+        var dx2 = s.forceX - t.forceX;
+        var dy2 = s.forceY - t.forceY;
+        var dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+        if (dist2 < 0.01) dist2 = 0.01;
+        var att = (dist2 * dist2) / k;
+        var ax = dx2 / dist2 * att;
+        var ay = dy2 / dist2 * att;
+        disp[s.id].x -= ax; disp[s.id].y -= ay;
+        disp[t.id].x += ax; disp[t.id].y += ay;
+      }
+
+      // apply displacement
+      for (i = 0; i < n; i++) {
+        var node = graph.nodes[i];
+        var ddx = disp[node.id].x;
+        var ddy = disp[node.id].y;
+        var dlen = Math.sqrt(ddx * ddx + ddy * ddy);
+        if (dlen > 0) {
+          var limited = Math.min(dlen, temperature);
+          node.forceX += ddx / dlen * limited;
+          node.forceY += ddy / dlen * limited;
+        }
+      }
+
+      temperature *= 0.95;
+    }
+
+    // normalize to canvas-friendly range
+    var xs = [], ys = [];
+    for (i = 0; i < n; i++) {
+      xs.push(graph.nodes[i].forceX);
+      ys.push(graph.nodes[i].forceY);
+    }
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    var centerX = (minX + maxX) / 2;
+    var centerY = (minY + maxY) / 2;
+    var scaleX = (maxX - minX) || 1;
+    var scaleY = (maxY - minY) || 1;
+    var normScale = 900 / Math.max(scaleX, scaleY);
+
+    for (i = 0; i < n; i++) {
+      graph.nodes[i].forceX = +((graph.nodes[i].forceX - centerX) * normScale).toFixed(2);
+      graph.nodes[i].forceY = +((graph.nodes[i].forceY - centerY) * normScale).toFixed(2);
+    }
+
+    // collision relaxation: avoid node overlap after force layout
+    for (var relax = 0; relax < 120; relax++) {
+      var moved = false;
+      for (i = 0; i < n; i++) {
+        var a = graph.nodes[i];
+        for (j = i + 1; j < n; j++) {
+          var b = graph.nodes[j];
+          var cdx = b.forceX - a.forceX;
+          var cdy = b.forceY - a.forceY;
+          var cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          if (cdist < 0.01) {
+            cdx = (Math.random() - 0.5) * 0.1;
+            cdy = (Math.random() - 0.5) * 0.1;
+            cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          }
+          var minDist = (Math.max(4, a.size) + Math.max(4, b.size) + 18);
+          if (cdist < minDist) {
+            var push = (minDist - cdist) / 2;
+            var pux = cdx / cdist * push;
+            var puy = cdy / cdist * push;
+            a.forceX -= pux;
+            a.forceY -= puy;
+            b.forceX += pux;
+            b.forceY += puy;
+            moved = true;
+          }
+        }
+      }
+      if (!moved) break;
+    }
+  }
+
+  function applyForceLayout() {
+    for (var i = 0; i < graph.nodes.length; i++) {
+      graph.nodes[i].x = graph.nodes[i].forceX;
+      graph.nodes[i].y = graph.nodes[i].forceY;
     }
   }
 
   function applyLayout(mode) {
     if (mode === "arc") applyArcLayout();
+    else if (mode === "force") applyForceLayout();
     else applyParallelLayout();
     fitCamera();
     draw();
   }
 
-
-  function isMobileView() {
-    return window.innerWidth <= 768;
-  }
-
   function fitCamera() {
     if (!graph.nodes.length) return;
-    var xs = [];
-    var ys = [];
-    for (var i = 0; i < graph.nodes.length; i++) {
+    var xs = [], ys = [], i;
+    for (i = 0; i < graph.nodes.length; i++) {
       xs.push(graph.nodes[i].x);
       ys.push(graph.nodes[i].y);
     }
-    var minX = Math.min.apply(null, xs);
-    var maxX = Math.max.apply(null, xs);
-    var minY = Math.min.apply(null, ys);
-    var maxY = Math.max.apply(null, ys);
-
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
     var pad = 240;
     var graphW = Math.max(1, maxX - minX + pad);
     var graphH = Math.max(1, maxY - minY + pad);
-
     var scaleX = width / graphW;
     var scaleY = height / graphH;
-
     var fitFactor = isMobileView() ? 0.72 : 0.92;
     camera.scale = Math.min(scaleX, scaleY) * fitFactor;
     camera.x = -((minX + maxX) / 2);
@@ -586,8 +690,7 @@ html,body{
       var p = worldToScreen(n.x, n.y);
       var r = Math.max(4, n.size) * camera.scale;
       if (n.shape === "circle") {
-        var dx = mx - p.x;
-        var dy = my - p.y;
+        var dx = mx - p.x, dy = my - p.y;
         if (dx * dx + dy * dy <= r * r) return n;
       } else {
         if (mx >= p.x - r && mx <= p.x + r && my >= p.y - r && my <= p.y + r) return n;
@@ -616,7 +719,6 @@ html,body{
     ctx.moveTo(sx, sy);
     ctx.lineTo(tx, ty);
     ctx.stroke();
-
     if (drawHead) {
       var angle = Math.atan2(ty - sy, tx - sx);
       var head = Math.max(8, 6 + widthLine * 2);
@@ -630,23 +732,109 @@ html,body{
     ctx.restore();
   }
 
+  function getTouchDistance(t1, t2) {
+    var dx = t2.clientX - t1.clientX;
+    var dy = t2.clientY - t1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function getTouchMidpoint(t1, t2) {
+    return { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
+  }
+
+
+  function boxesOverlap(a, b) {
+    return !(a.x + a.w < b.x || b.x + b.w < a.x || a.y + a.h < b.y || b.y + b.h < a.y);
+  }
+
+  function computeForceLabelPlacements() {
+    var placements = [];
+    var placed = [];
+    var nodeBoxes = [];
+    var i;
+
+    ctx.save();
+    ctx.font = isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC";
+
+    for (i = 0; i < graph.nodes.length; i++) {
+      var np = worldToScreen(graph.nodes[i].x, graph.nodes[i].y);
+      var nr = Math.max(4, graph.nodes[i].size);
+      nodeBoxes.push({
+        id: graph.nodes[i].id,
+        x: np.x - nr,
+        y: np.y - nr,
+        w: nr * 2,
+        h: nr * 2
+      });
+    }
+
+    var nodesSorted = graph.nodes.slice(0);
+    nodesSorted.sort(function(a, b) { return Math.max(4, b.size) - Math.max(4, a.size); });
+
+    for (i = 0; i < nodesSorted.length; i++) {
+      var node = nodesSorted[i];
+      var pt = worldToScreen(node.x, node.y);
+      var gap = Math.max(4, node.size) + 8;
+      var text = node.label;
+      var tw = ctx.measureText(text).width;
+      var boxW = tw + 6;
+      var boxH = 16;
+
+      var candidates = [
+        { x: pt.x + gap, y: pt.y - boxH / 2 },
+        { x: pt.x - boxW - gap, y: pt.y - boxH / 2 },
+        { x: pt.x + gap, y: pt.y - gap - boxH },
+        { x: pt.x + gap, y: pt.y + gap },
+        { x: pt.x - boxW - gap, y: pt.y - gap - boxH },
+        { x: pt.x - boxW - gap, y: pt.y + gap },
+        { x: pt.x - boxW / 2, y: pt.y - gap - boxH },
+        { x: pt.x - boxW / 2, y: pt.y + gap }
+      ];
+
+      var best = null;
+      var bestScore = Infinity;
+      var c, box, score, j, cx, cy;
+
+      for (c = 0; c < candidates.length; c++) {
+        box = { x: candidates[c].x, y: candidates[c].y, w: boxW, h: boxH };
+        score = 0;
+
+        for (j = 0; j < placed.length; j++) {
+          if (boxesOverlap(box, placed[j])) score += 1200;
+        }
+        for (j = 0; j < nodeBoxes.length; j++) {
+          if (nodeBoxes[j].id !== node.id && boxesOverlap(box, nodeBoxes[j])) score += 350;
+        }
+        if (box.x < 4 || box.y < 4 || box.x + box.w > width - 4 || box.y + box.h > height - 4) score += 180;
+
+        cx = box.x + box.w / 2;
+        cy = box.y + box.h / 2;
+        score += Math.sqrt((cx - pt.x) * (cx - pt.x) + (cy - pt.y) * (cy - pt.y)) * 0.15;
+
+        if (score < bestScore) {
+          bestScore = score;
+          best = box;
+        }
+      }
+
+      if (best) {
+        placements.push({ id: node.id, x: best.x, y: best.y, text: text });
+        placed.push(best);
+      }
+    }
+
+    ctx.restore();
+    return placements;
+  }
+
   function showTooltipForNode(n, mx, my) {
     var items = [];
     var i;
     if (n.type === "member") {
-      for (i = 0; i < graph.edges.length; i++) {
-        if (graph.edges[i].source === n.id && nodeMap[graph.edges[i].target]) {
-          items.push(nodeMap[graph.edges[i].target].label);
-        }
-      }
+      for (i = 0; i < graph.edges.length; i++) if (graph.edges[i].source === n.id && nodeMap[graph.edges[i].target]) items.push(nodeMap[graph.edges[i].target].label);
     } else {
-      for (i = 0; i < graph.edges.length; i++) {
-        if (graph.edges[i].target === n.id && nodeMap[graph.edges[i].source]) {
-          items.push(nodeMap[graph.edges[i].source].label);
-        }
-      }
+      for (i = 0; i < graph.edges.length; i++) if (graph.edges[i].target === n.id && nodeMap[graph.edges[i].source]) items.push(nodeMap[graph.edges[i].source].label);
     }
-
     var html = '<div class="title">' + escapeHtml(n.label) + '</div>';
     html += '<div class="meta">' + (n.type === "member" ? "學校成員" : "機構") + '</div>';
     html += '<div><strong>連結數：' + items.length + '</strong></div>';
@@ -673,16 +861,13 @@ html,body{
 
       var sp = worldToScreen(s.x, s.y);
       var tp = worldToScreen(t.x, t.y);
-
       var dx = tp.x - sp.x;
       var dy = tp.y - sp.y;
       var dist = Math.sqrt(dx * dx + dy * dy) || 1;
       var ux = dx / dist;
       var uy = dy / dist;
-
       var sr = Math.max(4, s.size) * camera.scale;
       var tr = Math.max(4, t.size) * camera.scale;
-
       var sx = sp.x + ux * (sr + 2);
       var sy = sp.y + uy * (sr + 2);
       var ex = tp.x - ux * (tr + 10);
@@ -698,23 +883,15 @@ html,body{
       var n = graph.nodes[i];
       var p = worldToScreen(n.x, n.y);
       var r = Math.max(4, n.size);
-
       ctx.save();
       ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(n.id) ? 0.25 : 1;
       ctx.fillStyle = n.color;
       ctx.strokeStyle = "#9c978f";
       ctx.lineWidth = 1;
-
       if (n.shape === "circle") {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
+        ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       } else {
-        ctx.beginPath();
-        ctx.rect(p.x - r, p.y - r, r * 2, r * 2);
-        ctx.fill();
-        ctx.stroke();
+        ctx.beginPath(); ctx.rect(p.x - r, p.y - r, r * 2, r * 2); ctx.fill(); ctx.stroke();
       }
       ctx.restore();
     }
@@ -722,90 +899,79 @@ html,body{
     // labels
     if (toggleLabels.checked) {
       ctx.save();
-      ctx.font = "12px Arial, Noto Sans TC";
+      ctx.font = isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC";
       ctx.fillStyle = "#5f564d";
-      for (i = 0; i < graph.nodes.length; i++) {
-        var node = graph.nodes[i];
-        var pt = worldToScreen(node.x, node.y);
-        var gap = Math.max(4, node.size) + 6;
-        var text = node.label;
-        var tw = ctx.measureText(text).width;
-        var lx, ly;
 
-        if (layoutMode.value === "parallel") {
-          if (node.type === "member") {
-            lx = pt.x - tw - gap;
-            ly = pt.y - 8;
-          } else {
-            lx = pt.x + gap;
-            ly = pt.y - 8;
-          }
-        } else {
-          // arc: 人員標籤在左側，機構標籤在右側
-          if (node.type === "member") {
-            lx = pt.x - tw - gap;
-            ly = pt.y - 8;
-          } else {
-            lx = pt.x + gap;
-            ly = pt.y - 8;
-          }
+      if (layoutMode.value === "force") {
+        var forcePlacements = computeForceLabelPlacements();
+        for (i = 0; i < forcePlacements.length; i++) {
+          ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(forcePlacements[i].id) ? 0.25 : 1;
+          ctx.fillText(forcePlacements[i].text, forcePlacements[i].x, forcePlacements[i].y);
         }
+      } else {
+        for (i = 0; i < graph.nodes.length; i++) {
+          var node = graph.nodes[i];
+          var pt = worldToScreen(node.x, node.y);
+          var gap = Math.max(4, node.size) + 6;
+          var text = node.label;
+          var tw = ctx.measureText(text).width;
+          var lx, ly;
 
-        ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(node.id) ? 0.25 : 1;
-        ctx.fillText(text, lx, ly);
+          if (layoutMode.value === "parallel") {
+            if (node.type === "member") { lx = pt.x - tw - gap; ly = pt.y - 8; }
+            else { lx = pt.x + gap; ly = pt.y - 8; }
+          } else if (layoutMode.value === "arc") {
+            if (node.type === "member") { lx = pt.x - tw - gap; ly = pt.y - 8; }
+            else { lx = pt.x + gap; ly = pt.y - 8; }
+          } else {
+            if (pt.x < width / 2) { lx = pt.x - tw - gap; ly = pt.y - 8; }
+            else { lx = pt.x + gap; ly = pt.y - 8; }
+          }
+
+          ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(node.id) ? 0.25 : 1;
+          ctx.fillText(text, lx, ly);
+        }
       }
       ctx.restore();
     }
   }
 
   function loadGexf() {
-    var url = "./network.gexf?_=" + String(new Date().getTime());
-    fetch(url).then(function(resp) {
-      if (!resp.ok) throw new Error("無法讀取network.gexf：" + resp.status);
-      return resp.text();
-    }).then(function(text) {
-      graph = parseGexf(text);
-      inferNodeTypesIfNeeded();
-      computeSizes();
-      prepareMaps();
-      applyLayout("parallel");
-      hideStatus();
-    }).catch(function(err) {
-      setStatus("讀取network.gexf失敗。請確認index.html與network.gexf在同一資料夾，且用HTTP伺服器開啟。<br><br>" + escapeHtml(String(err)), true);
-      console.error(err);
-    });
-  }
-
-
-  function getTouchDistance(t1, t2) {
-    var dx = t2.clientX - t1.clientX;
-    var dy = t2.clientY - t1.clientY;
-    return Math.sqrt(dx * dx + dy * dy);
-  }
-
-  function getTouchMidpoint(t1, t2) {
-    return {
-      x: (t1.clientX + t2.clientX) / 2,
-      y: (t1.clientY + t2.clientY) / 2
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "./network.gexf?_=" + String(new Date().getTime()), true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== 4) return;
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          graph = parseGexf(xhr.responseText);
+          inferNodeTypesIfNeeded();
+          computeSizes();
+          prepareMaps();
+          applyParallelLayout();
+          applyArcLayout(); // fill arc coords
+          computeForceLayout(); // fill force coords
+          applyLayout("parallel"); // default
+          hideStatus();
+        } catch (err) {
+          setStatus("解析network.gexf失敗：<br><br>" + escapeHtml(String(err)), true);
+          if (window.console) console.error(err);
+        }
+      } else {
+        setStatus("讀取network.gexf失敗。請確認index.html與network.gexf在同一資料夾，且用HTTP伺服器開啟。<br><br>HTTP狀態：" + xhr.status, true);
+      }
     };
+    xhr.send(null);
   }
 
-  // events
+  // mouse events
   canvas.addEventListener("mousedown", function(e) {
     var rect = canvas.getBoundingClientRect();
     var mx = e.clientX - rect.left;
     var my = e.clientY - rect.top;
     var n = findNodeAt(mx, my);
-    lastMouse.x = e.clientX;
-    lastMouse.y = e.clientY;
-    if (n) {
-      isDragging = true;
-      dragNode = n;
-      canvas.className = "dragging";
-    } else {
-      isPanning = true;
-      canvas.className = "dragging";
-    }
+    lastMouse.x = e.clientX; lastMouse.y = e.clientY;
+    if (n) { isDragging = true; dragNode = n; canvas.className = "dragging"; }
+    else { isPanning = true; canvas.className = "dragging"; }
   });
 
   window.addEventListener("mousemove", function(e) {
@@ -815,41 +981,29 @@ html,body{
 
     if (isDragging && dragNode) {
       var w = screenToWorld(mx, my);
-      dragNode.x = w.x;
-      dragNode.y = w.y;
-      draw();
+      dragNode.x = w.x; dragNode.y = w.y; draw();
       if (hovered && hovered.id === dragNode.id) showTooltipForNode(dragNode, mx, my);
       return;
     }
-
     if (isPanning) {
       var dx = e.clientX - lastMouse.x;
       var dy = e.clientY - lastMouse.y;
-      camera.x += dx / camera.scale;
-      camera.y += dy / camera.scale;
-      lastMouse.x = e.clientX;
-      lastMouse.y = e.clientY;
-      draw();
+      camera.x += dx / camera.scale; camera.y += dy / camera.scale;
+      lastMouse.x = e.clientX; lastMouse.y = e.clientY; draw();
       return;
     }
-
     var n = findNodeAt(mx, my);
     if (n) {
       if (!hovered || hovered.id !== n.id) hovered = n;
       showTooltipForNode(n, mx, my);
       draw();
     } else {
-      hovered = null;
-      tooltip.style.display = "none";
-      draw();
+      hovered = null; tooltip.style.display = "none"; draw();
     }
   });
 
   window.addEventListener("mouseup", function() {
-    isPanning = false;
-    isDragging = false;
-    dragNode = null;
-    canvas.className = "";
+    isPanning = false; isDragging = false; dragNode = null; canvas.className = "";
   });
 
   canvas.addEventListener("wheel", function(e) {
@@ -861,12 +1015,11 @@ html,body{
     var factor = e.deltaY < 0 ? 1.1 : 0.9;
     camera.scale = Math.max(0.12, Math.min(6, camera.scale * factor));
     var after = screenToWorld(mx, my);
-    camera.x += after.x - before.x;
-    camera.y += after.y - before.y;
+    camera.x += after.x - before.x; camera.y += after.y - before.y;
     draw();
   }, { passive: false });
 
-
+  // touch events
   canvas.addEventListener("touchstart", function(e) {
     if (!e.touches || !e.touches.length) return;
     var rect = canvas.getBoundingClientRect();
@@ -876,33 +1029,17 @@ html,body{
       var mx = t.clientX - rect.left;
       var my = t.clientY - rect.top;
       var n = findNodeAt(mx, my);
-
-      lastMouse.x = t.clientX;
-      lastMouse.y = t.clientY;
-
-      if (n) {
-        touchMode = "drag";
-        dragNode = n;
-        isDragging = true;
-      } else {
-        touchMode = "pan";
-        isPanning = true;
-      }
+      lastMouse.x = t.clientX; lastMouse.y = t.clientY;
+      if (n) { touchMode = "drag"; dragNode = n; isDragging = true; }
+      else { touchMode = "pan"; isPanning = true; }
     } else if (e.touches.length >= 2) {
       touchMode = "pinch";
-      isDragging = false;
-      isPanning = false;
-      dragNode = null;
-
-      var t1 = e.touches[0];
-      var t2 = e.touches[1];
+      isDragging = false; isPanning = false; dragNode = null;
+      var t1 = e.touches[0], t2 = e.touches[1];
       pinchStartDist = getTouchDistance(t1, t2);
       pinchStartScale = camera.scale;
-
       var mid = getTouchMidpoint(t1, t2);
-      var mx2 = mid.x - rect.left;
-      var my2 = mid.y - rect.top;
-      pinchWorldCenter = screenToWorld(mx2, my2);
+      pinchWorldCenter = screenToWorld(mid.x - rect.left, mid.y - rect.top);
     }
     e.preventDefault();
   }, { passive: false });
@@ -913,76 +1050,43 @@ html,body{
 
     if (touchMode === "drag" && e.touches.length === 1 && dragNode) {
       var t = e.touches[0];
-      var mx = t.clientX - rect.left;
-      var my = t.clientY - rect.top;
-      var w = screenToWorld(mx, my);
-      dragNode.x = w.x;
-      dragNode.y = w.y;
-      draw();
-      e.preventDefault();
-      return;
+      var w = screenToWorld(t.clientX - rect.left, t.clientY - rect.top);
+      dragNode.x = w.x; dragNode.y = w.y; draw(); e.preventDefault(); return;
     }
-
     if (touchMode === "pan" && e.touches.length === 1) {
       var t3 = e.touches[0];
       var dx = t3.clientX - lastMouse.x;
       var dy = t3.clientY - lastMouse.y;
-      camera.x += dx / camera.scale;
-      camera.y += dy / camera.scale;
-      lastMouse.x = t3.clientX;
-      lastMouse.y = t3.clientY;
-      draw();
-      e.preventDefault();
-      return;
+      camera.x += dx / camera.scale; camera.y += dy / camera.scale;
+      lastMouse.x = t3.clientX; lastMouse.y = t3.clientY; draw(); e.preventDefault(); return;
     }
-
     if (e.touches.length >= 2) {
       touchMode = "pinch";
-      var p1 = e.touches[0];
-      var p2 = e.touches[1];
+      var p1 = e.touches[0], p2 = e.touches[1];
       var dist = getTouchDistance(p1, p2);
-      if (pinchStartDist > 0) {
-        camera.scale = Math.max(0.12, Math.min(6, pinchStartScale * (dist / pinchStartDist)));
-      }
-
+      if (pinchStartDist > 0) camera.scale = Math.max(0.12, Math.min(6, pinchStartScale * (dist / pinchStartDist)));
       var mid2 = getTouchMidpoint(p1, p2);
-      var mx3 = mid2.x - rect.left;
-      var my3 = mid2.y - rect.top;
-
+      var after = screenToWorld(mid2.x - rect.left, mid2.y - rect.top);
       if (pinchWorldCenter) {
-        var after = screenToWorld(mx3, my3);
         camera.x += after.x - pinchWorldCenter.x;
         camera.y += after.y - pinchWorldCenter.y;
       }
-
-      draw();
-      e.preventDefault();
-      return;
+      draw(); e.preventDefault(); return;
     }
   }, { passive: false });
 
   canvas.addEventListener("touchend", function(e) {
     if (e.touches.length === 0) {
-      touchMode = null;
-      isDragging = false;
-      isPanning = false;
-      dragNode = null;
-      pinchStartDist = 0;
-      pinchWorldCenter = null;
+      touchMode = null; isDragging = false; isPanning = false; dragNode = null; pinchStartDist = 0; pinchWorldCenter = null;
     } else if (e.touches.length === 1) {
       touchMode = "pan";
-      var t = e.touches[0];
-      lastMouse.x = t.clientX;
-      lastMouse.y = t.clientY;
-      isDragging = false;
-      dragNode = null;
-      isPanning = true;
-      pinchStartDist = 0;
-      pinchWorldCenter = null;
+      lastMouse.x = e.touches[0].clientX; lastMouse.y = e.touches[0].clientY;
+      isDragging = false; dragNode = null; isPanning = true; pinchStartDist = 0; pinchWorldCenter = null;
     }
     e.preventDefault();
   }, { passive: false });
 
+  // UI events
   layoutMode.addEventListener("change", function() {
     applyLayout(layoutMode.value);
     closeMobilePanel();
@@ -998,9 +1102,23 @@ html,body{
     link.click();
   });
 
-  window.addEventListener("resize", function(){ syncResponsiveUI(); resizeCanvas(); });
   menuToggle.addEventListener("click", toggleMobilePanel);
   panelBackdrop.addEventListener("click", closeMobilePanel);
+
+  rerunForce.addEventListener("click", function() {
+    computeForceLayout();
+    if (layoutMode.value === "force") {
+      applyForceLayout();
+      fitCamera();
+      draw();
+    }
+    closeMobilePanel();
+  });
+
+  window.addEventListener("resize", function() {
+    syncResponsiveUI();
+    resizeCanvas();
+  });
 
   syncResponsiveUI();
   resizeCanvas();
