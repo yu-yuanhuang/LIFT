@@ -1,0 +1,196 @@
+:root {
+  --bg: #f4f0ea;
+  --paper: #fbf8f4;
+  --paper-2: #f0e7de;
+  --line: #d9cfc4;
+  --text: #5c5148;
+  --text-soft: #7a6f66;
+  --accent: #a58f86;
+  --accent-deep: #8f776d;
+  --accent-soft: #d8cbc2;
+  --accent-green: #aab4a0;
+  --shadow: 0 10px 30px rgba(108, 92, 82, 0.10);
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: linear-gradient(180deg, #f6f2ec 0%, #efe7df 100%);
+  color: var(--text);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif !important;
+}
+
+.ax_default {
+  color: var(--text);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif !important;
+}
+
+#base {
+  background: transparent;
+}
+
+/* page section backgrounds */
+#u0_div, #u1_div, #u2_div, #u3_div {
+  background-color: transparent !important;
+}
+
+/* top bar */
+#u6_div, #u13_div, #u39_div, #u41_div, #u40_div {
+  background: linear-gradient(135deg, #d8cbc2 0%, #c6b4aa 100%) !important;
+  border: 1px solid rgba(143, 119, 109, 0.28) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+#u14_div, #u42_div {
+  background-color: transparent !important;
+}
+
+/* cards / sections */
+#u9_div, #u10_div, #u18, #u43, #u5, #u11, #u12 {
+  filter: none;
+}
+
+#u10_div {
+  background: rgba(251, 248, 244, 0.92) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 24px !important;
+  box-shadow: var(--shadow) !important;
+}
+
+#u18 {
+  background: rgba(251, 248, 244, 0.75);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(4px);
+}
+#u18_state0, #u18_state1, #u18_state2 {
+  border-radius: 28px;
+}
+
+#u43_img, #u5_img, #u11_img, #u12_img {
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+/* typography */
+#u7, #u8, #u14, #u40, #u42 {
+  font-family: "Noto Serif TC", "PMingLiU", serif !important;
+  color: #4f433b !important;
+  letter-spacing: 0.03em;
+}
+
+#u7 {
+  font-size: 34px !important;
+  font-weight: 700 !important;
+}
+#u8 {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+}
+#u14, #u40 {
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+#u42 {
+  font-size: 30px !important;
+  font-weight: 600 !important;
+}
+
+#u10, #u20, #u21, #u22, #u23, #u24, #u25, #u26, #u27,
+#u29, #u30, #u31, #u32, #u33, #u34, #u35, #u36 {
+  color: var(--text-soft) !important;
+  line-height: 1.75 !important;
+}
+
+/* buttons */
+#u15, #u16, #u17 {
+  cursor: pointer;
+}
+
+#u15_div, #u16_div, #u17_div {
+  background: linear-gradient(180deg, #f7f1eb 0%, #eadfd5 100%) !important;
+  border: 1px solid rgba(143, 119, 109, 0.35) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 18px rgba(116, 98, 88, 0.12) !important;
+  transition: all 0.22s ease;
+}
+
+#u15 .text, #u16 .text, #u17 .text {
+  padding: 4px 6px !important;
+}
+
+#u15_text, #u16_text, #u17_text {
+  color: #5a4d45 !important;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+}
+
+#u15_text span, #u16_text span, #u17_text span {
+  color: #5a4d45 !important;
+}
+
+#u15:hover #u15_div,
+#u16:hover #u16_div,
+#u17:hover #u17_div {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #f9f5ef 0%, #e3d5ca 100%) !important;
+  box-shadow: 0 14px 24px rgba(116, 98, 88, 0.16) !important;
+}
+
+#u15.morandi-active #u15_div,
+#u16.morandi-active #u16_div,
+#u17.morandi-active #u17_div {
+  background: linear-gradient(180deg, #a58f86 0%, #8f776d 100%) !important;
+  border-color: rgba(122, 101, 92, 0.82) !important;
+  box-shadow: 0 14px 28px rgba(92, 74, 65, 0.22) !important;
+  transform: translateY(-1px);
+}
+
+#u15.morandi-active #u15_text,
+#u16.morandi-active #u16_text,
+#u17.morandi-active #u17_text,
+#u15.morandi-active #u15_text span,
+#u16.morandi-active #u16_text span,
+#u17.morandi-active #u17_text span {
+  color: #fffaf6 !important;
+}
+
+#u15.morandi-active::after,
+#u16.morandi-active::after,
+#u17.morandi-active::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -8px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(143, 119, 109, 0.35);
+}
+
+/* tooltip text blocks inside panel */
+#u20_div, #u21_div, #u22_div, #u23_div, #u24_div, #u25_div, #u26_div, #u27_div,
+#u29_div, #u30_div, #u31_div, #u32_div, #u33_div, #u34_div, #u35_div, #u36_div {
+  background: rgba(251, 248, 244, 0.97) !important;
+  border: 1px solid rgba(165, 143, 134, 0.35) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px rgba(95, 80, 71, 0.14) !important;
+}
+
+#u20_text, #u21_text, #u22_text, #u23_text, #u24_text, #u25_text, #u26_text, #u27_text,
+#u29_text, #u30_text, #u31_text, #u32_text, #u33_text, #u34_text, #u35_text, #u36_text {
+  padding: 10px 12px !important;
+  color: #655950 !important;
+  font-size: 14px !important;
+}
+
+/* smoother image / graph appearance */
+img.img {
+  image-rendering: auto;
+}
