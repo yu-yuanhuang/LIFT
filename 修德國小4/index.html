@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIFT學習生態系統成果分享</title>
+  <meta name="description" content="LIFT學習生態系統成果分享網站重構版，支援以Markdown管理hover提示內容。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header" id="top">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="回到頁首">
+          <div class="brand-mark" aria-hidden="true">
+            <span class="orb orb-a"></span>
+            <span class="orb orb-b"></span>
+            <span class="orb orb-c"></span>
+          </div>
+          <div class="brand-copy">
+            <p class="eyebrow">LIFT學習生態系統</p>
+            <h1>成果分享網站</h1>
+          </div>
+        </a>
+
+        <nav class="top-nav" aria-label="主選單">
+          <a href="#overview">計畫概覽</a>
+          <a href="#part1">第一部分</a>
+          <a href="#part2">第二部分</a>
+          <a href="#part3">第三部分</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section" id="overview">
+        <div class="hero-grid">
+          <div class="hero-copy card-panel">
+            <p class="hero-kicker">114學年學校學習生態系統成果分享</p>
+            <h2>新北市三重區修德國小</h2>
+            <p class="hero-desc">
+              新北市三重區修德國小成果說明新北市三重區修德國小成果說明新北市三重區修德國小成果說明新北市三重區修德國小成果說明新北市三重區修德國小成果說明新北市三重區修德國小成果說明新北市三重區修德國小成果說明。
+            </p>
+            <div class="hero-actions">
+              <a class="lux-button" href="#part1">開始瀏覽</a>
+              <a class="lux-button ghost download-button" href="#" onclick="return false;">下載成果報告</a>
+            </div>
+          </div>
+
+          <aside class="hero-meta card-panel">
+            <div class="logo-row">
+              <div class="logo-slot logo-school">
+                <img src="img/u11.png" alt="國立臺北教育大學校徽與校名標誌" />
+              </div>
+              <div class="logo-slot logo-partner">
+                <img src="img/u12.png" alt="國家科學及技術委員會標誌" />
+              </div>
+            </div>
+            <dl class="meta-list">
+              <div>
+                <dt>計畫名稱</dt>
+                <dd>共領未來：形塑網絡式公平學習生態系統之多年期研究</dd>
+              </div>
+              <div>
+                <dt>補助單位</dt>
+                <dd>國科會</dd>
+              </div>
+              <div>
+                <dt>計畫主持</dt>
+                <dd>劉怡華老師</dd>
+              </div>
+              <div>
+                <dt>服務單位</dt>
+                <dd>國立臺北教育大學</dd>
+              </div>
+              <div>
+                <dt>連絡電話</dt>
+                <dd class="stack-lines"><span>+886-2-27321104 ext. 55724</span><span>+886-935-485-805</span></dd>
+              </div>
+              <div>
+                <dt>電子信箱</dt>
+                <dd>yhliou@mail.ntue.edu.tw｜yhliou.office@gmail.com</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="content-section" id="part1">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PART 01</p>
+            <h3>校內學習支持</h3>
+            <p class="section-intro">
+              校內學習支持研究成果文案校內學習支持研究成果文案校內學習支持研究成果文案校內學習支持研究成果文案校內學習支持研究成果文案校內學習支持研究成果文案校內學習支持研究成果文案。
+            </p>
+          </div>
+          <div class="section-icon-card">
+            <span class="mini-icon">✦</span>
+            <span>資源 × 配置 × 獲取</span>
+          </div>
+        </div>
+
+        <div class="control-bar" role="tablist" aria-label="第一部分檢視模式">
+          <button class="lux-button mode-button active" data-mode-target="part1" data-mode="config" role="tab" aria-selected="true">僅檢視配置</button>
+          <button class="lux-button mode-button ghost" data-mode-target="part1" data-mode="access" role="tab" aria-selected="false">僅檢視獲取</button>
+          <button class="lux-button mode-button ghost" data-mode-target="part1" data-mode="both" role="tab" aria-selected="false">配置+獲取重疊展示</button>
+        </div>
+
+        <div class="figure-layout single-column part1-expanded">
+          <article class="figure-card card-panel">
+            <div class="figure-title-row">
+              <h4>互動圖像展示區</h4>
+              <span class="mode-pill" id="part1-mode-label">目前模式：配置</span>
+            </div>
+            <div class="figure-stage hotspot-stage xl" data-stage="part1">
+              <div class="placeholder-art">
+                <span>此處預留第一部分圖像／雷達圖／結構圖</span>
+                <small>可直接替換為/img/中的正式圖檔</small>
+              </div>
+              <div class="hotspot-layer" data-hotspot-layer="part1"></div>
+            </div>
+            <p class="figure-caption" id="part1-caption">Hover數據節點可展示詳細數據資料。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="part2">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PART 02</p>
+            <h3>支持學生學習的校內組織條件與文化</h3>
+            <p class="section-intro">
+              支持學生學習的校內組織條件與文化文案支持學生學習的校內組織條件與文化文案支持學生學習的校內組織條件與文化文案。
+            </p>
+          </div>
+          <div class="section-icon-card">
+            <span class="mini-icon">✧</span>
+            <span>組織條件 × 協作文化</span>
+          </div>
+        </div>
+
+        <div class="insight-grid">
+          <article class="insight-card card-panel">
+            <span class="icon-tag">課程</span>
+            <h4>課程與教學支持</h4>
+            <p>可對應正式圖表、分析摘要或指標說明，呈現學校如何透過教學安排支持學生學習。</p>
+          </article>
+          <article class="insight-card card-panel">
+            <span class="icon-tag">協作</span>
+            <h4>專業協作與運作機制</h4>
+            <p>呈現教師之間、行政與教學現場之間如何連結與協作，形成支持學習的行動基礎。</p>
+          </article>
+          <article class="insight-card card-panel">
+            <span class="icon-tag">文化</span>
+            <h4>學校文化與支持氛圍</h4>
+            <p>適合置入文化觀察、質性摘要，或搭配圖像說明校園中支持學習的共同價值與氛圍。</p>
+          </article>
+        </div>
+
+        <div class="figure-layout single-column">
+          <article class="figure-card card-panel">
+            <div class="figure-title-row">
+              <h4>第二部分圖像展示區</h4>
+              <span class="mode-pill soft">Hover圖內數據點可展示詳細資料</span>
+            </div>
+            <div class="figure-stage hotspot-stage tall" data-stage="part2">
+              <div class="placeholder-art">
+                <span>此處預留第二部分圖像、長條圖或流程圖</span>
+                <small>點位與提示內容皆可由data/hotspots.json與md檔控制</small>
+              </div>
+              <div class="hotspot-layer" data-hotspot-layer="part2"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="part3">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PART 03</p>
+            <h3>網絡圖</h3>
+            <p class="section-intro">
+              網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案。
+            </p>
+          </div>
+          <div class="section-icon-card">
+            <span class="mini-icon">◎</span>
+            <span>Network × Relation × Insight</span>
+          </div>
+        </div>
+
+        <div class="network-button-groups" aria-label="第三部分網絡圖按鈕群組">
+          <div class="network-group-row">
+            <p class="network-group-title">第一組</p>
+            <div class="network-button-wrap">
+              <a class="lux-button ghost network-pill" href="https://yu-yuanhuang.github.io/LIFT/修德國小3/index.html" target="_blank" rel="noopener noreferrer">校際網絡</a>
+              <button class="lux-button ghost network-pill" type="button">校際網絡_校際間合作類別</button>
+              <button class="lux-button ghost network-pill" type="button">校際網絡_校際間合作管道</button>
+            </div>
+          </div>
+
+          <div class="network-group-row">
+            <p class="network-group-title">第二組</p>
+            <div class="network-button-wrap">
+              <button class="lux-button ghost network-pill" type="button">校與社區網絡_合作類別</button>
+              <button class="lux-button ghost network-pill" type="button">校與社區網絡_合作型態</button>
+              <button class="lux-button ghost network-pill" type="button">校與社區網絡_合作頻率</button>
+            </div>
+          </div>
+
+          <div class="network-group-row">
+            <p class="network-group-title">第三組</p>
+            <div class="network-button-wrap">
+              <button class="lux-button ghost network-pill" type="button">校內網絡_課程與教學</button>
+              <button class="lux-button ghost network-pill" type="button">校內網絡_學生學習支持</button>
+              <button class="lux-button ghost network-pill" type="button">校內網絡_行政運作資源協調</button>
+              <button class="lux-button ghost network-pill" type="button">校內網絡_專業社群</button>
+              <button class="lux-button ghost network-pill" type="button">校內網絡_同仁支持鼓勵</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="tooltip-panel" id="tooltip-panel" hidden>
+    <div class="tooltip-shell">
+      <div class="tooltip-head">
+        <span class="tooltip-label">資料說明</span>
+        <button class="tooltip-close" id="tooltip-close" aria-label="關閉提示">×</button>
+      </div>
+      <div class="tooltip-content" id="tooltip-content">
+        <p>載入中…</p>
+      </div>
+    </div>
+  </div>
+
+  <template id="hotspot-template">
+    <button class="hotspot-point" type="button">
+      <span class="hotspot-core"></span>
+      <span class="hotspot-ring"></span>
+    </button>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
