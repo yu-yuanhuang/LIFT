@@ -52,12 +52,12 @@
 
           <aside class="hero-meta card-panel">
             <div class="logo-row">
-              <div class="logo-slot logo-school">
+              <a class="logo-slot logo-school" href="https://www.ntue.edu.tw/" target="_blank" rel="noopener noreferrer" aria-label="前往國立臺北教育大學官網">
                 <img src="img/u11.png" alt="國立臺北教育大學校徽與校名標誌" />
-              </div>
-              <div class="logo-slot logo-partner">
+              </a>
+              <a class="logo-slot logo-partner" href="https://www.nstc.gov.tw/" target="_blank" rel="noopener noreferrer" aria-label="前往國家科學及技術委員會官網">
                 <img src="img/u12.png" alt="國家科學及技術委員會標誌" />
-              </div>
+              </a>
             </div>
             <dl class="meta-list">
               <div>
@@ -110,13 +110,13 @@
           <button class="lux-button mode-button ghost" data-mode-target="part1" data-mode="both" role="tab" aria-selected="false">配置+獲取重疊展示</button>
         </div>
 
-        <div class="figure-layout single-column part1-expanded">
+        <div class="figure-layout two-column">
           <article class="figure-card card-panel">
             <div class="figure-title-row">
               <h4>互動圖像展示區</h4>
               <span class="mode-pill" id="part1-mode-label">目前模式：配置</span>
             </div>
-            <div class="figure-stage hotspot-stage xl" data-stage="part1">
+            <div class="figure-stage hotspot-stage" data-stage="part1">
               <div class="placeholder-art">
                 <span>此處預留第一部分圖像／雷達圖／結構圖</span>
                 <small>可直接替換為/img/中的正式圖檔</small>
@@ -124,6 +124,31 @@
               <div class="hotspot-layer" data-hotspot-layer="part1"></div>
             </div>
             <p class="figure-caption" id="part1-caption">Hover數據節點可展示詳細數據資料。</p>
+          </article>
+
+          <article class="stats-card card-panel">
+            <h4>資訊摘要區</h4>
+            <div class="stat-grid">
+              <div class="stat-box">
+                <span class="stat-k">N</span>
+                <strong>34</strong>
+              </div>
+              <div class="stat-box">
+                <span class="stat-k">平均值</span>
+                <strong>5.16</strong>
+              </div>
+              <div class="stat-box">
+                <span class="stat-k">標準偏差</span>
+                <strong>0.80</strong>
+              </div>
+              <div class="stat-box muted">
+                <span class="stat-k">提示</span>
+                <strong>可依圖表替換</strong>
+              </div>
+            </div>
+            <div class="info-note">
+              <p>右側區塊可改成平均數、標準差、樣本數、題組摘要，或直接嵌入長條圖／雷達圖說明。</p>
+            </div>
           </article>
         </div>
       </section>
@@ -184,7 +209,7 @@
             <p class="eyebrow">PART 03</p>
             <h3>網絡圖</h3>
             <p class="section-intro">
-              網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案網絡圖文案。
+              第三部分預留大型網絡視覺區，可放入校際合作、關係網絡或節點連結圖，並延續hover提示說明節點意義。
             </p>
           </div>
           <div class="section-icon-card">
@@ -197,7 +222,7 @@
           <div class="network-group-row">
             <p class="network-group-title">第一組</p>
             <div class="network-button-wrap">
-              <a class="lux-button ghost network-pill" href="https://yu-yuanhuang.github.io/LIFT/修德國小3/index.html" target="_blank" rel="noopener noreferrer">校際網絡</a>
+              <button class="lux-button ghost network-pill" type="button">校際網絡</button>
               <button class="lux-button ghost network-pill" type="button">校際網絡_校際間合作類別</button>
               <button class="lux-button ghost network-pill" type="button">校際網絡_校際間合作管道</button>
             </div>

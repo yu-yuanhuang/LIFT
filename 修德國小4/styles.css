@@ -874,20 +874,3 @@ a {
     grid-template-columns: 1fr;
   }
 }
-
-
-.part1-expanded {
-  grid-template-columns: 1fr;
-}
-
-.part1-expanded .figure-card {
-  padding: 30px;
-}
-
-.part1-expanded .figure-stage {
-  min-height: 620px;
-}
-
-.part1-expanded .placeholder-art span {
-  font-size: 1.08rem;
-}
