@@ -50,7 +50,7 @@ button,select{font:inherit;}
   position:relative;width:100%;height:100%;
   --headbar-offset:118px;
 }
-#app.headbar-collapsed{--headbar-offset:70px;}
+#app.headbar-collapsed{--headbar-offset:82px;}
 #canvas{
   position:absolute;inset:0;width:100%;height:100%;
   background:linear-gradient(180deg, rgba(251,248,244,0.16), rgba(240,232,225,0.08));
@@ -59,14 +59,17 @@ button,select{font:inherit;}
 #canvas.dragging{cursor:grabbing;}
 #headBar{
   position:absolute;top:14px;left:16px;right:16px;z-index:35;
+  display:flex;flex-direction:column;align-items:flex-start;
 }
 #headBar .headbar-shell{
   display:flex;align-items:center;justify-content:space-between;gap:18px;
+  width:min(100%, 980px);
   padding:16px 20px;border-radius:999px;
   border:1px solid rgba(255,255,255,0.56);
   background:rgba(251,248,244,0.80);
   backdrop-filter:blur(14px);
   box-shadow:var(--shadow);
+  transition:padding .25s ease, gap .25s ease, width .25s ease, box-shadow .25s ease;
 }
 #headBar .brand{display:flex;align-items:center;gap:14px;min-width:0;}
 #headBar .brand-copy{min-width:0;}
@@ -82,6 +85,33 @@ button,select{font:inherit;}
 #headBar .orb-b{width:26px;height:12px;left:15px;top:25px;border-radius:999px;background:#d6d97d;}
 #headBar .orb-c{width:16px;height:16px;left:20px;top:38px;background:#e46d77;}
 #headBar .headbar-actions{display:flex;align-items:center;gap:10px;flex:none;}
+#headBar .home-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:10px 16px;border-radius:999px;
+  border:1px solid rgba(184,152,102,0.22);
+  background:rgba(255,255,255,0.58);color:var(--text);text-decoration:none;
+  box-shadow:0 10px 22px rgba(88,76,67,0.08);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, opacity .22s ease;
+}
+#headBar .home-link:hover,
+#headBar .home-link:focus-visible{
+  background:rgba(255,255,255,0.74);
+  border-color:rgba(184,152,102,0.40);
+  box-shadow:0 0 0 4px rgba(184,152,102,0.12), 0 18px 28px rgba(88,76,67,0.12);
+  transform:translateY(-2px);outline:none;
+}
+#app.headbar-collapsed #headBar .headbar-shell{
+  width:max-content;max-width:calc(100vw - 36px);justify-content:flex-start;gap:10px;padding:8px 14px 8px 8px;
+  box-shadow:0 14px 34px rgba(88,76,67,0.12);
+}
+#app.headbar-collapsed #headBar .headbar-actions{order:-1;gap:0;}
+#app.headbar-collapsed #headBar .brand{gap:10px;}
+#app.headbar-collapsed #headBar .brand-mark,
+#app.headbar-collapsed #headBar .eyebrow{display:none;}
+#app.headbar-collapsed #headBar .brand-copy h1{
+  margin:0;font-size:.96rem;line-height:1.2;max-width:min(calc(100vw - 110px), 520px);
+}
+#app.headbar-collapsed #headBar .home-link{display:none;}
 #headBarCollapse,
 #panel button,
 #menuToggle{
@@ -89,7 +119,7 @@ button,select{font:inherit;}
   padding:10px 16px;border-radius:999px;border:1px solid rgba(184,152,102,0.22);
   background:rgba(255,255,255,0.58);color:var(--text);cursor:pointer;
   box-shadow:0 10px 22px rgba(88,76,67,0.08);
-  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, width .25s ease, height .25s ease, padding .25s ease, font-size .25s ease;
 }
 #headBarCollapse::before,
 #panel button::before,
@@ -115,6 +145,13 @@ button,select{font:inherit;}
 #panel button:focus-visible::before,
 #menuToggle:hover::before,
 #menuToggle:focus-visible::before{left:112%;opacity:1;}
+#app.headbar-collapsed #headBarCollapse{
+  width:48px;height:48px;padding:0;border-radius:50%;display:grid;place-items:center;
+  box-shadow:0 12px 26px rgba(88,76,67,0.12);font-size:0;
+}
+#app.headbar-collapsed #headBarCollapse::after{
+  content:"+";position:relative;z-index:1;font-size:24px;font-weight:900;line-height:1;color:var(--text);
+}
 #headBar .headbar-body{
   margin-top:10px;padding:12px 18px;border-radius:22px;
   border:1px solid rgba(255,255,255,0.62);
@@ -149,6 +186,58 @@ button,select{font:inherit;}
 }
 #panel h3{margin:0 0 14px 0;font-size:15px;font-weight:900;color:var(--text);letter-spacing:.04em;}
 #panel select{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid rgba(191,167,147,0.36);border-radius:16px;background:rgba(240,232,225,0.82);color:var(--text);outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.35);}
+#panel .select-wrap{position:relative;}
+#panel .native-select{position:absolute;inset:0;opacity:0;pointer-events:none;}
+#panel .select-trigger,
+#panel .select-option{font:inherit;}
+#panel .select-trigger{
+  width:100%;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 18px;border-radius:22px;border:1px solid rgba(191,167,147,0.36);
+  background:linear-gradient(180deg, rgba(244,237,230,0.96), rgba(236,227,219,0.94));
+  color:var(--text);text-align:left;cursor:pointer;outline:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.52), 0 10px 22px rgba(88,76,67,0.06);
+  transform:none;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+#panel .select-trigger:hover,
+#panel .select-trigger:focus-visible,
+#panel .custom-select.open .select-trigger{
+  background:linear-gradient(180deg, rgba(248,242,236,0.98), rgba(239,230,221,0.96));
+  border-color:rgba(184,152,102,0.42);
+  box-shadow:0 0 0 4px rgba(184,152,102,0.10), 0 18px 28px rgba(88,76,67,0.10);
+  transform:translateY(-2px);
+}
+#panel .select-trigger-text{display:block;flex:1 1 auto;min-width:0;}
+#panel .select-trigger-icon{
+  flex:none;width:13px;height:13px;border-right:2px solid rgba(92,82,73,0.72);border-bottom:2px solid rgba(92,82,73,0.72);
+  transform:rotate(45deg) translateY(-2px);transition:transform .22s ease, border-color .22s ease;
+}
+#panel .custom-select.open .select-trigger-icon{transform:rotate(225deg) translateY(-1px);}
+#panel .select-menu{
+  position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:25;
+  padding:10px;border-radius:22px;border:1px solid rgba(191,167,147,0.30);
+  background:rgba(251,248,244,0.96);backdrop-filter:blur(14px);
+  box-shadow:0 20px 40px rgba(88,76,67,0.12);
+  opacity:0;pointer-events:none;transform:translateY(-6px) scale(.98);
+  transition:opacity .18s ease, transform .18s ease;
+}
+#panel .custom-select.open .select-menu{opacity:1;pointer-events:auto;transform:translateY(0) scale(1);}
+#panel .select-option{
+  width:100%;display:block;margin:0 0 6px;padding:12px 14px;border-radius:16px;border:1px solid transparent;
+  background:transparent;color:var(--text);text-align:left;cursor:pointer;outline:none;box-shadow:none;transform:none;
+  transition:background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+#panel .select-option:last-child{margin-bottom:0;}
+#panel .select-option:hover,
+#panel .select-option:focus-visible{
+  background:rgba(236,227,219,0.72);border-color:rgba(191,167,147,0.28);transform:translateY(-1px);
+  box-shadow:0 10px 20px rgba(88,76,67,0.06);
+}
+#panel .select-option.is-selected{
+  background:linear-gradient(180deg, rgba(166,180,160,0.26), rgba(148,168,180,0.22));
+  border-color:rgba(184,152,102,0.30);box-shadow:inset 0 1px 0 rgba(255,255,255,0.50);
+}
+#panel .select-option.is-selected::after{content:"✓";float:right;color:rgba(92,82,73,0.70);font-weight:900;}
+
 #panel label{
   display:flex;align-items:center;gap:10px;margin:10px 0 0;color:var(--text);
   padding:10px 12px;border:1px solid rgba(191,167,147,0.22);border-radius:16px;
@@ -211,17 +300,20 @@ button,select{font:inherit;}
   #panel{width:320px;}
 }
 @media (max-width: 768px){
-  #app{--headbar-offset:86px;}
-  #app.headbar-collapsed{--headbar-offset:74px;}
+  #app{--headbar-offset:92px;}
+  #app.headbar-collapsed{--headbar-offset:78px;}
   #headBar{left:12px;right:12px;top:12px;}
-  #headBar .headbar-shell{padding:12px 14px;gap:12px;}
+  #headBar .headbar-shell{width:calc(100vw - 88px);padding:12px 14px;gap:12px;}
   #headBar .brand-mark{width:46px;height:46px;}
   #headBar .orb-a{left:15px;top:8px;width:14px;height:14px;}
   #headBar .orb-b{left:10px;top:21px;width:24px;height:10px;}
   #headBar .orb-c{left:15px;top:31px;width:14px;height:14px;}
   #headBar .eyebrow{font-size:.68rem;}
   #headBar .brand-copy h1{font-size:.88rem;}
-  #headBarCollapse{display:none;}
+  #headBarCollapse{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;font-size:12px;}
+  #app.headbar-collapsed #headBar .headbar-shell{width:max-content;max-width:calc(100vw - 76px);padding:7px 12px 7px 7px;gap:8px;}
+  #app.headbar-collapsed #headBar .brand-copy h1{font-size:.82rem;max-width:calc(100vw - 128px);}
+  #app.headbar-collapsed #headBarCollapse{width:42px;height:42px;}
   #headBar .headbar-body{display:none;}
   #menuToggle{display:block;top:18px;right:14px;padding:9px 12px;font-size:12px;}
   #hint{display:none;}
@@ -236,7 +328,7 @@ button,select{font:inherit;}
 </style>
 </head>
 <body>
-<div id="app">
+<div id="app" class="headbar-collapsed">
   <canvas id="canvas"></canvas>
 
 <header id="headBar" aria-label="頁面標頭">
@@ -253,7 +345,8 @@ button,select{font:inherit;}
       </div>
     </div>
     <div class="headbar-actions">
-      <button id="headBarCollapse" type="button" aria-expanded="true">收合資訊</button>
+      <button id="headBarCollapse" type="button" aria-expanded="false" aria-label="展開資訊" title="展開資訊">展開資訊</button>
+      <a class="home-link" href="https://yu-yuanhuang.github.io/LIFT/" target="_blank" rel="noopener noreferrer" aria-label="返回原報告首頁">返回原報告首頁</a>
     </div>
   </div>
   <div class="headbar-body">
@@ -272,11 +365,22 @@ button,select{font:inherit;}
   <div id="panel">
     <h3>網絡設定</h3>
     <div>
-      <select id="layoutMode">
-        <option value="parallel">左右並列</option>
-        <option value="arc">環狀並列</option>
-        <option value="force">力導向布局</option>
-      </select>
+      <div class="select-wrap custom-select" id="layoutModeWrap">
+        <select id="layoutMode" class="native-select" aria-label="布局模式">
+          <option value="parallel">左右並列</option>
+          <option value="arc">環狀並列</option>
+          <option value="force">力導向布局</option>
+        </select>
+        <button type="button" class="select-trigger" id="layoutModeTrigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="layoutModeMenu">
+          <span class="select-trigger-text">左右並列</span>
+          <span class="select-trigger-icon" aria-hidden="true"></span>
+        </button>
+        <div class="select-menu" id="layoutModeMenu" role="listbox" aria-label="布局模式選單">
+          <button type="button" class="select-option is-selected" data-value="parallel" role="option" aria-selected="true">左右並列</button>
+          <button type="button" class="select-option" data-value="arc" role="option" aria-selected="false">環狀並列</button>
+          <button type="button" class="select-option" data-value="force" role="option" aria-selected="false">力導向布局</button>
+        </div>
+      </div>
     </div>
     <div style="margin-top:8px;">
       <label><input id="toggleLabels" type="checkbox" checked> 顯示標籤</label>
@@ -344,6 +448,39 @@ button,select{font:inherit;}
   var panelBackdrop = document.getElementById("panelBackdrop");
   var appRoot = document.getElementById("app");
   var headBarCollapse = document.getElementById("headBarCollapse");
+  var layoutModeWrap = document.getElementById("layoutModeWrap");
+  var layoutModeTrigger = document.getElementById("layoutModeTrigger");
+  var layoutModeTriggerText = layoutModeTrigger ? layoutModeTrigger.querySelector(".select-trigger-text") : null;
+  var layoutModeMenu = document.getElementById("layoutModeMenu");
+  var layoutModeOptions = layoutModeMenu ? Array.prototype.slice.call(layoutModeMenu.querySelectorAll(".select-option")) : [];
+
+  function syncLayoutModeSelectUI() {
+    if (!layoutMode || !layoutModeTriggerText || !layoutModeOptions.length) return;
+    var value = layoutMode.value;
+    var label = "";
+    layoutModeOptions.forEach(function(optionButton) {
+      var isSelected = optionButton.getAttribute("data-value") === value;
+      optionButton.classList.toggle("is-selected", isSelected);
+      optionButton.setAttribute("aria-selected", isSelected ? "true" : "false");
+      if (isSelected) label = optionButton.textContent.trim();
+    });
+    if (!label && layoutMode.options && layoutMode.selectedIndex >= 0) {
+      label = layoutMode.options[layoutMode.selectedIndex].textContent.trim();
+    }
+    layoutModeTriggerText.textContent = label || "請選擇";
+  }
+
+  function closeLayoutModeSelect() {
+    if (!layoutModeWrap || !layoutModeTrigger) return;
+    layoutModeWrap.classList.remove("open");
+    layoutModeTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  function openLayoutModeSelect() {
+    if (!layoutModeWrap || !layoutModeTrigger) return;
+    layoutModeWrap.classList.add("open");
+    layoutModeTrigger.setAttribute("aria-expanded", "true");
+  }
 
   var width = 0;
   var height = 0;
@@ -1256,10 +1393,44 @@ button,select{font:inherit;}
     e.preventDefault();
   }, { passive: false });
 
+  syncLayoutModeSelectUI();
+  if (layoutModeTrigger && layoutModeWrap) {
+    layoutModeTrigger.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (layoutModeWrap.classList.contains("open")) {
+        closeLayoutModeSelect();
+      } else {
+        openLayoutModeSelect();
+      }
+    });
+    layoutModeOptions.forEach(function(optionButton) {
+      optionButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        var nextValue = optionButton.getAttribute("data-value");
+        if (layoutMode.value !== nextValue) {
+          layoutMode.value = nextValue;
+          layoutMode.dispatchEvent(new Event("change", { bubbles: true }));
+        } else {
+          syncLayoutModeSelectUI();
+        }
+        closeLayoutModeSelect();
+      });
+    });
+    document.addEventListener("click", function(event) {
+      if (!layoutModeWrap.contains(event.target)) closeLayoutModeSelect();
+    });
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") closeLayoutModeSelect();
+    });
+  }
+
   // UI events
   layoutMode.addEventListener("change", function() {
+    syncLayoutModeSelectUI();
     updateForceDensityVisibility();
     applyLayout(layoutMode.value);
+    closeLayoutModeSelect();
     closeMobilePanel();
   });
   toggleLabels.addEventListener("change", function(){ draw(); });
@@ -1286,10 +1457,19 @@ button,select{font:inherit;}
   panelBackdrop.addEventListener("click", closeMobilePanel);
 
 
-headBarCollapse.addEventListener("click", function() {
-  var collapsed = appRoot.classList.toggle("headbar-collapsed");
-  headBarCollapse.textContent = collapsed ? "展開資訊" : "收合資訊";
+function syncHeadBarState() {
+  var collapsed = appRoot.classList.contains("headbar-collapsed");
+  var label = collapsed ? "展開資訊" : "收合資訊";
+  headBarCollapse.textContent = label;
   headBarCollapse.setAttribute("aria-expanded", String(!collapsed));
+  headBarCollapse.setAttribute("aria-label", label);
+  headBarCollapse.setAttribute("title", label);
+}
+syncHeadBarState();
+
+headBarCollapse.addEventListener("click", function() {
+  appRoot.classList.toggle("headbar-collapsed");
+  syncHeadBarState();
 });
 
   rerunForce.addEventListener("click", function() {
