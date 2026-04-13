@@ -143,6 +143,53 @@ a {
   letter-spacing: 0.14em;
 }
 
+.eyebrow-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.part-icon {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(240,232,225,0.82));
+  border: 1px solid rgba(191, 167, 147, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.76), 0 8px 16px rgba(88, 76, 67, 0.08);
+}
+
+.part-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.part-icon-01 svg {
+  stroke: #9f9287;
+}
+
+.part-icon-01 circle:nth-of-type(2) {
+  fill: rgba(199, 170, 162, 0.18);
+}
+
+.part-icon-02 svg {
+  stroke: #8fa29a;
+}
+
+.part-icon-03 svg {
+  stroke: #8a9aa8;
+}
+
+.part-icon-03 circle {
+  fill: rgba(148, 168, 180, 0.14);
+}
+
 .brand-copy h1 {
   font-size: 1rem;
   margin-top: 2px;
@@ -303,6 +350,14 @@ a {
 .tooltip-content,
 .meta-list dd {
   color: var(--muted);
+}
+
+.hero-desc p {
+  margin: 0 0 12px;
+}
+
+.hero-desc p:last-child {
+  margin-bottom: 0;
 }
 
 .hero-actions {
