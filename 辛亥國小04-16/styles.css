@@ -1481,5 +1481,5 @@ a {
   .part2-meta-panel, .part2-legend-card { position: static; margin: 14px 16px 0; max-width: none; width: auto; }
   .part2-x-label { font-size: 24px; }
   .part2-y-label { font-size: 22px; }
-  .part2-mean-text { font-size: 19px; }
+  .part2-mean-text { font-size: 22px; }
 }
