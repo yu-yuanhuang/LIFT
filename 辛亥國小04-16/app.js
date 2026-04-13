@@ -351,7 +351,7 @@ function buildPart2AxisLabel(text, x, y) {
     return Array.from(columnText).map((char, charIndex) => {
       const charX = x + (columnIndex * columnGap);
       const charY = y + (charIndex * rowGap);
-      return `<text class="part2-x-label" x="${charX}" y="${charY}" text-anchor="middle" dominant-baseline="middle" transform="rotate(90 ${charX} ${charY})">${escapeHtml(char)}</text>`;
+      return `<text class="part2-x-label" x="${charX}" y="${charY}" text-anchor="middle" dominant-baseline="middle">${escapeHtml(char)}</text>`;
     }).join('');
   }).join('');
 
