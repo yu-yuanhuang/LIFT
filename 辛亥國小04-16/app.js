@@ -350,7 +350,7 @@ function buildPart2AxisLabel(text, x, y) {
   }).join('');
 
   return `
-    <text class="part2-x-label" x="${x}" y="${y}" text-anchor="start" transform="rotate(90 ${x} ${y})">${tspans}</text>
+    <text class="part2-x-label" x="${x}" y="${y}" text-anchor="start" transform="rotate(-90 ${x} ${y})">${tspans}</text>
   `;
 }
 
