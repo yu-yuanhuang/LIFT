@@ -159,19 +159,28 @@
           </div>
         </div>
 
-        <div class="figure-layout single-column">
+        <div class="figure-layout single-column part2-expanded">
           <article class="figure-card card-panel">
             <div class="figure-title-row">
               <h4>第二部分圖像展示區</h4>
-              <span class="mode-pill soft">Hover圖內數據點可展示詳細資料</span>
+              <span class="mode-pill soft">莫蘭迪雅致方塊 × 上下界展示 × Hover查看完整統計</span>
             </div>
-            <div class="figure-stage hotspot-stage tall" data-stage="part2">
-              <div class="placeholder-art">
-                <span>此處預留第二部分圖像、長條圖或流程圖</span>
-                <small>點位與提示內容皆可由data/hotspots.json與md檔控制</small>
+            <div class="figure-stage xl part2-stage" data-stage="part2">
+              <div class="part2-stage-inner">
+                <div class="part2-meta-panel" aria-hidden="true">
+                  <span class="part2-meta-chip">統一畫布 1800 × 1200</span>
+                  <span class="part2-meta-chip">方塊顯示平均值</span>
+                  <span class="part2-meta-chip">上界最大值｜下界最小值</span>
+                </div>
+                <figure class="part2-legend-card" aria-label="PART 02圖例說明">
+                  <img src="img/part02-legend.jpg" alt="PART 02圖例：方塊內為平均值，上橫線代表最大值，下橫線代表最小值。" />
+                  <figcaption>圖例說明</figcaption>
+                </figure>
+                <svg class="part2-svg" id="part2-box-svg" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet" aria-label="PART 02互動圖表"></svg>
+                <div class="part2-hotspot-layer" id="part2-box-hotspots" aria-label="PART 02互動數據點"></div>
               </div>
-              <div class="hotspot-layer" data-hotspot-layer="part2"></div>
             </div>
+            <p class="figure-caption" id="part2-caption">滑鼠移至各方塊可查看點名稱、N、平均值、最大值、最小值與標準偏差；標籤以45度角排列，利於同區域比較。</p>
           </article>
         </div>
       </section>

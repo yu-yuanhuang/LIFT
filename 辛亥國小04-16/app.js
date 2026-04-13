@@ -11,9 +11,26 @@ const RADAR_CONFIG = {
   axisLineOffset: 28,
 };
 
+const PART2_CONFIG = {
+  width: 1800,
+  height: 1200,
+  minValue: 1,
+  maxValue: 6,
+  chartLeft: 210,
+  chartRight: 1440,
+  chartTop: 132,
+  chartBottom: 860,
+  boxWidth: 116,
+  boxHeight: 88,
+  capWidth: 94,
+  axisTickStart: 1,
+  axisTickEnd: 6,
+};
+
 const state = {
   hotspotConfig: null,
   radarRows: [],
+  part2Rows: [],
   activeModes: {
     part1: 'config',
     part2: 'default',
@@ -34,6 +51,9 @@ const part1Caption = document.getElementById('part1-caption');
 const part1RadarSvg = document.getElementById('part1-radar-svg');
 const part1RadarHotspots = document.getElementById('part1-radar-hotspots');
 const part1RadarLegend = document.getElementById('part1-radar-legend');
+const part2BoxSvg = document.getElementById('part2-box-svg');
+const part2BoxHotspots = document.getElementById('part2-box-hotspots');
+const part2Caption = document.getElementById('part2-caption');
 
 init();
 
@@ -44,6 +64,7 @@ async function init() {
   await Promise.all([
     loadHotspotConfig(),
     loadPart1RadarData(),
+    loadPart2ChartData(),
   ]);
 
   updateModeCopy('part1', state.activeModes.part1);
@@ -52,7 +73,7 @@ async function init() {
 
 function renderAllStages() {
   renderPart1Radar();
-  renderHotspotsForStage('part2');
+  renderPart2Chart();
   renderHotspotsForStage('part3');
 }
 
@@ -78,6 +99,18 @@ async function loadPart1RadarData() {
   }
 }
 
+async function loadPart2ChartData() {
+  try {
+    const response = await fetch('data/csv/xinhai-part02-box-clean-long.csv');
+    if (!response.ok) throw new Error('Failed to load xinhai-part02-box-clean-long.csv');
+    const csvText = await response.text();
+    state.part2Rows = parsePart2Csv(csvText);
+  } catch (error) {
+    console.error(error);
+    state.part2Rows = [];
+  }
+}
+
 function bindModeButtons() {
   document.querySelectorAll('.mode-button').forEach((button) => {
     button.addEventListener('click', () => {
@@ -96,6 +129,8 @@ function bindModeButtons() {
       updateModeCopy(target, mode);
       if (target === 'part1') {
         renderPart1Radar();
+      } else if (target === 'part2') {
+        renderPart2Chart();
       } else {
         renderHotspotsForStage(target);
       }
@@ -118,6 +153,7 @@ function bindTooltipEvents() {
   window.addEventListener('resize', () => {
     hideTooltip();
     renderPart1Radar();
+    renderPart2Chart();
   });
   window.addEventListener('scroll', hideTooltip, { passive: true });
 }
@@ -361,6 +397,128 @@ function updateRadarLegend(visibleKeys) {
   });
 }
 
+
+function renderPart2Chart() {
+  if (!part2BoxSvg || !part2BoxHotspots) return;
+
+  part2BoxSvg.innerHTML = '';
+  part2BoxHotspots.innerHTML = '';
+
+  if (!state.part2Rows.length) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const text = document.createElementNS(ns, 'text');
+    text.setAttribute('x', '900');
+    text.setAttribute('y', '600');
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('class', 'radar-empty-copy');
+    text.textContent = '目前無法載入PART 02圖表資料';
+    part2BoxSvg.appendChild(text);
+    return;
+  }
+
+  part2BoxSvg.setAttribute('viewBox', `0 0 ${PART2_CONFIG.width} ${PART2_CONFIG.height}`);
+  part2BoxSvg.innerHTML = buildPart2SvgMarkup(state.part2Rows);
+  buildPart2Hotspots(state.part2Rows);
+}
+
+function buildPart2SvgMarkup(rows) {
+  const cfg = PART2_CONFIG;
+  const chartWidth = cfg.chartRight - cfg.chartLeft;
+  const slot = chartWidth / rows.length;
+  const yForValue = (value) => {
+    const ratio = (Number(value) - cfg.minValue) / (cfg.maxValue - cfg.minValue);
+    return cfg.chartBottom - (ratio * (cfg.chartBottom - cfg.chartTop));
+  };
+
+  const gridLines = [];
+  const yLabels = [];
+  for (let value = cfg.axisTickStart; value <= cfg.axisTickEnd; value += 1) {
+    const y = yForValue(value);
+    gridLines.push(`<line class="part2-grid-line" x1="${cfg.chartLeft}" y1="${y}" x2="${cfg.chartRight}" y2="${y}"></line>`);
+    yLabels.push(`<text class="part2-y-label" x="${cfg.chartLeft - 28}" y="${y + 7}" text-anchor="end">${value}</text>`);
+  }
+
+  const baseAxis = `
+    <line class="part2-axis-line" x1="${cfg.chartLeft}" y1="${cfg.chartTop - 20}" x2="${cfg.chartLeft}" y2="${cfg.chartBottom + 20}"></line>
+    <line class="part2-axis-line axis-bottom" x1="${cfg.chartLeft}" y1="${cfg.chartBottom}" x2="${cfg.chartRight + 40}" y2="${cfg.chartBottom}"></line>
+  `;
+
+  const groups = rows.map((row, index) => {
+    const x = cfg.chartLeft + slot * index + slot / 2;
+    const yMean = yForValue(row.mean);
+    const yMin = yForValue(row.min);
+    const yMax = yForValue(row.max);
+    const labelY = cfg.chartBottom + 70;
+    const labelX = x - 26;
+    return `
+      <g class="part2-series-group" data-order="${row.order}">
+        <line class="part2-whisker-line" x1="${x}" y1="${yMax}" x2="${x}" y2="${yMin}" stroke="${row.whisker_hex}"></line>
+        <line class="part2-whisker-cap" x1="${x - cfg.capWidth / 2}" y1="${yMax}" x2="${x + cfg.capWidth / 2}" y2="${yMax}" stroke="${row.whisker_hex}"></line>
+        <line class="part2-whisker-cap" x1="${x - cfg.capWidth / 2}" y1="${yMin}" x2="${x + cfg.capWidth / 2}" y2="${yMin}" stroke="${row.whisker_hex}"></line>
+        <rect class="part2-mean-box" x="${x - cfg.boxWidth / 2}" y="${yMean - cfg.boxHeight / 2}" width="${cfg.boxWidth}" height="${cfg.boxHeight}" rx="20"
+          fill="${row.marker_fill_hex}" stroke="${row.marker_stroke_hex}"></rect>
+        <text class="part2-mean-text" x="${x}" y="${yMean + 12}" text-anchor="middle">${formatStatNumber(row.mean, 2)}</text>
+        <line class="part2-x-tick" x1="${x}" y1="${cfg.chartBottom}" x2="${x}" y2="${cfg.chartBottom + 14}"></line>
+        <text class="part2-x-label" x="${labelX}" y="${labelY}" text-anchor="end" transform="rotate(45 ${labelX} ${labelY})">${escapeHtml(row.axis)}</text>
+      </g>
+    `;
+  });
+
+  return `
+    <defs>
+      <filter id="part2SoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#5f554d" flood-opacity="0.14"></feDropShadow>
+      </filter>
+      <linearGradient id="part2PlateFill" x1="0" x2="1" y1="0" y2="1">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.48)"></stop>
+        <stop offset="100%" stop-color="rgba(244,236,231,0.42)"></stop>
+      </linearGradient>
+    </defs>
+    <rect class="part2-bg-plate" x="28" y="28" width="1744" height="1144" rx="36"></rect>
+    <g class="part2-chart-group" filter="url(#part2SoftGlow)">
+      <rect class="part2-chart-area" x="${cfg.chartLeft - 34}" y="${cfg.chartTop - 34}" width="${(cfg.chartRight - cfg.chartLeft) + 88}" height="${(cfg.chartBottom - cfg.chartTop) + 86}" rx="34"></rect>
+      ${gridLines.join('')}
+      ${yLabels.join('')}
+      ${baseAxis}
+      ${groups.join('')}
+    </g>
+  `;
+}
+
+function buildPart2Hotspots(rows) {
+  const cfg = PART2_CONFIG;
+  const chartWidth = cfg.chartRight - cfg.chartLeft;
+  const slot = chartWidth / rows.length;
+  const yForValue = (value) => {
+    const ratio = (Number(value) - cfg.minValue) / (cfg.maxValue - cfg.minValue);
+    return cfg.chartBottom - (ratio * (cfg.chartBottom - cfg.chartTop));
+  };
+
+  rows.forEach((row, index) => {
+    const x = cfg.chartLeft + slot * index + slot / 2;
+    const y = yForValue(row.mean);
+    const button = document.createElement('button');
+    button.className = 'part2-box-hit';
+    button.type = 'button';
+    button.style.left = `${(x / cfg.width) * 100}%`;
+    button.style.top = `${(y / cfg.height) * 100}%`;
+    button.style.width = `${(cfg.boxWidth / cfg.width) * 100}%`;
+    button.style.height = `${(cfg.boxHeight / cfg.height) * 100}%`;
+    button.dataset.tooltipType = 'part2stats';
+    button.dataset.tooltipLabel = '數據說明';
+    button.dataset.title = row.axis;
+    button.dataset.pointName = row.point_name;
+    button.dataset.n = String(row.n);
+    button.dataset.min = String(row.min);
+    button.dataset.max = String(row.max);
+    button.dataset.mean = String(row.mean);
+    button.dataset.sd = String(row.sd);
+    button.setAttribute('aria-label', `${row.point_name} 數據說明`);
+    bindTooltipTarget(button);
+    part2BoxHotspots.appendChild(button);
+  });
+}
+
 function bindTooltipTarget(button) {
   button.addEventListener('mouseenter', (event) => {
     clearTimeout(state.tooltipTimer);
@@ -382,7 +540,7 @@ function scheduleTooltipHide() {
 }
 
 async function showTooltipForPoint(button) {
-  document.querySelectorAll('.hotspot-point, .radar-point').forEach((item) => item.classList.remove('active'));
+  document.querySelectorAll('.hotspot-point, .radar-point, .part2-box-hit').forEach((item) => item.classList.remove('active'));
   button.classList.add('active');
 
   const label = button.dataset.tooltipLabel || '資料說明';
@@ -391,6 +549,12 @@ async function showTooltipForPoint(button) {
 
   if (button.dataset.tooltipType === 'stats') {
     tooltipContent.innerHTML = renderStatsTooltip(button.dataset);
+    positionTooltip(button);
+    return;
+  }
+
+  if (button.dataset.tooltipType === 'part2stats') {
+    tooltipContent.innerHTML = renderPart2StatsTooltip(button.dataset);
     positionTooltip(button);
     return;
   }
@@ -441,7 +605,7 @@ function positionTooltip(button) {
 
 function hideTooltip() {
   tooltipPanel.hidden = true;
-  document.querySelectorAll('.hotspot-point, .radar-point').forEach((item) => item.classList.remove('active'));
+  document.querySelectorAll('.hotspot-point, .radar-point, .part2-box-hit').forEach((item) => item.classList.remove('active'));
 }
 
 function renderStatsTooltip(data) {
@@ -457,6 +621,21 @@ function renderStatsTooltip(data) {
       ${renderStatBox('最小值', formatStatNumber(data.min, 2))}
       ${renderStatBox('最大值', formatStatNumber(data.max, 2))}
       ${renderStatBox('平均值', formatStatNumber(data.mean, 2))}
+      ${renderStatBox('標準偏差', formatStatNumber(data.sd, 2), true)}
+    </div>
+  `;
+}
+
+
+function renderPart2StatsTooltip(data) {
+  return `
+    <h3>${escapeHtml(data.title || '數據節點')}</h3>
+    <p class="tooltip-subtitle">點名稱：${escapeHtml(data.pointName || data.title || '')}</p>
+    <div class="tooltip-stat-grid part2-tooltip-grid">
+      ${renderStatBox('N', formatStatNumber(data.n, 0))}
+      ${renderStatBox('平均值', formatStatNumber(data.mean, 2))}
+      ${renderStatBox('最大值', formatStatNumber(data.max, 2))}
+      ${renderStatBox('最小值', formatStatNumber(data.min, 2))}
       ${renderStatBox('標準偏差', formatStatNumber(data.sd, 2), true)}
     </div>
   `;
@@ -546,6 +725,27 @@ function parseRadarCsv(csvText) {
     fill_rgba: row.fill_rgba,
     raw_name: row.raw_name,
   }));
+}
+
+
+function parsePart2Csv(csvText) {
+  const rows = parseCsvRows(csvText.replace(/^﻿/, ''));
+  return rows.map((row) => ({
+    school: row.school,
+    part: row.part,
+    order: Number(row.order),
+    axis: row.axis,
+    point_name: row.point_name,
+    n: Number(row.n),
+    min: Number(row.min),
+    max: Number(row.max),
+    mean: Number(row.mean),
+    sd: Number(row.sd),
+    marker_fill_hex: row.marker_fill_hex,
+    marker_stroke_hex: row.marker_stroke_hex,
+    whisker_hex: row.whisker_hex,
+    text_hex: row.text_hex,
+  })).sort((a, b) => a.order - b.order);
 }
 
 function parseCsvRows(text) {

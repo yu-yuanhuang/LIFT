@@ -1259,3 +1259,197 @@ a {
 .part1-expanded .placeholder-art span {
   font-size: 1.08rem;
 }
+
+
+.part2-stage {
+  min-height: 0;
+  aspect-ratio: 3 / 2;
+}
+
+.part2-stage-inner {
+  position: absolute;
+  inset: 0;
+}
+
+.part2-svg,
+.part2-hotspot-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.part2-meta-panel {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  z-index: 2;
+  max-width: calc(100% - 340px);
+}
+
+.part2-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(251, 248, 244, 0.74);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: 0 12px 24px rgba(88, 76, 67, 0.08);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.part2-legend-card {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 250px;
+  margin: 0;
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(251, 248, 244, 0.82);
+  border: 1px solid rgba(255,255,255,0.74);
+  box-shadow: 0 18px 30px rgba(88, 76, 67, 0.12);
+  z-index: 2;
+}
+
+.part2-legend-card img {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.8);
+}
+
+.part2-legend-card figcaption {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.part2-bg-plate {
+  fill: rgba(255,255,255,0.30);
+  stroke: rgba(255,255,255,0.52);
+  stroke-width: 2;
+}
+
+.part2-chart-area {
+  fill: rgba(255,255,255,0.24);
+  stroke: rgba(255,255,255,0.54);
+  stroke-width: 2;
+}
+
+.part2-grid-line {
+  stroke: rgba(148, 168, 180, 0.18);
+  stroke-width: 2;
+}
+
+.part2-axis-line {
+  stroke: rgba(109, 101, 95, 0.46);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.part2-axis-line.axis-bottom {
+  stroke-width: 2.5;
+}
+
+.part2-y-label {
+  fill: rgba(116, 107, 100, 0.76);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.part2-whisker-line,
+.part2-whisker-cap {
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.part2-mean-box {
+  stroke-width: 4;
+  filter: drop-shadow(0 16px 24px rgba(88, 76, 67, 0.12));
+}
+
+.part2-mean-text {
+  fill: #6d655f;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.part2-x-tick {
+  stroke: rgba(109, 101, 95, 0.4);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.part2-x-label {
+  fill: #6d655f;
+  font-size: 29px;
+  font-weight: 800;
+}
+
+.part2-hotspot-layer {
+  z-index: 3;
+}
+
+.part2-box-hit {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.part2-box-hit::before,
+.part2-box-hit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.part2-box-hit::before {
+  border: 2px solid rgba(184, 152, 102, 0.18);
+  background: rgba(255,255,255,0.01);
+}
+
+.part2-box-hit::after {
+  inset: 6px;
+  border: 2px solid rgba(184, 152, 102, 0.0);
+  box-shadow: 0 0 0 0 rgba(184, 152, 102, 0.0);
+}
+
+.part2-box-hit:hover::after,
+.part2-box-hit:focus-visible::after,
+.part2-box-hit.active::after {
+  border-color: rgba(184, 152, 102, 0.52);
+  box-shadow: 0 0 0 8px rgba(184, 152, 102, 0.14), 0 14px 30px rgba(88, 76, 67, 0.12);
+}
+
+.part2-box-hit:focus-visible {
+  outline: none;
+}
+
+.part2-expanded .figure-card {
+  padding: 30px;
+}
+
+.part2-expanded .figure-stage {
+  min-height: 620px;
+}
+
+@media (max-width: 720px) {
+  .part2-stage { aspect-ratio: auto; min-height: 540px; }
+  .part2-meta-panel, .part2-legend-card { position: static; margin: 14px 16px 0; max-width: none; width: auto; }
+  .part2-x-label { font-size: 24px; }
+  .part2-y-label { font-size: 22px; }
+  .part2-mean-text { font-size: 28px; }
+}
