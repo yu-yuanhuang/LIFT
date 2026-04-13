@@ -1,5 +1,19 @@
+const RADAR_CONFIG = {
+  width: 1800,
+  height: 1200,
+  padding: 120,
+  chartCenterX: 760,
+  chartCenterY: 620,
+  radius: 350,
+  levels: 6,
+  maxValue: 6,
+  labelOffset: 118,
+  axisLineOffset: 28,
+};
+
 const state = {
   hotspotConfig: null,
+  radarRows: [],
   activeModes: {
     part1: 'config',
     part2: 'default',
@@ -12,18 +26,34 @@ const tooltipPanel = document.getElementById('tooltip-panel');
 const tooltipContent = document.getElementById('tooltip-content');
 const tooltipClose = document.getElementById('tooltip-close');
 const tooltipShell = tooltipPanel.querySelector('.tooltip-shell');
+const tooltipLabel = tooltipPanel.querySelector('.tooltip-label');
 const hotspotTemplate = document.getElementById('hotspot-template');
 
 const part1ModeLabel = document.getElementById('part1-mode-label');
 const part1Caption = document.getElementById('part1-caption');
+const part1RadarSvg = document.getElementById('part1-radar-svg');
+const part1RadarHotspots = document.getElementById('part1-radar-hotspots');
+const part1RadarLegend = document.getElementById('part1-radar-legend');
 
 init();
 
 async function init() {
   bindModeButtons();
   bindTooltipEvents();
-  await loadHotspotConfig();
-  renderAllHotspots();
+
+  await Promise.all([
+    loadHotspotConfig(),
+    loadPart1RadarData(),
+  ]);
+
+  updateModeCopy('part1', state.activeModes.part1);
+  renderAllStages();
+}
+
+function renderAllStages() {
+  renderPart1Radar();
+  renderHotspotsForStage('part2');
+  renderHotspotsForStage('part3');
 }
 
 async function loadHotspotConfig() {
@@ -33,7 +63,18 @@ async function loadHotspotConfig() {
     state.hotspotConfig = await response.json();
   } catch (error) {
     console.error(error);
-    tooltipContent.innerHTML = '<p>目前無法載入hotspot設定，請確認data/hotspots.json是否存在。</p>';
+  }
+}
+
+async function loadPart1RadarData() {
+  try {
+    const response = await fetch('data/csv/xinhai-part01-radar-clean-long.csv');
+    if (!response.ok) throw new Error('Failed to load xinhai-part01-radar-clean-long.csv');
+    const csvText = await response.text();
+    state.radarRows = parseRadarCsv(csvText);
+  } catch (error) {
+    console.error(error);
+    state.radarRows = [];
   }
 }
 
@@ -53,7 +94,11 @@ function bindModeButtons() {
       });
 
       updateModeCopy(target, mode);
-      renderHotspotsForStage(target);
+      if (target === 'part1') {
+        renderPart1Radar();
+      } else {
+        renderHotspotsForStage(target);
+      }
       hideTooltip();
     });
   });
@@ -70,7 +115,10 @@ function bindTooltipEvents() {
     scheduleTooltipHide();
   });
 
-  window.addEventListener('resize', hideTooltip);
+  window.addEventListener('resize', () => {
+    hideTooltip();
+    renderPart1Radar();
+  });
   window.addEventListener('scroll', hideTooltip, { passive: true });
 }
 
@@ -80,15 +128,15 @@ function updateModeCopy(target, mode) {
   const copyMap = {
     config: {
       label: '目前模式：配置',
-      caption: '目前顯示學校端配置視角的提示點，適合呈現制度設計、資源安排與支持機制。',
+      caption: '目前顯示校內學習支持的配置視角。各節點依莫蘭迪藍顯示，hover可查看各向度的完整統計數值。',
     },
     access: {
       label: '目前模式：獲取',
-      caption: '目前顯示學生端獲取視角的提示點，適合呈現實際接觸、參與與感受。',
+      caption: '目前顯示學生實際獲取的視角。各節點依莫蘭迪紅顯示，hover可查看各向度的完整統計數值。',
     },
     both: {
       label: '目前模式：配置與獲取',
-      caption: '目前顯示整合視角的提示點，適合對照制度配置與學生獲取之間的落差或連動。',
+      caption: '目前同步顯示配置與獲取兩組資料，可直接比較各向度在制度支持與實際感受之間的差異。',
     },
   };
 
@@ -96,10 +144,6 @@ function updateModeCopy(target, mode) {
   if (!copy) return;
   part1ModeLabel.textContent = copy.label;
   part1Caption.textContent = copy.caption;
-}
-
-function renderAllHotspots() {
-  ['part1', 'part2', 'part3'].forEach(renderHotspotsForStage);
 }
 
 function renderHotspotsForStage(stageName) {
@@ -112,14 +156,7 @@ function renderHotspotsForStage(stageName) {
   const stageConfig = state.hotspotConfig[stageName];
   if (!stageConfig) return;
 
-  let hotspots = [];
-  if (stageName === 'part1') {
-    const currentMode = state.activeModes.part1 || 'config';
-    hotspots = stageConfig[currentMode] || [];
-  } else {
-    hotspots = stageConfig.default || [];
-  }
-
+  const hotspots = stageConfig.default || [];
   hotspots.forEach((item) => {
     const fragment = hotspotTemplate.content.cloneNode(true);
     const button = fragment.querySelector('.hotspot-point');
@@ -128,23 +165,215 @@ function renderHotspotsForStage(stageName) {
     button.dataset.md = item.md;
     button.dataset.title = item.title || '資料說明';
     button.dataset.stage = stageName;
+    button.dataset.tooltipLabel = '資料說明';
     button.setAttribute('aria-label', item.title || '資料說明');
 
-    button.addEventListener('mouseenter', (event) => {
-      clearTimeout(state.tooltipTimer);
-      showTooltipForPoint(event.currentTarget);
-    });
-
-    button.addEventListener('focus', (event) => {
-      clearTimeout(state.tooltipTimer);
-      showTooltipForPoint(event.currentTarget);
-    });
-
-    button.addEventListener('mouseleave', scheduleTooltipHide);
-    button.addEventListener('blur', scheduleTooltipHide);
-
+    bindTooltipTarget(button);
     layer.appendChild(fragment);
   });
+}
+
+function renderPart1Radar() {
+  if (!part1RadarSvg || !part1RadarHotspots || !part1RadarLegend) return;
+
+  part1RadarSvg.innerHTML = '';
+  part1RadarHotspots.innerHTML = '';
+
+  if (!state.radarRows.length) {
+    renderRadarFallback();
+    return;
+  }
+
+  const currentMode = state.activeModes.part1 || 'config';
+  const visibleKeys = currentMode === 'config'
+    ? ['conf']
+    : currentMode === 'access'
+      ? ['get']
+      : ['conf', 'get'];
+
+  const allRows = [...state.radarRows].sort((a, b) => a.order - b.order || a.series_key.localeCompare(b.series_key));
+  const axisRows = allRows.filter((row) => row.series_key === 'conf');
+  const bySeries = {
+    conf: allRows.filter((row) => row.series_key === 'conf'),
+    get: allRows.filter((row) => row.series_key === 'get'),
+  };
+
+  part1RadarSvg.setAttribute('viewBox', `0 0 ${RADAR_CONFIG.width} ${RADAR_CONFIG.height}`);
+  part1RadarSvg.innerHTML = buildRadarSvgMarkup(axisRows, bySeries, visibleKeys);
+  buildRadarHotspots(bySeries, visibleKeys);
+  updateRadarLegend(visibleKeys);
+}
+
+function renderRadarFallback() {
+  const ns = 'http://www.w3.org/2000/svg';
+  const text = document.createElementNS(ns, 'text');
+  text.setAttribute('x', '900');
+  text.setAttribute('y', '600');
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('class', 'radar-empty-copy');
+  text.textContent = '目前無法載入PART 01雷達圖資料';
+  part1RadarSvg.appendChild(text);
+}
+
+function buildRadarSvgMarkup(axisRows, bySeries, visibleKeys) {
+  const cfg = RADAR_CONFIG;
+  const count = axisRows.length;
+  const centerX = cfg.chartCenterX;
+  const centerY = cfg.chartCenterY;
+  const radius = cfg.radius;
+
+  const ringPolygons = [];
+  const axisLines = [];
+  const levelLabels = [];
+  const axisLabels = [];
+  const dataLayers = [];
+
+  for (let level = cfg.levels; level >= 1; level -= 1) {
+    const ratio = level / cfg.levels;
+    const points = axisRows.map((row, index) => {
+      const angle = getAxisAngle(index, count);
+      return polarToCartesian(centerX, centerY, radius * ratio, angle);
+    });
+    const fillOpacity = level % 2 === 0 ? '0.28' : '0.12';
+    ringPolygons.push(
+      `<polygon class="radar-grid-level" fill="rgba(255,255,255,${fillOpacity})" points="${pointsToString(points)}"></polygon>`
+    );
+
+    const labelPoint = polarToCartesian(centerX, centerY, radius * ratio, -Math.PI / 2);
+    levelLabels.push(
+      `<text class="radar-scale-label" x="${centerX - 18}" y="${labelPoint.y + 5}" text-anchor="end">${level}</text>`
+    );
+  }
+
+  axisRows.forEach((row, index) => {
+    const angle = getAxisAngle(index, count);
+    const lineEnd = polarToCartesian(centerX, centerY, radius + cfg.axisLineOffset, angle);
+    axisLines.push(
+      `<line class="radar-axis-line" x1="${centerX}" y1="${centerY}" x2="${lineEnd.x}" y2="${lineEnd.y}"></line>`
+    );
+
+    const labelPoint = polarToCartesian(centerX, centerY, radius + cfg.labelOffset, angle);
+    axisLabels.push(buildAxisLabel(row.axis, labelPoint.x, labelPoint.y, angle));
+  });
+
+  visibleKeys.forEach((seriesKey) => {
+    const seriesRows = bySeries[seriesKey];
+    if (!seriesRows.length) return;
+
+    const stroke = seriesRows[0].stroke_hex;
+    const fill = seriesRows[0].fill_rgba;
+    const points = seriesRows.map((row, index) => {
+      const angle = getAxisAngle(index, count);
+      return polarToCartesian(centerX, centerY, valueToRadius(row.mean), angle);
+    });
+
+    dataLayers.push(`
+      <polygon class="radar-area radar-area-${seriesKey}" points="${pointsToString(points)}" fill="${fill}" stroke="${stroke}"></polygon>
+      ${points.map((point) => `
+        <circle class="radar-point-dot radar-point-dot-${seriesKey}" cx="${point.x}" cy="${point.y}" r="8"></circle>
+        <circle class="radar-point-halo radar-point-halo-${seriesKey}" cx="${point.x}" cy="${point.y}" r="15"></circle>
+      `).join('')}
+    `);
+  });
+
+  return `
+    <defs>
+      <filter id="radarSoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#5f554d" flood-opacity="0.15"></feDropShadow>
+      </filter>
+    </defs>
+    <rect class="radar-bg-plate" x="28" y="28" width="1744" height="1144" rx="36"></rect>
+    <g class="radar-chart-group" filter="url(#radarSoftGlow)">
+      <circle class="radar-center-wash" cx="${centerX}" cy="${centerY}" r="${radius + 48}"></circle>
+      ${ringPolygons.join('')}
+      ${axisLines.join('')}
+      ${levelLabels.join('')}
+      ${dataLayers.join('')}
+      <circle class="radar-center-dot" cx="${centerX}" cy="${centerY}" r="6"></circle>
+      ${axisLabels.join('')}
+    </g>
+  `;
+}
+
+function buildAxisLabel(text, x, y, angle) {
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const anchor = cos > 0.35 ? 'start' : cos < -0.35 ? 'end' : 'middle';
+  const lines = splitLabel(text, 6);
+  const xOffset = cos > 0.35 ? 8 : cos < -0.35 ? -8 : 0;
+  const yShift = sin > 0.6 ? 8 : sin < -0.6 ? -8 : 0;
+  const startDy = lines.length > 1 ? `${-0.55 * (lines.length - 1)}em` : '0';
+
+  return `
+    <text class="radar-axis-label" x="${x + xOffset}" y="${y + yShift}" text-anchor="${anchor}">
+      ${lines.map((line, index) => `<tspan x="${x + xOffset}" dy="${index === 0 ? startDy : '1.15em'}">${escapeHtml(line)}</tspan>`).join('')}
+    </text>
+  `;
+}
+
+function buildRadarHotspots(bySeries, visibleKeys) {
+  const count = bySeries.conf.length || bySeries.get.length;
+
+  visibleKeys.forEach((seriesKey) => {
+    const rows = bySeries[seriesKey] || [];
+    rows.forEach((row, index) => {
+      const angle = getAxisAngle(index, count);
+      const point = polarToCartesian(
+        RADAR_CONFIG.chartCenterX,
+        RADAR_CONFIG.chartCenterY,
+        valueToRadius(row.mean),
+        angle,
+      );
+
+      const button = document.createElement('button');
+      button.className = `radar-point radar-point-${seriesKey}`;
+      button.type = 'button';
+      button.style.left = `${(point.x / RADAR_CONFIG.width) * 100}%`;
+      button.style.top = `${(point.y / RADAR_CONFIG.height) * 100}%`;
+      button.dataset.tooltipType = 'stats';
+      button.dataset.tooltipLabel = '數據節點';
+      button.dataset.title = row.axis;
+      button.dataset.axis = row.axis;
+      button.dataset.pointName = row.point_name;
+      button.dataset.seriesLabel = row.series_label;
+      button.dataset.seriesKey = row.series_key;
+      button.dataset.n = String(row.n);
+      button.dataset.min = String(row.min);
+      button.dataset.max = String(row.max);
+      button.dataset.mean = String(row.mean);
+      button.dataset.sd = String(row.sd);
+      button.setAttribute('aria-label', `${row.point_name} 數據說明`);
+      button.innerHTML = '<span class="radar-point-ring"></span><span class="radar-point-core"></span>';
+
+      bindTooltipTarget(button);
+      part1RadarHotspots.appendChild(button);
+    });
+  });
+}
+
+function updateRadarLegend(visibleKeys) {
+  const items = part1RadarLegend.querySelectorAll('.radar-legend-item');
+  items.forEach((item) => {
+    const isConf = item.classList.contains('radar-legend-conf');
+    const key = isConf ? 'conf' : 'get';
+    item.classList.toggle('is-active', visibleKeys.includes(key));
+    item.classList.toggle('is-muted', !visibleKeys.includes(key));
+  });
+}
+
+function bindTooltipTarget(button) {
+  button.addEventListener('mouseenter', (event) => {
+    clearTimeout(state.tooltipTimer);
+    showTooltipForPoint(event.currentTarget);
+  });
+
+  button.addEventListener('focus', (event) => {
+    clearTimeout(state.tooltipTimer);
+    showTooltipForPoint(event.currentTarget);
+  });
+
+  button.addEventListener('mouseleave', scheduleTooltipHide);
+  button.addEventListener('blur', scheduleTooltipHide);
 }
 
 function scheduleTooltipHide() {
@@ -153,13 +382,21 @@ function scheduleTooltipHide() {
 }
 
 async function showTooltipForPoint(button) {
-  const allHotspots = document.querySelectorAll('.hotspot-point');
-  allHotspots.forEach((item) => item.classList.remove('active'));
+  document.querySelectorAll('.hotspot-point, .radar-point').forEach((item) => item.classList.remove('active'));
   button.classList.add('active');
+
+  const label = button.dataset.tooltipLabel || '資料說明';
+  tooltipLabel.textContent = label;
+  tooltipPanel.hidden = false;
+
+  if (button.dataset.tooltipType === 'stats') {
+    tooltipContent.innerHTML = renderStatsTooltip(button.dataset);
+    positionTooltip(button);
+    return;
+  }
 
   const title = button.dataset.title || '資料說明';
   const mdPath = button.dataset.md;
-  tooltipPanel.hidden = false;
   tooltipContent.innerHTML = '<p>載入中…</p>';
 
   try {
@@ -204,7 +441,34 @@ function positionTooltip(button) {
 
 function hideTooltip() {
   tooltipPanel.hidden = true;
-  document.querySelectorAll('.hotspot-point').forEach((item) => item.classList.remove('active'));
+  document.querySelectorAll('.hotspot-point, .radar-point').forEach((item) => item.classList.remove('active'));
+}
+
+function renderStatsTooltip(data) {
+  return `
+    <div class="tooltip-series-meta">
+      <span class="tooltip-series-swatch tooltip-series-${escapeHtml(data.seriesKey || '')}"></span>
+      <span>${escapeHtml(data.seriesLabel)}</span>
+    </div>
+    <h3>${escapeHtml(data.axis || data.title || '數據節點')}</h3>
+    <p class="tooltip-subtitle">名稱：${escapeHtml(data.pointName || data.axis || '')}</p>
+    <div class="tooltip-stat-grid">
+      ${renderStatBox('N', formatStatNumber(data.n, 0))}
+      ${renderStatBox('最小值', formatStatNumber(data.min, 2))}
+      ${renderStatBox('最大值', formatStatNumber(data.max, 2))}
+      ${renderStatBox('平均值', formatStatNumber(data.mean, 2))}
+      ${renderStatBox('標準偏差', formatStatNumber(data.sd, 2), true)}
+    </div>
+  `;
+}
+
+function renderStatBox(label, value, spanFull = false) {
+  return `
+    <div class="tooltip-stat-box${spanFull ? ' full' : ''}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+    </div>
+  `;
 }
 
 function renderMarkdown(markdown, fallbackTitle = '資料說明') {
@@ -263,8 +527,117 @@ function inlineMarkdown(text) {
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
 }
 
+function parseRadarCsv(csvText) {
+  const rows = parseCsvRows(csvText.replace(/^\uFEFF/, ''));
+  return rows.map((row) => ({
+    school: row.school,
+    part: row.part,
+    order: Number(row.order),
+    axis: row.axis,
+    series_key: row.series_key,
+    series_label: row.series_label,
+    point_name: row.point_name,
+    n: Number(row.n),
+    min: Number(row.min),
+    max: Number(row.max),
+    mean: Number(row.mean),
+    sd: Number(row.sd),
+    stroke_hex: row.stroke_hex,
+    fill_rgba: row.fill_rgba,
+    raw_name: row.raw_name,
+  }));
+}
+
+function parseCsvRows(text) {
+  const rows = [];
+  let current = '';
+  let row = [];
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (char === ',' && !inQuotes) {
+      row.push(current);
+      current = '';
+      continue;
+    }
+
+    if ((char === '\n' || char === '\r') && !inQuotes) {
+      if (char === '\r' && next === '\n') i += 1;
+      row.push(current);
+      current = '';
+      if (row.some((cell) => cell !== '')) rows.push(row);
+      row = [];
+      continue;
+    }
+
+    current += char;
+  }
+
+  if (current || row.length) {
+    row.push(current);
+    if (row.some((cell) => cell !== '')) rows.push(row);
+  }
+
+  const [header = [], ...body] = rows;
+  return body.map((cells) => {
+    const entry = {};
+    header.forEach((key, index) => {
+      entry[key] = (cells[index] || '').trim();
+    });
+    return entry;
+  });
+}
+
+function getAxisAngle(index, count) {
+  return (-Math.PI / 2) + ((Math.PI * 2 * index) / count);
+}
+
+function valueToRadius(value) {
+  return (Number(value) / RADAR_CONFIG.maxValue) * RADAR_CONFIG.radius;
+}
+
+function polarToCartesian(centerX, centerY, radius, angle) {
+  return {
+    x: centerX + Math.cos(angle) * radius,
+    y: centerY + Math.sin(angle) * radius,
+  };
+}
+
+function pointsToString(points) {
+  return points.map((point) => `${point.x.toFixed(2)},${point.y.toFixed(2)}`).join(' ');
+}
+
+function splitLabel(text, chunkSize = 6) {
+  if (!text) return [''];
+  if (text.length <= chunkSize) return [text];
+  const lines = [];
+  for (let index = 0; index < text.length; index += chunkSize) {
+    lines.push(text.slice(index, index + chunkSize));
+  }
+  return lines;
+}
+
+function formatStatNumber(value, decimals = 2) {
+  const number = Number(value);
+  if (Number.isNaN(number)) return '—';
+  return number.toFixed(decimals);
+}
+
 function escapeHtml(text) {
-  return text
+  return String(text)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')

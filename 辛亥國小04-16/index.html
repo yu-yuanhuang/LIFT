@@ -118,14 +118,28 @@
               <h4>互動圖像展示區</h4>
               <span class="mode-pill" id="part1-mode-label">目前模式：配置</span>
             </div>
-            <div class="figure-stage hotspot-stage xl" data-stage="part1">
-              <div class="placeholder-art">
-                <span>此處預留第一部分圖像／雷達圖／結構圖</span>
-                <small>可直接替換為/img/中的正式圖檔</small>
+            <div class="figure-stage hotspot-stage xl radar-stage" data-stage="part1">
+              <div class="radar-stage-inner">
+                <div class="radar-meta-panel" aria-hidden="true">
+                  <span class="radar-meta-chip">統一畫布 1800 × 1200</span>
+                  <span class="radar-meta-chip">同尺度格線 6層</span>
+                  <span class="radar-meta-chip">Hover可看完整統計</span>
+                </div>
+                <svg class="radar-svg" id="part1-radar-svg" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet" aria-label="PART 01互動雷達圖"></svg>
+                <div class="radar-hotspot-layer" id="part1-radar-hotspots" aria-label="PART 01互動數據點"></div>
+                <div class="radar-legend" id="part1-radar-legend" aria-hidden="true">
+                  <div class="radar-legend-item radar-legend-conf is-active">
+                    <span class="radar-swatch"></span>
+                    <span>配置</span>
+                  </div>
+                  <div class="radar-legend-item radar-legend-get">
+                    <span class="radar-swatch"></span>
+                    <span>獲取</span>
+                  </div>
+                </div>
               </div>
-              <div class="hotspot-layer" data-hotspot-layer="part1"></div>
             </div>
-            <p class="figure-caption" id="part1-caption">Hover數據節點可展示詳細數據資料。</p>
+            <p class="figure-caption" id="part1-caption">量尺範圍為0–6，滑鼠移至各節點可查看名稱、N、最小值、最大值、平均值與標準偏差。</p>
           </article>
         </div>
       </section>
