@@ -20,9 +20,9 @@ const PART2_CONFIG = {
   chartRight: 1440,
   chartTop: 132,
   chartBottom: 860,
-  boxWidth: 116,
-  boxHeight: 88,
-  capWidth: 94,
+  boxWidth: 70,
+  boxHeight: 53,
+  capWidth: 56,
   axisTickStart: 1,
   axisTickEnd: 6,
 };
@@ -164,11 +164,11 @@ function updateModeCopy(target, mode) {
   const copyMap = {
     config: {
       label: '目前模式：配置',
-      caption: '目前顯示校內學習支持的配置視角。各節點依莫蘭迪藍顯示，hover可查看各向度的完整統計數值。',
+      caption: '目前顯示校內學習支持的配置視角。hover可查看各向度的完整統計數值。',
     },
     access: {
       label: '目前模式：獲取',
-      caption: '目前顯示學生實際獲取的視角。各節點依莫蘭迪紅顯示，hover可查看各向度的完整統計數值。',
+      caption: '目前顯示學生實際獲取的視角。hover可查看各向度的完整統計數值。',
     },
     both: {
       label: '目前模式：配置與獲取',
@@ -335,15 +335,11 @@ function buildAxisLabel(text, x, y, angle) {
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
   const anchor = cos > 0.35 ? 'start' : cos < -0.35 ? 'end' : 'middle';
-  const lines = splitLabel(text, 6);
   const xOffset = cos > 0.35 ? 8 : cos < -0.35 ? -8 : 0;
   const yShift = sin > 0.6 ? 8 : sin < -0.6 ? -8 : 0;
-  const startDy = lines.length > 1 ? `${-0.55 * (lines.length - 1)}em` : '0';
 
   return `
-    <text class="radar-axis-label" x="${x + xOffset}" y="${y + yShift}" text-anchor="${anchor}">
-      ${lines.map((line, index) => `<tspan x="${x + xOffset}" dy="${index === 0 ? startDy : '1.15em'}">${escapeHtml(line)}</tspan>`).join('')}
-    </text>
+    <text class="radar-axis-label" x="${x + xOffset}" y="${y + yShift}" text-anchor="${anchor}">${escapeHtml(text)}</text>
   `;
 }
 
@@ -448,8 +444,8 @@ function buildPart2SvgMarkup(rows) {
     const yMean = yForValue(row.mean);
     const yMin = yForValue(row.min);
     const yMax = yForValue(row.max);
-    const labelY = cfg.chartBottom + 70;
-    const labelX = x - 26;
+    const labelY = cfg.chartBottom + 42;
+    const labelX = x - 8;
     return `
       <g class="part2-series-group" data-order="${row.order}">
         <line class="part2-whisker-line" x1="${x}" y1="${yMax}" x2="${x}" y2="${yMin}" stroke="${row.whisker_hex}"></line>
@@ -457,9 +453,9 @@ function buildPart2SvgMarkup(rows) {
         <line class="part2-whisker-cap" x1="${x - cfg.capWidth / 2}" y1="${yMin}" x2="${x + cfg.capWidth / 2}" y2="${yMin}" stroke="${row.whisker_hex}"></line>
         <rect class="part2-mean-box" x="${x - cfg.boxWidth / 2}" y="${yMean - cfg.boxHeight / 2}" width="${cfg.boxWidth}" height="${cfg.boxHeight}" rx="20"
           fill="${row.marker_fill_hex}" stroke="${row.marker_stroke_hex}"></rect>
-        <text class="part2-mean-text" x="${x}" y="${yMean + 12}" text-anchor="middle">${formatStatNumber(row.mean, 2)}</text>
+        <text class="part2-mean-text" x="${x}" y="${yMean + 7}" text-anchor="middle">${formatStatNumber(row.mean, 2)}</text>
         <line class="part2-x-tick" x1="${x}" y1="${cfg.chartBottom}" x2="${x}" y2="${cfg.chartBottom + 14}"></line>
-        <text class="part2-x-label" x="${labelX}" y="${labelY}" text-anchor="end" transform="rotate(45 ${labelX} ${labelY})">${escapeHtml(row.axis)}</text>
+        <text class="part2-x-label" x="${labelX}" y="${labelY}" text-anchor="start" transform="rotate(90 ${labelX} ${labelY})">${escapeHtml(row.axis)}</text>
       </g>
     `;
   });

@@ -1389,24 +1389,24 @@ a {
 
 .part2-y-label {
   fill: rgba(116, 107, 100, 0.76);
-  font-size: 24px;
+  font-size: 31px;
   font-weight: 800;
 }
 
 .part2-whisker-line,
 .part2-whisker-cap {
-  stroke-width: 6;
+  stroke-width: 4;
   stroke-linecap: round;
 }
 
 .part2-mean-box {
-  stroke-width: 4;
-  filter: drop-shadow(0 16px 24px rgba(88, 76, 67, 0.12));
+  stroke-width: 3;
+  filter: drop-shadow(0 12px 18px rgba(88, 76, 67, 0.12));
 }
 
 .part2-mean-text {
   fill: #6d655f;
-  font-size: 34px;
+  font-size: 20px;
   font-weight: 900;
   letter-spacing: 0.01em;
 }
@@ -1481,5 +1481,5 @@ a {
   .part2-meta-panel, .part2-legend-card { position: static; margin: 14px 16px 0; max-width: none; width: auto; }
   .part2-x-label { font-size: 24px; }
   .part2-y-label { font-size: 22px; }
-  .part2-mean-text { font-size: 28px; }
+  .part2-mean-text { font-size: 17px; }
 }
