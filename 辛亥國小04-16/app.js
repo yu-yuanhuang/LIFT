@@ -342,6 +342,18 @@ function buildAxisLabel(text, x, y, angle) {
     <text class="radar-axis-label" x="${x + xOffset}" y="${y + yShift}" text-anchor="${anchor}">${escapeHtml(text)}</text>
   `;
 }
+function buildPart2AxisLabel(text, x, y) {
+  const lines = splitLabel(text, 7);
+  const tspans = lines.map((line, index) => {
+    const dy = index === 0 ? '0' : '1.12em';
+    return `<tspan x="${x}" dy="${dy}">${escapeHtml(line)}</tspan>`;
+  }).join('');
+
+  return `
+    <text class="part2-x-label" x="${x}" y="${y}" text-anchor="start" transform="rotate(90 ${x} ${y})">${tspans}</text>
+  `;
+}
+
 
 function buildRadarHotspots(bySeries, visibleKeys) {
   const count = bySeries.conf.length || bySeries.get.length;
@@ -455,7 +467,7 @@ function buildPart2SvgMarkup(rows) {
           fill="${row.marker_fill_hex}" stroke="${row.marker_stroke_hex}"></rect>
         <text class="part2-mean-text" x="${x}" y="${yMean + 7}" text-anchor="middle">${formatStatNumber(row.mean, 2)}</text>
         <line class="part2-x-tick" x1="${x}" y1="${cfg.chartBottom}" x2="${x}" y2="${cfg.chartBottom + 14}"></line>
-        <text class="part2-x-label" x="${labelX}" y="${labelY}" text-anchor="start" transform="rotate(90 ${labelX} ${labelY})">${escapeHtml(row.axis)}</text>
+        ${buildPart2AxisLabel(row.axis, labelX, labelY)}
       </g>
     `;
   });
