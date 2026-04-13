@@ -343,14 +343,20 @@ function buildAxisLabel(text, x, y, angle) {
   `;
 }
 function buildPart2AxisLabel(text, x, y) {
-  const lines = splitLabel(text, 7);
-  const tspans = lines.map((line, index) => {
-    const dy = index === 0 ? '0' : '1.12em';
-    return `<tspan x="${x}" dy="${dy}">${escapeHtml(line)}</tspan>`;
+  const columns = splitLabel(text, 7);
+  const rowGap = 30;
+  const columnGap = 34;
+
+  const chars = columns.map((columnText, columnIndex) => {
+    return Array.from(columnText).map((char, charIndex) => {
+      const charX = x + (columnIndex * columnGap);
+      const charY = y + (charIndex * rowGap);
+      return `<text class="part2-x-label" x="${charX}" y="${charY}" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90 ${charX} ${charY})">${escapeHtml(char)}</text>`;
+    }).join('');
   }).join('');
 
   return `
-    <text class="part2-x-label" x="${x}" y="${y}" text-anchor="start" transform="rotate(-90 ${x} ${y})">${tspans}</text>
+    <g class="part2-x-label-group">${chars}</g>
   `;
 }
 
@@ -456,8 +462,8 @@ function buildPart2SvgMarkup(rows) {
     const yMean = yForValue(row.mean);
     const yMin = yForValue(row.min);
     const yMax = yForValue(row.max);
-    const labelY = cfg.chartBottom + 42;
-    const labelX = x - 8;
+    const labelY = cfg.chartBottom + 34;
+    const labelX = x;
     return `
       <g class="part2-series-group" data-order="${row.order}">
         <line class="part2-whisker-line" x1="${x}" y1="${yMax}" x2="${x}" y2="${yMin}" stroke="${row.whisker_hex}"></line>
