@@ -360,6 +360,23 @@ a {
   margin-bottom: 0;
 }
 
+.hero-desc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.hero-desc-item .part-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-top: 4px;
+}
+
+.hero-desc-item span:last-child {
+  flex: 1;
+}
+
 .hero-actions {
   margin-top: 28px;
 }
