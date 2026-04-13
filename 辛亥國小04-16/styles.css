@@ -1317,10 +1317,40 @@ a {
   z-index: 2;
 }
 
-.part2-legend-card img {
+.part2-legend-svg {
+  display: block;
   width: 100%;
+  height: auto;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.8);
+  background: linear-gradient(145deg, rgba(255,255,255,0.74), rgba(244,236,231,0.66));
+}
+
+.part2-legend-whisker,
+.part2-legend-cap {
+  stroke: #ba908c;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+}
+
+.part2-legend-box {
+  fill: url(#part2LegendBoxFill);
+  stroke: #ba908c;
+  stroke-width: 3.2;
+  filter: drop-shadow(0 8px 14px rgba(88, 76, 67, 0.10));
+}
+
+.part2-legend-value {
+  fill: #6d655f;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.part2-legend-note {
+  fill: #746b64;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .part2-legend-card figcaption {
