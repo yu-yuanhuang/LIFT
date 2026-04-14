@@ -341,7 +341,7 @@ button,select{font:inherit;}
       </div>
       <div class="brand-copy">
         <p class="eyebrow">LIFT學習生態系統</p>
-        <h1>辛亥國小｜校與社區網絡_合作類別</h1>
+        <h1>辛亥國小｜校內網絡_課程與教學</h1>
       </div>
     </div>
     <div class="headbar-actions">
@@ -1444,7 +1444,7 @@ button,select{font:inherit;}
       ctx.font = isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC";
       ctx.fillStyle = "#5f564d";
 
-      if (layoutMode.value === "force") {
+      if (isForceLikeMode(layoutMode.value)) {
         var forcePlacements = computeForceLabelPlacements();
         for (i = 0; i < forcePlacements.length; i++) {
           ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(forcePlacements[i].id) ? 0.25 : 1;
@@ -1493,7 +1493,7 @@ button,select{font:inherit;}
           applyArcLayout();
           computeFrLayout();
           computeKkLayout();
-          applyLayout("parallel");
+          applyLayout("parallel"); // default
           hideStatus();
         } catch (err) {
           setStatus("解析network.gexf失敗：<br><br>" + escapeHtml(String(err)), true);
