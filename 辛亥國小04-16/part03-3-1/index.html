@@ -366,7 +366,8 @@ button,select{font:inherit;}
         <select id="layoutMode" class="native-select" aria-label="布局模式">
           <option value="parallel">左右並列</option>
           <option value="arc">環狀並列</option>
-          <option value="force">力導向布局</option>
+          <option value="fr">Fruchterman–Reingold</option>
+          <option value="kk">Kamada–Kawai</option>
         </select>
         <button type="button" class="select-trigger" id="layoutModeTrigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="layoutModeMenu">
           <span class="select-trigger-text">左右並列</span>
@@ -375,7 +376,8 @@ button,select{font:inherit;}
         <div class="select-menu" id="layoutModeMenu" role="listbox" aria-label="布局模式選單">
           <button type="button" class="select-option is-selected" data-value="parallel" role="option" aria-selected="true">左右並列</button>
           <button type="button" class="select-option" data-value="arc" role="option" aria-selected="false">環狀並列</button>
-          <button type="button" class="select-option" data-value="force" role="option" aria-selected="false">力導向布局</button>
+          <button type="button" class="select-option" data-value="fr" role="option" aria-selected="false">Fruchterman–Reingold</button>
+          <button type="button" class="select-option" data-value="kk" role="option" aria-selected="false">Kamada–Kawai</button>
         </div>
       </div>
     </div>
@@ -527,11 +529,17 @@ button,select{font:inherit;}
     }
   }
 
+  function isForceLikeMode(mode) {
+    return mode === "fr" || mode === "kk";
+  }
+
+
   function updateForceDensityVisibility() {
-    if (layoutMode.value === "force") forceDensityWrap.classList.add("active");
+    if (isForceLikeMode(layoutMode.value)) forceDensityWrap.classList.add("active");
     else forceDensityWrap.classList.remove("active");
   }
 
+  
   function isMobileView() {
     return window.innerWidth <= 768;
   }
@@ -639,6 +647,10 @@ button,select{font:inherit;}
         arcX: 0, arcY: 0,
         forceX: 0, forceY: 0,
         forceBaseX: 0, forceBaseY: 0,
+        frX: 0, frY: 0,
+        frBaseX: 0, frBaseY: 0,
+        kkX: 0, kkY: 0,
+        kkBaseX: 0, kkBaseY: 0,
         x: 0, y: 0
       });
     }
@@ -809,27 +821,77 @@ button,select{font:inherit;}
     }
   }
 
+  function createRandomizedInitialPositions(targetPrefix, radius, jitter) {
+    var n = graph.nodes.length;
+    var phase = Math.random() * Math.PI * 2;
+    for (var i = 0; i < n; i++) {
+      var ang = phase + (Math.PI * 2 * i) / Math.max(1, n);
+      graph.nodes[i][targetPrefix + "X"] = Math.cos(ang) * radius + (Math.random() - 0.5) * jitter;
+      graph.nodes[i][targetPrefix + "Y"] = Math.sin(ang) * radius + (Math.random() - 0.5) * jitter;
+    }
+  }
+
+  function normalizeLayoutCoordinates(sourceXKey, sourceYKey, baseXKey, baseYKey, targetSpan) {
+    var xs = [], ys = [], i;
+    for (i = 0; i < graph.nodes.length; i++) {
+      xs.push(graph.nodes[i][sourceXKey]);
+      ys.push(graph.nodes[i][sourceYKey]);
+    }
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    var centerX = (minX + maxX) / 2;
+    var centerY = (minY + maxY) / 2;
+    var scaleX = (maxX - minX) || 1;
+    var scaleY = (maxY - minY) || 1;
+    var normScale = targetSpan / Math.max(scaleX, scaleY, 1);
+
+    for (i = 0; i < graph.nodes.length; i++) {
+      graph.nodes[i][sourceXKey] = +((graph.nodes[i][sourceXKey] - centerX) * normScale).toFixed(2);
+      graph.nodes[i][sourceYKey] = +((graph.nodes[i][sourceYKey] - centerY) * normScale).toFixed(2);
+      graph.nodes[i][baseXKey] = graph.nodes[i][sourceXKey];
+      graph.nodes[i][baseYKey] = graph.nodes[i][sourceYKey];
+    }
+  }
+
+  function relaxCollisions(xKey, yKey, spacingFactor, rounds) {
+    var n = graph.nodes.length;
+    for (var relax = 0; relax < rounds; relax++) {
+      var moved = false;
+      for (var i = 0; i < n; i++) {
+        var a = graph.nodes[i];
+        for (var j = i + 1; j < n; j++) {
+          var b = graph.nodes[j];
+          var cdx = b[xKey] - a[xKey];
+          var cdy = b[yKey] - a[yKey];
+          var cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          if (cdist < 0.01) {
+            cdx = (Math.random() - 0.5) * 0.1;
+            cdy = (Math.random() - 0.5) * 0.1;
+            cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+          }
+          var minDist = (Math.max(4, a.size) + Math.max(4, b.size) + 18) * Math.max(0.7, spacingFactor);
+          if (cdist < minDist) {
+            var push = (minDist - cdist) / 2;
+            var pux = cdx / cdist * push;
+            var puy = cdy / cdist * push;
+            a[xKey] -= pux;
+            a[yKey] -= puy;
+            b[xKey] += pux;
+            b[yKey] += puy;
+            moved = true;
+          }
+        }
+      }
+      if (!moved) break;
+    }
+  }
+
   function computeForceLayout() {
     var i, j;
     var n = graph.nodes.length;
     if (!n) return;
 
-    // initial positions on a broad circle with random phase and small jitter
-    var radius = 320;
-    var phase = Math.random() * Math.PI * 2;
-    for (i = 0; i < n; i++) {
-      var ang = phase + (Math.PI * 2 * i) / n;
-      graph.nodes[i].forceX = Math.cos(ang) * radius + (Math.random() - 0.5) * 40;
-      graph.nodes[i].forceY = Math.sin(ang) * radius + (Math.random() - 0.5) * 40;
-    }
-
-    var adj = {};
-    for (i = 0; i < n; i++) adj[graph.nodes[i].id] = {};
-    for (i = 0; i < graph.edges.length; i++) {
-      var e = graph.edges[i];
-      adj[e.source][e.target] = true;
-      adj[e.target][e.source] = true;
-    }
+    createRandomizedInitialPositions("force", 320, 40);
 
     var area = 1200 * 900;
     var spacingFactor = getForceDistanceFactor();
@@ -840,7 +902,6 @@ button,select{font:inherit;}
       var disp = {};
       for (i = 0; i < n; i++) disp[graph.nodes[i].id] = { x: 0, y: 0 };
 
-      // repulsion
       for (i = 0; i < n; i++) {
         var v = graph.nodes[i];
         for (j = i + 1; j < n; j++) {
@@ -861,7 +922,6 @@ button,select{font:inherit;}
         }
       }
 
-      // attraction along edges
       for (i = 0; i < graph.edges.length; i++) {
         var ed = graph.edges[i];
         var s = nodeMap[ed.source];
@@ -877,7 +937,6 @@ button,select{font:inherit;}
         disp[t.id].x += ax; disp[t.id].y += ay;
       }
 
-      // apply displacement
       for (i = 0; i < n; i++) {
         var node = graph.nodes[i];
         var ddx = disp[node.id].x;
@@ -893,60 +952,218 @@ button,select{font:inherit;}
       temperature *= 0.95;
     }
 
-    // normalize to canvas-friendly range
-    var xs = [], ys = [];
-    for (i = 0; i < n; i++) {
-      xs.push(graph.nodes[i].forceX);
-      ys.push(graph.nodes[i].forceY);
-    }
-    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
-    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
-    var centerX = (minX + maxX) / 2;
-    var centerY = (minY + maxY) / 2;
-    var scaleX = (maxX - minX) || 1;
-    var scaleY = (maxY - minY) || 1;
-    var normScale = 900 / Math.max(scaleX, scaleY);
-
-    for (i = 0; i < n; i++) {
-      graph.nodes[i].forceX = +((graph.nodes[i].forceX - centerX) * normScale).toFixed(2);
-      graph.nodes[i].forceY = +((graph.nodes[i].forceY - centerY) * normScale).toFixed(2);
-    }
-
-    // collision relaxation: avoid node overlap after force layout
-    for (var relax = 0; relax < 120; relax++) {
-      var moved = false;
-      for (i = 0; i < n; i++) {
-        var a = graph.nodes[i];
-        for (j = i + 1; j < n; j++) {
-          var b = graph.nodes[j];
-          var cdx = b.forceX - a.forceX;
-          var cdy = b.forceY - a.forceY;
-          var cdist = Math.sqrt(cdx * cdx + cdy * cdy);
-          if (cdist < 0.01) {
-            cdx = (Math.random() - 0.5) * 0.1;
-            cdy = (Math.random() - 0.5) * 0.1;
-            cdist = Math.sqrt(cdx * cdx + cdy * cdy);
-          }
-          var minDist = (Math.max(4, a.size) + Math.max(4, b.size) + 18) * Math.max(0.7, spacingFactor);
-          if (cdist < minDist) {
-            var push = (minDist - cdist) / 2;
-            var pux = cdx / cdist * push;
-            var puy = cdy / cdist * push;
-            a.forceX -= pux;
-            a.forceY -= puy;
-            b.forceX += pux;
-            b.forceY += puy;
-            moved = true;
-          }
-        }
-      }
-      if (!moved) break;
-    }
-
-    // persist as the current base force layout
+    normalizeLayoutCoordinates("forceX", "forceY", "forceBaseX", "forceBaseY", 900);
+    relaxCollisions("forceX", "forceY", spacingFactor, 120);
     for (i = 0; i < n; i++) {
       graph.nodes[i].forceBaseX = graph.nodes[i].forceX;
       graph.nodes[i].forceBaseY = graph.nodes[i].forceY;
+    }
+  }
+
+  function computeFrLayout() {
+    var i, j;
+    var n = graph.nodes.length;
+    if (!n) return;
+
+    createRandomizedInitialPositions("fr", 360, 70);
+
+    var area = 1350 * 1000;
+    var spacingFactor = getForceDistanceFactor();
+    var k = Math.sqrt(area / Math.max(1, n)) * spacingFactor;
+    var temperature = 150;
+
+    for (var iter = 0; iter < 260; iter++) {
+      var disp = {};
+      for (i = 0; i < n; i++) disp[graph.nodes[i].id] = { x: 0, y: 0 };
+
+      for (i = 0; i < n; i++) {
+        var v = graph.nodes[i];
+        for (j = i + 1; j < n; j++) {
+          var u = graph.nodes[j];
+          var dx = v.frX - u.frX;
+          var dy = v.frY - u.frY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 0.01) {
+            dx = (Math.random() - 0.5) * 0.1;
+            dy = (Math.random() - 0.5) * 0.1;
+            dist = Math.sqrt(dx * dx + dy * dy);
+          }
+          var rep = (k * k) / dist;
+          var rx = dx / dist * rep;
+          var ry = dy / dist * rep;
+          disp[v.id].x += rx; disp[v.id].y += ry;
+          disp[u.id].x -= rx; disp[u.id].y -= ry;
+        }
+      }
+
+      for (i = 0; i < graph.edges.length; i++) {
+        var ed = graph.edges[i];
+        var s = nodeMap[ed.source];
+        var t = nodeMap[ed.target];
+        var dx2 = s.frX - t.frX;
+        var dy2 = s.frY - t.frY;
+        var dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+        if (dist2 < 0.01) dist2 = 0.01;
+        var att = (dist2 * dist2) / k;
+        var bias = (s.type === t.type) ? 1.08 : 0.92;
+        var ax = dx2 / dist2 * att * bias;
+        var ay = dy2 / dist2 * att * bias;
+        disp[s.id].x -= ax; disp[s.id].y -= ay;
+        disp[t.id].x += ax; disp[t.id].y += ay;
+      }
+
+      for (i = 0; i < n; i++) {
+        var node = graph.nodes[i];
+        var ddx = disp[node.id].x;
+        var ddy = disp[node.id].y;
+        var dlen = Math.sqrt(ddx * ddx + ddy * ddy);
+        if (dlen > 0) {
+          var limited = Math.min(dlen, temperature);
+          node.frX += ddx / dlen * limited;
+          node.frY += ddy / dlen * limited;
+        }
+      }
+
+      temperature *= 0.965;
+    }
+
+    normalizeLayoutCoordinates("frX", "frY", "frBaseX", "frBaseY", 980);
+    relaxCollisions("frX", "frY", spacingFactor, 140);
+    for (i = 0; i < n; i++) {
+      graph.nodes[i].frBaseX = graph.nodes[i].frX;
+      graph.nodes[i].frBaseY = graph.nodes[i].frY;
+    }
+  }
+
+  function computeKkLayout() {
+    var n = graph.nodes.length;
+    if (!n) return;
+
+    var spacingFactor = getForceDistanceFactor();
+    var distMatrix = [];
+    var springLength = [];
+    var springStrength = [];
+    var i, j;
+
+    for (i = 0; i < n; i++) {
+      distMatrix[i] = [];
+      springLength[i] = [];
+      springStrength[i] = [];
+      for (j = 0; j < n; j++) distMatrix[i][j] = i === j ? 0 : Infinity;
+    }
+
+    for (i = 0; i < graph.edges.length; i++) {
+      var e = graph.edges[i];
+      var sIdx = graph.nodes.indexOf(nodeMap[e.source]);
+      var tIdx = graph.nodes.indexOf(nodeMap[e.target]);
+      if (sIdx >= 0 && tIdx >= 0) {
+        distMatrix[sIdx][tIdx] = 1;
+        distMatrix[tIdx][sIdx] = 1;
+      }
+    }
+
+    for (var kf = 0; kf < n; kf++) {
+      for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+          var through = distMatrix[i][kf] + distMatrix[kf][j];
+          if (through < distMatrix[i][j]) distMatrix[i][j] = through;
+        }
+      }
+    }
+
+    var maxGraphDist = 1;
+    for (i = 0; i < n; i++) {
+      for (j = 0; j < n; j++) {
+        if (distMatrix[i][j] !== Infinity && distMatrix[i][j] > maxGraphDist) maxGraphDist = distMatrix[i][j];
+      }
+    }
+
+    var baseLength = 120 * spacingFactor;
+    for (i = 0; i < n; i++) {
+      for (j = 0; j < n; j++) {
+        var dij = distMatrix[i][j];
+        if (i === j) {
+          springLength[i][j] = 0;
+          springStrength[i][j] = 0;
+        } else if (dij === Infinity) {
+          springLength[i][j] = baseLength * (maxGraphDist + 1.2);
+          springStrength[i][j] = 0.002;
+        } else {
+          springLength[i][j] = baseLength * dij;
+          springStrength[i][j] = 1 / (dij * dij);
+        }
+      }
+    }
+
+    createRandomizedInitialPositions("kk", 300, 40);
+
+    function calcDelta(index) {
+      var Ex = 0, Ey = 0, x = graph.nodes[index].kkX, y = graph.nodes[index].kkY;
+      for (var m = 0; m < n; m++) {
+        if (m === index) continue;
+        var dx = x - graph.nodes[m].kkX;
+        var dy = y - graph.nodes[m].kkY;
+        var dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        var kij = springStrength[index][m];
+        var lij = springLength[index][m];
+        Ex += kij * (dx - (lij * dx) / dist);
+        Ey += kij * (dy - (lij * dy) / dist);
+      }
+      return Math.sqrt(Ex * Ex + Ey * Ey);
+    }
+
+    for (var iter = 0; iter < 600; iter++) {
+      var maxDelta = -1;
+      var maxIndex = 0;
+      for (i = 0; i < n; i++) {
+        var d = calcDelta(i);
+        if (d > maxDelta) {
+          maxDelta = d;
+          maxIndex = i;
+        }
+      }
+      if (maxDelta < 0.25) break;
+
+      for (var inner = 0; inner < 40; inner++) {
+        var m = maxIndex;
+        var x = graph.nodes[m].kkX;
+        var y = graph.nodes[m].kkY;
+        var dEx = 0, dEy = 0, d2Exx = 0, d2Exy = 0, d2Eyy = 0;
+
+        for (j = 0; j < n; j++) {
+          if (j === m) continue;
+          var dx = x - graph.nodes[j].kkX;
+          var dy = y - graph.nodes[j].kkY;
+          var dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          var dist3 = dist * dist * dist;
+          var kij = springStrength[m][j];
+          var lij = springLength[m][j];
+
+          dEx += kij * (dx - (lij * dx) / dist);
+          dEy += kij * (dy - (lij * dy) / dist);
+          d2Exx += kij * (1 - (lij * dy * dy) / dist3);
+          d2Exy += kij * ((lij * dx * dy) / dist3);
+          d2Eyy += kij * (1 - (lij * dx * dx) / dist3);
+        }
+
+        var denom = d2Exx * d2Eyy - d2Exy * d2Exy;
+        if (Math.abs(denom) < 1e-6) break;
+
+        var deltaX = (-dEx * d2Eyy + dEy * d2Exy) / denom;
+        var deltaY = (-dEy * d2Exx + dEx * d2Exy) / denom;
+
+        graph.nodes[m].kkX += deltaX;
+        graph.nodes[m].kkY += deltaY;
+
+        if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) < 0.08) break;
+      }
+    }
+
+    normalizeLayoutCoordinates("kkX", "kkY", "kkBaseX", "kkBaseY", 940);
+    relaxCollisions("kkX", "kkY", spacingFactor, 120);
+    for (i = 0; i < n; i++) {
+      graph.nodes[i].kkBaseX = graph.nodes[i].kkX;
+      graph.nodes[i].kkBaseY = graph.nodes[i].kkY;
     }
   }
 
@@ -960,9 +1177,30 @@ button,select{font:inherit;}
     }
   }
 
+  function applyFrLayout() {
+    var factor = getForceDistanceFactor();
+    for (var i = 0; i < graph.nodes.length; i++) {
+      var bx = typeof graph.nodes[i].frBaseX === "number" ? graph.nodes[i].frBaseX : graph.nodes[i].frX;
+      var by = typeof graph.nodes[i].frBaseY === "number" ? graph.nodes[i].frBaseY : graph.nodes[i].frY;
+      graph.nodes[i].x = bx * factor;
+      graph.nodes[i].y = by * factor;
+    }
+  }
+
+  function applyKkLayout() {
+    var factor = getForceDistanceFactor();
+    for (var i = 0; i < graph.nodes.length; i++) {
+      var bx = typeof graph.nodes[i].kkBaseX === "number" ? graph.nodes[i].kkBaseX : graph.nodes[i].kkX;
+      var by = typeof graph.nodes[i].kkBaseY === "number" ? graph.nodes[i].kkBaseY : graph.nodes[i].kkY;
+      graph.nodes[i].x = bx * factor;
+      graph.nodes[i].y = by * factor;
+    }
+  }
+
   function applyLayout(mode) {
     if (mode === "arc") applyArcLayout();
-    else if (mode === "force") applyForceLayout();
+    else if (mode === "fr") applyFrLayout();
+    else if (mode === "kk") applyKkLayout();
     else applyParallelLayout();
     fitCamera();
     draw();
@@ -1206,7 +1444,7 @@ button,select{font:inherit;}
       ctx.font = isMobileView() ? "11px Arial, Noto Sans TC" : "12px Arial, Noto Sans TC";
       ctx.fillStyle = "#5f564d";
 
-      if (layoutMode.value === "force") {
+      if (isForceLikeMode(layoutMode.value)) {
         var forcePlacements = computeForceLabelPlacements();
         for (i = 0; i < forcePlacements.length; i++) {
           ctx.globalAlpha = hovered && toggleHoverFocus.checked && !isNeighborOfHovered(forcePlacements[i].id) ? 0.25 : 1;
@@ -1252,8 +1490,9 @@ button,select{font:inherit;}
           computeSizes();
           prepareMaps();
           applyParallelLayout();
-          applyArcLayout(); // fill arc coords
-          computeForceLayout(); // fill force coords
+          applyArcLayout();
+          computeFrLayout();
+          computeKkLayout();
           applyLayout("parallel"); // default
           hideStatus();
         } catch (err) {
@@ -1436,10 +1675,8 @@ button,select{font:inherit;}
 
   forceDensitySlider.addEventListener("input", function() {
     updateForceDensityUI();
-    if (layoutMode.value === "force") {
-      applyForceLayout();
-      fitCamera();
-      draw();
+    if (isForceLikeMode(layoutMode.value)) {
+      applyLayout(layoutMode.value);
     }
   });
 
@@ -1470,11 +1707,11 @@ headBarCollapse.addEventListener("click", function() {
 });
 
   rerunForce.addEventListener("click", function() {
-    computeForceLayout();
-    if (layoutMode.value === "force") {
-      applyForceLayout();
-      fitCamera();
-      draw();
+    if (layoutMode.value === "fr") computeFrLayout();
+    else if (layoutMode.value === "kk") computeKkLayout();
+
+    if (isForceLikeMode(layoutMode.value)) {
+      applyLayout(layoutMode.value);
     }
     closeMobilePanel();
   });
