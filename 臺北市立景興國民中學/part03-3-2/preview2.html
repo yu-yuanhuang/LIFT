@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700;800;900&display=swap" rel="stylesheet">
-<title>板橋高中_校內網絡_學生學習支持</title>
+<title>板橋高中_校內網絡_課程與教學</title>
 <style>
 :root{
   --bg:#f3eee8;
@@ -199,7 +199,7 @@ button,select,input{font:inherit;}
         </div>
         <div class="brand-copy">
           <p class="eyebrow">LIFT學習生態系統｜一模網絡圖</p>
-          <h1>板橋高中｜校內網絡_學生學習支持</h1>
+          <h1>板橋高中｜校內網絡_課程與教學</h1>
         </div>
       </div>
       <div class="headbar-actions">
@@ -266,8 +266,8 @@ button,select,input{font:inherit;}
   <div id="status">正在載入network2.gexf…</div>
 </div>
 
-<script>
 
+<script>
 (function () {
   const GEXF_FILE = './network2.gexf';
   const COLORS = {
@@ -289,7 +289,7 @@ button,select,input{font:inherit;}
   const toggleArrows = document.getElementById('toggleArrows');
   const toggleFocus = document.getElementById('toggleFocus');
 
-  let graph = { nodes: [], edges: [] };
+  let graph = { nodes: [], edges: [], name: '' };
   let nodeMap = new Map();
   let adjacency = new Map();
   let hoverNode = null;
@@ -302,12 +302,20 @@ button,select,input{font:inherit;}
   function setStatus(msg, persist) {
     statusBox.innerHTML = msg;
     statusBox.style.display = 'block';
+    statusBox.classList.remove('error');
     if (!persist) {
       clearTimeout(setStatus._timer);
       setStatus._timer = setTimeout(() => {
         statusBox.style.display = 'none';
       }, 1700);
     }
+  }
+
+  function setError(msg) {
+    clearTimeout(setStatus._timer);
+    statusBox.classList.add('error');
+    statusBox.style.display = 'block';
+    statusBox.innerHTML = msg;
   }
 
   function resizeCanvas() {
@@ -345,26 +353,17 @@ button,select,input{font:inherit;}
     draw();
   }
 
-  function getChildrenByLocalName(parent, name) {
-    return Array.from(parent ? parent.childNodes || [] : []).filter(el => el.nodeType === 1 && el.localName === name);
+  function getChildrenByLocalName(parent, localName) {
+    return Array.from(parent ? parent.children || [] : []).filter(el => (el.localName || el.nodeName || '').toLowerCase() === localName.toLowerCase());
   }
 
-  function getFirstChildByLocalName(parent, name) {
-    return Array.from(parent ? parent.childNodes || [] : []).find(el => el.nodeType === 1 && el.localName === name) || null;
-  }
-
-  function getDescendantsByLocalName(parent, name) {
-    return Array.from(parent ? parent.getElementsByTagName('*') : []).filter(el => el.localName === name);
-  }
-
-  function getFirstDescendantByLocalName(parent, names) {
-    const list = Array.isArray(names) ? names : [names];
+  function getFirstDescendantByLocalName(parent, localName) {
     const all = Array.from(parent ? parent.getElementsByTagName('*') : []);
-    for (const name of list) {
-      const found = all.find(el => el.localName === name);
-      if (found) return found;
-    }
-    return null;
+    return all.find(el => (el.localName || el.nodeName || '').toLowerCase() === localName.toLowerCase()) || null;
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
   }
 
   function parseGexf(xmlText) {
@@ -373,8 +372,11 @@ button,select,input{font:inherit;}
     const parseErr = xml.querySelector('parsererror');
     if (parseErr) throw new Error('GEXF XML格式錯誤');
 
-    const graphEl = Array.from(xml.getElementsByTagName('*')).find(el => el.localName === 'graph');
+    const graphEl = getFirstDescendantByLocalName(xml, 'graph');
     if (!graphEl) throw new Error('找不到graph節點');
+
+    const metaDescription = getFirstDescendantByLocalName(xml, 'description');
+    const description = metaDescription ? metaDescription.textContent.trim() : '';
 
     const attrDefs = {};
     getChildrenByLocalName(graphEl, 'attributes')
@@ -385,71 +387,82 @@ button,select,input{font:inherit;}
         });
       });
 
-    const nodesContainer = getChildrenByLocalName(graphEl, 'nodes')[0];
-    const edgesContainer = getChildrenByLocalName(graphEl, 'edges')[0];
-    if (!nodesContainer) throw new Error('找不到nodes節點');
+    const nodesEl = getChildrenByLocalName(graphEl, 'nodes')[0];
+    const edgesEl = getChildrenByLocalName(graphEl, 'edges')[0];
+    const nodes = [];
 
-    const nodes = getChildrenByLocalName(nodesContainer, 'node').map(nodeEl => {
-      const attrs = {};
-      getDescendantsByLocalName(nodeEl, 'attvalue').forEach(av => {
-        const key = av.getAttribute('for');
-        attrs[key] = av.getAttribute('value');
+    getChildrenByLocalName(nodesEl || graphEl, 'node').forEach(nodeEl => {
+      const attrsById = {};
+      const attrsByTitle = {};
+      Array.from(nodeEl.getElementsByTagName('*')).forEach(el => {
+        if ((el.localName || '').toLowerCase() === 'attvalue') {
+          const key = el.getAttribute('for');
+          const value = el.getAttribute('value') || '';
+          attrsById[key] = value;
+          attrsByTitle[attrDefs[key] || key] = value;
+        }
       });
 
-      const titleMap = {};
-      Object.keys(attrs).forEach(k => {
-        titleMap[attrDefs[k] || k] = attrs[k];
-      });
-
-      const posEl = getFirstDescendantByLocalName(nodeEl, 'position');
-
-      const adminValue = String(
-        titleMap['行政團隊'] ?? attrs['行政團隊'] ?? attrs['admin_attr'] ?? '0'
-      ).trim();
-
-      const labelId = String(
-        titleMap['ID'] ?? attrs['ID'] ?? nodeEl.getAttribute('label') ?? nodeEl.getAttribute('id') ?? ''
-      ).trim();
-
-      const role = String(
-        titleMap['身分別'] ?? attrs['身分別'] ?? attrs['role_attr'] ?? (adminValue === '1' ? '行政身分' : '教師身分')
-      ).trim();
-
-      const indegree = Number(titleMap['indegree'] ?? attrs['indegree'] ?? attrs['indeg_attr'] ?? 0) || 0;
-      const outdegree = Number(titleMap['outdegree'] ?? attrs['outdegree'] ?? attrs['outdeg_attr'] ?? 0) || 0;
-
-      let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
-      let y = Number(posEl ? posEl.getAttribute('y') : 0) || 0;
+      const positionEl = Array.from(nodeEl.getElementsByTagName('*')).find(el => (el.localName || '').toLowerCase() === 'position');
+      let x = Number(positionEl ? positionEl.getAttribute('x') : 0) || 0;
+      let y = Number(positionEl ? positionEl.getAttribute('y') : 0) || 0;
       y = -y;
 
-      const color = adminValue === '1' ? COLORS.admin : COLORS.teacher;
+      const id = nodeEl.getAttribute('id') || nodeEl.getAttribute('label') || '';
+      const label = id;
+      const roleRaw = String(
+        attrsByTitle['點身分別'] ?? attrsByTitle['身分別'] ?? attrsById['type_attr'] ?? attrsById['role_attr'] ?? ''
+      ).trim();
+      const adminFlagRaw = String(
+        attrsByTitle['行政團隊'] ?? attrsById['admin_attr'] ?? ''
+      ).trim();
 
-      return {
-        id: nodeEl.getAttribute('id'),
-        label: labelId,
-        adminValue,
-        role,
-        group: adminValue === '1' ? 'admin' : 'teacher',
-        indegree,
-        outdegree,
-        color,
+      let group = 'teacher';
+      if (adminFlagRaw === '1' || /行政/.test(roleRaw)) group = 'admin';
+      else if (adminFlagRaw === '0' || /教師/.test(roleRaw)) group = 'teacher';
+
+      const degreeRaw = Number(attrsByTitle['連結數'] ?? attrsByTitle['degree'] ?? attrsById['degree_attr'] ?? 0) || 0;
+
+      nodes.push({
+        id,
+        label,
+        role: group === 'admin' ? '行政身分' : '教師身分',
+        group,
+        degreeRaw,
+        indegree: 0,
+        outdegree: 0,
+        color: group === 'admin' ? COLORS.admin : COLORS.teacher,
         radius: 12,
-        x, y,
-        baseX: x,
-        baseY: y
-      };
+        x,
+        y
+      });
     });
 
-    const edges = edgesContainer
-      ? getChildrenByLocalName(edgesContainer, 'edge').map((edgeEl, idx) => ({
-          id: edgeEl.getAttribute('id') || ('e' + idx),
-          source: edgeEl.getAttribute('source'),
-          target: edgeEl.getAttribute('target'),
-          weight: Number(edgeEl.getAttribute('weight') || 1) || 1
-        }))
-      : [];
+    const edges = [];
+    getChildrenByLocalName(edgesEl || graphEl, 'edge').forEach((edgeEl, idx) => {
+      edges.push({
+        id: edgeEl.getAttribute('id') || ('e' + idx),
+        source: edgeEl.getAttribute('source'),
+        target: edgeEl.getAttribute('target'),
+        weight: Number(edgeEl.getAttribute('weight') || 1) || 1
+      });
+    });
 
-    return { nodes, edges };
+    const nodeIndex = new Map(nodes.map(n => [n.id, n]));
+    edges.forEach(e => {
+      const s = nodeIndex.get(e.source);
+      const t = nodeIndex.get(e.target);
+      if (s) s.outdegree += 1;
+      if (t) t.indegree += 1;
+    });
+
+    nodes.forEach(n => {
+      if (!n.indegree && n.degreeRaw && !n.outdegree) {
+        n.indegree = n.degreeRaw;
+      }
+    });
+
+    return { nodes, edges, name: description };
   }
 
   function buildMaps() {
@@ -520,7 +533,7 @@ button,select,input{font:inherit;}
     });
     const radius = Math.max(240, nodes.length * 15);
     nodes.forEach((n, i) => {
-      const angle = (-Math.PI / 2) + (Math.PI * 2 * i / nodes.length);
+      const angle = (-Math.PI / 2) + (Math.PI * 2 * i / Math.max(nodes.length,1));
       n.x = Math.cos(angle) * radius;
       n.y = Math.sin(angle) * radius;
     });
@@ -804,7 +817,7 @@ button,select,input{font:inherit;}
         ctx.fillStyle = COLORS.label;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(n.label, p.x, p.y);
+        ctx.fillText(n.id, p.x, p.y);
         ctx.restore();
       }
     });
@@ -822,17 +835,11 @@ button,select,input{font:inherit;}
     return null;
   }
 
-  function escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, s => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[s]));
-  }
-
   function showTooltip(node, sx, sy) {
     const rel = adjacency.get(node.id) || { in:new Set(), out:new Set(), all:new Set() };
     const inList = Array.from(rel.in).sort((a,b) => String(a).localeCompare(String(b),'zh-Hant'));
     const outList = Array.from(rel.out).sort((a,b) => String(a).localeCompare(String(b),'zh-Hant'));
-    let html = '<div class="title">' + escapeHtml(node.label) + '</div>';
+    let html = '<div class="title">' + escapeHtml(node.id) + '</div>';
     html += '<div class="meta">' + escapeHtml(node.role) + '</div>';
     html += '<div><strong>Indegree：</strong>' + node.indegree + '</div>';
     html += '<div><strong>Outdegree：</strong>' + node.outdegree + '</div>';
@@ -952,29 +959,23 @@ button,select,input{font:inherit;}
       })
       .then(text => {
         graph = parseGexf(text);
-        const pageTitle = document.getElementById('pageTitle');
-        if (graph.graphName) {
-          document.title = graph.graphName + '｜一模網絡圖';
-          if (pageTitle) pageTitle.textContent = graph.graphName.replaceAll('_', '｜');
-        }
         buildMaps();
         applyVisualRules();
-        applyLayout('parallel', false);
         layoutMode.value = 'parallel';
+        applyLayout('parallel', false);
         resizeCanvas();
         setStatus('network2.gexf載入完成', false);
       })
       .catch(err => {
-        statusBox.style.display = 'block';
-        statusBox.innerHTML = '讀取network2.gexf失敗。請確認HTML與network2.gexf放在同一資料夾，且使用HTTP伺服器或GitHub Pages開啟。<br>錯誤：' + escapeHtml(String(err));
+        setError('讀取network2.gexf失敗。請確認HTML與network2.gexf放在同一資料夾，且使用HTTP伺服器或GitHub Pages開啟。<br>錯誤：' + escapeHtml(String(err)));
       });
   }
 
   resizeCanvas();
   loadGraph();
 })();
-
 </script>
+
 <script>
 (function () {
   const appRoot = document.getElementById('app');
