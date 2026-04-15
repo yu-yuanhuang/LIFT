@@ -402,46 +402,27 @@ button,select,input{font:inherit;}
       });
 
       const posEl = getFirstDescendantByLocalName(nodeEl, 'position');
-      const colorEl = getFirstDescendantByLocalName(nodeEl, 'color');
-
-      const adminValue = String(
-        titleMap['行政團隊'] ?? attrs['行政團隊'] ?? attrs['admin_attr'] ?? '0'
+      const rawRole = String(
+        titleMap['行政團隊'] ?? titleMap['點身分別'] ?? titleMap['身分別'] ?? attrs['type_attr'] ?? attrs['role_attr'] ?? attrs['admin_attr'] ?? '0'
       ).trim();
-
+      const adminValue = rawRole === '1' || rawRole === '行政身分' ? '1' : '0';
       const labelId = String(
-        titleMap['ID'] ?? attrs['ID'] ?? nodeEl.getAttribute('label') ?? nodeEl.getAttribute('id') ?? ''
+        titleMap['ID'] ?? titleMap['點名稱'] ?? attrs['name_attr'] ?? nodeEl.getAttribute('label') ?? nodeEl.getAttribute('id') ?? ''
       ).trim();
-
-      const role = String(
-        titleMap['身分別'] ?? attrs['身分別'] ?? attrs['role_attr'] ?? (adminValue === '1' ? '行政身分' : '教師身分')
-      ).trim();
-
-      const indegree = Number(titleMap['indegree'] ?? attrs['indegree'] ?? attrs['indeg_attr'] ?? 0) || 0;
-      const outdegree = Number(titleMap['outdegree'] ?? attrs['outdegree'] ?? attrs['outdeg_attr'] ?? 0) || 0;
 
       let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
       let y = Number(posEl ? posEl.getAttribute('y') : 0) || 0;
       y = -y;
 
-      let color = adminValue === '1' ? COLORS.admin : COLORS.teacher;
-      if (colorEl) {
-        const r = Number(colorEl.getAttribute('r'));
-        const g = Number(colorEl.getAttribute('g'));
-        const b = Number(colorEl.getAttribute('b'));
-        if ([r, g, b].every(v => !Number.isNaN(v))) {
-          color = `rgb(${r},${g},${b})`;
-        }
-      }
-
       return {
         id: nodeEl.getAttribute('id'),
         label: labelId,
         adminValue,
-        role,
+        role: adminValue === '1' ? '行政身分' : '教師身分',
         group: adminValue === '1' ? 'admin' : 'teacher',
-        indegree,
-        outdegree,
-        color,
+        indegree: 0,
+        outdegree: 0,
+        color: adminValue === '1' ? COLORS.admin : COLORS.teacher,
         radius: 12,
         x, y,
         baseX: x,
@@ -457,6 +438,14 @@ button,select,input{font:inherit;}
           weight: Number(edgeEl.getAttribute('weight') || 1) || 1
         }))
       : [];
+
+    const nodeById = new Map(nodes.map(n => [n.id, n]));
+    edges.forEach(e => {
+      const sourceNode = nodeById.get(e.source);
+      const targetNode = nodeById.get(e.target);
+      if (sourceNode) sourceNode.outdegree += 1;
+      if (targetNode) targetNode.indegree += 1;
+    });
 
     return { nodes, edges };
   }
