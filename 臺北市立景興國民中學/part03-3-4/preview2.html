@@ -392,24 +392,11 @@ button,select,input{font:inherit;}
       });
 
       const posEl = getDescendantsByLocalName(nodeEl, 'position')[0] || null;
-
-      const adminValue = String(
-        titleMap['行政團隊'] ?? attrs['admin_attr'] ?? attrs['行政團隊'] ?? '0'
+      const rawRole = String(
+        titleMap['行政團隊'] ?? titleMap['點身分別'] ?? titleMap['身分別'] ?? attrs['type_attr'] ?? attrs['role_attr'] ?? attrs['admin_attr'] ?? '0'
       ).trim();
-
-      const role = String(
-        titleMap['身分別'] ??
-        attrs['role_attr'] ??
-        (adminValue === '1' ? '行政身分' : '教師身分')
-      ).trim();
-
-      const indegree = Number(
-        titleMap['indegree'] ?? titleMap['Indegree'] ?? attrs['indeg_attr'] ?? attrs['indegree'] ?? 0
-      ) || 0;
-
-      const outdegree = Number(
-        titleMap['outdegree'] ?? titleMap['Outdegree'] ?? attrs['outdeg_attr'] ?? attrs['outdegree'] ?? 0
-      ) || 0;
+      const adminValue = rawRole === '1' || rawRole === '行政身分' ? '1' : '0';
+      const role = adminValue === '1' ? '行政身分' : '教師身分';
 
       let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
       let y = Number(posEl ? posEl.getAttribute('y') : 0) || 0;
@@ -417,12 +404,12 @@ button,select,input{font:inherit;}
 
       nodes.push({
         id: nodeEl.getAttribute('id'),
-        label: nodeEl.getAttribute('id') || nodeEl.getAttribute('label') || '',
+        label: String(nodeEl.getAttribute('id') || nodeEl.getAttribute('label') || '').trim(),
         adminValue,
         role,
         group: adminValue === '1' ? 'admin' : 'teacher',
-        indegree,
-        outdegree,
+        indegree: 0,
+        outdegree: 0,
         color: adminValue === '1' ? COLORS.admin : COLORS.teacher,
         radius: 12,
         x, y,
@@ -441,6 +428,14 @@ button,select,input{font:inherit;}
         target: edgeEl.getAttribute('target'),
         weight: Number(edgeEl.getAttribute('weight') || 1) || 1
       });
+    });
+
+    const nodeById = new Map(nodes.map(n => [n.id, n]));
+    edges.forEach(e => {
+      const sourceNode = nodeById.get(e.source);
+      const targetNode = nodeById.get(e.target);
+      if (sourceNode) sourceNode.outdegree += 1;
+      if (targetNode) targetNode.indegree += 1;
     });
 
     return { nodes, edges, graphName: graphEl.getAttribute('name') || '' };
