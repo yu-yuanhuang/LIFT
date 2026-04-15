@@ -1,0 +1,2939 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-04-15">
+    <creator>OpenAI ChatGPT</creator>
+    <description>芳和實中｜校內網絡_同仁支持鼓勵（有向單模網路）</description>
+  </meta>
+  <graph mode="static" defaultedgetype="directed">
+    <attributes class="node" mode="static">
+      <attribute id="n0" title="點名稱" type="string"/>
+      <attribute id="n1" title="點身分別" type="string"/>
+      <attribute id="n2" title="連結數" type="string"/>
+      <attribute id="n3" title="連結對象" type="string"/>
+      <attribute id="n4" title="出向連結數" type="string"/>
+      <attribute id="n5" title="出向連結對象" type="string"/>
+      <attribute id="n6" title="入向連結數" type="string"/>
+      <attribute id="n7" title="入向連結對象" type="string"/>
+    </attributes>
+    <attributes class="edge" mode="static">
+      <attribute id="e0" title="關係類型" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="11001" label="11001">
+        <attvalues>
+          <attvalue for="n0" value="11001"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11022、11035、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11022、11035、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11002" label="11002">
+        <attvalues>
+          <attvalue for="n0" value="11002"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="52"/>
+          <attvalue for="n3" value="11001、11003、11004、11005、11006、11007、11008、11009、11010、11013、11014、11015、11016、11017、11018、11019、11020、11021、11022、11023、11024、11026、11027、11030、11031、11032、11033、11034、11035、11037、11038、11039、11040、11041、11042、11043、11044、11045、11046、11047、11048、11049、11050、11051、11052、11053、11054、11055、11056、11057、11058、11059"/>
+          <attvalue for="n4" value="52"/>
+          <attvalue for="n5" value="11001、11003、11004、11005、11006、11007、11008、11009、11010、11013、11014、11015、11016、11017、11018、11019、11020、11021、11022、11023、11024、11026、11027、11030、11031、11032、11033、11034、11035、11037、11038、11039、11040、11041、11042、11043、11044、11045、11046、11047、11048、11049、11050、11051、11052、11053、11054、11055、11056、11057、11058、11059"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11006、11009、11020、11022、11032、11039、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11003" label="11003">
+        <attvalues>
+          <attvalue for="n0" value="11003"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11035、11038、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11035、11038、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11004" label="11004">
+        <attvalues>
+          <attvalue for="n0" value="11004"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="11"/>
+          <attvalue for="n3" value="11002、11006、11009、11016、11022、11029、11032、11038、11042、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="11"/>
+          <attvalue for="n7" value="11002、11006、11009、11016、11022、11029、11032、11038、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11005" label="11005">
+        <attvalues>
+          <attvalue for="n0" value="11005"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="10"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11032、11035、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="10"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11032、11035、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11006" label="11006">
+        <attvalues>
+          <attvalue for="n0" value="11006"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="48"/>
+          <attvalue for="n3" value="11002、11003、11004、11005、11007、11008、11009、11012、11015、11016、11017、11018、11019、11020、11022、11023、11024、11026、11027、11028、11029、11030、11031、11032、11033、11034、11035、11036、11038、11039、11040、11041、11042、11043、11044、11045、11046、11047、11048、11049、11050、11051、11052、11054、11055、11056、11058、11059"/>
+          <attvalue for="n4" value="46"/>
+          <attvalue for="n5" value="11002、11003、11004、11005、11007、11008、11009、11012、11015、11016、11017、11018、11019、11020、11022、11023、11024、11026、11027、11028、11029、11030、11031、11032、11033、11034、11035、11036、11038、11039、11040、11041、11042、11044、11045、11046、11047、11048、11049、11050、11051、11052、11054、11056、11058、11059"/>
+          <attvalue for="n6" value="10"/>
+          <attvalue for="n7" value="11002、11009、11016、11022、11029、11032、11035、11038、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11007" label="11007">
+        <attvalues>
+          <attvalue for="n0" value="11007"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="7"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11008" label="11008">
+        <attvalues>
+          <attvalue for="n0" value="11008"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="4"/>
+          <attvalue for="n3" value="11002、11006、11022、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="4"/>
+          <attvalue for="n7" value="11002、11006、11022、11043"/>
+        </attvalues>
+      </node>
+      <node id="11009" label="11009">
+        <attvalues>
+          <attvalue for="n0" value="11009"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="35"/>
+          <attvalue for="n3" value="11002、11003、11004、11005、11006、11007、11011、11014、11016、11017、11021、11022、11023、11027、11029、11030、11031、11032、11033、11035、11036、11038、11039、11040、11041、11042、11043、11045、11047、11049、11051、11052、11053、11056、11059"/>
+          <attvalue for="n4" value="35"/>
+          <attvalue for="n5" value="11002、11003、11004、11005、11006、11007、11011、11014、11016、11017、11021、11022、11023、11027、11029、11030、11031、11032、11033、11035、11036、11038、11039、11040、11041、11042、11043、11045、11047、11049、11051、11052、11053、11056、11059"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11002、11006、11022、11039、11043"/>
+        </attvalues>
+      </node>
+      <node id="11010" label="11010">
+        <attvalues>
+          <attvalue for="n0" value="11010"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="5"/>
+          <attvalue for="n3" value="11002、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11002、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11011" label="11011">
+        <attvalues>
+          <attvalue for="n0" value="11011"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="5"/>
+          <attvalue for="n3" value="11009、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11009、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11012" label="11012">
+        <attvalues>
+          <attvalue for="n0" value="11012"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="5"/>
+          <attvalue for="n3" value="11006、11020、11022、11035、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11006、11020、11022、11035、11043"/>
+        </attvalues>
+      </node>
+      <node id="11013" label="11013">
+        <attvalues>
+          <attvalue for="n0" value="11013"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="5"/>
+          <attvalue for="n3" value="11002、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11002、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11014" label="11014">
+        <attvalues>
+          <attvalue for="n0" value="11014"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11009、11022、11029、11038、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11009、11022、11029、11038、11043"/>
+        </attvalues>
+      </node>
+      <node id="11015" label="11015">
+        <attvalues>
+          <attvalue for="n0" value="11015"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="7"/>
+          <attvalue for="n3" value="11002、11006、11016、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11002、11006、11016、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11016" label="11016">
+        <attvalues>
+          <attvalue for="n0" value="11016"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="18"/>
+          <attvalue for="n3" value="11002、11004、11006、11009、11015、11019、11021、11022、11027、11033、11038、11039、11043、11044、11046、11048、11053、11055"/>
+          <attvalue for="n4" value="13"/>
+          <attvalue for="n5" value="11004、11006、11015、11019、11021、11027、11033、11039、11043、11044、11046、11048、11053"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11017" label="11017">
+        <attvalues>
+          <attvalue for="n0" value="11017"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11035、11038、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11035、11038、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11018" label="11018">
+        <attvalues>
+          <attvalue for="n0" value="11018"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11002、11006、11020、11022、11038、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11020、11022、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11019" label="11019">
+        <attvalues>
+          <attvalue for="n0" value="11019"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="11"/>
+          <attvalue for="n3" value="11002、11006、11016、11020、11022、11035、11038、11039、11042、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="11"/>
+          <attvalue for="n7" value="11002、11006、11016、11020、11022、11035、11038、11039、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11020" label="11020">
+        <attvalues>
+          <attvalue for="n0" value="11020"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="25"/>
+          <attvalue for="n3" value="11002、11005、11006、11012、11017、11018、11019、11022、11023、11024、11027、11031、11033、11035、11037、11039、11043、11044、11045、11047、11051、11055、11056、11058、11059"/>
+          <attvalue for="n4" value="24"/>
+          <attvalue for="n5" value="11002、11005、11012、11017、11018、11019、11022、11023、11024、11027、11031、11033、11035、11037、11039、11043、11044、11045、11047、11051、11055、11056、11058、11059"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11006、11022、11035、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11021" label="11021">
+        <attvalues>
+          <attvalue for="n0" value="11021"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="7"/>
+          <attvalue for="n3" value="11002、11009、11016、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11002、11009、11016、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11022" label="11022">
+        <attvalues>
+          <attvalue for="n0" value="11022"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="58"/>
+          <attvalue for="n3" value="11001、11002、11003、11004、11005、11006、11007、11008、11009、11010、11011、11012、11013、11014、11015、11016、11017、11018、11019、11020、11021、11023、11024、11025、11026、11027、11028、11029、11030、11031、11032、11033、11034、11035、11036、11037、11038、11039、11040、11041、11042、11043、11044、11045、11046、11047、11048、11049、11050、11051、11052、11053、11054、11055、11056、11057、11058、11059"/>
+          <attvalue for="n4" value="58"/>
+          <attvalue for="n5" value="11001、11002、11003、11004、11005、11006、11007、11008、11009、11010、11011、11012、11013、11014、11015、11016、11017、11018、11019、11020、11021、11023、11024、11025、11026、11027、11028、11029、11030、11031、11032、11033、11034、11035、11036、11037、11038、11039、11040、11041、11042、11043、11044、11045、11046、11047、11048、11049、11050、11051、11052、11053、11054、11055、11056、11057、11058、11059"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11035、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11023" label="11023">
+        <attvalues>
+          <attvalue for="n0" value="11023"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="10"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11032、11035、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="10"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11032、11035、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11024" label="11024">
+        <attvalues>
+          <attvalue for="n0" value="11024"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11006、11020、11022、11038、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11006、11020、11022、11038、11043"/>
+        </attvalues>
+      </node>
+      <node id="11025" label="11025">
+        <attvalues>
+          <attvalue for="n0" value="11025"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="4"/>
+          <attvalue for="n3" value="11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="4"/>
+          <attvalue for="n7" value="11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11026" label="11026">
+        <attvalues>
+          <attvalue for="n0" value="11026"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="4"/>
+          <attvalue for="n3" value="11002、11006、11022、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="4"/>
+          <attvalue for="n7" value="11002、11006、11022、11043"/>
+        </attvalues>
+      </node>
+      <node id="11027" label="11027">
+        <attvalues>
+          <attvalue for="n0" value="11027"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="10"/>
+          <attvalue for="n3" value="11002、11006、11009、11016、11020、11022、11038、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="10"/>
+          <attvalue for="n7" value="11002、11006、11009、11016、11020、11022、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11028" label="11028">
+        <attvalues>
+          <attvalue for="n0" value="11028"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11006、11022、11029、11032、11038、11039、11042、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11006、11022、11029、11032、11038、11039、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11029" label="11029">
+        <attvalues>
+          <attvalue for="n0" value="11029"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="12"/>
+          <attvalue for="n3" value="11004、11006、11009、11014、11022、11028、11038、11040、11042、11043、11044、11055"/>
+          <attvalue for="n4" value="8"/>
+          <attvalue for="n5" value="11004、11006、11014、11028、11038、11040、11043、11044"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11006、11009、11022、11038、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11030" label="11030">
+        <attvalues>
+          <attvalue for="n0" value="11030"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11038、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11031" label="11031">
+        <attvalues>
+          <attvalue for="n0" value="11031"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11038、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11032" label="11032">
+        <attvalues>
+          <attvalue for="n0" value="11032"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="14"/>
+          <attvalue for="n3" value="11002、11004、11005、11006、11009、11022、11023、11028、11035、11036、11038、11042、11043、11055"/>
+          <attvalue for="n4" value="11"/>
+          <attvalue for="n5" value="11002、11004、11005、11006、11023、11028、11035、11036、11038、11042、11043"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11035、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11033" label="11033">
+        <attvalues>
+          <attvalue for="n0" value="11033"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="10"/>
+          <attvalue for="n3" value="11002、11006、11009、11016、11020、11022、11035、11038、11039、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="10"/>
+          <attvalue for="n7" value="11002、11006、11009、11016、11020、11022、11035、11038、11039、11043"/>
+        </attvalues>
+      </node>
+      <node id="11034" label="11034">
+        <attvalues>
+          <attvalue for="n0" value="11034"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="5"/>
+          <attvalue for="n3" value="11002、11006、11022、11039、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11002、11006、11022、11039、11043"/>
+        </attvalues>
+      </node>
+      <node id="11035" label="11035">
+        <attvalues>
+          <attvalue for="n0" value="11035"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="22"/>
+          <attvalue for="n3" value="11001、11002、11003、11005、11006、11009、11012、11017、11019、11020、11022、11023、11032、11033、11038、11042、11043、11045、11047、11051、11058、11059"/>
+          <attvalue for="n4" value="20"/>
+          <attvalue for="n5" value="11001、11003、11005、11006、11012、11017、11019、11020、11022、11023、11032、11033、11038、11042、11043、11045、11047、11051、11058、11059"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11032、11038、11042、11043"/>
+        </attvalues>
+      </node>
+      <node id="11036" label="11036">
+        <attvalues>
+          <attvalue for="n0" value="11036"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11006、11009、11022、11032、11038、11042、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11006、11009、11022、11032、11038、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11037" label="11037">
+        <attvalues>
+          <attvalue for="n0" value="11037"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11020、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11020、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11038" label="11038">
+        <attvalues>
+          <attvalue for="n0" value="11038"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="31"/>
+          <attvalue for="n3" value="11002、11003、11004、11006、11009、11014、11016、11017、11018、11019、11022、11024、11027、11028、11029、11030、11031、11032、11033、11035、11036、11039、11041、11042、11043、11044、11045、11049、11051、11052、11055"/>
+          <attvalue for="n4" value="26"/>
+          <attvalue for="n5" value="11003、11004、11006、11014、11016、11017、11018、11019、11022、11024、11027、11028、11029、11030、11031、11033、11035、11036、11041、11042、11043、11044、11045、11049、11051、11052"/>
+          <attvalue for="n6" value="11"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11029、11032、11035、11039、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11039" label="11039">
+        <attvalues>
+          <attvalue for="n0" value="11039"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="38"/>
+          <attvalue for="n3" value="11001、11002、11005、11006、11007、11009、11010、11011、11013、11015、11016、11018、11019、11020、11021、11022、11023、11025、11027、11028、11030、11031、11033、11034、11037、11038、11040、11043、11044、11046、11047、11048、11050、11052、11053、11055、11056、11058"/>
+          <attvalue for="n4" value="36"/>
+          <attvalue for="n5" value="11001、11002、11005、11007、11009、11010、11011、11013、11015、11016、11018、11019、11021、11022、11023、11025、11027、11028、11030、11031、11033、11034、11037、11038、11040、11043、11044、11046、11047、11048、11050、11052、11053、11055、11056、11058"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11009、11016、11020、11022、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11040" label="11040">
+        <attvalues>
+          <attvalue for="n0" value="11040"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="7"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11029、11039、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11029、11039、11043"/>
+        </attvalues>
+      </node>
+      <node id="11041" label="11041">
+        <attvalues>
+          <attvalue for="n0" value="11041"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11038、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11038、11043"/>
+        </attvalues>
+      </node>
+      <node id="11042" label="11042">
+        <attvalues>
+          <attvalue for="n0" value="11042"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="16"/>
+          <attvalue for="n3" value="11002、11004、11006、11009、11019、11022、11028、11029、11032、11035、11036、11038、11043、11048、11055、11056"/>
+          <attvalue for="n4" value="12"/>
+          <attvalue for="n5" value="11002、11004、11019、11028、11029、11032、11035、11036、11038、11043、11048、11056"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11032、11035、11038、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11043" label="11043">
+        <attvalues>
+          <attvalue for="n0" value="11043"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="58"/>
+          <attvalue for="n3" value="11001、11002、11003、11004、11005、11006、11007、11008、11009、11010、11011、11012、11013、11014、11015、11016、11017、11018、11019、11020、11021、11022、11023、11024、11025、11026、11027、11028、11029、11030、11031、11032、11033、11034、11035、11036、11037、11038、11039、11040、11041、11042、11044、11045、11046、11047、11048、11049、11050、11051、11052、11053、11054、11055、11056、11057、11058、11059"/>
+          <attvalue for="n4" value="58"/>
+          <attvalue for="n5" value="11001、11002、11003、11004、11005、11006、11007、11008、11009、11010、11011、11012、11013、11014、11015、11016、11017、11018、11019、11020、11021、11022、11023、11024、11025、11026、11027、11028、11029、11030、11031、11032、11033、11034、11035、11036、11037、11038、11039、11040、11041、11042、11044、11045、11046、11047、11048、11049、11050、11051、11052、11053、11054、11055、11056、11057、11058、11059"/>
+          <attvalue for="n6" value="12"/>
+          <attvalue for="n7" value="11002、11009、11016、11020、11022、11029、11032、11035、11038、11039、11042、11055"/>
+        </attvalues>
+      </node>
+      <node id="11044" label="11044">
+        <attvalues>
+          <attvalue for="n0" value="11044"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="10"/>
+          <attvalue for="n3" value="11002、11006、11016、11020、11022、11029、11038、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="10"/>
+          <attvalue for="n7" value="11002、11006、11016、11020、11022、11029、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11045" label="11045">
+        <attvalues>
+          <attvalue for="n0" value="11045"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11035、11038、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11035、11038、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11046" label="11046">
+        <attvalues>
+          <attvalue for="n0" value="11046"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="7"/>
+          <attvalue for="n3" value="11002、11006、11016、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11002、11006、11016、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11047" label="11047">
+        <attvalues>
+          <attvalue for="n0" value="11047"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11035、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11035、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11048" label="11048">
+        <attvalues>
+          <attvalue for="n0" value="11048"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11002、11006、11016、11022、11039、11042、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11016、11022、11039、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11049" label="11049">
+        <attvalues>
+          <attvalue for="n0" value="11049"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11038、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11038、11043"/>
+        </attvalues>
+      </node>
+      <node id="11050" label="11050">
+        <attvalues>
+          <attvalue for="n0" value="11050"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11006、11022、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11006、11022、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11051" label="11051">
+        <attvalues>
+          <attvalue for="n0" value="11051"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11035、11038、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11035、11038、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11052" label="11052">
+        <attvalues>
+          <attvalue for="n0" value="11052"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11002、11006、11009、11022、11038、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11009、11022、11038、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11053" label="11053">
+        <attvalues>
+          <attvalue for="n0" value="11053"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="6"/>
+          <attvalue for="n3" value="11002、11009、11016、11022、11039、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="6"/>
+          <attvalue for="n7" value="11002、11009、11016、11022、11039、11043"/>
+        </attvalues>
+      </node>
+      <node id="11054" label="11054">
+        <attvalues>
+          <attvalue for="n0" value="11054"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="4"/>
+          <attvalue for="n3" value="11002、11006、11022、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="4"/>
+          <attvalue for="n7" value="11002、11006、11022、11043"/>
+        </attvalues>
+      </node>
+      <node id="11055" label="11055">
+        <attvalues>
+          <attvalue for="n0" value="11055"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="42"/>
+          <attvalue for="n3" value="11001、11002、11003、11004、11005、11006、11007、11010、11011、11013、11015、11016、11017、11018、11019、11020、11021、11022、11023、11025、11027、11028、11029、11030、11031、11032、11036、11037、11038、11039、11042、11043、11044、11045、11046、11047、11048、11050、11051、11052、11056、11058"/>
+          <attvalue for="n4" value="42"/>
+          <attvalue for="n5" value="11001、11002、11003、11004、11005、11006、11007、11010、11011、11013、11015、11016、11017、11018、11019、11020、11021、11022、11023、11025、11027、11028、11029、11030、11031、11032、11036、11037、11038、11039、11042、11043、11044、11045、11046、11047、11048、11050、11051、11052、11056、11058"/>
+          <attvalue for="n6" value="5"/>
+          <attvalue for="n7" value="11002、11020、11022、11039、11043"/>
+        </attvalues>
+      </node>
+      <node id="11056" label="11056">
+        <attvalues>
+          <attvalue for="n0" value="11056"/>
+          <attvalue for="n1" value="行政身分"/>
+          <attvalue for="n2" value="9"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11039、11042、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="9"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11039、11042、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11057" label="11057">
+        <attvalues>
+          <attvalue for="n0" value="11057"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="3"/>
+          <attvalue for="n3" value="11002、11022、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="3"/>
+          <attvalue for="n7" value="11002、11022、11043"/>
+        </attvalues>
+      </node>
+      <node id="11058" label="11058">
+        <attvalues>
+          <attvalue for="n0" value="11058"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="8"/>
+          <attvalue for="n3" value="11002、11006、11020、11022、11035、11039、11043、11055"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="8"/>
+          <attvalue for="n7" value="11002、11006、11020、11022、11035、11039、11043、11055"/>
+        </attvalues>
+      </node>
+      <node id="11059" label="11059">
+        <attvalues>
+          <attvalue for="n0" value="11059"/>
+          <attvalue for="n1" value="教師身分"/>
+          <attvalue for="n2" value="7"/>
+          <attvalue for="n3" value="11002、11006、11009、11020、11022、11035、11043"/>
+          <attvalue for="n4" value="0"/>
+          <attvalue for="n5" value="無"/>
+          <attvalue for="n6" value="7"/>
+          <attvalue for="n7" value="11002、11006、11009、11020、11022、11035、11043"/>
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="11002" target="11001" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="1" source="11002" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="2" source="11002" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="3" source="11002" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="4" source="11002" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="5" source="11002" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="6" source="11002" target="11008" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="7" source="11002" target="11009" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="8" source="11002" target="11010" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="9" source="11002" target="11013" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="10" source="11002" target="11014" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="11" source="11002" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="12" source="11002" target="11016" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="13" source="11002" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="14" source="11002" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="15" source="11002" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="16" source="11002" target="11020" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="17" source="11002" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="18" source="11002" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="19" source="11002" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="20" source="11002" target="11024" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="21" source="11002" target="11026" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="22" source="11002" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="23" source="11002" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="24" source="11002" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="25" source="11002" target="11032" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="26" source="11002" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="27" source="11002" target="11034" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="28" source="11002" target="11035" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="29" source="11002" target="11037" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="30" source="11002" target="11038" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="31" source="11002" target="11039" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="32" source="11002" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="33" source="11002" target="11041" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="34" source="11002" target="11042" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="35" source="11002" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="36" source="11002" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="37" source="11002" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="38" source="11002" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="39" source="11002" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="40" source="11002" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="41" source="11002" target="11049" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="42" source="11002" target="11050" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="43" source="11002" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="44" source="11002" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="45" source="11002" target="11053" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="46" source="11002" target="11054" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="47" source="11002" target="11055" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="48" source="11002" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="49" source="11002" target="11057" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="50" source="11002" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="51" source="11002" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="52" source="11006" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="53" source="11006" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="54" source="11006" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="55" source="11006" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="56" source="11006" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="57" source="11006" target="11008" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="58" source="11006" target="11009" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="59" source="11006" target="11012" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="60" source="11006" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="61" source="11006" target="11016" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="62" source="11006" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="63" source="11006" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="64" source="11006" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="65" source="11006" target="11020" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="66" source="11006" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="67" source="11006" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="68" source="11006" target="11024" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="69" source="11006" target="11026" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="70" source="11006" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="71" source="11006" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="72" source="11006" target="11029" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="73" source="11006" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="74" source="11006" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="75" source="11006" target="11032" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="76" source="11006" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="77" source="11006" target="11034" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="78" source="11006" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="79" source="11006" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="80" source="11006" target="11038" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="81" source="11006" target="11039" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="82" source="11006" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="83" source="11006" target="11041" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="84" source="11006" target="11042" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="85" source="11006" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="86" source="11006" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="87" source="11006" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="88" source="11006" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="89" source="11006" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="90" source="11006" target="11049" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="91" source="11006" target="11050" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="92" source="11006" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="93" source="11006" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="94" source="11006" target="11054" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="95" source="11006" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="96" source="11006" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="97" source="11006" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="98" source="11009" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="99" source="11009" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="100" source="11009" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="101" source="11009" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="102" source="11009" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="103" source="11009" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="104" source="11009" target="11011" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="105" source="11009" target="11014" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="106" source="11009" target="11016" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="107" source="11009" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="108" source="11009" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="109" source="11009" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="110" source="11009" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="111" source="11009" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="112" source="11009" target="11029" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="113" source="11009" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="114" source="11009" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="115" source="11009" target="11032" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="116" source="11009" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="117" source="11009" target="11035" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="118" source="11009" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="119" source="11009" target="11038" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="120" source="11009" target="11039" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="121" source="11009" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="122" source="11009" target="11041" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="123" source="11009" target="11042" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="124" source="11009" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="125" source="11009" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="126" source="11009" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="127" source="11009" target="11049" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="128" source="11009" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="129" source="11009" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="130" source="11009" target="11053" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="131" source="11009" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="132" source="11009" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="133" source="11016" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="134" source="11016" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="135" source="11016" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="136" source="11016" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="137" source="11016" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="138" source="11016" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="139" source="11016" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="140" source="11016" target="11039" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="141" source="11016" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="142" source="11016" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="143" source="11016" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="144" source="11016" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="145" source="11016" target="11053" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="146" source="11020" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="147" source="11020" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="148" source="11020" target="11012" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="149" source="11020" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="150" source="11020" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="151" source="11020" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="152" source="11020" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="153" source="11020" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="154" source="11020" target="11024" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="155" source="11020" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="156" source="11020" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="157" source="11020" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="158" source="11020" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="159" source="11020" target="11037" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="160" source="11020" target="11039" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="161" source="11020" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="162" source="11020" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="163" source="11020" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="164" source="11020" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="165" source="11020" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="166" source="11020" target="11055" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="167" source="11020" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="168" source="11020" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="169" source="11020" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="170" source="11022" target="11001" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="171" source="11022" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="172" source="11022" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="173" source="11022" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="174" source="11022" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="175" source="11022" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="176" source="11022" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="177" source="11022" target="11008" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="178" source="11022" target="11009" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="179" source="11022" target="11010" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="180" source="11022" target="11011" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="181" source="11022" target="11012" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="182" source="11022" target="11013" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="183" source="11022" target="11014" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="184" source="11022" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="185" source="11022" target="11016" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="186" source="11022" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="187" source="11022" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="188" source="11022" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="189" source="11022" target="11020" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="190" source="11022" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="191" source="11022" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="192" source="11022" target="11024" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="193" source="11022" target="11025" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="194" source="11022" target="11026" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="195" source="11022" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="196" source="11022" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="197" source="11022" target="11029" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="198" source="11022" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="199" source="11022" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="200" source="11022" target="11032" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="201" source="11022" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="202" source="11022" target="11034" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="203" source="11022" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="204" source="11022" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="205" source="11022" target="11037" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="206" source="11022" target="11038" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="207" source="11022" target="11039" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="208" source="11022" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="209" source="11022" target="11041" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="210" source="11022" target="11042" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="211" source="11022" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="212" source="11022" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="213" source="11022" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="214" source="11022" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="215" source="11022" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="216" source="11022" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="217" source="11022" target="11049" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="218" source="11022" target="11050" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="219" source="11022" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="220" source="11022" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="221" source="11022" target="11053" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="222" source="11022" target="11054" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="223" source="11022" target="11055" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="224" source="11022" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="225" source="11022" target="11057" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="226" source="11022" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="227" source="11022" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="228" source="11029" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="229" source="11029" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="230" source="11029" target="11014" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="231" source="11029" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="232" source="11029" target="11038" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="233" source="11029" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="234" source="11029" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="235" source="11029" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="236" source="11032" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="237" source="11032" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="238" source="11032" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="239" source="11032" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="240" source="11032" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="241" source="11032" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="242" source="11032" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="243" source="11032" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="244" source="11032" target="11038" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="245" source="11032" target="11042" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="246" source="11032" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="247" source="11035" target="11001" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="248" source="11035" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="249" source="11035" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="250" source="11035" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="251" source="11035" target="11012" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="252" source="11035" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="253" source="11035" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="254" source="11035" target="11020" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="255" source="11035" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="256" source="11035" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="257" source="11035" target="11032" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="258" source="11035" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="259" source="11035" target="11038" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="260" source="11035" target="11042" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="261" source="11035" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="262" source="11035" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="263" source="11035" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="264" source="11035" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="265" source="11035" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="266" source="11035" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="267" source="11038" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="268" source="11038" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="269" source="11038" target="11006" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="270" source="11038" target="11014" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="271" source="11038" target="11016" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="272" source="11038" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="273" source="11038" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="274" source="11038" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="275" source="11038" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="276" source="11038" target="11024" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="277" source="11038" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="278" source="11038" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="279" source="11038" target="11029" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="280" source="11038" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="281" source="11038" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="282" source="11038" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="283" source="11038" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="284" source="11038" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="285" source="11038" target="11041" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="286" source="11038" target="11042" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="287" source="11038" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="288" source="11038" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="289" source="11038" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="290" source="11038" target="11049" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="291" source="11038" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="292" source="11038" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="293" source="11039" target="11001" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="294" source="11039" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="295" source="11039" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="296" source="11039" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="297" source="11039" target="11009" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="298" source="11039" target="11010" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="299" source="11039" target="11011" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="300" source="11039" target="11013" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="301" source="11039" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="302" source="11039" target="11016" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="303" source="11039" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="304" source="11039" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="305" source="11039" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="306" source="11039" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="307" source="11039" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="308" source="11039" target="11025" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="309" source="11039" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="310" source="11039" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="311" source="11039" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="312" source="11039" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="313" source="11039" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="314" source="11039" target="11034" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="315" source="11039" target="11037" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="316" source="11039" target="11038" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="317" source="11039" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="318" source="11039" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="319" source="11039" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="320" source="11039" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="321" source="11039" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="322" source="11039" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="323" source="11039" target="11050" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="324" source="11039" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="325" source="11039" target="11053" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="326" source="11039" target="11055" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="327" source="11039" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="328" source="11039" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="329" source="11042" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="330" source="11042" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="331" source="11042" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="332" source="11042" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="333" source="11042" target="11029" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="334" source="11042" target="11032" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="335" source="11042" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="336" source="11042" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="337" source="11042" target="11038" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="338" source="11042" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="339" source="11042" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="340" source="11042" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="341" source="11043" target="11001" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="342" source="11043" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="343" source="11043" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="344" source="11043" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="345" source="11043" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="346" source="11043" target="11006" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="347" source="11043" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="348" source="11043" target="11008" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="349" source="11043" target="11009" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="350" source="11043" target="11010" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="351" source="11043" target="11011" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="352" source="11043" target="11012" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="353" source="11043" target="11013" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="354" source="11043" target="11014" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="355" source="11043" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="356" source="11043" target="11016" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="357" source="11043" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="358" source="11043" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="359" source="11043" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="360" source="11043" target="11020" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="361" source="11043" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="362" source="11043" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="363" source="11043" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="364" source="11043" target="11024" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="365" source="11043" target="11025" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="366" source="11043" target="11026" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="367" source="11043" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="368" source="11043" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="369" source="11043" target="11029" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="370" source="11043" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="371" source="11043" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="372" source="11043" target="11032" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="373" source="11043" target="11033" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="374" source="11043" target="11034" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="375" source="11043" target="11035" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="376" source="11043" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="377" source="11043" target="11037" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="378" source="11043" target="11038" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="379" source="11043" target="11039" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="380" source="11043" target="11040" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="381" source="11043" target="11041" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="382" source="11043" target="11042" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="383" source="11043" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="384" source="11043" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="385" source="11043" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="386" source="11043" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="387" source="11043" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="388" source="11043" target="11049" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="389" source="11043" target="11050" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="390" source="11043" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="391" source="11043" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="392" source="11043" target="11053" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="393" source="11043" target="11054" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="394" source="11043" target="11055" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="395" source="11043" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="396" source="11043" target="11057" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="397" source="11043" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="398" source="11043" target="11059" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="399" source="11055" target="11001" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="400" source="11055" target="11002" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="401" source="11055" target="11003" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="402" source="11055" target="11004" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="403" source="11055" target="11005" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="404" source="11055" target="11006" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="405" source="11055" target="11007" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="406" source="11055" target="11010" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="407" source="11055" target="11011" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="408" source="11055" target="11013" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="409" source="11055" target="11015" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="410" source="11055" target="11016" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="411" source="11055" target="11017" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="412" source="11055" target="11018" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="413" source="11055" target="11019" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="414" source="11055" target="11020" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="415" source="11055" target="11021" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="416" source="11055" target="11022" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="417" source="11055" target="11023" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="418" source="11055" target="11025" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="419" source="11055" target="11027" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="420" source="11055" target="11028" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="421" source="11055" target="11029" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="422" source="11055" target="11030" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="423" source="11055" target="11031" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="424" source="11055" target="11032" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="425" source="11055" target="11036" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="426" source="11055" target="11037" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="427" source="11055" target="11038" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="428" source="11055" target="11039" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="429" source="11055" target="11042" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="430" source="11055" target="11043" type="directed" weight="1" label="雙向">
+        <attvalues>
+          <attvalue for="e0" value="雙向"/>
+        </attvalues>
+      </edge>
+      <edge id="431" source="11055" target="11044" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="432" source="11055" target="11045" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="433" source="11055" target="11046" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="434" source="11055" target="11047" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="435" source="11055" target="11048" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="436" source="11055" target="11050" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="437" source="11055" target="11051" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="438" source="11055" target="11052" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="439" source="11055" target="11056" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+      <edge id="440" source="11055" target="11058" type="directed" weight="1" label="單向">
+        <attvalues>
+          <attvalue for="e0" value="單向"/>
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
