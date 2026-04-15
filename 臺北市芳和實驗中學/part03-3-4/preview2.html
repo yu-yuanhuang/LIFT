@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700;800;900&display=swap" rel="stylesheet">
-<title>芳和實中_校內網絡_課程與教學</title>
+<title>network2 一模網絡圖</title>
 <style>
 :root{
   --bg:#f3eee8;
@@ -199,12 +199,12 @@ button,select,input{font:inherit;}
         </div>
         <div class="brand-copy">
           <p class="eyebrow">LIFT學習生態系統｜一模網絡圖</p>
-          <h1>芳和實中｜校內網絡_課程與教學</h1>
+          <h1>network2｜一模網絡圖</h1>
         </div>
       </div>
       <div class="headbar-actions">
         <button id="headBarCollapse" type="button" aria-expanded="false" aria-label="展開資訊" title="展開資訊">展開資訊</button>
-        <a class="meta-pill" href="https://yu-yuanhuang.github.io/LIFT/臺北市芳和實驗中學/#part3">返回原報告首頁</a>
+        <a class="meta-pill" href="#">返回原報告首頁</a>
       </div>
     </div>
     
@@ -220,7 +220,7 @@ button,select,input{font:inherit;}
 
   <div id="panel">
     <h3>網絡設定</h3>
-    <p class="panel-sub">依network2.gexf顯示一模網絡圖，節點以行政團隊區分教師／行政身分，大小依Indegree，邊為有向箭頭，標籤僅顯示ID。</p>
+    <p class="panel-sub">依network2.gexf顯示一模網絡圖，依行政團隊區分教師／行政身分，節點大小依Indegree，邊為有向箭頭，標籤僅顯示ID。</p>
 
     <div class="select-wrap custom-select" id="layoutModeWrap">
       <select id="layoutMode" class="native-select" aria-label="布局模式">
@@ -345,23 +345,37 @@ button,select,input{font:inherit;}
     draw();
   }
 
+
   function parseGexf(xmlText) {
     const parser = new DOMParser();
     const xml = parser.parseFromString(xmlText, 'application/xml');
     const parseErr = xml.querySelector('parsererror');
     if (parseErr) throw new Error('GEXF XML格式錯誤');
 
+    const allEls = Array.from(xml.getElementsByTagName('*'));
+    const byLocalName = (name, root) => Array.from((root || xml).getElementsByTagName('*')).filter(el => el.localName === name);
+    const firstLocal = (root, names) => {
+      const list = Array.isArray(names) ? names : [names];
+      return Array.from((root || xml).getElementsByTagName('*')).find(el => list.includes(el.localName)) || null;
+    };
+
     const attrDefs = {};
-    xml.querySelectorAll('graph > attributes[class="node"] > attribute').forEach(attr => {
-      attrDefs[attr.getAttribute('id')] = attr.getAttribute('title');
-    });
+    allEls
+      .filter(el => el.localName === 'attributes' && (el.getAttribute('class') || '').toLowerCase() === 'node')
+      .forEach(groupEl => {
+        Array.from(groupEl.children)
+          .filter(el => el.localName === 'attribute')
+          .forEach(attr => {
+            attrDefs[attr.getAttribute('id')] = attr.getAttribute('title') || attr.getAttribute('id');
+          });
+      });
 
     const nodes = [];
-    xml.querySelectorAll('graph > nodes > node').forEach(nodeEl => {
+    byLocalName('node').forEach(nodeEl => {
       const attrs = {};
-      nodeEl.querySelectorAll('attvalue').forEach(av => {
+      byLocalName('attvalue', nodeEl).forEach(av => {
         const key = av.getAttribute('for');
-        attrs[key] = av.getAttribute('value');
+        if (key != null) attrs[key] = av.getAttribute('value') || '';
       });
 
       const titleMap = {};
@@ -369,48 +383,67 @@ button,select,input{font:inherit;}
         titleMap[attrDefs[k] || k] = attrs[k];
       });
 
-      const posEl = nodeEl.querySelector('position, viz\\:position');
-      const colorEl = nodeEl.querySelector('color, viz\\:color');
-
-      const role = String(
+      const posEl = firstLocal(nodeEl, 'position');
+      const rawRole = String(
+        titleMap['點身分別'] ??
         titleMap['身分別'] ??
         titleMap['role'] ??
-        attrs['role'] ??
-        attrs['role_attr'] ??
+        attrs['1'] ??
         attrs['身分別'] ??
         ''
       ).trim();
 
-      const adminValue = String(
-        titleMap['行政團隊'] ??
-        attrs['admin_attr'] ??
-        attrs['行政團隊'] ??
-        (role === '行政身分' ? '1' : '0')
+      const rawName = String(
+        titleMap['點名稱'] ??
+        attrs['0'] ??
+        nodeEl.getAttribute('label') ??
+        nodeEl.getAttribute('id') ??
+        ''
       ).trim();
 
+      const adminValue = /行政/.test(rawRole) ? '1' : '0';
+      const role = adminValue === '1' ? '行政身分' : '教師身分';
+
       const indegree = Number(
-        titleMap['indegree'] ?? titleMap['Indegree'] ?? attrs['indeg_attr'] ?? attrs['indegree'] ?? 0
+        titleMap['Indegree'] ??
+        titleMap['indegree'] ??
+        attrs['2'] ??
+        attrs['indeg_attr'] ??
+        attrs['indegree'] ??
+        0
       ) || 0;
 
       const outdegree = Number(
-        titleMap['outdegree'] ?? titleMap['Outdegree'] ?? attrs['outdeg_attr'] ?? attrs['outdegree'] ?? 0
+        titleMap['Outdegree'] ??
+        titleMap['outdegree'] ??
+        attrs['3'] ??
+        attrs['outdeg_attr'] ??
+        attrs['outdegree'] ??
+        0
       ) || 0;
+
+      const links = String(
+        titleMap['連結對象'] ??
+        attrs['4'] ??
+        ''
+      ).trim();
 
       let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
       let y = Number(posEl ? posEl.getAttribute('y') : 0) || 0;
       y = -y;
 
-      let color = adminValue === '1' ? COLORS.admin : COLORS.teacher;
-
       nodes.push({
         id: nodeEl.getAttribute('id'),
         label: nodeEl.getAttribute('id'),
+        displayId: nodeEl.getAttribute('id'),
+        originalName: rawName,
         adminValue,
         role,
         group: adminValue === '1' ? 'admin' : 'teacher',
         indegree,
         outdegree,
-        color,
+        links,
+        color: adminValue === '1' ? COLORS.admin : COLORS.teacher,
         radius: 12,
         x, y,
         baseX: x,
@@ -419,12 +452,13 @@ button,select,input{font:inherit;}
     });
 
     const edges = [];
-    xml.querySelectorAll('graph > edges > edge').forEach((edgeEl, idx) => {
+    byLocalName('edge').forEach((edgeEl, idx) => {
       edges.push({
         id: edgeEl.getAttribute('id') || ('e' + idx),
         source: edgeEl.getAttribute('source'),
         target: edgeEl.getAttribute('target'),
-        weight: Number(edgeEl.getAttribute('weight') || 1) || 1
+        weight: Number(edgeEl.getAttribute('weight') || 1),
+        directed: true
       });
     });
 
