@@ -204,7 +204,7 @@ button,select,input{font:inherit;}
       </div>
       <div class="headbar-actions">
         <button id="headBarCollapse" type="button" aria-expanded="false" aria-label="展開資訊" title="展開資訊">展開資訊</button>
-        <a class="meta-pill" href="https://yu-yuanhuang.github.io/LIFT/臺北市芳和實驗中學/#part3">返回原報告首頁</a>
+        <a class="meta-pill" href="#">返回原報告首頁</a>
       </div>
     </div>
     
@@ -220,7 +220,7 @@ button,select,input{font:inherit;}
 
   <div id="panel">
     <h3>網絡設定</h3>
-    <p class="panel-sub">介面風格比照主站視覺系統，保留一模網絡的節點身分類別、箭頭方向與ID顯示。</p>
+    <p class="panel-sub">依network2.gexf顯示一模網絡圖，依行政團隊區分教師／行政身分，節點大小依Indegree，邊為有向箭頭，標籤僅顯示ID。</p>
 
     <div class="select-wrap custom-select" id="layoutModeWrap">
       <select id="layoutMode" class="native-select" aria-label="布局模式">
@@ -370,24 +370,29 @@ button,select,input{font:inherit;}
       });
 
       const posEl = nodeEl.querySelector('position, viz\\:position');
-      const colorEl = nodeEl.querySelector('color, viz\\:color');
-
-      const adminValue = String(
-        titleMap['行政團隊'] ?? attrs['admin_attr'] ?? attrs['行政團隊'] ?? '0'
-      ).trim();
 
       const role = String(
         titleMap['身分別'] ??
+        titleMap['role'] ??
+        attrs['role'] ??
         attrs['role_attr'] ??
-        (adminValue === '1' ? '行政身分' : '教師身分')
+        attrs['身分別'] ??
+        ''
+      ).trim();
+
+      const adminValue = String(
+        titleMap['行政團隊'] ??
+        attrs['admin_attr'] ??
+        attrs['行政團隊'] ??
+        (role === '行政身分' ? '1' : '0')
       ).trim();
 
       const indegree = Number(
-        titleMap['indegree'] ?? attrs['indeg_attr'] ?? attrs['indegree'] ?? 0
+        titleMap['indegree'] ?? titleMap['Indegree'] ?? attrs['indeg_attr'] ?? attrs['indegree'] ?? 0
       ) || 0;
 
       const outdegree = Number(
-        titleMap['outdegree'] ?? attrs['outdeg_attr'] ?? attrs['outdegree'] ?? 0
+        titleMap['outdegree'] ?? titleMap['Outdegree'] ?? attrs['outdeg_attr'] ?? attrs['outdegree'] ?? 0
       ) || 0;
 
       let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
@@ -395,16 +400,10 @@ button,select,input{font:inherit;}
       y = -y;
 
       let color = adminValue === '1' ? COLORS.admin : COLORS.teacher;
-      if (colorEl) {
-        const r = Number(colorEl.getAttribute('r'));
-        const g = Number(colorEl.getAttribute('g'));
-        const b = Number(colorEl.getAttribute('b'));
-        if ([r,g,b].every(v => !Number.isNaN(v))) color = `rgb(${r},${g},${b})`;
-      }
 
       nodes.push({
         id: nodeEl.getAttribute('id'),
-        label: nodeEl.getAttribute('label') || nodeEl.getAttribute('id'),
+        label: nodeEl.getAttribute('id'),
         adminValue,
         role,
         group: adminValue === '1' ? 'admin' : 'teacher',
