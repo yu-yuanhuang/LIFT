@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700;800;900&display=swap" rel="stylesheet">
-<title>板橋高中_校內網絡_同仁支持鼓勵</title>
+<title>板橋高中_校內網絡_專業社群</title>
 <style>
 :root{
   --bg:#f3eee8;
@@ -199,7 +199,7 @@ button,select,input{font:inherit;}
         </div>
         <div class="brand-copy">
           <p class="eyebrow">LIFT學習生態系統｜一模網絡圖</p>
-          <h1>板橋高中｜校內網絡_同仁支持鼓勵</h1>
+          <h1>板橋高中｜校內網絡_專業社群</h1>
         </div>
       </div>
       <div class="headbar-actions">
@@ -299,6 +299,15 @@ button,select,input{font:inherit;}
   let camera = { x: 0, y: 0, scale: 1 };
   let worldBounds = { minX: -500, maxX: 500, minY: -400, maxY: 400 };
 
+
+  function byLocal(root, name) {
+    return Array.from(root.getElementsByTagName('*')).filter(el => el.localName === name);
+  }
+
+  function childrenByLocal(root, name) {
+    return Array.from(root.children || []).filter(el => el.localName === name);
+  }
+
   function setStatus(msg, persist) {
     statusBox.innerHTML = msg;
     statusBox.style.display = 'block';
@@ -345,21 +354,43 @@ button,select,input{font:inherit;}
     draw();
   }
 
+  function getChildrenByLocalName(parent, name) {
+    return Array.from(parent.children || []).filter(el => el.localName === name);
+  }
+
+  function getFirstChildByLocalName(parent, name) {
+    return Array.from(parent.children || []).find(el => el.localName === name) || null;
+  }
+
+  function getDescendantsByLocalName(root, name) {
+    return Array.from(root.getElementsByTagName('*')).filter(el => el.localName === name);
+  }
+
   function parseGexf(xmlText) {
     const parser = new DOMParser();
     const xml = parser.parseFromString(xmlText, 'application/xml');
     const parseErr = xml.querySelector('parsererror');
     if (parseErr) throw new Error('GEXF XML格式錯誤');
 
-    const attrDefs = {};
-    xml.querySelectorAll('graph > attributes[class="node"] > attribute').forEach(attr => {
-      attrDefs[attr.getAttribute('id')] = attr.getAttribute('title');
-    });
+    const graphEl = byLocal(xml, 'graph')[0];
+    if (!graphEl) throw new Error('找不到graph節點');
 
+    const attrDefs = {};
+    childrenByLocal(graphEl, 'attributes')
+      .filter(el => (el.getAttribute('class') || '').toLowerCase() === 'node')
+      .forEach(attrsEl => {
+        childrenByLocal(attrsEl, 'attribute').forEach(attr => {
+          attrDefs[attr.getAttribute('id')] = attr.getAttribute('title') || attr.getAttribute('id');
+        });
+      });
+
+    const nodesEl = childrenByLocal(graphEl, 'nodes')[0];
+    const nodeEls = nodesEl ? childrenByLocal(nodesEl, 'node') : [];
     const nodes = [];
-    xml.querySelectorAll('graph > nodes > node').forEach(nodeEl => {
+
+    nodeEls.forEach(nodeEl => {
       const attrs = {};
-      nodeEl.querySelectorAll('attvalue').forEach(av => {
+      byLocal(nodeEl, 'attvalue').forEach(av => {
         const key = av.getAttribute('for');
         attrs[key] = av.getAttribute('value');
       });
@@ -369,12 +400,15 @@ button,select,input{font:inherit;}
         titleMap[attrDefs[k] || k] = attrs[k];
       });
 
-      const posEl = nodeEl.querySelector('position, viz\:position');
+      const posEl = byLocal(nodeEl, 'position')[0] || null;
       const rawRole = String(
         titleMap['行政團隊'] ?? titleMap['點身分別'] ?? titleMap['身分別'] ?? attrs['type_attr'] ?? attrs['role_attr'] ?? attrs['admin_attr'] ?? '0'
       ).trim();
       const adminValue = rawRole === '1' || rawRole === '行政身分' ? '1' : '0';
       const role = adminValue === '1' ? '行政身分' : '教師身分';
+      const label = String(
+        titleMap['ID'] ?? titleMap['點名稱'] ?? attrs['name_attr'] ?? nodeEl.getAttribute('label') ?? nodeEl.getAttribute('id') ?? ''
+      ).trim();
 
       let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
       let y = Number(posEl ? posEl.getAttribute('y') : 0) || 0;
@@ -382,7 +416,7 @@ button,select,input{font:inherit;}
 
       nodes.push({
         id: nodeEl.getAttribute('id'),
-        label: String(nodeEl.getAttribute('id') || nodeEl.getAttribute('label') || '').trim(),
+        label,
         adminValue,
         role,
         group: adminValue === '1' ? 'admin' : 'teacher',
@@ -396,8 +430,10 @@ button,select,input{font:inherit;}
       });
     });
 
+    const edgesEl = childrenByLocal(graphEl, 'edges')[0];
+    const edgeEls = edgesEl ? childrenByLocal(edgesEl, 'edge') : [];
     const edges = [];
-    xml.querySelectorAll('graph > edges > edge').forEach((edgeEl, idx) => {
+    edgeEls.forEach((edgeEl, idx) => {
       edges.push({
         id: edgeEl.getAttribute('id') || ('e' + idx),
         source: edgeEl.getAttribute('source'),
@@ -917,6 +953,11 @@ button,select,input{font:inherit;}
       })
       .then(text => {
         graph = parseGexf(text);
+        const pageTitle = document.getElementById('pageTitle');
+        if (graph.graphName) {
+          document.title = graph.graphName + '｜一模網絡圖';
+          if (pageTitle) pageTitle.textContent = graph.graphName.replaceAll('_', '｜');
+        }
         buildMaps();
         applyVisualRules();
         applyLayout('parallel', false);
