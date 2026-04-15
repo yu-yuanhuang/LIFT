@@ -1,0 +1,2324 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-04-15">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="5" title="線向性" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="點名稱" type="string" />
+      <attribute id="1" title="點身分別" type="string" />
+      <attribute id="2" title="Indegree" type="long" />
+      <attribute id="3" title="連結數" type="long" />
+      <attribute id="4" title="連結對象" type="string" />
+    </attributes>
+    <nodes>
+      <node id="2001" label="2001">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2001" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2013; 2073" />
+        </attvalues>
+      </node>
+      <node id="2002" label="2002">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2002" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2005" />
+        </attvalues>
+      </node>
+      <node id="2003" label="2003">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2003" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2004" label="2004">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2004" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2045" />
+        </attvalues>
+      </node>
+      <node id="2005" label="2005">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="27.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2005" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="7" />
+          <attvalue for="3" value="16" />
+          <attvalue for="4" value="2002; 2007; 2011; 2013; 2021; 2025; 2028; 2032; 2034; 2035; 2049; 2054; 2061; 2066; 2067; 2074" />
+        </attvalues>
+      </node>
+      <node id="2006" label="2006">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2006" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2054; 2067" />
+        </attvalues>
+      </node>
+      <node id="2007" label="2007">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="27.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2007" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="7" />
+          <attvalue for="3" value="13" />
+          <attvalue for="4" value="2005; 2011; 2013; 2021; 2026; 2027; 2029; 2034; 2049; 2061; 2068; 2069; 2074" />
+        </attvalues>
+      </node>
+      <node id="2008" label="2008">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2008" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2009" label="2009">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2009" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="7" />
+          <attvalue for="4" value="2013; 2021; 2032; 2035; 2036; 2041; 2049" />
+        </attvalues>
+      </node>
+      <node id="2010" label="2010">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2010" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2011" label="2011">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="35.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2011" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="10" />
+          <attvalue for="3" value="13" />
+          <attvalue for="4" value="2005; 2007; 2013; 2021; 2024; 2026; 2027; 2034; 2047; 2061; 2068; 2069; 2075" />
+        </attvalues>
+      </node>
+      <node id="2012" label="2012">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2012" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2048" />
+        </attvalues>
+      </node>
+      <node id="2013" label="2013">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="45.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2013" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="14" />
+          <attvalue for="3" value="23" />
+          <attvalue for="4" value="2001; 2005; 2007; 2009; 2011; 2021; 2028; 2032; 2034; 2035; 2036; 2041; 2042; 2049; 2050; 2054; 2055; 2061; 2066; 2068; 2069; 2073; 2074" />
+        </attvalues>
+      </node>
+      <node id="2014" label="2014">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2014" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2015" label="2015">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2015" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2067" />
+        </attvalues>
+      </node>
+      <node id="2016" label="2016">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2016" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2017" label="2017">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2017" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2021; 2034" />
+        </attvalues>
+      </node>
+      <node id="2018" label="2018">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2018" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2044; 2068" />
+        </attvalues>
+      </node>
+      <node id="2019" label="2019">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2019" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2027" />
+        </attvalues>
+      </node>
+      <node id="2020" label="2020">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2020" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2021" label="2021">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="45.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2021" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="14" />
+          <attvalue for="3" value="21" />
+          <attvalue for="4" value="2005; 2007; 2009; 2011; 2013; 2017; 2025; 2028; 2032; 2034; 2035; 2041; 2047; 2049; 2055; 2067; 2068; 2069; 2072; 2073; 2076" />
+        </attvalues>
+      </node>
+      <node id="2022" label="2022">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2022" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2023" label="2023">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2023" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="6" />
+          <attvalue for="4" value="2025; 2028; 2034; 2054; 2066; 2067" />
+        </attvalues>
+      </node>
+      <node id="2024" label="2024">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2024" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2011; 2026; 2027; 2047; 2068" />
+        </attvalues>
+      </node>
+      <node id="2025" label="2025">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="32.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2025" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="9" />
+          <attvalue for="3" value="14" />
+          <attvalue for="4" value="2005; 2021; 2023; 2028; 2032; 2034; 2035; 2048; 2050; 2054; 2061; 2066; 2067; 2073" />
+        </attvalues>
+      </node>
+      <node id="2026" label="2026">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2026" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2007; 2011; 2024; 2068; 2069" />
+        </attvalues>
+      </node>
+      <node id="2027" label="2027">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2027" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="12" />
+          <attvalue for="4" value="2007; 2011; 2019; 2024; 2046; 2047; 2048; 2058; 2061; 2068; 2069; 2075" />
+        </attvalues>
+      </node>
+      <node id="2028" label="2028">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="37.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2028" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="11" />
+          <attvalue for="3" value="13" />
+          <attvalue for="4" value="2005; 2013; 2021; 2023; 2025; 2032; 2034; 2035; 2050; 2061; 2066; 2068; 2071" />
+        </attvalues>
+      </node>
+      <node id="2029" label="2029">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2029" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2007" />
+        </attvalues>
+      </node>
+      <node id="2030" label="2030">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2030" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2057" />
+        </attvalues>
+      </node>
+      <node id="2031" label="2031">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2031" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2032" label="2032">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="45.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2032" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="14" />
+          <attvalue for="3" value="20" />
+          <attvalue for="4" value="2005; 2009; 2013; 2021; 2025; 2028; 2034; 2035; 2036; 2041; 2049; 2050; 2054; 2055; 2057; 2062; 2066; 2067; 2068; 2073" />
+        </attvalues>
+      </node>
+      <node id="2033" label="2033">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2033" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2034" label="2034">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="27.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2034" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="7" />
+          <attvalue for="3" value="23" />
+          <attvalue for="4" value="2005; 2007; 2011; 2013; 2017; 2021; 2023; 2025; 2028; 2032; 2035; 2041; 2049; 2050; 2054; 2061; 2063; 2066; 2067; 2069; 2072; 2073; 2074" />
+        </attvalues>
+      </node>
+      <node id="2035" label="2035">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="52.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2035" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="17" />
+          <attvalue for="3" value="19" />
+          <attvalue for="4" value="2005; 2009; 2013; 2021; 2025; 2028; 2032; 2034; 2041; 2043; 2044; 2049; 2050; 2055; 2061; 2066; 2068; 2071; 2073" />
+        </attvalues>
+      </node>
+      <node id="2036" label="2036">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="22.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2036" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="5" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2009; 2013; 2032; 2068; 2073" />
+        </attvalues>
+      </node>
+      <node id="2037" label="2037">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2037" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2042; 2047" />
+        </attvalues>
+      </node>
+      <node id="2038" label="2038">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2038" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2049; 2073" />
+        </attvalues>
+      </node>
+      <node id="2039" label="2039">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="20.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2039" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="4" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2044; 2045; 2060; 2061; 2068" />
+        </attvalues>
+      </node>
+      <node id="2040" label="2040">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2040" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2041" label="2041">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="37.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2041" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="11" />
+          <attvalue for="3" value="17" />
+          <attvalue for="4" value="2009; 2013; 2021; 2032; 2034; 2035; 2042; 2044; 2049; 2050; 2054; 2055; 2061; 2066; 2068; 2073; 2074" />
+        </attvalues>
+      </node>
+      <node id="2042" label="2042">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2042" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="6" />
+          <attvalue for="4" value="2013; 2037; 2041; 2047; 2049; 2061" />
+        </attvalues>
+      </node>
+      <node id="2043" label="2043">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2043" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2035; 2044; 2066" />
+        </attvalues>
+      </node>
+      <node id="2044" label="2044">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2044" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2018; 2035; 2039; 2041; 2043" />
+        </attvalues>
+      </node>
+      <node id="2045" label="2045">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2045" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2004; 2039; 2068" />
+        </attvalues>
+      </node>
+      <node id="2046" label="2046">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="20.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2046" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="4" />
+          <attvalue for="3" value="6" />
+          <attvalue for="4" value="2027; 2060; 2061; 2068; 2069; 2075" />
+        </attvalues>
+      </node>
+      <node id="2047" label="2047">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="25.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2047" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="6" />
+          <attvalue for="3" value="11" />
+          <attvalue for="4" value="2011; 2021; 2024; 2027; 2037; 2042; 2052; 2061; 2068; 2069; 2075" />
+        </attvalues>
+      </node>
+      <node id="2048" label="2048">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="20.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2048" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="4" />
+          <attvalue for="3" value="6" />
+          <attvalue for="4" value="2012; 2025; 2027; 2068; 2069; 2075" />
+        </attvalues>
+      </node>
+      <node id="2049" label="2049">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="47.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2049" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="15" />
+          <attvalue for="3" value="16" />
+          <attvalue for="4" value="2005; 2007; 2009; 2013; 2021; 2032; 2034; 2035; 2038; 2041; 2042; 2055; 2068; 2069; 2073; 2074" />
+        </attvalues>
+      </node>
+      <node id="2050" label="2050">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="30.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2050" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="8" />
+          <attvalue for="3" value="8" />
+          <attvalue for="4" value="2013; 2025; 2028; 2032; 2034; 2035; 2041; 2066" />
+        </attvalues>
+      </node>
+      <node id="2051" label="2051">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2051" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2052" label="2052">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2052" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2047" />
+        </attvalues>
+      </node>
+      <node id="2053" label="2053">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2053" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2054" label="2054">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="40.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2054" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="12" />
+          <attvalue for="3" value="12" />
+          <attvalue for="4" value="2005; 2006; 2013; 2023; 2025; 2032; 2034; 2041; 2066; 2071; 2073; 2074" />
+        </attvalues>
+      </node>
+      <node id="2055" label="2055">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2055" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="7" />
+          <attvalue for="4" value="2013; 2021; 2032; 2035; 2041; 2049; 2074" />
+        </attvalues>
+      </node>
+      <node id="2056" label="2056">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2056" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2057" label="2057">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2057" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="4" />
+          <attvalue for="4" value="2030; 2032; 2067; 2073" />
+        </attvalues>
+      </node>
+      <node id="2058" label="2058">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2058" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="4" />
+          <attvalue for="4" value="2027; 2069; 2074; 2075" />
+        </attvalues>
+      </node>
+      <node id="2059" label="2059">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2059" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2060" label="2060">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2060" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2039; 2046" />
+        </attvalues>
+      </node>
+      <node id="2061" label="2061">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="52.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2061" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="17" />
+          <attvalue for="3" value="17" />
+          <attvalue for="4" value="2005; 2007; 2011; 2013; 2025; 2027; 2028; 2034; 2035; 2039; 2041; 2042; 2046; 2047; 2066; 2068; 2073" />
+        </attvalues>
+      </node>
+      <node id="2062" label="2062">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2062" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2032" />
+        </attvalues>
+      </node>
+      <node id="2063" label="2063">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2063" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2034" />
+        </attvalues>
+      </node>
+      <node id="2064" label="2064">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2064" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2071; 2074" />
+        </attvalues>
+      </node>
+      <node id="2065" label="2065">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2065" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2066" label="2066">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="42.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2066" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="13" />
+          <attvalue for="3" value="16" />
+          <attvalue for="4" value="2005; 2013; 2023; 2025; 2028; 2032; 2034; 2035; 2041; 2043; 2050; 2054; 2061; 2067; 2068; 2073" />
+        </attvalues>
+      </node>
+      <node id="2067" label="2067">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="27.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2067" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="7" />
+          <attvalue for="3" value="10" />
+          <attvalue for="4" value="2005; 2006; 2015; 2021; 2023; 2025; 2032; 2034; 2057; 2066" />
+        </attvalues>
+      </node>
+      <node id="2068" label="2068">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="22.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2068" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="5" />
+          <attvalue for="3" value="22" />
+          <attvalue for="4" value="2007; 2011; 2013; 2018; 2021; 2024; 2026; 2027; 2028; 2032; 2035; 2036; 2039; 2041; 2045; 2046; 2047; 2048; 2049; 2061; 2066; 2069" />
+        </attvalues>
+      </node>
+      <node id="2069" label="2069">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="45.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2069" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="14" />
+          <attvalue for="3" value="15" />
+          <attvalue for="4" value="2007; 2011; 2013; 2021; 2026; 2027; 2034; 2046; 2047; 2048; 2049; 2058; 2068; 2073; 2075" />
+        </attvalues>
+      </node>
+      <node id="2070" label="2070">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2070" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2071" label="2071">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2071" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="4" />
+          <attvalue for="4" value="2028; 2035; 2054; 2064" />
+        </attvalues>
+      </node>
+      <node id="2072" label="2072">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2072" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2021; 2034" />
+        </attvalues>
+      </node>
+      <node id="2073" label="2073">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2073" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="16" />
+          <attvalue for="4" value="2001; 2013; 2021; 2025; 2032; 2034; 2035; 2036; 2038; 2041; 2049; 2054; 2057; 2061; 2066; 2069" />
+        </attvalues>
+      </node>
+      <node id="2074" label="2074">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2074" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="11" />
+          <attvalue for="4" value="2005; 2007; 2013; 2034; 2041; 2049; 2054; 2055; 2058; 2064; 2076" />
+        </attvalues>
+      </node>
+      <node id="2075" label="2075">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2075" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="7" />
+          <attvalue for="4" value="2011; 2027; 2046; 2047; 2048; 2058; 2069" />
+        </attvalues>
+      </node>
+      <node id="2076" label="2076">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2076" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2021; 2074" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="2002" target="2005" id="0" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2007" id="1" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2011" id="2" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2013" id="3" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2021" id="4" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2025" id="5" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2028" id="6" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2032" id="7" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2034" id="8" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2035" id="9" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2049" id="10" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2054" id="11" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2061" id="12" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2066" id="13" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2067" id="14" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2006" target="2054" id="15" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2006" target="2067" id="16" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2005" id="17" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2011" id="18" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2013" id="19" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2021" id="20" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2029" id="21" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2049" id="22" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2061" id="23" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2007" target="2069" id="24" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2013" id="25" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2021" id="26" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2032" id="27" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2035" id="28" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2036" id="29" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2041" id="30" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2049" id="31" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2013" id="32" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2021" id="33" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2024" id="34" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2027" id="35" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2047" id="36" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2061" id="37" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2011" target="2069" id="38" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2012" target="2048" id="39" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2001" id="40" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2005" id="41" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2007" id="42" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2011" id="43" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2021" id="44" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2028" id="45" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2032" id="46" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2034" id="47" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2035" id="48" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2036" id="49" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2041" id="50" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2049" id="51" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2050" id="52" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2054" id="53" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2055" id="54" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2061" id="55" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2066" id="56" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2068" id="57" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2069" id="58" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2015" target="2067" id="59" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2011" id="60" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2013" id="61" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2017" id="62" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2025" id="63" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2028" id="64" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2032" id="65" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2035" id="66" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2049" id="67" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2069" id="68" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2072" id="69" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2076" id="70" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2025" id="71" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2028" id="72" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2034" id="73" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2054" id="74" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2066" id="75" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2067" id="76" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2024" target="2026" id="77" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2024" target="2047" id="78" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2025" target="2028" id="79" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2025" target="2035" id="80" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2025" target="2050" id="81" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2025" target="2054" id="82" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2025" target="2061" id="83" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2025" target="2066" id="84" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2026" target="2007" id="85" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2026" target="2011" id="86" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2026" target="2068" id="87" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2026" target="2069" id="88" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2007" id="89" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2011" id="90" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2019" id="91" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2024" id="92" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2046" id="93" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2047" id="94" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2048" id="95" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2058" id="96" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2061" id="97" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2068" id="98" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2069" id="99" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2027" target="2075" id="100" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2028" target="2035" id="101" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2028" target="2050" id="102" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2028" target="2061" id="103" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2028" target="2066" id="104" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2005" id="105" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2009" id="106" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2013" id="107" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2021" id="108" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2025" id="109" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2028" id="110" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2035" id="111" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2036" id="112" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2041" id="113" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2049" id="114" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2050" id="115" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2054" id="116" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2066" id="117" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2067" id="118" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2005" id="119" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2007" id="120" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2011" id="121" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2013" id="122" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2017" id="123" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2021" id="124" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2023" id="125" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2025" id="126" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2028" id="127" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2032" id="128" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2035" id="129" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2041" id="130" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2049" id="131" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2050" id="132" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2054" id="133" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2061" id="134" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2063" id="135" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2066" id="136" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2067" id="137" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2069" id="138" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2072" id="139" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2013" id="140" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2021" id="141" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2028" id="142" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2032" id="143" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2050" id="144" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2061" id="145" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2035" target="2066" id="146" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2038" target="2049" id="147" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2039" target="2061" id="148" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2039" target="2068" id="149" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2013" id="150" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2021" id="151" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2032" id="152" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2034" id="153" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2035" id="154" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2049" id="155" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2050" id="156" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2054" id="157" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2061" id="158" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2066" id="159" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2042" target="2013" id="160" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2042" target="2037" id="161" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2042" target="2041" id="162" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2042" target="2049" id="163" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2042" target="2061" id="164" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2043" target="2035" id="165" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2043" target="2066" id="166" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2044" target="2018" id="167" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2044" target="2035" id="168" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2044" target="2039" id="169" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2044" target="2041" id="170" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2044" target="2043" id="171" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2045" target="2004" id="172" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2045" target="2039" id="173" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2061" id="174" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2069" id="175" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2011" id="176" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2021" id="177" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2037" id="178" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2042" id="179" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2052" id="180" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2061" id="181" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2068" id="182" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2047" target="2069" id="183" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2048" target="2025" id="184" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2048" target="2069" id="185" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2049" target="2013" id="186" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2049" target="2035" id="187" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2049" target="2038" id="188" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2049" target="2041" id="189" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2054" target="2005" id="190" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2054" target="2032" id="191" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2013" id="192" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2021" id="193" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2032" id="194" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2035" id="195" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2041" id="196" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2049" id="197" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2055" target="2074" id="198" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2057" target="2030" id="199" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2057" target="2032" id="200" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2058" target="2069" id="201" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2060" target="2039" id="202" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2060" target="2046" id="203" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2062" target="2032" id="204" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2023" id="205" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2025" id="206" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2028" id="207" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2034" id="208" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2035" id="209" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2050" id="210" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2054" id="211" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2061" id="212" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2066" target="2067" id="213" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2067" target="2021" id="214" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2067" target="2025" id="215" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2067" target="2032" id="216" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2067" target="2057" id="217" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2067" target="2066" id="218" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2007" id="219" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2011" id="220" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2018" id="221" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2021" id="222" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2024" id="223" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2027" id="224" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2028" id="225" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2032" id="226" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2035" id="227" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2036" id="228" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2039" id="229" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2041" id="230" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2045" id="231" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2046" id="232" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2047" id="233" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2048" id="234" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2049" id="235" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2061" id="236" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2066" id="237" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2068" target="2069" id="238" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2069" target="2047" id="239" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2069" target="2049" id="240" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2028" id="241" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2035" id="242" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2054" id="243" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2064" id="244" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2001" id="245" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2013" id="246" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2021" id="247" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2025" id="248" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2032" id="249" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2034" id="250" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2035" id="251" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2036" id="252" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2038" id="253" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2041" id="254" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2049" id="255" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2054" id="256" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2057" id="257" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2061" id="258" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2066" id="259" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2069" id="260" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2005" id="261" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2007" id="262" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2013" id="263" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2034" id="264" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2041" id="265" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2049" id="266" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2054" id="267" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2058" id="268" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2064" id="269" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2076" id="270" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2011" id="271" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2027" id="272" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2046" id="273" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2047" id="274" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2048" id="275" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2058" id="276" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2075" target="2069" id="277" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

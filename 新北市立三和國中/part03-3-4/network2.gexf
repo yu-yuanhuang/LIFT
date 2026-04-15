@@ -1,0 +1,1274 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-04-15">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="5" title="線向性" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="點名稱" type="string" />
+      <attribute id="1" title="點身分別" type="string" />
+      <attribute id="2" title="Indegree" type="long" />
+      <attribute id="3" title="連結數" type="long" />
+      <attribute id="4" title="連結對象" type="string" />
+    </attributes>
+    <nodes>
+      <node id="2001" label="2001">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2001" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2002" label="2002">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2002" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="6" />
+          <attvalue for="4" value="2005; 2010; 2016; 2018; 2064; 2071" />
+        </attvalues>
+      </node>
+      <node id="2003" label="2003">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2003" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2004" label="2004">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2004" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2039" />
+        </attvalues>
+      </node>
+      <node id="2005" label="2005">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2005" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2002; 2010; 2071" />
+        </attvalues>
+      </node>
+      <node id="2006" label="2006">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2006" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2054" />
+        </attvalues>
+      </node>
+      <node id="2007" label="2007">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2007" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2008" label="2008">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2008" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2009" label="2009">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2009" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="4" />
+          <attvalue for="4" value="2032; 2035; 2041; 2049" />
+        </attvalues>
+      </node>
+      <node id="2010" label="2010">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2010" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="8" />
+          <attvalue for="4" value="2002; 2005; 2011; 2016; 2018; 2054; 2064; 2071" />
+        </attvalues>
+      </node>
+      <node id="2011" label="2011">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2011" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2010" />
+        </attvalues>
+      </node>
+      <node id="2012" label="2012">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2012" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2034" />
+        </attvalues>
+      </node>
+      <node id="2013" label="2013">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2013" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2032; 2049" />
+        </attvalues>
+      </node>
+      <node id="2014" label="2014">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2014" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2015" label="2015">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2015" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2016" label="2016">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2016" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2002; 2010; 2071" />
+        </attvalues>
+      </node>
+      <node id="2017" label="2017">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2017" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2034" />
+        </attvalues>
+      </node>
+      <node id="2018" label="2018">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2018" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2002; 2010; 2071" />
+        </attvalues>
+      </node>
+      <node id="2019" label="2019">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2019" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2020" label="2020">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2020" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="8" />
+          <attvalue for="4" value="2022; 2031; 2036; 2053; 2056; 2060; 2065; 2073" />
+        </attvalues>
+      </node>
+      <node id="2021" label="2021">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2021" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2022; 2032; 2073" />
+        </attvalues>
+      </node>
+      <node id="2022" label="2022">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2022" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2020; 2021" />
+        </attvalues>
+      </node>
+      <node id="2023" label="2023">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2023" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2034; 2054; 2067" />
+        </attvalues>
+      </node>
+      <node id="2024" label="2024">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2024" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2025" label="2025">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2025" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2026" label="2026">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2026" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2027" label="2027">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2027" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2046; 2058" />
+        </attvalues>
+      </node>
+      <node id="2028" label="2028">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2028" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2032" />
+        </attvalues>
+      </node>
+      <node id="2029" label="2029">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2029" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2030" label="2030">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2030" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2031" label="2031">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2031" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2020" />
+        </attvalues>
+      </node>
+      <node id="2032" label="2032">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2032" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="10" />
+          <attvalue for="4" value="2009; 2013; 2021; 2028; 2035; 2036; 2041; 2049; 2050; 2073" />
+        </attvalues>
+      </node>
+      <node id="2033" label="2033">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2033" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2074" />
+        </attvalues>
+      </node>
+      <node id="2034" label="2034">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2034" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2012; 2017; 2023; 2063; 2072" />
+        </attvalues>
+      </node>
+      <node id="2035" label="2035">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2035" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2009; 2032; 2041" />
+        </attvalues>
+      </node>
+      <node id="2036" label="2036">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2036" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2020; 2032" />
+        </attvalues>
+      </node>
+      <node id="2037" label="2037">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2037" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2059" />
+        </attvalues>
+      </node>
+      <node id="2038" label="2038">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2038" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2039" label="2039">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2039" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2004; 2045" />
+        </attvalues>
+      </node>
+      <node id="2040" label="2040">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2040" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2041" label="2041">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2041" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="4" />
+          <attvalue for="4" value="2009; 2032; 2035; 2074" />
+        </attvalues>
+      </node>
+      <node id="2042" label="2042">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2042" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2043" label="2043">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2043" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2044" label="2044">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2044" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2045" label="2045">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2045" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2039" />
+        </attvalues>
+      </node>
+      <node id="2046" label="2046">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2046" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2027; 2048; 2058; 2069; 2075" />
+        </attvalues>
+      </node>
+      <node id="2047" label="2047">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2047" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2069" />
+        </attvalues>
+      </node>
+      <node id="2048" label="2048">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2048" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2046; 2058" />
+        </attvalues>
+      </node>
+      <node id="2049" label="2049">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2049" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2009; 2013; 2032" />
+        </attvalues>
+      </node>
+      <node id="2050" label="2050">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2050" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2032" />
+        </attvalues>
+      </node>
+      <node id="2051" label="2051">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2051" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2052" label="2052">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2052" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2074" />
+        </attvalues>
+      </node>
+      <node id="2053" label="2053">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2053" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2020" />
+        </attvalues>
+      </node>
+      <node id="2054" label="2054">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="17.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2054" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2006; 2010; 2023" />
+        </attvalues>
+      </node>
+      <node id="2055" label="2055">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2055" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2056" label="2056">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2056" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2020" />
+        </attvalues>
+      </node>
+      <node id="2057" label="2057">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2057" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2058" label="2058">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2058" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2027; 2046; 2048" />
+        </attvalues>
+      </node>
+      <node id="2059" label="2059">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2059" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2037" />
+        </attvalues>
+      </node>
+      <node id="2060" label="2060">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2060" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2020" />
+        </attvalues>
+      </node>
+      <node id="2061" label="2061">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2061" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2062" label="2062">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2062" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2063" label="2063">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2063" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2034" />
+        </attvalues>
+      </node>
+      <node id="2064" label="2064">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2064" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2002; 2010" />
+        </attvalues>
+      </node>
+      <node id="2065" label="2065">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2065" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2020" />
+        </attvalues>
+      </node>
+      <node id="2066" label="2066">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2066" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2067" label="2067">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2067" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2023" />
+        </attvalues>
+      </node>
+      <node id="2068" label="2068">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2068" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2069" label="2069">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2069" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="2" />
+          <attvalue for="4" value="2046; 2047" />
+        </attvalues>
+      </node>
+      <node id="2070" label="2070">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2070" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+      <node id="2071" label="2071">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="20.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2071" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="4" />
+          <attvalue for="3" value="5" />
+          <attvalue for="4" value="2002; 2005; 2010; 2016; 2018" />
+        </attvalues>
+      </node>
+      <node id="2072" label="2072">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2072" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2034" />
+        </attvalues>
+      </node>
+      <node id="2073" label="2073">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="15.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2073" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2020; 2021; 2032" />
+        </attvalues>
+      </node>
+      <node id="2074" label="2074">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2074" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="3" />
+          <attvalue for="4" value="2033; 2041; 2052" />
+        </attvalues>
+      </node>
+      <node id="2075" label="2075">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="12.5" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2075" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="1" />
+          <attvalue for="4" value="2046" />
+        </attvalues>
+      </node>
+      <node id="2076" label="2076">
+        <viz:color r="122" g="141" b="168" a="1.0" />
+        <viz:size value="10.0" />
+        <viz:shape value="disc" />
+        <attvalues>
+          <attvalue for="0" value="2076" />
+          <attvalue for="1" value="教師身分" />
+          <attvalue for="2" value="0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="2002" target="2005" id="0" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2002" target="2010" id="1" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2002" target="2016" id="2" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2002" target="2018" id="3" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2002" target="2064" id="4" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2002" target="2071" id="5" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2005" target="2071" id="6" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2006" target="2054" id="7" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2035" id="8" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2041" id="9" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2009" target="2049" id="10" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2005" id="11" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2011" id="12" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2016" id="13" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2018" id="14" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2054" id="15" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2064" id="16" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2010" target="2071" id="17" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2013" target="2049" id="18" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2018" target="2010" id="19" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2018" target="2071" id="20" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2022" id="21" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2031" id="22" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2036" id="23" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2053" id="24" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2056" id="25" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2060" id="26" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2065" id="27" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2020" target="2073" id="28" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2022" id="29" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2021" target="2073" id="30" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2034" id="31" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2054" id="32" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2023" target="2067" id="33" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2009" id="34" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2013" id="35" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2021" id="36" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2028" id="37" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2035" id="38" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2036" id="39" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2049" id="40" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2032" target="2050" id="41" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2012" id="42" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2017" id="43" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2063" id="44" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2034" target="2072" id="45" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2039" target="2004" id="46" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2039" target="2045" id="47" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2032" id="48" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2041" target="2035" id="49" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2027" id="50" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2048" id="51" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2058" id="52" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2069" id="53" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2046" target="2075" id="54" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2058" target="2027" id="55" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2058" target="2048" id="56" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2059" target="2037" id="57" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2069" target="2047" id="58" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2002" id="59" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2005" id="60" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2010" id="61" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2016" id="62" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2071" target="2018" id="63" label="雙向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="雙向" />
+        </attvalues>
+      </edge>
+      <edge source="2073" target="2032" id="64" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2033" id="65" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2041" id="66" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+      <edge source="2074" target="2052" id="67" label="單向" weight="1.0">
+        <attvalues>
+          <attvalue for="5" value="單向" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
