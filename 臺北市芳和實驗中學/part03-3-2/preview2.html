@@ -220,7 +220,7 @@ button,select,input{font:inherit;}
 
   <div id="panel">
     <h3>網絡設定</h3>
-    <p class="panel-sub">依network2.gexf顯示一模網絡圖，節點以行政團隊區分教師／行政身分，大小依Indegree，邊為有向箭頭，標籤僅顯示ID。</p>
+    <p class="panel-sub">介面風格比照主站視覺系統，保留一模網絡的節點身分類別、箭頭方向與ID顯示。</p>
 
     <div class="select-wrap custom-select" id="layoutModeWrap">
       <select id="layoutMode" class="native-select" aria-label="布局模式">
@@ -372,28 +372,50 @@ button,select,input{font:inherit;}
       const posEl = nodeEl.querySelector('position, viz\\:position');
       const colorEl = nodeEl.querySelector('color, viz\\:color');
 
-      const role = String(
+      const rawRole = String(
+        titleMap['點身分別'] ??
         titleMap['身分別'] ??
         titleMap['role'] ??
         attrs['role'] ??
         attrs['role_attr'] ??
         attrs['身分別'] ??
+        attrs['1'] ??
         ''
       ).trim();
 
-      const adminValue = String(
+      const nodeType = String(
+        titleMap['node_type'] ?? attrs['node_type'] ?? ''
+      ).trim().toLowerCase();
+
+      const role = rawRole || (nodeType === 'member' ? '教師身分' : '');
+
+      const adminValueRaw = String(
         titleMap['行政團隊'] ??
         attrs['admin_attr'] ??
         attrs['行政團隊'] ??
-        (role === '行政身分' ? '1' : '0')
+        ''
       ).trim();
 
+      const adminValue = adminValueRaw || (/行政/.test(role) ? '1' : '0');
+
       const indegree = Number(
-        titleMap['indegree'] ?? titleMap['Indegree'] ?? attrs['indeg_attr'] ?? attrs['indegree'] ?? 0
+        titleMap['傳入連結數'] ??
+        titleMap['indegree'] ??
+        titleMap['Indegree'] ??
+        attrs['indeg_attr'] ??
+        attrs['indegree'] ??
+        attrs['5'] ??
+        0
       ) || 0;
 
       const outdegree = Number(
-        titleMap['outdegree'] ?? titleMap['Outdegree'] ?? attrs['outdeg_attr'] ?? attrs['outdegree'] ?? 0
+        titleMap['傳出連結數'] ??
+        titleMap['outdegree'] ??
+        titleMap['Outdegree'] ??
+        attrs['outdeg_attr'] ??
+        attrs['outdegree'] ??
+        attrs['4'] ??
+        0
       ) || 0;
 
       let x = Number(posEl ? posEl.getAttribute('x') : 0) || 0;
