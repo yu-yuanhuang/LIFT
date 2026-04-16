@@ -15,4 +15,7 @@
 Fruchterman–Reingold
 Kamada–Kawai
 
-幫我產出可以搭配展示的preview2.html 
+只需要修改preview2.html的network2.gexf展示機制，不要去修改視覺風格
+檢查節點前端展示可以區分教師身分、行政身分
+不用跟我說怎麼做，不用說修改細節
+直接產出產出可以下載的preview2.html 
