@@ -1,12 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700;800;900&display=swap" rel="stylesheet">
-<title>修德國小_校際合作網絡</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<title>修德國小_校際網絡</title>
 <style>
 :root{
   --bg:#f3eee8;
@@ -326,105 +327,284 @@ button,select{font:inherit;}
   .force-density-ticks span{font-size:9px;}
 }
 </style>
-</head>
+<style id="style-2-inspired-overrides">
+:root{
+  --bg1:#f4eee7;
+  --bg2:#efe6dc;
+  --bg3:#e7ddd1;
+  --panel:rgba(251,248,244,0.84);
+  --panel-strong:rgba(251,248,244,0.96);
+  --text:#4f463f;
+  --muted:#7a7067;
+  --accent:#b89866;
+  --accent-soft:rgba(184,152,102,0.18);
+  --teacher:#7d90a3;
+  --admin:#b9817c;
+  --shadow:0 24px 52px rgba(88,76,67,0.14);
+  --shadow-soft:0 16px 34px rgba(88,76,67,0.10);
+}
+html,body{height:100%;}
+body{
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255,255,255,0.72), transparent 28%),
+    radial-gradient(circle at 84% 16%, rgba(255,255,255,0.54), transparent 24%),
+    linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 46%, var(--bg3) 100%);
+  color:var(--text);
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:linear-gradient(120deg, rgba(255,255,255,0.16), transparent 38%, rgba(255,255,255,0.08) 62%, transparent 100%);
+  opacity:.72;
+}
+#app{isolation:isolate;}
+#canvas{filter:saturate(.98) contrast(1.01);}
+#headBar{
+  left:16px;right:16px;top:16px;
+}
+#headBar .headbar-shell{
+  position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;
+  width:min(1120px, calc(100vw - 32px));padding:14px 18px;border-radius:30px;
+  border:1px solid rgba(255,255,255,0.62);background:rgba(251,248,244,0.78);
+  box-shadow:var(--shadow);backdrop-filter:blur(16px);
+}
+#headBar .brand{display:flex;align-items:center;gap:16px;min-width:0;}
+#headBar .brand-mark{
+  position:relative;width:54px;height:54px;border-radius:18px;flex:none;
+  background:linear-gradient(145deg, rgba(255,255,255,0.78), rgba(235,223,211,0.92));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.72), 0 12px 24px rgba(88,76,67,0.10);
+  overflow:hidden;
+}
+#headBar .orb{position:absolute;border-radius:999px;display:block;mix-blend-mode:multiply;opacity:.92;}
+#headBar .orb-a{left:17px;top:8px;width:15px;height:15px;background:rgba(125,144,163,0.88);}
+#headBar .orb-b{left:10px;top:23px;width:28px;height:11px;background:rgba(184,152,102,0.82);}
+#headBar .orb-c{left:17px;top:34px;width:15px;height:15px;background:rgba(185,129,124,0.86);}
+#headBar .brand-copy{min-width:0;}
+#headBar .eyebrow{
+  display:block;margin-bottom:4px;font-size:.72rem;font-weight:800;letter-spacing:.16em;
+  color:rgba(122,112,103,0.88);text-transform:uppercase;
+}
+#headBar .brand-copy h1{
+  margin:0;font-size:1.02rem;line-height:1.28;color:var(--text);letter-spacing:.03em;font-weight:900;
+}
+#headBar .headbar-actions{display:flex;align-items:center;gap:10px;flex:none;}
+#headBar .meta-pill,
+#headBar .home-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;
+  border-radius:999px;border:1px solid rgba(184,152,102,0.22);
+  background:rgba(255,255,255,0.58);color:var(--text);text-decoration:none;
+  box-shadow:0 10px 22px rgba(88,76,67,0.08);font-size:inherit;
+}
+#headBarCollapse, #panel button, #menuToggle, .ghost-btn{
+  position:relative;overflow:hidden;padding:10px 16px;border-radius:999px;border:1px solid rgba(184,152,102,0.22);
+  background:rgba(255,255,255,0.58);color:var(--text);cursor:pointer;
+  box-shadow:0 10px 22px rgba(88,76,67,0.08);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, width .25s ease, height .25s ease, padding .25s ease, font-size .25s ease;
+}
+#headBarCollapse::before, #panel button::before, #menuToggle::before, .ghost-btn::before{
+  content:"";position:absolute;inset:-2px auto -2px -36%;width:32%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.62), transparent);
+  transform:skewX(-24deg);opacity:0;transition:opacity .25s ease,left .45s ease;
+}
+#headBarCollapse:hover, #headBarCollapse:focus-visible, #panel button:hover, #panel button:focus-visible,
+#menuToggle:hover, #menuToggle:focus-visible, .ghost-btn:hover, .ghost-btn:focus-visible,
+#headBar .home-link:hover, #headBar .home-link:focus-visible{
+  background:rgba(255,255,255,0.74);border-color:rgba(184,152,102,0.40);
+  box-shadow:0 0 0 4px rgba(184,152,102,0.12), 0 18px 28px rgba(88,76,67,0.12);
+  transform:translateY(-2px);outline:none;
+}
+#headBarCollapse:hover::before,#headBarCollapse:focus-visible::before,#panel button:hover::before,#panel button:focus-visible::before,
+#menuToggle:hover::before,#menuToggle:focus-visible::before,.ghost-btn:hover::before,.ghost-btn:focus-visible::before{left:112%;opacity:1;}
+#app.headbar-collapsed #headBar .headbar-shell{width:max-content;max-width:calc(100vw - 36px);justify-content:flex-start;gap:10px;padding:8px 14px 8px 8px;box-shadow:0 14px 34px rgba(88,76,67,0.12);}
+#app.headbar-collapsed #headBar .headbar-actions{order:-1;gap:0;}
+#app.headbar-collapsed #headBar .brand{gap:10px;}
+#app.headbar-collapsed #headBar .brand-mark, #app.headbar-collapsed #headBar .eyebrow, #app.headbar-collapsed #headBar .meta-pill, #app.headbar-collapsed #headBar .home-link{display:none;}
+#app.headbar-collapsed #headBar .brand-copy h1{margin:0;font-size:.96rem;line-height:1.2;max-width:min(calc(100vw - 110px), 520px);}
+#app.headbar-collapsed #headBarCollapse{width:48px;height:48px;padding:0;border-radius:50%;display:grid;place-items:center;box-shadow:0 12px 26px rgba(88,76,67,0.12);font-size:0;}
+#app.headbar-collapsed #headBarCollapse::after{content:"+";position:relative;z-index:1;font-size:24px;font-weight:900;line-height:1;color:var(--text);}
+#headBar .headbar-body{
+  margin-top:10px;padding:12px 18px;border-radius:22px;border:1px solid rgba(255,255,255,0.62);
+  background:rgba(251,248,244,0.72);backdrop-filter:blur(12px);box-shadow:var(--shadow-soft);
+  max-height:140px;opacity:1;overflow:hidden;transition:max-height .28s ease, opacity .22s ease, margin-top .22s ease, padding .22s ease;
+}
+#headBar .headbar-body p{margin:0;color:var(--muted);font-size:12px;line-height:1.6;font-weight:700;}
+#app.headbar-collapsed #headBar .headbar-body{max-height:0;opacity:0;margin-top:0;padding-top:0;padding-bottom:0;border-width:0;}
+#hint,#panel,#legend,#tooltip,#status{backdrop-filter:blur(14px);}
+#hint{position:absolute;left:16px;top:var(--headbar-offset);z-index:20;max-width:min(360px, calc(100vw - 32px));background:rgba(251,248,244,0.84);border:1px solid rgba(255,255,255,0.65);border-radius:24px;padding:12px 14px;box-shadow:var(--shadow-soft);}
+#hint .hint-title{font-size:14px;line-height:1.2;font-weight:900;margin-bottom:4px;color:var(--text);letter-spacing:.04em;}
+#hint .hint-desc{font-size:12px;line-height:1.5;color:var(--muted);font-weight:700;}
+#panel{position:absolute;right:16px;top:var(--headbar-offset);z-index:20;width:356px;background:rgba(251,248,244,0.84);border:1px solid rgba(255,255,255,0.65);border-radius:28px;padding:18px;box-shadow:var(--shadow);font-size:13px;color:var(--text);}
+#panel h3{margin:0 0 10px 0;font-size:15px;font-weight:900;color:var(--text);letter-spacing:.04em;}
+#panel .panel-sub{margin:0 0 14px;color:var(--muted);font-size:12px;line-height:1.55;font-weight:700;}
+#panel .select-wrap{position:relative;}
+#panel .native-select{position:absolute;inset:0;opacity:0;pointer-events:none;}
+#panel .select-trigger, #panel .select-option{font:inherit;}
+#panel .select-trigger{width:100%;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;border-radius:22px;border:1px solid rgba(191,167,147,0.36);background:linear-gradient(180deg, rgba(244,237,230,0.96), rgba(236,227,219,0.94));color:var(--text);text-align:left;cursor:pointer;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.52), 0 10px 22px rgba(88,76,67,0.06);transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;}
+#panel .select-trigger:hover, #panel .select-trigger:focus-visible, #panel .custom-select.open .select-trigger{background:linear-gradient(180deg, rgba(248,242,236,0.98), rgba(239,230,221,0.96));border-color:rgba(184,152,102,0.42);box-shadow:0 0 0 4px rgba(184,152,102,0.10), 0 18px 28px rgba(88,76,67,0.10);transform:translateY(-2px);}
+#panel .select-trigger-text-wrap{display:block;flex:1 1 auto;min-width:0;}
+#panel .select-trigger-text{display:block;flex:1 1 auto;min-width:0;font-weight:800;}
+#panel .select-trigger-meta{display:block;margin-top:4px;font-size:11px;line-height:1.4;color:var(--muted);font-weight:700;}
+#panel .select-trigger-icon{flex:none;width:13px;height:13px;border-right:2px solid rgba(92,82,73,0.72);border-bottom:2px solid rgba(92,82,73,0.72);transform:rotate(45deg) translateY(-2px);transition:transform .22s ease, border-color .22s ease;}
+#panel .custom-select.open .select-trigger-icon{transform:rotate(225deg) translateY(-1px);}
+#panel .select-menu{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:25;padding:10px;border-radius:22px;border:1px solid rgba(191,167,147,0.30);background:rgba(251,248,244,0.96);backdrop-filter:blur(14px);box-shadow:0 20px 40px rgba(88,76,67,0.12);opacity:0;pointer-events:none;transform:translateY(-6px) scale(.98);transition:opacity .18s ease, transform .18s ease;}
+#panel .custom-select.open .select-menu{opacity:1;pointer-events:auto;transform:translateY(0) scale(1);}
+#panel .select-option{width:100%;display:block;margin:0 0 6px;padding:12px 14px;border-radius:16px;border:1px solid transparent;background:transparent;color:var(--text);text-align:left;cursor:pointer;outline:none;transition:background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;}
+#panel .select-option:last-child{margin-bottom:0;}
+#panel .select-option:hover,#panel .select-option:focus-visible{background:rgba(236,227,219,0.72);border-color:rgba(191,167,147,0.28);transform:translateY(-1px);box-shadow:0 10px 20px rgba(88,76,67,0.06);}
+#panel .select-option.is-selected{background:linear-gradient(180deg, rgba(125,144,163,0.16), rgba(185,129,124,0.14));border-color:rgba(184,152,102,0.30);box-shadow:inset 0 1px 0 rgba(255,255,255,0.50);}
+#panel .select-option.is-selected::after{content:"✓";float:right;color:rgba(92,82,73,0.70);font-weight:900;}
+#panel .toggle-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px;}
+#panel label.control-check{display:flex;align-items:center;gap:10px;margin:0;color:var(--text);padding:10px 12px;border:1px solid rgba(191,167,147,0.22);border-radius:16px;background:rgba(255,255,255,0.45);transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;cursor:pointer;font-weight:800;}
+#panel label.control-check:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(88,76,67,0.06);border-color:rgba(184,152,102,0.24);}
+#panel input[type="checkbox"]{accent-color:#a4927e;transform:translateY(1px);}
+#panel .button-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+#panel .button-row button{margin:0;flex:1 1 auto;min-height:46px;font-weight:800;}
+#panel .single-button-row button{flex:1 1 100%;min-height:48px;}
+#forceDensityWrap{display:block;margin-top:2px;padding:13px 14px 12px;border-radius:18px;border:1px solid rgba(191,167,147,0.22);background:rgba(255,255,255,0.45);box-shadow:inset 0 1px 0 rgba(255,255,255,0.45);}
+#forceDensityWrap.active{display:block;}
+#forceDensityWrap .force-density-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;}
+#forceDensityWrap .force-density-title{font-size:12px;font-weight:900;color:var(--text);letter-spacing:.03em;}
+#forceDensityWrap .force-density-current{font-size:11px;font-weight:800;color:var(--muted);text-align:right;}
+#forceDensityWrap .force-density-scale-labels{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:10px;color:var(--muted);font-weight:800;}
+#forceDensityWrap .force-density-ruler{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin:9px 0 10px;align-items:center;}
+#forceDensityWrap .force-density-ruler span{display:block;height:6px;border-radius:999px;background:rgba(191,167,147,0.38);}
+#forceDensityWrap .force-density-ruler span.mid{height:8px;background:rgba(184,152,102,0.58);}
+#forceDensitySlider{-webkit-appearance:none;appearance:none;width:100%;margin:0;background:transparent;}
+#forceDensitySlider:focus{outline:none;}
+#forceDensitySlider::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:linear-gradient(90deg,#d8cfc3 0%, #cec3b6 100%);}
+#forceDensitySlider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;margin-top:-5px;width:16px;height:16px;border-radius:50%;background:#8f8173;border:2px solid #f6f1ea;box-shadow:0 2px 6px rgba(101,92,82,0.22);}
+#forceDensitySlider::-moz-range-track{height:6px;border-radius:999px;background:linear-gradient(90deg,#d8cfc3 0%, #cec3b6 100%);}
+#forceDensitySlider::-moz-range-thumb{width:16px;height:16px;border:none;border-radius:50%;background:#8f8173;box-shadow:0 2px 6px rgba(101,92,82,0.22);}
+#forceDensityWrap .force-density-ticks{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin-top:8px;font-size:9px;color:var(--muted);font-weight:800;text-align:center;}
+#legend{position:absolute;left:16px;bottom:16px;z-index:20;background:rgba(251,248,244,0.84);border:1px solid rgba(255,255,255,0.65);border-radius:22px;padding:12px 14px;font-size:13px;color:var(--text);box-shadow:var(--shadow-soft);}
+#legend strong{font-size:13px;}
+.legend-row{display:flex;align-items:center;gap:8px;margin-top:7px;}
+.legend-circle,.legend-square{width:12px;height:12px;border:1px solid rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(92,82,73,.08) inset;}
+.legend-circle{border-radius:50%;}
+.legend-square{border-radius:4px;}
+.legend-line{position:relative;width:18px;height:0;border-top:2px solid rgba(118,107,97,0.92);}
+.legend-line:after{content:"";position:absolute;right:-1px;top:-4px;width:0;height:0;border-left:6px solid rgba(118,107,97,0.92);border-top:4px solid transparent;border-bottom:4px solid transparent;}
+#tooltip{position:absolute;z-index:30;display:none;max-width:320px;background:rgba(251,248,244,0.96);border:1px solid rgba(255,255,255,0.72);border-radius:18px;box-shadow:var(--shadow);padding:12px 14px;font-size:12px;line-height:1.6;pointer-events:none;color:var(--text);}
+#tooltip .title{font-weight:900;margin-bottom:6px;color:var(--text);}
+#tooltip .meta{color:var(--muted);margin-bottom:6px;font-weight:700;}
+#tooltip .list{max-height:180px;overflow:auto;}
+#status{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(251,248,244,0.92);border:1px solid rgba(255,255,255,0.76);border-radius:20px;padding:14px 18px;z-index:40;box-shadow:var(--shadow);font-size:14px;color:var(--text);}
+#menuToggle{display:none;position:absolute;right:16px;top:18px;z-index:40;}
+#panelBackdrop{display:none;position:absolute;inset:0;z-index:21;background:rgba(83,74,66,0.18);}
+@media (max-width: 920px){
+  #headBar .brand-copy h1{font-size:.92rem;}
+  #panel{width:326px;}
+}
+@media (max-width: 768px){
+  #app{--headbar-offset:92px;}
+  #app.headbar-collapsed{--headbar-offset:78px;}
+  #headBar{left:12px;right:12px;top:12px;}
+  #headBar .headbar-shell{width:calc(100vw - 88px);padding:12px 14px;gap:12px;}
+  #headBar .brand-mark{width:46px;height:46px;}
+  #headBar .orb-a{left:15px;top:8px;width:14px;height:14px;}
+  #headBar .orb-b{left:10px;top:21px;width:24px;height:10px;}
+  #headBar .orb-c{left:15px;top:31px;width:14px;height:14px;}
+  #headBar .eyebrow{font-size:.68rem;}
+  #headBar .brand-copy h1{font-size:.88rem;}
+  #headBarCollapse{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;font-size:12px;}
+  #app.headbar-collapsed #headBar .headbar-shell{width:max-content;max-width:calc(100vw - 76px);padding:7px 12px 7px 7px;gap:8px;}
+  #app.headbar-collapsed #headBar .brand-copy h1{font-size:.82rem;max-width:calc(100vw - 128px);}
+  #app.headbar-collapsed #headBarCollapse{width:42px;height:42px;}
+  #headBar .headbar-body{display:none;}
+  #menuToggle{display:block;top:18px;right:14px;padding:9px 12px;font-size:12px;}
+  #hint{display:none;}
+  #panel{right:12px;top:calc(var(--headbar-offset) + 4px);width:min(84vw,320px);max-height:calc(100vh - var(--headbar-offset) - 20px);overflow:auto;transform:translateX(calc(100% + 24px));opacity:0;pointer-events:none;transition:transform .22s ease, opacity .22s ease;z-index:22;}
+  #panel.open{transform:translateX(0);opacity:1;pointer-events:auto;}
+  #panelBackdrop.open{display:block;}
+  #legend{left:12px;bottom:12px;max-width:62vw;font-size:12px;padding:10px 12px;}
+}
+</style></head>
 <body>
-<div id="app" class="headbar-collapsed">
-  <canvas id="canvas"></canvas>
-
-<header id="headBar" aria-label="頁面標頭">
-  <div class="headbar-shell">
-    <div class="brand" aria-label="頁面標題">
-      <div class="brand-mark" aria-hidden="true">
-        <span class="orb orb-a"></span>
-        <span class="orb orb-b"></span>
-        <span class="orb orb-c"></span>
-      </div>
-      <div class="brand-copy">
-        <p class="eyebrow">LIFT學習生態系統</p>
-        <h1>辛亥國小｜校際合作網絡</h1>
-      </div>
-    </div>
-    <div class="headbar-actions">
-      <button id="headBarCollapse" type="button" aria-expanded="false" aria-label="展開資訊" title="展開資訊">展開資訊</button>
-      <a class="home-link" href="https://yu-yuanhuang.github.io/LIFT/辛亥國小04-16/#part3" target="_blank" rel="noopener noreferrer" aria-label="返回原報告首頁">返回原報告首頁</a>
-    </div>
-  </div>
-  <div class="headbar-body">
-    <p>以V10版視覺系統統一此頁配色、字型與互動元件。滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置。</p>
-  </div>
-</header>
-
-  <button id="menuToggle" aria-label="開關設定選單">設定</button>
-  <div id="panelBackdrop"></div>
-
-  <div id="hint">
-    <div class="hint-title">操作提示</div>
-    <div class="hint-desc">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div>
-  </div>
-
-  <div id="panel">
-    <h3>網絡設定</h3>
-    <div>
-      <div class="select-wrap custom-select" id="layoutModeWrap">
-        <select id="layoutMode" class="native-select" aria-label="布局模式">
-          <option value="parallel">左右並列</option>
-          <option value="arc">環狀並列</option>
-          <option value="fr">Fruchterman–Reingold</option>
-          <option value="kk">Kamada–Kawai</option>
-        </select>
-        <button type="button" class="select-trigger" id="layoutModeTrigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="layoutModeMenu">
-          <span class="select-trigger-text">左右並列</span>
-          <span class="select-trigger-icon" aria-hidden="true"></span>
-        </button>
-        <div class="select-menu" id="layoutModeMenu" role="listbox" aria-label="布局模式選單">
-          <button type="button" class="select-option is-selected" data-value="parallel" role="option" aria-selected="true">左右並列</button>
-          <button type="button" class="select-option" data-value="arc" role="option" aria-selected="false">環狀並列</button>
-          <button type="button" class="select-option" data-value="fr" role="option" aria-selected="false">Fruchterman–Reingold</button>
-          <button type="button" class="select-option" data-value="kk" role="option" aria-selected="false">Kamada–Kawai</button>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:8px;">
-      <label><input id="toggleLabels" type="checkbox" checked> 顯示標籤</label>
-      <label><input id="toggleArrows" type="checkbox" checked> 顯示箭頭</label>
-      <label><input id="toggleHoverFocus" type="checkbox" checked> Hover聚焦突顯</label>
-
-      <div id="forceDensityWrap">
-        <div class="force-density-head">
-          <div class="force-density-title">節點距離</div>
-          <div id="forceDensityCurrent" class="force-density-current">預設密度 ×1.0</div>
-        </div>
-        <div class="force-density-scale-labels">
-          <span>小</span>
-          <span>預設密度</span>
-          <span>大</span>
-        </div>
-        <div class="force-density-ruler">
-          <span></span><span></span><span></span><span></span><span class="mid"></span><span></span><span></span><span></span><span></span>
-        </div>
-        <input id="forceDensitySlider" type="range" min="0" max="8" step="1" value="4">
-        <div id="forceDensityTicks" class="force-density-ticks">
-          <span>÷1.8</span><span>÷1.6</span><span>÷1.4</span><span>÷1.2</span><span>1.0</span><span>×1.2</span><span>×1.4</span><span>×1.6</span><span>×1.8</span>
-        </div>
-      </div>
-    </div>
-    <div>
-      <button id="exportPNG">匯出PNG</button>
-      <button id="rerunForce">重新布局</button>
-    </div>
-  </div>
-
-  <div id="legend">
-    <div><strong>圖例</strong></div>
-    <div class="legend-row"><span class="legend-circle"></span><span>學校成員</span></div>
-    <div class="legend-row"><span class="legend-square"></span><span>機構</span></div>
-    <div class="legend-row"><span class="legend-line"></span><span>有向連結</span></div>
-  </div>
-
-  <div id="tooltip"></div>
-  <div id="status">正在載入network.gexf…</div>
+<div class="headbar-collapsed" id="app">
+<canvas id="canvas"></canvas>
+<header aria-label="頁面標頭" id="headBar">
+<div class="headbar-shell">
+<div aria-label="頁面標題" class="brand">
+<div aria-hidden="true" class="brand-mark">
+<span class="orb orb-a"></span>
+<span class="orb orb-b"></span>
+<span class="orb orb-c"></span>
 </div>
-
+<div class="brand-copy">
+<p class="eyebrow">LIFT學習生態系統</p>
+<h1>修德國小｜校際網絡</h1>
+</div>
+</div>
+<div class="headbar-actions">
+<button aria-expanded="false" aria-label="展開資訊" id="headBarCollapse" title="展開資訊" type="button">展開資訊</button>
+<a aria-label="返回原報告首頁" class="home-link meta-pill" href="https://yu-yuanhuang.github.io/LIFT/新北市修德國小/#part3" rel="noopener noreferrer" target="_blank">返回原報告首頁</a>
+</div>
+</div>
+<div class="headbar-body">
+<p>以V10版視覺系統統一此頁配色、字型與互動元件。滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置。</p>
+</div>
+</header>
+<button aria-label="開關設定選單" id="menuToggle">設定</button>
+<div id="panelBackdrop"></div>
+<div id="hint">
+<div class="hint-title">操作提示</div>
+<div class="hint-desc">滑鼠拖曳空白處可平移，滾輪縮放，拖曳節點可微調位置</div>
+</div>
+<div id="panel">
+<h3>網絡設定</h3>
+<div>
+<div class="select-wrap custom-select" id="layoutModeWrap">
+<select aria-label="布局模式" class="native-select" id="layoutMode">
+<option value="parallel">左右並列</option>
+<option value="arc">環狀並列</option>
+<option value="fr">Fruchterman–Reingold</option>
+<option value="kk">Kamada–Kawai</option>
+</select>
+<button aria-controls="layoutModeMenu" aria-expanded="false" aria-haspopup="listbox" class="select-trigger" id="layoutModeTrigger" type="button"><span class="select-trigger-text-wrap"><span class="select-trigger-text">左右並列</span><span class="select-trigger-meta">切換圖面布局模式</span></span><span aria-hidden="true" class="select-trigger-icon"></span></button>
+<div aria-label="布局模式選單" class="select-menu" id="layoutModeMenu" role="listbox">
+<button aria-selected="true" class="select-option is-selected" data-value="parallel" role="option" type="button">左右並列</button>
+<button aria-selected="false" class="select-option" data-value="arc" role="option" type="button">環狀並列</button>
+<button aria-selected="false" class="select-option" data-value="fr" role="option" type="button">Fruchterman–Reingold</button>
+<button aria-selected="false" class="select-option" data-value="kk" role="option" type="button">Kamada–Kawai</button>
+</div>
+</div>
+</div>
+<div class="toggle-grid">
+<label class="control-check"><input checked="" id="toggleLabels" type="checkbox"/> 顯示標籤</label>
+<label class="control-check"><input checked="" id="toggleArrows" type="checkbox"/> 顯示箭頭</label>
+<label class="control-check"><input checked="" id="toggleHoverFocus" type="checkbox"/> Hover聚焦突顯</label>
+<div id="forceDensityWrap">
+<div class="force-density-head">
+<div class="force-density-title">節點距離</div>
+<div class="force-density-current" id="forceDensityCurrent">預設密度 ×1.0</div>
+</div>
+<div class="force-density-scale-labels">
+<span>小</span>
+<span>預設密度</span>
+<span>大</span>
+</div>
+<div class="force-density-ruler">
+<span></span><span></span><span></span><span></span><span class="mid"></span><span></span><span></span><span></span><span></span>
+</div>
+<input id="forceDensitySlider" max="8" min="0" step="1" type="range" value="4"/>
+<div class="force-density-ticks" id="forceDensityTicks">
+<span>÷1.8</span><span>÷1.6</span><span>÷1.4</span><span>÷1.2</span><span>1.0</span><span>×1.2</span><span>×1.4</span><span>×1.6</span><span>×1.8</span>
+</div>
+</div>
+</div>
+<div class="button-row">
+<button id="exportPNG">匯出PNG</button>
+<button id="rerunForce">重新布局</button>
+</div>
+</div>
+<div id="legend">
+<div><strong>圖例</strong></div>
+<div class="legend-row"><span class="legend-circle"></span><span>學校成員</span></div>
+<div class="legend-row"><span class="legend-square"></span><span>機構</span></div>
+<div class="legend-row"><span class="legend-line"></span><span>有向連結</span></div>
+</div>
+<div id="tooltip"></div>
+<div id="status">正在載入network.gexf…</div>
+</div>
 <script>
 (function () {
   var MEMBER_COLOR = "#aeb9aa";

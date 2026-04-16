@@ -1,1632 +1,1149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
-  <meta lastmodifieddate="2026-04-13">
-    <creator>OpenAI GPT-5.4 Thinking</creator>
-    <description>辛亥國小校際合作網絡（成員與節點詳情皆以訪談代碼顯示；機構顯示全名）</description>
+<gexf xmlns="http://gexf.net/1.3" xmlns:viz="http://gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3" xsi:schemaLocation="http://gexf.net/1.3 http://gexf.net/1.3/gexf.xsd">
+  <meta lastmodifieddate="2026-04-16">
+    <creator>OpenAI ChatGPT</creator>
+    <description>01_修德國小_校際網絡 二模有向網路</description>
   </meta>
-  <graph defaultedgetype="directed" mode="static" name="辛亥國小_校際網路_訪談代碼節點詳情版">
+  <graph defaultedgetype="directed" mode="static">
     <attributes class="node" mode="static">
-      <attribute id="node_type" title="node_type" type="string"/>
-      <attribute id="點名稱" title="點名稱" type="string"/>
-      <attribute id="點身分別" title="點身分別" type="string"/>
-      <attribute id="訪談代碼" title="訪談代碼" type="string"/>
-      <attribute id="連結數" title="連結數" type="integer"/>
-      <attribute id="出向連結數" title="出向連結數" type="integer"/>
-      <attribute id="入向連結數" title="入向連結數" type="integer"/>
-      <attribute id="連結對象" title="連結對象" type="string"/>
-      <attribute id="出向連結對象" title="出向連結對象" type="string"/>
-      <attribute id="入向連結對象" title="入向連結對象" type="string"/>
-    </attributes>
-    <attributes class="edge" mode="static">
-      <attribute id="方向性" title="方向性" type="string"/>
-      <attribute id="關係類型" title="關係類型" type="string"/>
+      <attribute id="0" title="node_name" type="string"/>
+      <attribute id="1" title="identity" type="string"/>
+      <attribute id="2" title="link_count" type="integer"/>
+      <attribute id="3" title="link_targets" type="string"/>
     </attributes>
     <nodes>
-      <node id="9001" label="9001">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9001"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9001"/>
-          <attvalue for="連結數" value="10"/>
-          <attvalue for="出向連結數" value="10"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市大同區日新國民小學；臺北市大同區蓬萊國民小學；臺北市內湖區麗湖國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區萬福國民小學；臺北市文山區興隆國民小學；臺北市文山區興德國民小學；臺北市北投區文林國民小學；臺北市松山區健康國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市大同區日新國民小學；臺北市大同區蓬萊國民小學；臺北市內湖區麗湖國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區萬福國民小學；臺北市文山區興隆國民小學；臺北市文山區興德國民小學；臺北市北投區文林國民小學；臺北市松山區健康國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9002" label="9002">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9002"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9002"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="日本香春思小學"/>
-          <attvalue for="出向連結對象" value="日本香春思小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9003" label="9003">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9003"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9003"/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="3"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市松山區健康國民小學；國立臺北教育大學；國立清華大學"/>
-          <attvalue for="出向連結對象" value="臺北市松山區健康國民小學；國立臺北教育大學；國立清華大學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9004" label="9004">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9004"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9004"/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="3"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區萬芳國民小學；臺北市文山區興隆國民小學；臺北市文山區興德國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區萬芳國民小學；臺北市文山區興隆國民小學；臺北市文山區興德國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9005" label="9005">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9005"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9005"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9006" label="9006">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9006"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9006"/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="3"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區力行國民小學；臺北市文山區興隆國民小學；新北市板橋區新埔國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區力行國民小學；臺北市文山區興隆國民小學；新北市板橋區新埔國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9007" label="9007">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9007"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9007"/>
-          <attvalue for="連結數" value="0"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value=""/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9008" label="9008">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9008"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9008"/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="3"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區志清國民小學；臺北市文山區景美國民小學；國立臺北教育大學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區志清國民小學；臺北市文山區景美國民小學；國立臺北教育大學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9009" label="9009">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9009"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9009"/>
-          <attvalue for="連結數" value="0"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value=""/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9010" label="9010">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9010"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9010"/>
-          <attvalue for="連結數" value="0"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value=""/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9011" label="9011">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9011"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9011"/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="3"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區永建國民小學；臺北市文山區實踐國民小學；新北市中和區自強國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區永建國民小學；臺北市文山區實踐國民小學；新北市中和區自強國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9012" label="9012">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9012"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9012"/>
-          <attvalue for="連結數" value="9"/>
-          <attvalue for="出向連結數" value="9"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市中山區長安國民小學；臺北市中正區東門國民小學；臺北市文山區力行國民小學；臺北市文山區木柵國民小學；臺北市文山區景興國民小學；臺北市文山區萬福國民小學；臺北市文山區萬興國民小學；臺北市萬華區老松國民小學；臺北市萬華區萬大國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市中山區長安國民小學；臺北市中正區東門國民小學；臺北市文山區力行國民小學；臺北市文山區木柵國民小學；臺北市文山區景興國民小學；臺北市文山區萬福國民小學；臺北市文山區萬興國民小學；臺北市萬華區老松國民小學；臺北市萬華區萬大國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9013" label="9013">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9013"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9013"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區興隆國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區興隆國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9014" label="9014">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9014"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9014"/>
-          <attvalue for="連結數" value="0"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value=""/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9015" label="9015">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9015"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9015"/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="2"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區永建國民小學；臺北市文山區興隆國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區永建國民小學；臺北市文山區興隆國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9016" label="9016">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9016"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9016"/>
-          <attvalue for="連結數" value="9"/>
-          <attvalue for="出向連結數" value="9"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="國立臺北教育大學附設實驗國民小學；臺北市文山區力行國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區明道國民小學；臺北市文山區博嘉實驗國民小學；臺北市文山區溪口國民小學；臺北市松山區敦化國民小學；臺北市信義區光復國民小學"/>
-          <attvalue for="出向連結對象" value="國立臺北教育大學附設實驗國民小學；臺北市文山區力行國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區明道國民小學；臺北市文山區博嘉實驗國民小學；臺北市文山區溪口國民小學；臺北市松山區敦化國民小學；臺北市信義區光復國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9017" label="9017">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9017"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9017"/>
-          <attvalue for="連結數" value="8"/>
-          <attvalue for="出向連結數" value="8"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市中正區東門國民小學；臺北市內湖區大湖國民小學；臺北市文山區力行國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區博嘉實驗國民小學；臺北市文山區萬興國民小學；臺北市文山區興隆國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市中正區東門國民小學；臺北市內湖區大湖國民小學；臺北市文山區力行國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區博嘉實驗國民小學；臺北市文山區萬興國民小學；臺北市文山區興隆國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9018" label="9018">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9018"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9018"/>
-          <attvalue for="連結數" value="5"/>
-          <attvalue for="出向連結數" value="5"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市內湖區大湖國民小學；臺北市文山區永建國民小學；臺北市文山區景美國民小學；臺北市文山區興隆國民小學；金門縣金湖國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市內湖區大湖國民小學；臺北市文山區永建國民小學；臺北市文山區景美國民小學；臺北市文山區興隆國民小學；金門縣金湖國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9019" label="9019">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9019"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9019"/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="2"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區景興國民小學；臺北市萬華區新和國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區景興國民小學；臺北市萬華區新和國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9020" label="9020">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9020"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9020"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區興隆國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區興隆國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9021" label="9021">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9021"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9021"/>
-          <attvalue for="連結數" value="0"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value=""/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9022" label="9022">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9022"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9022"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9023" label="9023">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9023"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9023"/>
-          <attvalue for="連結數" value="19"/>
-          <attvalue for="出向連結數" value="19"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市士林區三玉國民小學；臺北市大安區古亭國民小學；臺北市中山區長安國民小學；臺北市中山區濱江國民小學；臺北市中正區東門國民小學；臺北市內湖區南湖國民小學；臺北市文山區力行國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區武功國民小學；臺北市文山區博嘉實驗國民小學；臺北市文山區景美國民小學；臺北市北投區大屯國民小學；臺北市松山區民權國民小學；臺北市松山區松山國民小學；臺北市信義區信義國民小學；臺北市南港區玉成國民小學；臺北市南港區胡適國民小學；臺北市萬華區新和國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市士林區三玉國民小學；臺北市大安區古亭國民小學；臺北市中山區長安國民小學；臺北市中山區濱江國民小學；臺北市中正區東門國民小學；臺北市內湖區南湖國民小學；臺北市文山區力行國民小學；臺北市文山區永建國民小學；臺北市文山區志清國民小學；臺北市文山區武功國民小學；臺北市文山區博嘉實驗國民小學；臺北市文山區景美國民小學；臺北市北投區大屯國民小學；臺北市松山區民權國民小學；臺北市松山區松山國民小學；臺北市信義區信義國民小學；臺北市南港區玉成國民小學；臺北市南港區胡適國民小學；臺北市萬華區新和國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9024" label="9024">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9024"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9024"/>
-          <attvalue for="連結數" value="0"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value=""/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9025" label="9025">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9025"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9025"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9026" label="9026">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9026"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9026"/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="3"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區景興國民小學；臺北市文山區興隆國民小學；臺南縣安南區九份子國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區景興國民小學；臺北市文山區興隆國民小學；臺南縣安南區九份子國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9027" label="9027">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9027"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9027"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="國立清華大學"/>
-          <attvalue for="出向連結對象" value="國立清華大學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="9028" label="9028">
-        <attvalues>
-          <attvalue for="node_type" value="member"/>
-          <attvalue for="點名稱" value="9028"/>
-          <attvalue for="點身分別" value="學校成員"/>
-          <attvalue for="訪談代碼" value="9028"/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="1"/>
-          <attvalue for="入向連結數" value="0"/>
-          <attvalue for="連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="出向連結對象" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="入向連結對象" value=""/>
-        </attvalues>
-      </node>
-      <node id="臺北市士林區三玉國民小學" label="臺北市士林區三玉國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市士林區三玉國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市大同區日新國民小學" label="臺北市大同區日新國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市大同區日新國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9001"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001"/>
-        </attvalues>
-      </node>
-      <node id="臺北市大同區蓬萊國民小學" label="臺北市大同區蓬萊國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市大同區蓬萊國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9001"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001"/>
-        </attvalues>
-      </node>
-      <node id="國立臺北教育大學附設實驗國民小學" label="國立臺北教育大學附設實驗國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="國立臺北教育大學附設實驗國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9016"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9016"/>
-        </attvalues>
-      </node>
-      <node id="臺北市大安區古亭國民小學" label="臺北市大安區古亭國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市大安區古亭國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市中山區長安國民小學" label="臺北市中山區長安國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市中山區長安國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9012；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市中山區濱江國民小學" label="臺北市中山區濱江國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市中山區濱江國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市中正區東門國民小學" label="臺北市中正區東門國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市中正區東門國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="3"/>
-          <attvalue for="連結對象" value="9012；9017；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012；9017；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市內湖區大湖國民小學" label="臺北市內湖區大湖國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市內湖區大湖國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9017；9018"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9017；9018"/>
-        </attvalues>
-      </node>
-      <node id="臺北市內湖區南湖國民小學" label="臺北市內湖區南湖國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市內湖區南湖國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市內湖區麗湖國民小學" label="臺北市內湖區麗湖國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市內湖區麗湖國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9001"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區力行國民小學" label="臺北市文山區力行國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區力行國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="5"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="5"/>
-          <attvalue for="連結對象" value="9006；9012；9016；9017；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9006；9012；9016；9017；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區木柵國民小學" label="臺北市文山區木柵國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區木柵國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9012"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區永建國民小學" label="臺北市文山區永建國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區永建國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="7"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="7"/>
-          <attvalue for="連結對象" value="9001；9011；9015；9016；9017；9018；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001；9011；9015；9016；9017；9018；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區志清國民小學" label="臺北市文山區志清國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區志清國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="5"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="5"/>
-          <attvalue for="連結對象" value="9001；9008；9016；9017；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001；9008；9016；9017；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區辛亥國民小學" label="臺北市文山區辛亥國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區辛亥國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="4"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="4"/>
-          <attvalue for="連結對象" value="9005；9022；9025；9028"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9005；9022；9025；9028"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區明道國民小學" label="臺北市文山區明道國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區明道國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9016"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9016"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區武功國民小學" label="臺北市文山區武功國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區武功國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區博嘉實驗國民小學" label="臺北市文山區博嘉實驗國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區博嘉實驗國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="3"/>
-          <attvalue for="連結對象" value="9016；9017；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9016；9017；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區景美國民小學" label="臺北市文山區景美國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區景美國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="3"/>
-          <attvalue for="連結對象" value="9008；9018；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9008；9018；9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區景興國民小學" label="臺北市文山區景興國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區景興國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="3"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="3"/>
-          <attvalue for="連結對象" value="9012；9019；9026"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012；9019；9026"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區溪口國民小學" label="臺北市文山區溪口國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區溪口國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9016"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9016"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區萬芳國民小學" label="臺北市文山區萬芳國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區萬芳國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9004"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9004"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區萬福國民小學" label="臺北市文山區萬福國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區萬福國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9001；9012"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001；9012"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區萬興國民小學" label="臺北市文山區萬興國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區萬興國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9012；9017"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012；9017"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區實踐國民小學" label="臺北市文山區實踐國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區實踐國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9011"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9011"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區興隆國民小學" label="臺北市文山區興隆國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區興隆國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="9"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="9"/>
-          <attvalue for="連結對象" value="9001；9004；9006；9013；9015；9017；9018；9020；9026"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001；9004；9006；9013；9015；9017；9018；9020；9026"/>
-        </attvalues>
-      </node>
-      <node id="臺北市文山區興德國民小學" label="臺北市文山區興德國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市文山區興德國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9001；9004"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001；9004"/>
-        </attvalues>
-      </node>
-      <node id="臺北市北投區大屯國民小學" label="臺北市北投區大屯國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市北投區大屯國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市北投區文林國民小學" label="臺北市北投區文林國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市北投區文林國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9001"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001"/>
-        </attvalues>
-      </node>
-      <node id="臺北市松山區民權國民小學" label="臺北市松山區民權國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市松山區民權國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市松山區松山國民小學" label="臺北市松山區松山國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市松山區松山國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市松山區健康國民小學" label="臺北市松山區健康國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市松山區健康國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9001；9003"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9001；9003"/>
-        </attvalues>
-      </node>
-      <node id="臺北市松山區敦化國民小學" label="臺北市松山區敦化國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市松山區敦化國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9016"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9016"/>
-        </attvalues>
-      </node>
-      <node id="臺北市信義區光復國民小學" label="臺北市信義區光復國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市信義區光復國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9016"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9016"/>
-        </attvalues>
-      </node>
-      <node id="臺北市信義區信義國民小學" label="臺北市信義區信義國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市信義區信義國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市南港區玉成國民小學" label="臺北市南港區玉成國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市南港區玉成國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市南港區胡適國民小學" label="臺北市南港區胡適國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市南港區胡適國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9023"/>
-        </attvalues>
-      </node>
-      <node id="臺北市萬華區老松國民小學" label="臺北市萬華區老松國民小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市萬華區老松國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9012"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012"/>
+      <node id="1001" label="1001">
+        <attvalues>
+          <attvalue for="0" value="1001"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區正義國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1002" label="1002">
+        <attvalues>
+          <attvalue for="0" value="1002"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="0"/>
+          <attvalue for="3" value=""/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1003" label="1003">
+        <attvalues>
+          <attvalue for="0" value="1003"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區厚德國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1004" label="1004">
+        <attvalues>
+          <attvalue for="0" value="1004"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市三重區光興國民小學；新北市蘆洲區蘆洲國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1005" label="1005">
+        <attvalues>
+          <attvalue for="0" value="1005"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="新北市三重區興穀國民小學；新北市三重區五華國民小學；新北市蘆洲區鷺江國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="13.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1006" label="1006">
+        <attvalues>
+          <attvalue for="0" value="1006"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區五華國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1007" label="1007">
+        <attvalues>
+          <attvalue for="0" value="1007"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市蘆洲區蘆洲國民小學；新北市鶯歌區鶯歌國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1008" label="1008">
+        <attvalues>
+          <attvalue for="0" value="1008"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="0"/>
+          <attvalue for="3" value=""/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1009" label="1009">
+        <attvalues>
+          <attvalue for="0" value="1009"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區正義國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1010" label="1010">
+        <attvalues>
+          <attvalue for="0" value="1010"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市蘆洲區成功國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1011" label="1011">
+        <attvalues>
+          <attvalue for="0" value="1011"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市蘆洲區鷺江國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1012" label="1012">
+        <attvalues>
+          <attvalue for="0" value="1012"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="4"/>
+          <attvalue for="3" value="新北市三重區厚德國民小學；新北市淡水區興仁國民小學；新北市淡水區新興國民小學；新北市板橋區板橋國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="15.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1013" label="1013">
+        <attvalues>
+          <attvalue for="0" value="1013"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市蘆洲區鷺江國民小學；新北市石碇區和平國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1014" label="1014">
+        <attvalues>
+          <attvalue for="0" value="1014"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市永和區網溪國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1015" label="1015">
+        <attvalues>
+          <attvalue for="0" value="1015"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市鶯歌區鶯歌國民小學；新北市新店區中正國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1016" label="1016">
+        <attvalues>
+          <attvalue for="0" value="1016"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區正義國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1017" label="1017">
+        <attvalues>
+          <attvalue for="0" value="1017"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市蘆洲區鷺江國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1018" label="1018">
+        <attvalues>
+          <attvalue for="0" value="1018"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區修德國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1019" label="1019">
+        <attvalues>
+          <attvalue for="0" value="1019"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="新北市三重區正義國民小學；新北市三重區五華國民小學；新北市新莊區昌平國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="13.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1020" label="1020">
+        <attvalues>
+          <attvalue for="0" value="1020"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區光榮國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1021" label="1021">
+        <attvalues>
+          <attvalue for="0" value="1021"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市新莊區光華國民小學；新北市市立明志國民中學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1022" label="1022">
+        <attvalues>
+          <attvalue for="0" value="1022"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市三重區五華國民小學；新北市三重區碧華國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1023" label="1023">
+        <attvalues>
+          <attvalue for="0" value="1023"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市市立明志國民中學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1024" label="1024">
+        <attvalues>
+          <attvalue for="0" value="1024"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="12"/>
+          <attvalue for="3" value="新北市三重區正義國民小學；新北市三重區修德國民小學；新北市三重區永福國民小學；新北市板橋區板橋國民小學；新北市板橋區後埔國民小學；新北市新莊區昌平國民小學；新北市新莊區榮富國民小學；新北市汐止區北峰國民小學；新北市汐止區汐止國民小學；雲林縣麥寮鄉麥寮國民小學；臺南市善化區蓮潭國民小學；臺中市大里區內新國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="29.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1025" label="1025">
+        <attvalues>
+          <attvalue for="0" value="1025"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="新北市三重區正義國民小學；新北市三重區五華國民小學；新北市三重區重陽國民小學；新北市三重區二重國民小學；新北市市立碧華國民中學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="17.0"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1026" label="1026">
+        <attvalues>
+          <attvalue for="0" value="1026"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="新北市三重區厚德國民小學；新北市三重區五華國民小學；新北市三重區集美國民小學；新北市市立明志國民中學；新北市立三重高級中學；國立臺北教育大學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="18.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1027" label="1027">
+        <attvalues>
+          <attvalue for="0" value="1027"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市立三民高級中學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1028" label="1028">
+        <attvalues>
+          <attvalue for="0" value="1028"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市蘆洲區仁愛國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1029" label="1029">
+        <attvalues>
+          <attvalue for="0" value="1029"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區修德國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1030" label="1030">
+        <attvalues>
+          <attvalue for="0" value="1030"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="0"/>
+          <attvalue for="3" value=""/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1031" label="1031">
+        <attvalues>
+          <attvalue for="0" value="1031"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="5"/>
+          <attvalue for="3" value="臺北市私立光仁國民小學；臺北市萬華區新和國民小學；臺北市萬華區萬大國民小學；臺北市萬華區東園國民小學；臺北市大同區日新國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="17.0"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1032" label="1032">
+        <attvalues>
+          <attvalue for="0" value="1032"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="新北市三重區正義國民小學；新北市三重區興穀國民小學；新北市三重區光榮國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="13.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1033" label="1033">
+        <attvalues>
+          <attvalue for="0" value="1033"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="新北市三重區碧華國民小學；新北市板橋區國光國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="11.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="1034" label="1034">
+        <attvalues>
+          <attvalue for="0" value="1034"/>
+          <attvalue for="1" value="學校成員"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="新北市三重區修德國民小學"/>
+        </attvalues>
+        <viz:color r="174" g="185" b="170"/>
+        <viz:size value="9.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區正義國民小學" label="新北市三重區正義國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區正義國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="7"/>
+          <attvalue for="3" value="1001；1009；1016；1019；1024；1025；1032"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="18.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區興穀國民小學" label="新北市三重區興穀國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區興穀國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1005；1032"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區厚德國民小學" label="新北市三重區厚德國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區厚德國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="1003；1012；1026"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="13.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區五華國民小學" label="新北市三重區五華國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區五華國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="6"/>
+          <attvalue for="3" value="1005；1006；1019；1022；1025；1026"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="17.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區光興國民小學" label="新北市三重區光興國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區光興國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1004"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區修德國民小學" label="新北市三重區修德國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區修德國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="4"/>
+          <attvalue for="3" value="1018；1024；1029；1034"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="14.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區光榮國民小學" label="新北市三重區光榮國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區光榮國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1020；1032"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區碧華國民小學" label="新北市三重區碧華國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區碧華國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1022；1033"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區永福國民小學" label="新北市三重區永福國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區永福國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區重陽國民小學" label="新北市三重區重陽國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區重陽國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1025"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區二重國民小學" label="新北市三重區二重國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區二重國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1025"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市三重區集美國民小學" label="新北市三重區集美國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市三重區集美國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1026"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市蘆洲區蘆洲國民小學" label="新北市蘆洲區蘆洲國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市蘆洲區蘆洲國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1004；1007"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市蘆洲區鷺江國民小學" label="新北市蘆洲區鷺江國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市蘆洲區鷺江國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="4"/>
+          <attvalue for="3" value="1005；1011；1013；1017"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="14.8"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市蘆洲區成功國民小學" label="新北市蘆洲區成功國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市蘆洲區成功國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1010"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市蘆洲區仁愛國民小學" label="新北市蘆洲區仁愛國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市蘆洲區仁愛國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1028"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市鶯歌區鶯歌國民小學" label="新北市鶯歌區鶯歌國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市鶯歌區鶯歌國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1007；1015"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市淡水區興仁國民小學" label="新北市淡水區興仁國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市淡水區興仁國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1012"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市淡水區新興國民小學" label="新北市淡水區新興國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市淡水區新興國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1012"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市板橋區板橋國民小學" label="新北市板橋區板橋國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市板橋區板橋國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1012；1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市板橋區國光國民小學" label="新北市板橋區國光國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市板橋區國光國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1033"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市板橋區後埔國民小學" label="新北市板橋區後埔國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市板橋區後埔國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市石碇區和平國民小學" label="新北市石碇區和平國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市石碇區和平國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1013"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市永和區網溪國民小學" label="新北市永和區網溪國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市永和區網溪國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1014"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市新店區中正國民小學" label="新北市新店區中正國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市新店區中正國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1015"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市新莊區昌平國民小學" label="新北市新莊區昌平國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市新莊區昌平國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="2"/>
+          <attvalue for="3" value="1019；1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="12.4"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市新莊區榮富國民小學" label="新北市新莊區榮富國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市新莊區榮富國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市新莊區光華國民小學" label="新北市新莊區光華國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市新莊區光華國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1021"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市汐止區北峰國民小學" label="新北市汐止區北峰國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市汐止區北峰國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市汐止區汐止國民小學" label="新北市汐止區汐止國民小學">
+        <attvalues>
+          <attvalue for="0" value="新北市汐止區汐止國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市市立明志國民中學" label="新北市市立明志國民中學">
+        <attvalues>
+          <attvalue for="0" value="新北市市立明志國民中學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="3"/>
+          <attvalue for="3" value="1021；1023；1026"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="13.6"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市市立碧華國民中學" label="新北市市立碧華國民中學">
+        <attvalues>
+          <attvalue for="0" value="新北市市立碧華國民中學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1025"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市立三重高級中學" label="新北市立三重高級中學">
+        <attvalues>
+          <attvalue for="0" value="新北市立三重高級中學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1026"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="新北市立三民高級中學" label="新北市立三民高級中學">
+        <attvalues>
+          <attvalue for="0" value="新北市立三民高級中學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1027"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="臺北市私立光仁國民小學" label="臺北市私立光仁國民小學">
+        <attvalues>
+          <attvalue for="0" value="臺北市私立光仁國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1031"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
       <node id="臺北市萬華區新和國民小學" label="臺北市萬華區新和國民小學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市萬華區新和國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9019；9023"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9019；9023"/>
+          <attvalue for="0" value="臺北市萬華區新和國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1031"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
       <node id="臺北市萬華區萬大國民小學" label="臺北市萬華區萬大國民小學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺北市萬華區萬大國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9012"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9012"/>
+          <attvalue for="0" value="臺北市萬華區萬大國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1031"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
-      <node id="新北市板橋區新埔國民小學" label="新北市板橋區新埔國民小學">
+      <node id="臺北市萬華區東園國民小學" label="臺北市萬華區東園國民小學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="新北市板橋區新埔國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9006"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9006"/>
+          <attvalue for="0" value="臺北市萬華區東園國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1031"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
-      <node id="新北市中和區自強國民小學" label="新北市中和區自強國民小學">
+      <node id="臺北市大同區日新國民小學" label="臺北市大同區日新國民小學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="新北市中和區自強國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9011"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9011"/>
+          <attvalue for="0" value="臺北市大同區日新國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1031"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
-      <node id="臺南縣安南區九份子國民小學" label="臺南縣安南區九份子國民小學">
+      <node id="雲林縣麥寮鄉麥寮國民小學" label="雲林縣麥寮鄉麥寮國民小學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="臺南縣安南區九份子國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9026"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9026"/>
+          <attvalue for="0" value="雲林縣麥寮鄉麥寮國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
-      <node id="金門縣金湖國民小學" label="金門縣金湖國民小學">
+      <node id="臺南市善化區蓮潭國民小學" label="臺南市善化區蓮潭國民小學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="金門縣金湖國民小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9018"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9018"/>
+          <attvalue for="0" value="臺南市善化區蓮潭國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
         </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
+      </node>
+      <node id="臺中市大里區內新國民小學" label="臺中市大里區內新國民小學">
+        <attvalues>
+          <attvalue for="0" value="臺中市大里區內新國民小學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1024"/>
+        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
       <node id="國立臺北教育大學" label="國立臺北教育大學">
         <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="國立臺北教育大學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9003；9008"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9003；9008"/>
+          <attvalue for="0" value="國立臺北教育大學"/>
+          <attvalue for="1" value="機構"/>
+          <attvalue for="2" value="1"/>
+          <attvalue for="3" value="1026"/>
         </attvalues>
-      </node>
-      <node id="國立清華大學" label="國立清華大學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="國立清華大學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="2"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="2"/>
-          <attvalue for="連結對象" value="9003；9027"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9003；9027"/>
-        </attvalues>
-      </node>
-      <node id="日本香春思小學" label="日本香春思小學">
-        <attvalues>
-          <attvalue for="node_type" value="institution"/>
-          <attvalue for="點名稱" value="日本香春思小學"/>
-          <attvalue for="點身分別" value="機構"/>
-          <attvalue for="訪談代碼" value=""/>
-          <attvalue for="連結數" value="1"/>
-          <attvalue for="出向連結數" value="0"/>
-          <attvalue for="入向連結數" value="1"/>
-          <attvalue for="連結對象" value="9002"/>
-          <attvalue for="出向連結對象" value=""/>
-          <attvalue for="入向連結對象" value="9002"/>
-        </attvalues>
+        <viz:color r="198" g="182" b="188"/>
+        <viz:size value="11.2"/>
+        <viz:shape value="disc"/>
       </node>
     </nodes>
     <edges>
-      <edge id="e1" source="9001" target="臺北市大同區日新國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e2" source="9001" target="臺北市大同區蓬萊國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e3" source="9001" target="臺北市內湖區麗湖國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e4" source="9001" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e5" source="9001" target="臺北市文山區志清國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e6" source="9001" target="臺北市文山區萬福國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e7" source="9001" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e8" source="9001" target="臺北市文山區興德國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e9" source="9001" target="臺北市北投區文林國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e10" source="9001" target="臺北市松山區健康國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e11" source="9002" target="日本香春思小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e12" source="9003" target="臺北市松山區健康國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e13" source="9003" target="國立臺北教育大學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e14" source="9003" target="國立清華大學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e15" source="9004" target="臺北市文山區萬芳國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e16" source="9004" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e17" source="9004" target="臺北市文山區興德國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e18" source="9005" target="臺北市文山區辛亥國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e19" source="9006" target="臺北市文山區力行國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e20" source="9006" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e21" source="9006" target="新北市板橋區新埔國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e22" source="9008" target="臺北市文山區志清國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e23" source="9008" target="臺北市文山區景美國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e24" source="9008" target="國立臺北教育大學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e25" source="9011" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e26" source="9011" target="臺北市文山區實踐國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e27" source="9011" target="新北市中和區自強國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e28" source="9012" target="臺北市中山區長安國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e29" source="9012" target="臺北市中正區東門國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e30" source="9012" target="臺北市文山區力行國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e31" source="9012" target="臺北市文山區木柵國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e32" source="9012" target="臺北市文山區景興國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e33" source="9012" target="臺北市文山區萬福國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e34" source="9012" target="臺北市文山區萬興國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e35" source="9012" target="臺北市萬華區老松國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e36" source="9012" target="臺北市萬華區萬大國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e37" source="9013" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e38" source="9015" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e39" source="9015" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e40" source="9016" target="國立臺北教育大學附設實驗國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e41" source="9016" target="臺北市文山區力行國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e42" source="9016" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e43" source="9016" target="臺北市文山區志清國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e44" source="9016" target="臺北市文山區明道國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e45" source="9016" target="臺北市文山區博嘉實驗國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e46" source="9016" target="臺北市文山區溪口國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e47" source="9016" target="臺北市松山區敦化國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e48" source="9016" target="臺北市信義區光復國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e49" source="9017" target="臺北市中正區東門國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e50" source="9017" target="臺北市內湖區大湖國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e51" source="9017" target="臺北市文山區力行國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e52" source="9017" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e53" source="9017" target="臺北市文山區志清國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e54" source="9017" target="臺北市文山區博嘉實驗國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e55" source="9017" target="臺北市文山區萬興國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e56" source="9017" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e57" source="9018" target="臺北市內湖區大湖國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e58" source="9018" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e59" source="9018" target="臺北市文山區景美國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e60" source="9018" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e61" source="9018" target="金門縣金湖國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e62" source="9019" target="臺北市文山區景興國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e63" source="9019" target="臺北市萬華區新和國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e64" source="9020" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e65" source="9022" target="臺北市文山區辛亥國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e66" source="9023" target="臺北市士林區三玉國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e67" source="9023" target="臺北市大安區古亭國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e68" source="9023" target="臺北市中山區長安國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e69" source="9023" target="臺北市中山區濱江國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e70" source="9023" target="臺北市中正區東門國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e71" source="9023" target="臺北市內湖區南湖國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e72" source="9023" target="臺北市文山區力行國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e73" source="9023" target="臺北市文山區永建國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e74" source="9023" target="臺北市文山區志清國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e75" source="9023" target="臺北市文山區武功國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e76" source="9023" target="臺北市文山區博嘉實驗國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e77" source="9023" target="臺北市文山區景美國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e78" source="9023" target="臺北市北投區大屯國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e79" source="9023" target="臺北市松山區民權國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e80" source="9023" target="臺北市松山區松山國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e81" source="9023" target="臺北市信義區信義國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e82" source="9023" target="臺北市南港區玉成國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e83" source="9023" target="臺北市南港區胡適國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e84" source="9023" target="臺北市萬華區新和國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e85" source="9025" target="臺北市文山區辛亥國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e86" source="9026" target="臺北市文山區景興國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e87" source="9026" target="臺北市文山區興隆國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e88" source="9026" target="臺南縣安南區九份子國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e89" source="9027" target="國立清華大學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
-      </edge>
-      <edge id="e90" source="9028" target="臺北市文山區辛亥國民小學" label="單向" type="directed">
-        <attvalues>
-          <attvalue for="方向性" value="單向"/>
-          <attvalue for="關係類型" value="校際合作網絡"/>
-        </attvalues>
+      <edge id="0" source="1001" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="1" source="1003" target="新北市三重區厚德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="2" source="1004" target="新北市三重區光興國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="3" source="1004" target="新北市蘆洲區蘆洲國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="4" source="1005" target="新北市三重區興穀國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="5" source="1005" target="新北市三重區五華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="6" source="1005" target="新北市蘆洲區鷺江國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="7" source="1006" target="新北市三重區五華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="8" source="1007" target="新北市蘆洲區蘆洲國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="9" source="1007" target="新北市鶯歌區鶯歌國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="10" source="1009" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="11" source="1010" target="新北市蘆洲區成功國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="12" source="1011" target="新北市蘆洲區鷺江國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="13" source="1012" target="新北市三重區厚德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="14" source="1012" target="新北市淡水區興仁國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="15" source="1012" target="新北市淡水區新興國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="16" source="1012" target="新北市板橋區板橋國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="17" source="1013" target="新北市蘆洲區鷺江國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="18" source="1013" target="新北市石碇區和平國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="19" source="1014" target="新北市永和區網溪國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="20" source="1015" target="新北市鶯歌區鶯歌國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="21" source="1015" target="新北市新店區中正國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="22" source="1016" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="23" source="1017" target="新北市蘆洲區鷺江國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="24" source="1018" target="新北市三重區修德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="25" source="1019" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="26" source="1019" target="新北市三重區五華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="27" source="1019" target="新北市新莊區昌平國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="28" source="1020" target="新北市三重區光榮國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="29" source="1021" target="新北市新莊區光華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="30" source="1021" target="新北市市立明志國民中學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="31" source="1022" target="新北市三重區五華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="32" source="1022" target="新北市三重區碧華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="33" source="1023" target="新北市市立明志國民中學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="34" source="1024" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="35" source="1024" target="新北市三重區修德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="36" source="1024" target="新北市三重區永福國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="37" source="1024" target="新北市板橋區板橋國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="38" source="1024" target="新北市板橋區後埔國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="39" source="1024" target="新北市新莊區昌平國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="40" source="1024" target="新北市新莊區榮富國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="41" source="1024" target="新北市汐止區北峰國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="42" source="1024" target="新北市汐止區汐止國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="43" source="1024" target="雲林縣麥寮鄉麥寮國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="44" source="1024" target="臺南市善化區蓮潭國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="45" source="1024" target="臺中市大里區內新國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="46" source="1025" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="47" source="1025" target="新北市三重區五華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="48" source="1025" target="新北市三重區重陽國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="49" source="1025" target="新北市三重區二重國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="50" source="1025" target="新北市市立碧華國民中學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="51" source="1026" target="新北市三重區厚德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="52" source="1026" target="新北市三重區五華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="53" source="1026" target="新北市三重區集美國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="54" source="1026" target="新北市市立明志國民中學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="55" source="1026" target="新北市立三重高級中學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="56" source="1026" target="國立臺北教育大學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="57" source="1027" target="新北市立三民高級中學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="58" source="1028" target="新北市蘆洲區仁愛國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="59" source="1029" target="新北市三重區修德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="60" source="1031" target="臺北市私立光仁國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="61" source="1031" target="臺北市萬華區新和國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="62" source="1031" target="臺北市萬華區萬大國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="63" source="1031" target="臺北市萬華區東園國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="64" source="1031" target="臺北市大同區日新國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="65" source="1032" target="新北市三重區正義國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="66" source="1032" target="新北市三重區興穀國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="67" source="1032" target="新北市三重區光榮國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="68" source="1033" target="新北市三重區碧華國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="69" source="1033" target="新北市板橋區國光國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
+      </edge>
+      <edge id="70" source="1034" target="新北市三重區修德國民小學" type="directed" weight="1" label="單向">
+        <viz:color r="185" g="175" b="164"/>
+        <viz:thickness value="1.2"/>
       </edge>
     </edges>
   </graph>
